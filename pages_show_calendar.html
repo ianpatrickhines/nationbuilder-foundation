@@ -74,21 +74,21 @@
 
       {% if page.calendar.events_upcoming_nearby.size > 0 %}
 
-      <ul class="event-wrap">
+      <div class="event-wrap">
         {% for event in page.calendar.events_upcoming_nearby %}
-        <li>{% include "event" %}</li>
+        {% include "event" %}
         {% endfor %}
-      </ul>
+      </div>
 
       {{ page.calendar.events_upcoming_nearby | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
 
       {% else %}
 
-      <ul class="event-wrap">
+      <div class="event-wrap">
         {% for event in page.calendar.events_upcoming %}
-        <li>{% include "event" %}</li>
+        {% include "event" %}
         {% endfor %}
-      </ul>
+      </div>
 
       {{ page.calendar.events_upcoming | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
 
