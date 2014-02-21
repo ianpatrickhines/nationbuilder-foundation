@@ -8,6 +8,8 @@ According to [Zurb](http://zurb.com), [Foundation](http://foundation.zurb.com) i
 
 To learn more about what’s included in Foundation, check out <http://foundation.zurb.com/docs>
 
+To see a live demo of the theme, check out <http://foundation.ianpatrickhines.com>
+
 ## Copyright / License
 
 The Foundation theme framework is Copyright (c) 2014 ZURB, inc. and subject to the [MIT License](https://github.com/zurb/foundation/blob/master/LICENSE). 
