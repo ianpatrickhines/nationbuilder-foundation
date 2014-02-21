@@ -1,0 +1,29 @@
+<ul class="suggestion-tag-list checkbox-inline">
+{% for tag_name in page.suggestion.suggestion_box_tag_names %}
+  {% assign class_and_id_name = 'suggestion-' + tag_name %}
+  {% capture class_and_id_name %}suggestion-{{ tag_name | downcase }}{% endcapture %}
+  {% if tag_name and page.suggestion.signup_tag_names contains tag_name %}
+    {% assign current_class_and_id_name = 'current' %}
+    {% assign checked  = 'checked = "checked"' %}
+    {% for current_tag in page.suggestion.suggestion_box_taggings %}
+      {% if current_tag.tag.name == tag_name %}
+        {% assign tag_count = current_tag.signup_taggings_count %}
+      {% endif %}
+    {% endfor %}
+    {% else %}
+      {% assign checked = '' %}
+      {% assign current_class_and_id_name = '' %}
+      {% assign tag_count = null %}
+  {% endif %}
+
+  <li class="current inline-labels" class="{{ class_and_id_name }} {{ current_class_and_id_name }}">
+    <input type="checkbox" name="tag_name[]" value="{{ tag_name }}" id="{{ class_and_id_name }}" {{ checked }}>
+    <label class="checkbox" for="{{ class_and_id_name }}">
+      {{ tag_name | capitalize }}
+      {% if tag_count %}
+      <span class="tag-count">({{ tag_count }})</span>
+      {% endif %}
+    </label>
+  </li>
+{% endfor %}
+</ul>

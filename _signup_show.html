@@ -1,0 +1,15 @@
+<div class="people-list-pic"> {{ signup.bigger_profile_image }} <span class="people-pc">{{ signup.capital_amount_format }}</span></div>
+  
+<div class="people-name">{{ signup.published_name_linked }}</div>
+  
+{% if signup.has_facebook_info? %}
+<div class="network"><a href="{{ signup.facebook_profile_url }}"><i class="icon-facebook-squared"></i></a></div>
+{% endif %}    
+{% if signup.has_twitter_info? %}
+<div class="network"><a href="{{ signup.twitter_profile_url }}"><i class="icon-twitter-squared"></i></a></div>
+{% endif %}
+
+<div class="people-list-follow">
+  <span id="signup_follow_{{ signup.id }}">{% include "signup_follow" with signup %}</span>
+</div>
+  

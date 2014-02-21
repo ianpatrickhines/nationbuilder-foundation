@@ -1,0 +1,10 @@
+{{ recipient.first_name_or_friend }} --
+<br /><br />
+We just wanted to let you know that you are being issued a warning for a rule violation. I hope that you will take some time to review the <a href="{{ site.rule_page.full_url }}">rules page</a> so that you can avoid any infractions in the future. Thanks again for being an active member of our community, we hope you will continue to participate. Thank you for your understanding.
+<br/><br/>
+{% if site.has_rule_page? %}
+<a href="{{ site.rule_page.full_url }}">{{ site.rule_page.full_url }}</a>
+<br/><br/>
+{% endif %}
+{{ broadcaster.name }}<br/>
+<a href="{{ site.full_url }}">{{ site.full_url }}</a><br/>

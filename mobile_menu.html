@@ -1,0 +1,68 @@
+<div class="padcontainer mnav_container">
+	<ul id="mnav">
+  {% for child in site.root_nav_pages %}
+    {% if child.leaf? or child.nav_children.size == 0 %}
+				<li><div class="content_list_arrow"><a href="{{ child.url }}">{{ child.name }}</a></div></li>
+    {% else %}
+		<li class="drop"><div class="content_list_arrow"><a href="{{ child.url }}">{{ child.name }}</a></div></li>
+
+            {% for child2 in child.nav_children %}
+              <li class="sub"><div class="content_list_arrow"><a href="{{ child2.url }}">{{ child2.name }}</a></div></li>
+            {% endfor %}
+    {% endif %}
+  {% endfor %}	
+	</ul>
+	
+	{% if request.logged_in? %}
+	<hr />
+	
+		<div class="supporter_nav_top">	
+			
+		<div class="profile_container">
+			<div class="profile_image">{{ request.current_signup.profile_image }}</div>
+			
+			<div class="profile_info">
+				<div class="profile_name"><a href="{{ request.current_signup.settings_url }}">{{ request.current_signup.name_or_email }}</a></div>
+			
+				{% if site.show_public_profiles? == false %}
+			  {% elsif request.current_signup.is_profile_private? %}
+			    No public profile
+			  {% else %}
+					<div class="profile_link"><a href="{{ request.current_signup.profile_url }}">Public profile</a>
+			  {% endif %}
+					(<a href="{{ request.current_signup.logout_url }}">Sign out</a>)</div>
+			<div class="profile_badge_pc">
+			{% if request.current_signup.has_membership_level_badge %}
+			    {% if site.has_membership_page? %}
+			      <span class="badge"><a href="{{ site.membership_page.url }}">{{ request.current_signup.membership_level_badge }}</a></span>
+			    {% else %}
+			      <span class="badge">{{ request.current_signup.membership_level_badge }}</span>
+			    {% endif %}
+			  {% endif %}
+			  <span class="pc">{{ request.current_signup.capital_amount_format }}</span>
+			  {% if request.current_signup.is_banned? %}
+			    <span class="">Banned</span>
+			  {% elsif request.current_signup.rule_violations_count == 1 %}
+			    <span class=""> {{ "fugue-flag-yellow" | icon }} Warning</span>
+			  {% elsif request.current_signup.rule_violations_count == 2 %}
+			    <span class=""> {{ "fugue-flag" | icon }} 1 violation</span>
+			  {% elsif request.current_signup.rule_violations_count == 3 %}
+			    <span class=""> {{ "fugue-flag-gray" | icon }} 2 violations</span>
+			  {% endif %}
+				</div>
+			</div>
+		</div>
+			
+		<div class="clear"></div>
+		</div>
+		
+	<ul id="snav">
+		{% for child in site.supporter_pages %}
+				<li><div class="content_list_arrow"><a href="{{ child.url }}">{{ child.icon | icon }} {{ child.name }}</a></div></li>
+	  {% endfor %}
+	</ul>
+		
+		
+	{% endif %}
+
+</div>

@@ -1,0 +1,235 @@
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="/stylesheets/countdown_ie.css" media="all"/>
+<![endif]-->
+
+
+
+{% if page.headline.size > 0 %}
+<h2 class="headline">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  {% if page.moneybomb.content.size > 0 %}
+  <div id="moneybomb-content">
+    {{ page.moneybomb.content }}
+  </div>
+  {% endif %}
+
+  {% if page.moneybomb.has_start_at? and page.moneybomb.is_active? == false and page.moneybomb.is_past? == false %}
+  <div class="event-detail">
+    <div class="subhead">COUNTDOWN TO {{ page.moneybomb.local_start_at | moneybomb_time }}</div>
+    <div class="subtext">
+      <div id="pre-countdown" class="countdown"></div>
+    </div>
+  </div>
+  {% elsif page.moneybomb.is_active? %}
+  <div class="event-detail">
+    <div class="subhead">TIME LEFT TO DONATE</div>
+    <div class="subtext">
+      <div id="active-countdown" class="countdown"></div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% assign thermo_width = 50 %}
+
+  {% if page.moneybomb.has_amount_goal? %}
+  <div class="clearfix">
+    <div class="progress" style="width: {{ thermo_width }}%;">
+      <div class="bar bar-success" style="width: {{ page.moneybomb.percent_of_amount_goal | times:100 }}%;">
+        {% if page.pledges_count < 1 %}
+        <div class="bar-text">JUST STARTED</div>
+        {% else %}
+        <div class="bar-text">{{ page.pledges_amount_format }} pledged</div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="bar-goal">{{ page.moneybomb.amount_goal_format }}</div>
+  </div>
+
+  {% elsif page.moneybomb.has_pledger_goal? %}
+
+  <div class="clearfix">
+    <div class="progress" style="width: {{ thermo_width }}%;">
+      <div class="bar bar-success" style="width: {{ page.moneybomb.percent_of_pledger_goal | times:100 }}%;">
+        {% if page.pledges_count < 2 %}
+        <div class="bar-text">JUST STARTED</div>
+        {% else %}
+        <div class="bar-text">{{ page.pledges_count }} pledgers</div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="bar-goal">{{ page.moneybomb.pledger_goal }} PLEDGERS</div>
+  </div>
+
+  {% endif %}
+
+  {% if page.moneybomb.is_pledged? %}
+
+
+  {% form_for pledge %}
+
+  <div class="form-wrap">
+    <div class="form">
+
+      <h3>Thank you for pledging!</h3>
+
+      <div class="form-errors">{% error_messages_for pledges %}</div>
+
+      <label for="pledge_content">Change your pledge amount</label>
+      <div class="padtop padbottom">
+        <div class="radio-inline">{{ page.moneybomb.form_amount_options }}</div>
+      </div>
+
+      {% if page.is_commentable? %}
+      {% submit_tag "Save pledge", class:"submit-button" %} &nbsp;
+      {% endif %}
+
+      {{ page.moneybomb.current_pledge | delete_link message: "Cancel pledge" class_name: "button destroy-link" }}
+
+      <div class="form-submit"></div>
+
+    </div>
+  </div>
+  {% endform_for %}
+
+  {% else %}
+
+  {% form_for pledge %}
+
+  <div class="form-wrap">
+    <div class="form">
+
+      {% if request.sorta_logged_in? %}
+      <h4>Hi {{ request.current_signup.name_or_email }}, how much will you pledge to donate{% if page.moneybomb.has_start_at? %} on {{ page.moneybomb.local_start_at | moneybomb_time }}{% endif %}?</h4>
+
+      {% if request.logged_in? == false %}
+      <div class="padtop">
+        If you're not {{ request.current_signup.name_or_email }},
+        <a href="{{ request.current_signup.logout_url }}">click here</a>.
+      </div>
+      {% endif %}
+
+      {% else %}
+
+      <h4>How much will you pledge to donate{% if page.moneybomb.has_start_at? %} on {{ page.moneybomb.local_start_at | date_to_string }}{% endif %}?</h4>
+
+      {% endif %}
+
+      <div class="form-errors">{% error_messages_for pledge %}</div>
+
+      <div class="padtop padbottom">
+        <div class="radio-inline">{{ page.moneybomb.form_amount_options }}</div>
+      </div>
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+      <div class="row">
+        <div class="medium-6 columns"><label for="pledge_first_name">First Name</label>{% text_field "first_name", class:"text" %}
+        </div>
+        <div class="medium-6 columns"><label for="pledge_last_name">Last Name</label>{% text_field "last_name", class:"text" %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if request.sorta_logged_in? == false %}
+      <div class="row">
+        <div class="medium-6 columns"><label for="pledge_email">Email</label>{% email_field "email", class:"text" %}</div>
+        {% if site.ask_for_mobiles? %}
+        <div class="medium-6 columns">
+          <label for="pledge_mobile_number">Mobile phone (optional)</label>{% phone_field "mobile_number", class:"text" %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="row">
+        <div class="medium-6 columns">
+          <label class="checkbox" for="pledge_email_opt_in">{% check_box "email_opt_in", class:"checkbox" %} Send me email updates</label>
+        </div>
+        {% if site.ask_for_mobiles? %}
+        <div class="medium-6 columns">
+          <label class="checkbox" for="pledge_mobile_opt_in">{% check_box "mobile_opt_in", class:"checkbox" %} Send me text message updates</label>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+      <div class="row">
+        <div class="columns">
+          <label for="pledge_submitted_address">Address (Street, City, State, Postal code)</label>{% text_field "submitted_address", class:"text" %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if site.ask_to_publish_to_stream? %}
+      <div class="row">
+        <div class="columns">
+          <label class="checkbox" for="pledge_is_private">{% check_box "is_private", class:"checkbox" %} Don't publish this on the website</label>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if request.sorta_logged_in? == false or request.current_signup.is_volunteer == false %}
+      <div class="row">
+        <div class="columns">
+          <label class="checkbox" for="pledge_is_volunteer">{% check_box "is_volunteer", class:"checkbox" %} I want to volunteer</label>
+        </div>
+      </div>
+      {% endif %}
+
+      {% submit_tag "Add pledge", class:"submit-button" %}
+      <div class="form-submit"></div>
+
+      {% endform_for %}
+
+      {% if page.text_keyword_instructions.size > 0 %}
+      <div class="row padtopmore padbottommore">
+        <div class="columns">
+          or {{ page.text_keyword_instructions }}
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if page.tags_count > 0 %}
+  <div id="page-tags" class="page-tags">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+
+  <div class="like-page">
+    <div class="padtop padbottom">
+      <strong>Like this to spread the word:</strong>
+      {% include "like_page" %}
+    </div>
+  </div>
+
+</div>
+
+{% if page.show_stream? %}
+{% include "page_stream" %}
+{% endif %}
+
+<script type="text/javascript" src="/javascripts/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="/assets/liquid/money-bomb.js"></script>
+<script type="text/javascript">
+  $(function () {
+    var moneyBomb = new NB.Liquid.MoneyBomb();
+
+    moneyBomb.setCountdown({
+      $el : $('#pre-countdown'),
+      until: +{{ page.moneybomb.seconds_until }}
+    });
+
+    moneyBomb.setCountdown({
+      $el : $('#active-countdown'),
+      until: +{{ page.moneybomb.seconds_left }}
+    });
+  });
+</script>

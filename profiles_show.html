@@ -1,0 +1,126 @@
+{% if profile.profile_headline.size > 0 %}
+<h2 class="headline">{{ profile.profile_headline }}</h2>
+{% endif %}
+
+{% if profile.profile_content.size > 0 %}
+<div id="intro" class="intro">
+  {{ profile.profile_content }}
+</div>
+{% endif %}
+
+
+<!-- profile info -->
+
+<div class="padbottommore clearfix">
+  <div class="supporter-pic-left">
+    {{ profile.bigger_profile_image }}
+    <span class="pc">{{ profile.capital_amount_format }}</span>
+  </div>
+  <div class="supporter-pic-right">
+    <h4>{{ profile.published_name }}</h4>
+
+    <div class="user-status">
+      {% if profile.has_membership_level_badge %}
+      {% if site.has_membership_page? %}
+      <span class="badge"><a href="{{ site.membership_page.url }}">{{ profile.membership_level_badge }}</a></span>
+      {% else %}
+      <span class="badge">{{ profile.membership_level_badge }}</span>
+      {% endif %}
+      {% endif %}
+      {% if profile.rule_violations_count == 1 %}
+      <span class=""> {{ "fugue-flag-yellow" | icon }} Warning</span>
+      {% elsif profile.rule_violations_count == 2 %}
+      <span class=""> {{ "fugue-flag" | icon }} 1 violation</span>
+      {% elsif profile.rule_violations_count == 3 %}
+      <span class=""> {{ "fugue-flag-gray" | icon }} 2 violations</span>
+      {% endif %}
+      <div class="signup-follow-{{ profile.id }}">
+        {% include "signup_follow" with profile %}
+        {% if profile.has_bio? %}
+        <div class="padtopless">
+          {{ profile.bio | link_urls }}
+        </div>
+        {% endif %}
+        {% if profile.has_website? %}
+        <div class="padtopless">
+          <a href="{{ profile.website }}">{{ profile.website }}</a>
+        </div>
+        {% endif %}
+        {% if profile.has_twitter_info? %}
+        <div class="padtop">
+          <span class="network"><a href="{{ profile.twitter_profile_url }}" class="twitter-follow-button" data-show-count="true" data-show-screen-name="true">@{{ profile.twitter_login }}</a></span>
+        </div>
+        {% endif %}
+        {% if settings.is_donor? %}
+        {% if profile.has_fundraising_goal? %}
+        {% assign thermo_width = 50 %}
+        <div class="clearfix padtopmore">
+          <div class="progress" style="width: {{ thermo_width }}%;">
+            <div class="bar bar-success" style="width: {{ profile.percent_of_fundraising_goal | times:100 }}%;">
+              {% if profile.donations_raised_amount_in_cents == 0 %}
+              <div class="bar-text">JUST STARTED</div>
+              {% else %}
+              <div class="bar-text">{{ profile.donations_raised_amount_format }} raised</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="bar-goal">GOAL: {{ profile.donations_to_raise_amount_format }}</div>
+
+        </div>
+        {% endif %}
+        {% endif %}
+
+        {% if site.has_button1? %}
+        {% if site.button1_page.type_name == 'Donation' %}
+        <div class="padbottomless padtopmore">
+          <strong>Donate on behalf of {{ profile.published_name }}:</strong>
+        </div>
+        {% endif %}
+        <a class="submit-button" href="{{ site.button1_page.full_url_with_profile_recruiter }}">{{ site.button1_text }}</a>
+        {% endif %}
+
+        {% if site.has_button2? %}
+        <a class="submit-button" href="{{ site.button2_page.full_url_with_profile_recruiter }}">{{ site.button2_text }}</a>
+        {% endif %}
+
+        {% if site.has_button3? %}
+        <a class="submit-button" href="{{ site.button3_page.full_url_with_profile_recruiter }}">{{ site.button3_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if profile.most_recent_posts.size > 0 %}
+
+<h4 class="padtopmore">{{ profile.published_name }}'s activity stream</h4>
+
+<hr/>
+
+<div id="content" class="padtopmore">
+  <div class="profile-posts">
+
+    <ul class="page-excerpts">
+      {% for post in profile.most_recent_posts %}
+      <li>
+        {{ post.activity.show }}
+
+        {% if post.activity.show_page? %}
+        <div class="form-wrap page-{{ post.page.id }}">
+          <h4><a href="{{ post.page.url | recruiter_url recruiter_id:profile.id }}">{{ post.page.headline }}</a></h4>
+          {% include "page_profile" with post.page %}
+        </div>
+        {% endif %}
+
+        <hr/>
+      </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+
+  {{ profile.most_recent_posts | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
+</div>
+
+{% endif %}

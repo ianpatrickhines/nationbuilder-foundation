@@ -1,0 +1,680 @@
+<div class="homepage-excerpt page-{{ homepage_excerpt.id }}">
+
+  {% case homepage_excerpt.type_name %}
+
+  <!-- basic page -->  
+  {% when 'Basic' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-application"></span> Featured page</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    <div class="truncate-500" data-truncate="500">{{ homepage_excerpt.basic.content }}</div>
+
+    <span class="continue"><a href='{{ post.url }}'>Continue reading &rarr;</a></span>
+
+  <!-- blog page -->
+  {% when 'Blog' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-blog"></span> Latest from the blog</a></h3>
+
+    {% for post in homepage_excerpt.blog.most_recent_blog_posts limit: 1 %}
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ post.headline }}</a></h4>
+    
+    <div class="byline">
+      Posted by {{ post.author.published_name_linked }} &middot; {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
+      {% if post.show_stream? %}
+      {% if post.public_activities_count > 0 %}
+      &middot; <a href="{{ post.url }}#reactions">{{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}</a>
+      {% endif %}
+      {% endif %}
+    </div>
+    
+    <div class="truncate-300" data-truncate="300">
+    {{ post.blog_post.content }}</div>
+
+    <span class="continue"><a href="{{ post.url }}">Continue reading &rarr;</a></span>
+    
+    {% endfor %}
+
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">See all posts</a>
+    {% if homepage_excerpt.blog.is_posting_public? %}
+    or <a href="{{ homepage_excerpt.url }}">{{ homepage_excerpt.blog.public_posting_prompt }}</a>
+    {% endif %}
+
+  <!-- blog post page -->
+  {% when 'Blog Post' %}  
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-blogs"></span> Featured post</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ post.headline }}</a></h4>
+    
+    <div class="byline">
+      Posted by {{ post.author.published_name_linked }} &middot; {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
+      {% if post.show_stream? %}
+      {% if post.public_activities_count > 0 %}
+      &middot; <a href="{{ post.url }}#reactions">{{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}</a>
+      {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="truncate-500" data-truncate="500">{{ homepage_excerpt.blog_post.content }}</div>
+    
+    {% if homepage_excerpt.blog_post.is_extended? %}      
+     <span class="continue"><a href="{{ homepage_excerpt.url }}">Continue reading &rarr;</a></span>
+    {% endif %}
+
+    {% if post.show_stream? %}
+      <a href="{{ post.url }}#addreaction" class="button small-button">
+      {% if post.public_activities_count > 0 %}
+        {{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}
+      {% else %}
+        Add your reaction
+      {% endif %}
+      </a>
+    {% endif %}
+    
+    {{ "Share" | share_button page_id: post.id }}
+
+  <!-- calendar page -->
+  {% when 'Calendar' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-calendar"></span> Upcoming events</a></h3>
+  
+    {% if homepage_excerpt.calendar.show_map? %}
+      {% if homepage_excerpt.calendar.events_upcoming_count > 0 %}
+         <div class="event-map">{{ homepage_excerpt.calendar.events_upcoming_map }}</div>
+      {% endif %}
+    {% endif %}
+
+    {% for event in homepage_excerpt.calendar.events_upcoming limit:2 %}
+
+    <div class="event-block">
+
+      <div class="padbottom">
+      <h5>{{ event.event.local_start_at | date: '%A, %B %d, %Y at %I:%M %p' }}
+      {% if event.event.is_multi_day? %}
+      through {{ event.event.local_end_at | event_date }}
+      {% endif %}
+      {% if event.event.is_ticket_required? %}
+      &middot; {{ event.event.ticket_price_with_currency }}
+      {% elsif event.event.is_user_ticket_required? %}
+      &middot; {{ event.event.user_ticket_price_with_currency }}
+      {% endif %}
+      {% if event.event.show_guests? and event.event.rsvps_count > 0 %}
+      &middot;
+      <a href="{{ event.url }}">{{ event.event.rsvps_count }} rsvp{% if event.event.rsvps_count > 1 %}s{% endif %}</a>
+      {% endif %}
+      </h5>
+     {% if event.event.has_venue? %}
+      <div class="event-venue">
+      {% if event.event.has_venue_address? %}
+      <a href="{{ event.event.venue_address.google_map_link }}">{{ event.event.venue_name }}</a>
+      in
+      {{ event.event.venue_address.location }}
+      {% else %}
+      {{ event.event.venue_name }}
+      {% endif %}
+      </div>
+      {% endif %}
+      </div>
+     
+      <h4 class="excerpt-title"><a href="{{ event.url }}">{{ event.name }}</a></h4>
+
+      <div class="truncate-200" data-truncate="200">
+       {{ event.event.content }}
+      </div>
+
+      {% if event.event.is_maximum_capacity? %}
+      <div class="padtop"><a class="button destroy-link" href="{{ event.url }}">Sold out</a></div>
+      {% elsif event.event.is_past? == false and event.event.accept_rsvps? %}
+      <div class="padtop"><a class="submit-link" href="{{ event.url }}">RSVP &rarr;</a></div>
+      {% else %}
+      <div class="padtop"><a class="submit-link" href="{{ event.url }}">View event</a></div>
+      {% endif %}
+
+      </div>
+
+      {% endfor %}
+
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">See all events</a>
+    {% if homepage_excerpt.calendar.allow_user_submitted? %}
+    or <a href="{{ homepage_excerpt.calendar.new_event_url }}">Host your own</a>
+    {% endif %}
+
+  <!-- donation page -->
+  {% when 'Donation' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-credit-card-green"></span> Donate</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% assign thermo_width = 50 %}
+
+    {% if homepage_excerpt.donation.has_amount_goal? %}
+    <div class="clearfix">
+    <div class="progress" style="width: {{ thermo_width }}%;">
+      <div class="bar bar-success" style="width: {{ homepage_excerpt.donation.percent_of_amount_goal | times:100 }}%;">
+        {% if homepage_excerpt.donations_count < 1 %}
+        <div class="bar-text">JUST STARTED</div>
+        {% else %}
+        <div class="bar-text">{{ homepage_excerpt.donations_amount_format }} raised</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="bar-goal">GOAL: {{ homepage_excerpt.donation.amount_goal_format }}</div>
+
+    </div>
+
+    {% elsif homepage_excerpt.donation.has_donor_goal? %}
+
+    <div class="clearfix">
+      <div class="progress" style="width: {{ thermo_width }}%;">
+        <div class="bar bar-success" style="width: {{ homepage_excerpt.donation.percent_of_donor_goal | times:100 }}%;">
+          {% if homepage_excerpt.donations_count < 2 %}
+          <div class="bar-text">JUST STARTED</div>
+          {% else %}
+          <div class="bar-text">{{ homepage_excerpt.donations_count }} donors</div>
+          {% endif %}
+        </div>
+      </div>
+
+    <div class="bar-goal">{{ homepage_excerpt.donation.donor_goal }} donors</div>
+
+    </div>
+
+    {% endif %}
+
+    {% if homepage_excerpt.donation.content.size > 0 %}
+    {{ homepage_excerpt.donation.content }}
+    {% endif %}
+
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">Donate</a>
+
+  <!-- endorsement page -->  
+  {% when 'Endorsement' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-stamp"></span> Endorse</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.endorsement.intro.size > 0 %}
+      {{ homepage_excerpt.endorsement.intro }}
+    {% endif %}
+
+    {% if homepage_excerpt.endorsement.content.size > 0 %}
+    <div id="endorsement-content">
+      {{ homepage_excerpt.endorsement.content }}
+    </div>
+    {% endif %}
+
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">Endorse</a>
+
+  <!-- event page -->
+  {% when 'Event' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-calendar"></span> Featured event</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.event.content.size > 0 %}
+    {{ homepage_excerpt.event.content }}
+    {% endif %}
+
+    <div class="event-detail">
+      <div class="subhead">WHEN</div>
+      <div class="subtext">
+        {% if homepage_excerpt.event.is_multi_day? %}
+        {{ homepage_excerpt.event.local_start_at | event_time }} - {{ homepage_excerpt.event.local_end_at | event_time }}
+        {% else %}
+        {{ homepage_excerpt.event.local_start_at | event_time }}
+        {% endif %}
+      </div>
+    </div>
+
+    {% if homepage_excerpt.event.has_venue? %}
+
+    <div class="event-detail">
+      <div class="subhead">WHERE</div>
+      <div class="subtext">
+        {% if homepage_excerpt.event.venue_name.size > 0 %}
+        {{ homepage_excerpt.event.venue_name }}<br/>
+        {% endif %}
+        {% for line in homepage_excerpt.event.venue_address.multi_line %}
+        {{ line }}<br/>
+        {% endfor %}
+        {% if homepage_excerpt.event.has_venue_address? %}
+        <a href="{{ homepage_excerpt.event.venue_address.google_map_link }}">Google map and directions</a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% endif %}
+
+    <div class="padbottommore">
+    {% if homepage_excerpt.event.is_ticket_required? %}
+    {{ homepage_excerpt.event.ticket_price_with_currency }}
+    {% elsif homepage_excerpt.event.is_user_ticket_required? %}
+    {{ homepage_excerpt.event.user_ticket_price_with_currency }}
+    {% endif %}
+
+    {% if homepage_excerpt.event.is_ticket_required? or homepage_excerpt.event.is_user_ticket_required? %} &middot; {% endif %}
+
+    {% if homepage_excerpt.event.show_guests? and homepage_excerpt.event.rsvps_count > 0 %}
+    <a href="{{ homepage_excerpt.url }}">{{ homepage_excerpt.event.rsvps_count }} rsvp{% if homepage_excerpt.event.rsvps_count > 1 %}s{% endif %}</a>
+    {% endif %}
+    </div>
+
+    {% if homepage_excerpt.event.is_maximum_capacity? %}
+      <a class="button destroy-link" href="{{ homepage_excerpt.url }}">sold out</a>
+    {% elsif homepage_excerpt.event.is_past? == false %}
+      <a class="button submit-link" href="{{ homepage_excerpt.url }}">rsvp</a>
+    {% endif %}
+
+  <!-- FAQ page -->
+  {% when 'FAQ' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-question-octagon-frame"></span> Frequently asked questions</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.faq.content.size > 0 %}
+    {{ homepage_excerpt.faq.content }}
+    {% endif %}
+
+    <ul class="question-list">
+      {% for child in homepage_excerpt.children %}
+      {% if child.type_name == 'Question' %}
+      <li><a href="{{ child.url }}">{{ child.headline }}</a></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+
+    <div class="continue"><a href="{{ post.url }}">Read all FAQ's &rarr;</a></div>
+
+  <!-- Feedback page -->
+  {% when 'Feedback' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-balloon"></span> Contact</a></h3>
+    
+    {% if homepage_excerpt.feedback.content.size > 0 %}
+    {{ homepage_excerpt.feedback.content }}
+    {% endif %}
+
+    {% include "homepage_excerpt_feedback" with homepage_excerpt.slug %}
+
+  <!-- Leaderboard page --> 
+  {% when 'Leaderboard' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-medal"></span> Featured leaderboard</a></h3>
+
+    {% if homepage_excerpt.leaderboard.content.size > 0 %}
+    {{ homepage_excerpt.leaderboard.content }}
+    {% endif %}
+
+    {% for leaderboard in homepage_excerpt.page_leaderboards %}
+
+    <div class="leaderboard">
+
+    {% if leaderboard.has_goal? %}
+    {% assign thermo_width = 50 %}
+
+    <div class="clearfix padbottom">
+      <div class="progress" style="width: {{ thermo_width }}%;">
+        <div class="bar bar-success" style="width: {{ leaderboard.percent_of_goal | times:100 }}%;">
+          <div class="bar-text">{{ leaderboard.total }} {{ leaderboard.goal_name_short }}</div>
+        </div>
+      </div>
+
+      <div class="bar-goal">{{ leaderboard.goal }} {{ leaderboard.goal_name }}</div>
+
+    </div>
+
+    {% endif %}
+
+    {% if leaderboard.display_number_results > 0 %}
+
+    <strong>Top 5 {{ leaderboard.display_name }}</strong>
+
+    <hr style="margin: 5px 0 10px 0;" />
+
+    {% for entry in leaderboard.entries limit: 5 %}
+    <div class="people-list {% cycle 'odd', 'even' %}">
+      <div class="people-list-pic">{{ entry.signup.bigger_profile_image }} <span class="leaderboard-rank">{{ entry.position }}</span></div>
+      <div class="people-name">{{ entry.signup.published_name_linked }}</div>
+      {{ entry.total }} {{ leaderboard.goal_name }}
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+  <!-- Moneybomb page -->
+  {% when 'Moneybomb' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-bomb"></span> Moneybomb</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.moneybomb.content.size > 0 %}
+    {{ homepage_excerpt.moneybomb.content }}
+    {% endif %}
+
+    {% if homepage_excerpt.moneybomb.has_start_at? and homepage_excerpt.moneybomb.is_active? == false and homepage_excerpt.moneybomb.is_past? == false %}
+    <div class="event-detail">
+      <div class="subhead" style="text-transform: uppercase;">COUNTDOWN TO {{ homepage_excerpt.moneybomb.local_start_at | moneybomb_time }}</div>
+      <div class="subtext">
+        <div id="pre-countdown-{{ homepage_excerpt.slug }}" class="countdown"></div>
+      </div>
+    </div>
+    {% elsif homepage_excerpt.moneybomb.is_active? %}
+    <div class="event-detail">
+      <div class="subhead" style="text-transform: uppercase;">TIME LEFT TO DONATE</div>
+      <div class="subtext">
+        <div id="active-countdown-{{ homepage_excerpt.slug }}" class="countdown"></div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% assign thermo_width = 50 %}
+
+    {% if homepage_excerpt.moneybomb.has_amount_goal? %}
+    <div class="clearfix padbottommore">
+      <div class="progress" style="width: {{ thermo_width }}%;">
+        <div class="bar bar-success" style="width: {{ homepage_excerpt.moneybomb.percent_of_amount_goal | times:100 }}%;">
+          {% if homepage_excerpt.pledges_count < 1 %}
+          <div class="bar-text">JUST STARTED</div>
+          {% else %}
+          <div class="bar-text">{{ homepage_excerpt.pledges_amount_format }} pledged</div>
+          {% endif %}
+          </div>
+         </div>
+
+        <div class="bar-goal">{{ homepage_excerpt.moneybomb.amount_goal_format }}</div>
+
+    </div>
+
+    {% elsif homepage_excerpt.moneybomb.has_pledger_goal? %}
+
+    <div class="clearfix padbottommore">
+      <div class="progress" style="width: {{ thermo_width }}%;">
+        <div class="bar bar-success" style="width: {{ homepage_excerpt.moneybomb.percent_of_pledger_goal | times:100 }}%;">
+          {% if homepage_excerpt.pledges_count < 2 %}
+          <div class="bar-text">JUST STARTED</div>
+          {% else %}
+          <div class="bar-text">{{ homepage_excerpt.pledges_count }} pledgers</div>
+          {% endif %}
+          </div>
+         </div>
+
+        <div class="bar-goal">{{ homepage_excerpt.moneybomb.pledger_goal }} PLEDGERS</div>
+
+    </div>
+
+    {% endif %}
+
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/countdown_ie.css" media="all"/>
+    <![endif]-->
+
+    <script type="text/javascript" src="/javascripts/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="/assets/liquid/money-bomb.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        var moneyBomb = new NB.Liquid.MoneyBomb();
+
+        moneyBomb.setCountdown({
+          $el : $('#pre-countdown-{{ homepage_excerpt.slug }}'),
+          until: +{{ homepage_excerpt.moneybomb.seconds_until }}
+        });
+
+        moneyBomb.setCountdown({
+          $el : $('#active-countdown-{{ homepage_excerpt.slug }}'),
+          until: +{{ homepage_excerpt.moneybomb.seconds_left }}
+        });
+      });
+    </script>
+
+    {% if homepage_excerpt.moneybomb.is_active? %}
+    <a class="button submit-link" href="{{ homepage_excerpt.moneybomb.donation_page.url }}">Donate now</a>
+    {% else %}
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">Pledge now</a>
+    {% endif %}
+
+  <!-- Petition page -->
+  {% when 'Petition' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-bomb"></span> Featured petition</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.petition.intro.size > 0 %}
+    {{ homepage_excerpt.petition.intro }}
+    {% endif %}
+
+    {% if homepage_excerpt.petition.has_goal? %}
+    {% assign thermo_width = 50 %}
+
+    <div class="clearfix padbottommore">
+      <div class="progress" style="width: {{ thermo_width }}%;">
+        <div class="bar bar-success" style="width: {{ homepage_excerpt.petition.percent_of_goal | times:100 }}%;">
+          {% if homepage_excerpt.petition.signatures_count < 2 %}
+          <div class="bar-text">JUST STARTED</div>
+          {% else %}
+          <div class="bar-text">{{ homepage_excerpt.petition.signatures_count | number_with_commas }} {{ homepage_excerpt.petition.signature_name | pluralize | upcase }}</div>
+          {% endif %}
+          </div>
+      </div>
+      <div class="bar-goal">{{ homepage_excerpt.petition.goal | number_with_commas }} {{ homepage_excerpt.petition.signature_name | pluralize | downcase }}</div>
+    </div>
+    {% elsif homepage_excerpt.petition.signatures_count > 4 %}
+    <div class="bar-goal">{{ homepage_excerpt.petition.signatures_count | number_with_commas }} {{ homepage_excerpt.petition.signature_name | pluralize | downcase }}</div>
+    {% endif %}
+
+    {% if homepage_excerpt.petition.content.size > 0 %}
+    <div id="petition-content">
+      {{ homepage_excerpt.petition.content }}
+    </div>
+    {% endif %}
+
+    {% include "homepage_excerpt_petition" with homepage_excerpt.slug %}
+
+  <!-- Press release page -->
+  {% when 'Press Release' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-megaphone"></span> Featured press release</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    <div class="released-at">
+      {{ homepage_excerpt.published_at | date: '%B %d, %Y' }}
+    </div>
+
+    {% if homepage_excerpt.has_author? %}
+    <div class="contact vcard padbottomless">
+      <div class="contact-name">
+        Contact: <span class="n">{{ homepage_excerpt.author.published_name }}</span>
+      </div>
+      {% if homepage_excerpt.author.has_phone? %}
+      <a href="tel:{{ homepage_excerpt.author.phone_number }}" class="tel">
+        {{ homepage_excerpt.author.phone_number }}
+      </a>
+      {% endif %}
+      {% if homepage_excerpt.author.has_email? %}
+      <div class="email">
+        {{ homepage_excerpt.author.email | enkode_email }}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="truncate-500" data-truncate="500">{{ homepage_excerpt.press_release.content }}</div>
+
+    <span class="continue"><a href="{{ homepage_excerpt.url }}">Continue reading &rarr;</a></span>
+
+  <!-- Question page -->
+  {% when 'Question' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-question-octagon-frame"></span> Featured question</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.question.content.size > 0 %}
+    {{ homepage_excerpt.question.content }}
+    {% endif %}
+
+    {% if homepage_excerpt.question.answer.size > 0 %}
+    <div class="row padbottommore">
+      <div class="columns">
+        <div class="answer-wrap clearfix"><div class="answer-a">A:</div> <div class="answer">{{ homepage_excerpt.question.answer }}</div></div>
+      </div>
+    </div>
+    {% endif %}
+
+  <!-- Rules page -->
+  {% when 'Rules' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-property"></span> Rules</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.rule.content.size > 0 %}
+    {{ homepage_excerpt.rule.content }}
+    {% endif %}
+
+    <ol class="rule-list">
+      {% for rule in homepage_excerpt.rule.rules %}
+      <li><div class="rule">{{ rule.name }}</div> {{ rule.content }}</li>
+      {% endfor %}
+    </ol>
+
+  <!-- Signup page -->
+  {% when 'Signup' %}
+  
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-user"></span> Sign up</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.signup.content.size > 0 %}
+    {{ homepage_excerpt.signup.content }}
+    {% endif %}
+
+    {% include "homepage_excerpt_signup" with homepage_excerpt.slug %}
+
+  <!-- Suggestion box page -->
+  {% when 'Suggestion Box' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-box"></span> Suggestion box</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.suggestion_box.content.size > 0 %}
+    {{ homepage_excerpt.suggestion_box.content }}
+    {% endif %}
+
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">Add your suggestion</a>
+
+  <!-- Suggestion page -->
+  {% when 'Suggestion' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-box"></span> Featured suggestion</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+    <div class="byline">
+      Posted by {{ homepage_excerpt.author.published_name_linked }} <span class="pc">{{ homepage_excerpt.author.capital_amount_format }}</span> on {{ homepage_excerpt.published_at | date: '%B %d, %Y' }}
+    </div>
+
+    {% if homepage_excerpt.suggestion.content.size > 0 %}
+    {{ homepage_excerpt.suggestion.content }}
+    {% else %}
+    {% endif %}
+
+    {% if homepage_excerpt.suggestion.is_answered? %}
+      <div class="row padtopmore padbottommore">
+        <div class="columns">
+          <div class="answer clearfix"> 
+            <div>
+              <strong>
+                Official response from {{ homepage_excerpt.suggestion.answer_author.published_name_linked }}
+                {% if homepage_excerpt.suggestion.is_answer_type? %}
+                {{ homepage_excerpt.suggestion.answer_type_html }}
+                {% endif %}
+              </strong>
+            </div>
+            <i class="icon-up-dir" /></i><div class="answer-wrap">{% if homepage_excerpt.suggestion.answer.size > 0 %}{{ homepage_excerpt.suggestion.answer }}{% else %}<p></p>{% endif %}</div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">Post your reaction</a>
+
+  <!-- Survey page -->
+  {% when 'Survey' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-tick"></span> Survey</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.survey.content.size > 0 %}
+    {{ homepage_excerpt.survey.content }}
+    {% endif %}
+
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">Take the survey</a>
+
+  <!-- Volunteer signup page -->
+  {% when 'Volunteer Signup' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-hand"></span> Volunteer sign up</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.volunteer_signup.content.size > 0 %}
+    {{ homepage_excerpt.volunteer_signup.content }}
+    {% endif %}
+
+    {% include "homepage_excerpt_volunteer_signup" with homepage_excerpt.slug %}
+
+  <!-- Vote pledge page -->
+  {% when 'Vote Pledge' %}
+
+    <h3 class="excerpt-type"><a href="{{ homepage_excerpt.url }}"><span class="icon-hand"></span> Vote Pledge</a></h3>
+
+    <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+    {% if homepage_excerpt.vote_pledge.has_yes_goal? %}
+    {% assign thermo_width = 50 %}
+
+    <div class="clearfix padtopmore">
+      <div class="progress" style="width: {{ thermo_width }}%;">
+        <div class="bar bar-success" style="width: {{ homepage_excerpt.vote_pledge.percent_of_yes_goal | times:100 }}%;">
+          {% if homepage_excerpt.vote_pledge.yes_votes_count < 2 %}
+          <div class="bar-text">JUST STARTED</div>
+          {% else %}
+          <div class="bar-text">{{ homepage_excerpt.vote_pledge.yes_votes_count | number_with_commas }} VOTES FOUND</div>
+          {% endif %}
+         </div>
+       </div>
+
+        <div class="bar-goal">{{ homepage_excerpt.vote_pledge.yes_goal | number_with_commas }} votes</div>
+    </div>
+
+    {% elsif homepage_excerpt.vote_pledge.yes_votes_count > 4 %}
+    <div class="bar-goal">{{ homepage_excerpt.vote_pledge.yes_votes_count | number_with_commas }} votes</div>
+    {% endif %}
+
+
+    {% if homepage_excerpt.vote_pledge.content.size > 0 %}
+    {{ homepage_excerpt.vote_pledge.content }}
+    {% endif %}
+
+    {% include "homepage_excerpt_vote_pledge" with homepage_excerpt.slug %}
+
+  {% endcase %}
+
+</div> <!-- .homepage-excerpt -->

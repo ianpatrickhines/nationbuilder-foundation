@@ -1,0 +1,106 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page_title }}</title>
+  <link rel="stylesheet" href="theme.scss" />
+  <link rel="stylesheet" href="tablet-and-desktop.scss" />
+  <link rel="stylesheet" href="custom.scss" />
+  <script src="modernizr.js"></script>
+
+  {{ content_for_header }}
+
+  <script type="text/javascript">
+    NB.appConfig.userIsLoggedIn = {{request.logged_in?}};
+  </script>
+</head>
+<body id="{{ page.slug }}">
+
+  <!-- Nav Bar -->
+  {% include "nav" %}
+  <!-- End Nav -->
+
+  <!-- Main Page Content and Sidebar -->
+
+  <div id="{% if request.is_sidebar? %}columns-2{% else %}columns-1{% endif %}">    
+      {% if request.is_sidebar? %}
+      {% include "columns_2" %}
+      {% else %}
+      {% include "columns_1" %}
+      {% endif %}    
+  </div>
+
+  <!-- End Main Content and Sidebar -->
+
+  <!-- Footer -->
+
+  <footer>
+    <div class="row">
+      <div class="large-12 columns">
+        <hr />
+        <div class="row">
+          <div class="large-6 columns">{{ site.footer_content }}</div>
+          <div class="large-6 columns">
+            <p class="right">
+              {% if request.logged_in? %}
+                Hi
+              <a href="{{ request.current_signup.settings_url }}">{{ request.current_signup.name_or_email }}</a>
+              . View your
+                {% if site.show_public_profiles? %}
+              <a href="{{ request.current_signup.profile_url }}">public profile</a>
+              ,
+                {% endif %}
+              <a href="{{ request.current_signup.settings_url }}">account settings</a>
+              , or
+              <a href="{{ request.current_signup.logout_url }}">sign out</a>
+              .
+              {% else %}
+                Sign in with
+              <a href="{{ request.facebook_connect_url }}">Facebook</a>
+              ,
+              <a href="{{ request.twitter_connect_url }}">Twitter</a>
+              or
+              <a href="/login">email</a>
+              .
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <!-- The NationBuilder link below is required. If it is removed, we may add it back ourselves.
+                     You can style it or move it in different ways, but please leave it in the footer. -->
+        <p class="text-center">
+          <small>
+            Created with
+            <a href="http://nationbuilder.com">NationBuilder</a>
+          </small>
+        </p>
+      </div>
+    </div>
+  </footer>
+  {% if site.has_background_image? %}
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="/javascripts/jquery.backstretch.min.js"></script>
+  <script type="text/javascript">
+      jQuery.backstretch("{{ site.background_image_url }}", {speed: 0});
+    </script>
+  <![endif]-->
+  <style>
+      body {
+        background: url('{{ site.background_image_url }}') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+  </style>
+  {% endif %}
+  <script src="foundation.min.js"></script>
+  <script>$(document).foundation();</script>
+  {{ content_for_footer }}
+</body>
+</html>

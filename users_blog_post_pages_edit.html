@@ -1,0 +1,25 @@
+<div id="headline">
+  <h2>{{ blog_post_page.page.headline }}</h2>
+</div>
+
+{% form_for blog_post_page %}
+
+<div class="form-wrap">
+  <div class="form">
+
+    <div class="form-errors">{% error_messages_for blog_post_page %}</div>
+
+    <div class="row">
+
+      <div class="columns">{% text_area "content_editable", class:"textarea-tinymce" %}</div>
+
+    </div>
+
+    {% submit_tag "Save and update post", class:"submit-button" %}
+    <div class="form-submit"></div>
+
+  </div>
+
+</div>
+
+{% endform_for %}

@@ -1,0 +1,116 @@
+<div class="onecolumn_container">
+  <div class="onecolumn">
+    
+    {% if page.nation_signup.content.size > 0 %}
+    {{ page.nation_signup.content }}
+    {% endif %}
+    
+    <div align="center" class="one_column">
+      <div class="form-wrap" align="left">
+        <div class="form">
+          
+          {% if request.sorta_logged_in? %}
+          
+          <h2 class="headline">Hi {{ request.current_signup.name_or_email }}! Start your new nation.</h2>
+          
+          {% if request.logged_in? == false %}
+          <div class="padtop text-content">
+            If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here</a>.
+          </div>
+          {% endif %}
+          
+          {% else %}
+          
+          <h2 class="headline">Start your new nation.</h2>
+          
+          {% endif %}
+          
+          {% form_for nation_signup %}
+          
+          <div class="form_errors">{% error_messages_for nation_signup %}</div>
+          
+          <div class="row">
+            <div class="medium-6 columns"><label for="nation_signup_slug">Choose your NationBuilder URL</label><div style="width: 60%; float: left;">{% text_field "slug", class:"text" %}</div><div style="float: left; width: 30%; padding: 5px 0 0 5px;">.nationbuilder.com</div>
+            </div>
+          </div>
+
+          <div class="padbottommore"><small>(you can add your own domain later)</small></div>
+          
+          <div class="row">
+            <div class="medium-6 columns"><label for="nation_signup_first_name">Your First Name</label>{% text_field "first_name", class:"text" %}</div>
+            <div class="medium-6 columns"><label for="nation_signup_last_name">Your Last Name</label>{% text_field "last_name", class:"text" %}</div>
+          </div>
+          
+          <div class="row">
+            <div class="medium-6 columns"><label for="nation_signup_email">Your Email</label>{% email_field "email", class:"text" %}</div>
+            <div class="medium-6 columns"><label for="nation_signup_phone">Your Phone Number</label>{% text_field "phone", class:"text" %}</div>
+          </div>
+          
+          <div class="row">
+            <div class="medium-6 columns"><label for="nation_signup_password">Choose your password</label>{% password_field "password", class:"text" %}</div>
+            <div class="medium-6 columns"><label for="nation_signup_password_confirmation">Repeat password</label>{% password_field "password_confirmation", class:"text" %}</div>
+          </div>
+          
+          
+          {% if request.logged_in? and request.current_signup.has_password? %}
+          <div class="row">
+            <div class="columns">This password is for your personal administrator account on your new nation.<br/> It is separate from your nationbuilder.com password.</div>
+          </div>
+          {% endif %}
+          
+          {% unless page.nation_signup.has_plan? %}
+          {% if page.nation_signup.has_edition? == false %}
+          <div class="row">
+            <div class="span12 radio-inline">{{ page.nation_signup.form_edition_options }}</div>
+          </div>
+          {% endif %}
+          {% else %}
+          <div class="row">
+            <div class="columns"><label for="nation_signup_nation_plan_id">Choose your plan</label> {{ page.nation_signup.form_plan_dropdown }}</div>
+          </div>
+          {% endunless %}
+          
+          {% if page.nation_signup.ask_for_cc? %}
+          <hr />
+          
+          <div class="padbottom"><h3>Enter your billing information</h3></div>
+
+          <div class="row padtopmore">
+            <div class="columns">
+            <h4>14 day free trial</h4>
+            <b>You won't be billed unless you keep your account open past your 14 day free trial.</b> We need your billing information to reduce fraud and verify you have a valid credit card should you keep your nation. This prevents any interruption in service. <b>You can change your plan or cancel at anytime.</b>
+            </div>
+          </div>
+          
+          <div class="row padtop">
+            <div class="medium-6 columns"><label for="nation_signup_card_number">Credit card number</label>
+            {% text_field "card_number", class:"text" %}</div>
+            <div class="medium-6 columns"><label for="nation_signup_zip">Billing postal code:</label>{% text_field "zip", class:"text" %}</div>
+          </div>
+
+          <div class="row padtop">
+            <div class="medium-6 columns"><label for="nation_signup_card_expires_on">Expires:</label> {{ page.nation_signup.form_card_expires_on }}</div>
+            <div class="medium-6 columns"><div style="position: relative; top: 15px;"><img src="{{ 'lock' | icon_url }}" width="24" height="24" alt="Secure" title="Secure" align="middle" style="position: relative; top: -5px;"/><span style="font-size: 12px; font-weight: bold;">Secure</span> {{ page.nation_signup.accepted_card_icons }}</div></div>
+          </div>
+              
+          {% endif %}
+          
+          <div class="row padtopmore">
+            <div class="columns"><label class="checkbox">{% check_box "accept_tos", class:"checkbox" %} I agree to the <a href="http://nationbuilder.com/tos" target="_blank">NationBuilder terms of service</a></label></div>
+          </div>
+          
+          <div class="row">
+            <div class="columns">
+            {% submit_tag "Start your nation", class:"submit-button" %}
+            <div class="form_submit"></div>
+          </div>
+        </div>
+          
+          {% endform_for %}
+          
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

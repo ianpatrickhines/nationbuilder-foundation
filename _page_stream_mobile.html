@@ -1,0 +1,62 @@
+{% if page.public_activities_count > 0 or page.is_commentable? %}
+		 <div class="content_container_bottom" id="stream">
+		
+	<div id="comment">
+
+    {% if page.public_activities_count == 1 %}
+      <h4>Showing 1 reaction</h4>
+    {% elsif page.public_activities_count > 1 %}
+      <h4>Showing {{ page.public_activities_count }} reactions</h4>
+    {% elsif page.is_commentable? %}
+      <h4>Be the first to comment</h4>
+    {% endif %}
+
+    <div class="clear"></div>
+
+  </div>
+
+  {% if page.is_commentable? and page.type_name != 'Petition' and page.type_name != 'Endorsement' %}
+    
+    <div class="one_column" class="padtop">
+    	<div class="form_wrap">
+    	  <div class="form">
+          {% form_for comment %}
+            <div class="form_errors">{% error_messages_for comment %}</div>
+							{% text_area "content", class:"textarea" %}
+            <div class="padtopless">
+              {% submit_tag "Post your comment", class:"submit-button" %}
+
+							{% if request.sorta_logged_in? %}
+							<div class="padtopmore padbottomless" style="font-size: 12px;">
+								 <span id="page_follow_{{ page.id }}">
+						      {% include "page_follow" %}
+						      </span> | 
+							 {% if site.has_rule_page? %}
+	               	<a href="{{ site.rule_page.url }}">View the site rules</a>
+	              {% endif %}
+							</div>
+							{% endif %}
+
+              <div class="form_submit"></div>
+            </div>
+          {% endform_for %}
+        </div>
+      </div>
+    </div>
+    
+  {% endif %}
+
+
+  <div id="reactions">
+    <div id="page_activities" class="activities">
+      {% for activity in page.activities %}
+        <div class="activity">
+          {{ activity.show_page_view }}
+        </div>
+      {% endfor %}
+    </div>
+    {{ page.activities | paginate }}
+  </div>
+
+	</div>
+{% endif %}

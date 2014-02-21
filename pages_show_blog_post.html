@@ -1,0 +1,34 @@
+
+
+<div class="headline">
+  <h2>{{ page.headline }}</h2>
+
+  {% if page.has_author? %}
+  {% include "page_byline" %}
+  {% endif %}
+</div>
+
+<div id="content">
+
+  <div id="intro" class="intro">
+    <div class="content">
+      {{ page.blog_post.content_full }}
+    </div>
+  </div>
+
+  {% if page.tags_count > 0 %}
+  <div class="page-tags">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+
+  <div class="like-page">
+    <strong>Do you like this post?</strong>
+    {% include "like_page" %}
+  </div>
+
+  {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+
+</div>

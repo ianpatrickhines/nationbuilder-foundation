@@ -1,0 +1,41 @@
+<div class="padbottom">
+  <h5>{{ event.event.local_start_at | date: '%A, %B %d, %Y at %I:%M %p' }}
+    {% if event.event.is_multi_day? %}
+    through {{ event.event.local_end_at | event_date }}
+    {% endif %}
+    {% if event.event.is_ticket_required? %}
+    &middot; {{ event.event.ticket_price_with_currency }}
+    {% elsif event.event.is_user_ticket_required? %}
+    &middot; {{ event.event.user_ticket_price_with_currency }}
+    {% endif %}
+    {% if event.event.show_guests? and event.event.rsvps_count > 0 %}
+    &middot;
+    <a href="{{ event.url }}">{{ event.event.rsvps_count }} rsvp{% if event.event.rsvps_count > 1 %}s{% endif %}</a>
+    {% endif %}
+  </h5>
+  {% if event.event.has_venue? %}
+  <div class="event-venue">
+    {% if event.event.has_venue_address? %}
+    <a href="{{ event.event.venue_address.google_map_link }}">{{ event.event.venue_name }}</a>
+    in
+    {{ event.event.venue_address.location }}
+    {% else %}
+    {{ event.event.venue_name }}
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+<h4><a href="{{ event.url }}">{{ event.name }}</a></h4>
+
+{% if event.event.content.size > 0 %}
+<div class="truncate-200" data-truncate="200">
+  {{ event.event.content }}
+</div>
+{% endif %}
+
+{% if event.event.is_maximum_capacity? %}
+<div class="padtop"><a class="button destroy-link" href="{{ event.url }}">sold out</a></div>
+{% elsif event.event.is_past? == false and event.event.accept_rsvps? %}
+<div class="padtop"><a class="submit-link" href="{{ event.url }}">rsvp</a></div>
+{% endif %}

@@ -1,0 +1,16 @@
+{{ recipient.first_name_or_friend }} --
+<br /><br />
+Thank you for your RSVP{% if event_rsvp.guests_count > 0 %} +{{ event_rsvp.guests_count }}{% endif %}.
+<br/><br/>
+{% include "mailing_event" %}
+<br/><br/>
+If you need to update or cancel your RSVP, use this link:
+<br/><br/>
+<a href="{{ edit_url }}">{{ edit_url }}</a>
+<br/><br/>
+And you can invite others to join you at the event with this link:
+<br/><br/>
+<a href="{{ page_url }}">{{ page_url }}</a>
+<br/><br/>
+{{ broadcaster.name }}<br/>
+<a href="{{ site.full_url }}">{{ site.full_url }}</a><br/>

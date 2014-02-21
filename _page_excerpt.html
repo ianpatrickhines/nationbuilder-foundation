@@ -1,0 +1,575 @@
+<div class="page-excerpt page-{{ page_excerpt.id }}">
+  <h3><a href="{{ page_excerpt.url }}">{{ page_excerpt.headline }}</a></h3>
+
+  <div class="byline padtopless">
+    {{ page_excerpt.icon | icon }} Posted
+    {% if page_excerpt.has_parent? %}
+    on <a href="{{ page_excerpt.parent.url }}">{{ page_excerpt.parent.name }}</a>
+    {% endif %}
+    {% if page_excerpt.has_author? %}
+    by {{ page_excerpt.author.published_name_linked }}
+    {% endif %}
+    &middot; {{ page_excerpt.published_at | date: '%B %d, %Y %l:%M %p' }}
+    {% if page_excerpt.show_stream? %}
+    {% if page_excerpt.public_activities_count > 0 %}
+    &middot; <a href="{{ page_excerpt.url }}#reactions">{{ page_excerpt.public_activities_count }} reaction{% if page_excerpt.public_activities_count > 1 %}s{% endif %}</a>
+    {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="excerpt">
+  {% case page_excerpt.type_name %}
+
+  {% when 'Activity Stream' %}
+
+  <p>
+
+    {% when 'ActBlue' %}
+
+    <a class="button submit-link" href="{{ page_excerpt.actblue.actblue_page_url_with_tracking }}">Donate on ActBlue</a>
+
+
+  {% when 'Basic' %}
+
+  {{ page_excerpt.basic.content }}
+
+  {% when 'Blog' %}
+
+  {% for post in page_excerpt.blog.most_recent_blog_posts limit: 3 %}
+  <h4><a href="{{ post.url }}">{{ post.headline }}</a></h4>
+  <p>
+    Posted by {{ post.author.published_name_linked }} &middot; {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
+    {% if post.show_stream? %}
+    {% if post.public_activities_count > 0 %}
+    &middot; <a href="{{ post.url }}#reactions">{{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}</a>
+    {% endif %}
+    {% endif %}
+  </p>
+  {% endfor %}
+
+  <div class="padbottom">
+    <a class="button submit-link" href="{{ page_excerpt.url }}">See all posts</a>
+    {% if page_excerpt.blog.is_posting_public? %}
+    or <a href="{{ page_excerpt.url }}">{{ page_excerpt.blog.public_posting_prompt }}</a>
+    {% endif %}
+  </div>
+
+  {% when 'Blog Post' %}
+
+  {{ page_excerpt.blog_post.content }}
+  {% if page_excerpt.blog_post.is_extended? %}
+    <span class="read-more"><a href='{{ page_excerpt.url }}'>Read more</a></span>
+  {% endif %}
+
+  {% when 'Calendar' %}
+
+  {% if page_excerpt.calendar.content.size > 0 %}
+  {{ page_excerpt.calendar.content }}
+  {% endif %}
+
+  {% if page_excerpt.calendar.show_map? %}
+
+  {% if page_excerpt.calendar.events_upcoming_count > 0 %}
+
+    <div class="form-wrap">
+      <div class="form padtopmore">
+        {{ page_excerpt.calendar.events_upcoming_map }}
+      </div>
+    </div>
+
+  {% endif %}
+
+  {% endif %}
+
+    <a class="button submit-link" href="{{ page_excerpt.url }}">See all events</a>
+    {% if page_excerpt.calendar.allow_user_submitted? %}
+    or <a href="{{ page_excerpt.calendar.new_event_url }}">Host your own</a>
+    {% endif %}
+
+  {% when 'Donation' %}
+
+  {% assign thermo_width = 50 %}
+
+  {% if page_excerpt.donation.has_amount_goal? %}
+  <div class="clearfix padtopmore">
+  <div class="progress" style="width: {{ thermo_width }}%;">
+    <div class="bar bar-success" style="width: {{ page_excerpt.donation.percent_of_amount_goal | times:100 }}%;">
+      {% if page_excerpt.donations_count < 1 %}
+      <div class="bar-text">JUST STARTED</div>
+      {% else %}
+      <div class="bar-text">{{ page_excerpt.donations_amount_format }} raised</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="bar-goal">GOAL: {{ page_excerpt.donation.amount_goal_format }}</div>
+
+  </div>
+
+  {% elsif page_excerpt.donation.has_donor_goal? %}
+
+  <div class="clearfix">
+    <div class="progress" style="width: {{ thermo_width }}%;">
+      <div class="bar bar-success" style="width: {{ page_excerpt.donation.percent_of_donor_goal | times:100 }}%;">
+          {% if page_excerpt.donations_count < 2 %}
+          <div class="bar-text">JUST STARTED</div>
+          {% else %}
+          <div class="bar-text">{{ page_excerpt.donations_count }} donors</div>
+          {% endif %}
+      </div>
+    </div>
+
+  <div class="bar-goal">{{ page_excerpt.donation.donor_goal }} donors</div>
+
+  </div>
+
+  {% endif %}
+
+  {% if page_excerpt.donation.content.size > 0 %}
+  {{ page_excerpt.donation.content }}
+  {% endif %}
+
+    <a class="button submit-link" href="{{ page_excerpt.url }}">Donate</a>
+
+  {% when 'Endorsement' %}
+
+  {% if page_excerpt.endorsement.intro.size > 0 %}
+  {{ page_excerpt.endorsement.intro }}
+  {% endif %}
+
+  {% if page_excerpt.endorsement.content.size > 0 %}
+  <div id="endorsement-content">
+    {{ page_excerpt.endorsement.content }}
+  </div>
+  {% endif %}
+
+  <a class="button submit-link" href="{{ page_excerpt.url }}">Endorse</a>
+
+  {% when 'Event' %}
+
+  {% if page_excerpt.event.content.size > 0 %}
+  {{ page_excerpt.event.content }}
+  {% endif %}
+
+  <div class="event-detail">
+    <div class="subhead">WHEN</div>
+    <div class="subtext">
+      {% if page_excerpt.event.is_multi_day? %}
+      {{ page_excerpt.event.local_start_at | event_time }} - {{ page_excerpt.event.local_end_at | event_time }}
+      {% else %}
+      {{ page_excerpt.event.local_start_at | event_time }}
+      {% endif %}
+    </div>
+  </div>
+
+  {% if page_excerpt.event.has_venue? %}
+
+  <div class="event-detail">
+    <div class="subhead">WHERE</div>
+    <div class="subtext">
+      {% if page_excerpt.event.venue_name.size > 0 %}
+      {{ page_excerpt.event.venue_name }}<br/>
+      {% endif %}
+      {% for line in page_excerpt.event.venue_address.multi_line %}
+      {{ line }}<br/>
+      {% endfor %}
+      {% if page_excerpt.event.has_venue_address? %}
+      <a href="{{ page_excerpt.event.venue_address.google_map_link }}">Google map and directions</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% endif %}
+
+  <div class="padbottommore">
+  {% if page_excerpt.event.is_ticket_required? %}
+  {{ page_excerpt.event.ticket_price_with_currency }}
+  {% elsif page_excerpt.event.is_user_ticket_required? %}
+  {{ page_excerpt.event.user_ticket_price_with_currency }}
+  {% endif %}
+
+  {% if page_excerpt.event.is_ticket_required? or page_excerpt.event.is_user_ticket_required? %} &middot; {% endif %}
+
+  {% if page_excerpt.event.show_guests? and page_excerpt.event.rsvps_count > 0 %}
+  <a href="{{ page_excerpt.url }}">{{ page_excerpt.event.rsvps_count }} rsvp{% if page_excerpt.event.rsvps_count > 1 %}s{% endif %}</a>
+  {% endif %}
+  </div>
+
+  {% if page_excerpt.event.is_maximum_capacity? %}
+    <a class="button destroy-link" href="{{ page_excerpt.url }}">sold out</a>
+  {% elsif page_excerpt.event.is_past? == false %}
+    <a class="button submit-link" href="{{ page_excerpt.url }}">rsvp</a>
+  {% endif %}
+
+  {% when 'FAQ' %}
+
+  {% if page_excerpt.faq.content.size > 0 %}
+  {{ page_excerpt.faq.content }}
+  {% endif %}
+
+  <ul class="question-list">
+    {% for child in page_excerpt.children %}
+    {% if child.type_name == 'Question' %}
+    <li><a href="{{ child.url }}">{{ child.headline }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+  {% when 'Feedback' %}
+
+  {% if page_excerpt.feedback.content.size > 0 %}
+  {{ page_excerpt.feedback.content }}
+  {% endif %}
+
+  <a class="button submit-link" href="{{ page_excerpt.url }}">{{ page_excerpt.feedback.submit_button_name }}</a>
+
+  {% when 'Find Friends' %}
+
+  <p>
+
+    {% when 'Follows' %}
+
+  <p>
+
+    {% when 'Followers' %}
+
+  <p>
+
+    {% when 'Leaderboard' %}
+
+    {% if page_excerpt.leaderboard.content.size > 0 %}
+    {{ page_excerpt.leaderboard.content }}
+    {% endif %}
+
+    {% for leaderboard in page_excerpt.page_leaderboards %}
+
+    <div class="leaderboard padbottom">
+
+    {% if leaderboard.has_goal? %}
+    {% assign thermo_width = 50 %}
+
+    <div class="clearfix">
+      <div class="progress" style="width: {{ thermo_width }}%;">
+        <div class="bar bar-success" style="width: {{ leaderboard.percent_of_goal | times:100 }}%;">
+          <div class="bar-text">{{ leaderboard.total }} {{ leaderboard.goal_name_short }}</div>
+        </div>
+      </div>
+
+      <div class="bar-goal">{{ leaderboard.goal }} {{ leaderboard.goal_name }}</div>
+
+    </div>
+
+    {% endif %}
+
+    {% if leaderboard.display_number_results > 0 %}
+
+    <strong>Top 5 {{ leaderboard.display_name }}</strong>
+
+    <hr style="margin: 5px 0 10px 0;" />
+
+    {% for entry in leaderboard.entries limit: 5 %}
+    <div class="people-list {% cycle 'odd', 'even' %}">
+      <div class="people-list-pic">{{ entry.signup.bigger_profile_image }} <span class="leaderboard-rank">{{ entry.position }}</span></div>
+      <div class="people-name">{{ entry.signup.published_name_linked }}</div>
+      {{ entry.total }} {{ leaderboard.goal_name }}
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+  {% when 'Moneybomb' %}
+
+  {% if page_excerpt.moneybomb.content.size > 0 %}
+  {{ page_excerpt.moneybomb.content }}
+  {% endif %}
+
+  {% if page_excerpt.moneybomb.has_start_at? and page_excerpt.moneybomb.is_active? == false and page_excerpt.moneybomb.is_past? == false %}
+  <div class="event-detail">
+    <div class="subhead" style="text-transform: uppercase;">COUNTDOWN TO {{ page_excerpt.moneybomb.local_start_at | moneybomb_time }}</div>
+    <div class="subtext">
+      <div id="pre-countdown-{{ page_excerpt.slug }}" class="countdown"></div>
+    </div>
+  </div>
+  {% elsif page_excerpt.moneybomb.is_active? %}
+  <div class="event-detail">
+    <div class="subhead" style="text-transform: uppercase;">TIME LEFT TO DONATE</div>
+    <div class="subtext">
+      <div id="active-countdown-{{ page_excerpt.slug }}" class="countdown"></div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% assign thermo_width = 50 %}
+
+  {% if page_excerpt.moneybomb.has_amount_goal? %}
+  <div class="clearfix">
+    <div class="progress" style="width: {{ thermo_width }}%;">
+      <div class="bar bar-success" style="width: {{ page_excerpt.moneybomb.percent_of_amount_goal | times:100 }}%;">
+        {% if page_excerpt.pledges_count < 1 %}
+        <div class="bar-text">JUST STARTED</div>
+        {% else %}
+        <div class="bar-text">{{ page_excerpt.pledges_amount_format }} pledged</div>
+        {% endif %}
+        </div>
+       </div>
+
+      <div class="bar-goal">{{ page_excerpt.moneybomb.amount_goal_format }}</div>
+
+  </div>
+
+  {% elsif page_excerpt.moneybomb.has_pledger_goal? %}
+
+  <div class="clearfix">
+    <div class="progress" style="width: {{ thermo_width }}%;">
+      <div class="bar bar-success" style="width: {{ page_excerpt.moneybomb.percent_of_pledger_goal | times:100 }}%;">
+        {% if page_excerpt.pledges_count < 2 %}
+        <div class="bar-text">JUST STARTED</div>
+        {% else %}
+        <div class="bar-text">{{ page_excerpt.pledges_count }} pledgers</div>
+        {% endif %}
+        </div>
+       </div>
+
+      <div class="bar-goal">{{ page_excerpt.moneybomb.pledger_goal }} PLEDGERS</div>
+
+  </div>
+
+  {% endif %}
+
+  <script type="text/javascript" src="/javascripts/jquery.countdown.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      var moneyBomb = new NB.Liquid.MoneyBomb();
+
+      moneyBomb.setCountdown({
+        $el :  $('#pre-countdown-{{ page_excerpt.slug }}'),
+        until: +{{ page_excerpt.moneybomb.seconds_until }}
+      });
+
+      moneyBomb.setCountdown({
+        $el :  $('#active-countdown-{{ page_excerpt.slug }}'),
+        until: +{{ page_excerpt.moneybomb.seconds_left }}
+      });
+
+    });
+  </script>
+
+  {% if page_excerpt.moneybomb.is_active? %}
+  <a class="button submit-link" href="{{ page_excerpt.moneybomb.donation_page.url }}">Donate now</a>
+  {% else %}
+  <a class="button submit-link" href="{{ page_excerpt.url }}">Pledge now</a>
+  {% endif %}
+
+  {% when 'Paid Membership' %}
+
+  {% if page_excerpt.paid_membership.content.size > 0 %}
+  {{ page_excerpt.paid_membership.content }}
+  {% else %}
+  <p>
+  {% endif %}
+
+  {% for membership_option in page_excerpt.paid_membership.membership_options %}
+
+  <strong><a href="{{ membership_option.purchase_url }}">{{ membership_option.membership_level_name }}</strong></a>: Purchase for <a href="{{ membership_option.purchase_url }}">{{ membership_option.amount }} every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}</a>
+  <br/>
+
+  {% endfor %}
+
+  {% when 'Petition' %}
+
+  {% if page_excerpt.petition.intro.size > 0 %}
+  {{ page_excerpt.petition.intro }}
+  {% endif %}
+
+  {% if page_excerpt.petition.has_goal? %}
+  {% assign thermo_width = 50 %}
+
+  <div class="clearfix">
+    <div class="progress" style="width: {{ thermo_width }}%;">
+      <div class="bar bar-success" style="width: {{ page_excerpt.petition.percent_of_goal | times:100 }}%;">
+        {% if page_excerpt.petition.signatures_count < 2 %}
+        <div class="bar-text">JUST STARTED</div>
+        {% else %}
+        <div class="bar-text">{{ page_exerpt.petition.signatures_count | number_with_commas }} {{ page_exerpt.petition.signature_name | pluralize | upcase }}</div>
+        {% endif %}
+        </div>
+    </div>
+    <div class="bar-goal">{{ page_excerpt.petition.goal | number_with_commas }} {{ page_excerpt.petition.signature_name | pluralize | downcase }}</div>
+  </div>
+  {% elsif page_excerpt.petition.signatures_count > 4 %}
+  <div class="bar-goal">{{ page_excerpt.petition.signatures_count | number_with_commas }} {{ page_excerpt.petition.signature_name | pluralize | downcase }}</div>
+  {% endif %}
+
+  {% if page_excerpt.petition.content.size > 0 %}
+  <div id="petition-content">
+    {{ page_excerpt.petition.content }}
+  </div>
+  {% endif %}
+
+  <a class="button submit-link" href="{{ page_excerpt.url }}">Add {{ page_excerpt.petition.signature_name }}</a>
+
+  {% when 'Political Capital' %}
+
+  <p>
+
+  {% when 'Press Release' %}
+
+  <div class="released-at padtop">
+    {{ page_excerpt.published_at | date: '%B %d, %Y' }}
+  </div>
+
+  {% if page_excerpt.has_author? %}
+  <div class="contact vcard padbottomless">
+    <div class="contact-name">
+      Contact: <span class="n">{{ page_excerpt.author.published_name }}</span>
+    </div>
+    {% if page_excerpt.author.has_phone? %}
+    <a href="tel:{{ page_excerpt.author.phone_number }}" class="tel">
+      {{ page_excerpt.author.phone_number }}
+    </a>
+    {% endif %}
+    {% if page_excerpt.author.has_email? %}
+    <div class="email">
+      {{ page_excerpt.author.email | enkode_email }}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {{ page_excerpt.press_release.content }}
+
+  {% when 'Question' %}
+
+  {% if page_excerpt.question.content.size > 0 %}
+  {{ page_excerpt.question.content }}
+  {% endif %}
+
+  {% if page_excerpt.question.answer.size > 0 %}
+  <div class="row padbottommore">
+    <div class="columns">
+      <div class="answer-wrap clearfix"><div class="answer-a">A:</div> <div class="answer">{{ page_excerpt.question.answer }}</div></div>
+    </div>
+  </div>
+  {% endif %}
+
+
+  {% when 'Recruiting' %}
+
+  {% if page_excerpt.recruiting.content.size > 0 %}
+  {{ page_excerpt.recruiting.content }}
+  {% endif %}
+
+  <a class="button submit-link" href="{{ page_excerpt.url }}">Start recruiting</a>
+
+  {% when 'Redirect' %}
+
+  <p>
+
+    {% when 'Rules' %}
+
+    {% if page_excerpt.rule.content.size > 0 %}
+    {{ page_excerpt.rule.content }}
+    {% endif %}
+
+  <ol class="rule-list">
+    {% for rule in page_excerpt.rule.rules %}
+    <li><div class="rule">{{ rule.name }}</div> {{ rule.content }}</li>
+    {% endfor %}
+  </ol>
+
+  {% when 'Signup' %}
+
+  {% if page_excerpt.signup.content.size > 0 %}
+  {{ page_excerpt.signup.content }}
+  {% endif %}
+
+  <a class="button submit-link" href="{{ page_excerpt.url }}">Sign up</a>
+
+  {% when 'Suggestion Box' %}
+
+  {% if page_excerpt.suggestion_box.content.size > 0 %}
+  {{ page_excerpt.suggestion_box.content }}
+  {% endif %}
+
+  {% when 'Suggestion' %}
+
+  {% if page_excerpt.suggestion.content.size > 0 %}
+  {{ page_excerpt.suggestion.content }}
+  {% else %}
+  <p>
+    {% endif %}
+
+    {% if page_excerpt.suggestion.is_answered? %}
+  <div class="answer">
+    <div class="official-response">
+      Official response from {{ page_excerpt.suggestion.answer_author.published_name_linked }}
+      {% if page_excerpt.suggestion.is_answer_type? %}
+      {{ page_excerpt.suggestion.answer_type_html }}
+      {% endif %}
+    </div>
+    <div class="answer-wrap">{% if page_excerpt.suggestion.answer.size > 0 %}{{ page_excerpt.suggestion.answer }}{% else %}<p></p>{% endif %}</div>
+  </div>
+  {% endif %}
+
+  {% when 'Survey' %}
+
+  {% if page_excerpt.survey.content.size > 0 %}
+  {{ page_excerpt.survey.content }}
+  {% endif %}
+
+  <a class="button submit-link" href="{{ page_excerpt.url }}">Take the survey</a>
+
+  {% when 'Unsubscribe' %}
+
+  <p>
+
+    {% when 'Volunteer Signup' %}
+
+    {% if page_excerpt.volunteer_signup.content.size > 0 %}
+    {{ page_excerpt.volunteer_signup.content }}
+    {% endif %}
+
+  <a class="button submit-link" href="{{ page_excerpt.url }}">Become a volunteer</a>
+
+  {% when 'Vote Pledge' %}
+
+  {% if page_excerpt.vote_pledge.has_yes_goal? %}
+  {% assign thermo_width = 50 %}
+
+  <div class="clearfix padtopmore">
+    <div class="progress" style="width: {{ thermo_width }}%;">
+      <div class="bar bar-success" style="width: {{ page_excerpt.vote_pledge.percent_of_yes_goal | times:100 }}%;">
+        {% if page_excerpt.vote_pledge.yes_votes_count < 2 %}
+        <div class="bar-text">JUST STARTED</div>
+        {% else %}
+        <div class="bar-text">{{ page_excerpt.vote_pledge.yes_votes_count | number_with_commas }} VOTES FOUND</div>
+        {% endif %}
+       </div>
+     </div>
+
+      <div class="bar-goal">{{ page_excerpt.vote_pledge.yes_goal | number_with_commas }} votes</div>
+  </div>
+
+  {% elsif page_excerpt.vote_pledge.yes_votes_count > 4 %}
+  <div class="bar-goal">{{ page_excerpt.vote_pledge.yes_votes_count | number_with_commas }} votes</div>
+  {% endif %}
+
+
+  {% if page_excerpt.vote_pledge.content.size > 0 %}
+  {{ page_excerpt.vote_pledge.content }}
+  {% endif %}
+
+    <a class="button submit-link" href="{{ page_excerpt.url }}">Pledge your vote</a>
+
+  {% when 'Voter Registration' %}
+
+  <p>
+
+    {% endcase %}
+  </div>
+
+</div>

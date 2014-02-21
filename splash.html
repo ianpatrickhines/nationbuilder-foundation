@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{{ page_title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="theme.scss" type="text/css">
+  <link rel="stylesheet" href="tablet-and-desktop.scss" type="text/css" media="screen and (min-width: 768px)">
+
+  <!-- because ie8 ignores media queries, we need this -->
+  <!--[if IE 8]>
+  <link rel="stylesheet" href="tablet-and-desktop.scss" type="text/css">
+  <![endif]-->
+
+  <!--[if lte IE 9]>
+  <link rel="stylesheet" href="ie.scss" type="text/css">
+  <![endif]-->
+
+  {{ content_for_header }}
+
+  <script type="text/javascript">
+    NB.appConfig.userIsLoggedIn = {{request.logged_in?}};
+  </script>
+</head>
+<body class="aware-theme v2-theme {{ page.page_class_name }} js">
+<div id="pattern" class="pattern">
+  <div class="wrap" id="wrap">
+    <div id="body" class="page-{{ request.template }}">
+
+      <div class="header-container clearfix" {% if site.has_background_image? %} style="background: none;" {% endif %}>
+        <div class="width-container">
+
+          {% if site.has_meta_image? %}
+            <div class="site-logo">
+              <header class="splash"><a href="/"><img src="{{ site.meta_image_large_url }}" width="200" height="100"></a></header>
+            </div>
+          {% else %}
+            <header class="splash">
+              <h1 class="title"><a href="/">{{ site.long_name }}</a></h1>
+            </header>
+          {% endif %}
+
+        </div>
+        <!-- .width-container -->
+      </div>
+      <!-- .header-container -->
+
+      {% if site.has_header_image? %}
+      <div class="width-container">
+       <img src="{{ site.header_image_url_1026 }}" class="header-image" border="0" />
+      </div>
+      {% endif %}
+      
+      {% if page.features_count > 0 %}
+        <div class="width-container">
+         {% include "features" %}
+        </div>
+      {% endif %}
+
+      <div class="main-container" id="middle">
+        <div class="main width-container clearfix">
+
+        	{{ content_for_notifications }}
+						
+					<div class="onecolumn-container clearfix">
+           <div class="content-{{ request.template | replace: '_', '-' }}">
+            {% yield %}
+
+            <div align="center" class="padtopmore"><div class="submit-button" id="splash-button"><a href="/">Continue to {{ site.name }}</a></div></div>
+
+            {% if request.is_intern? and page.is_editing_available? %}
+              <div align="center" class="padtopmore"><a href="{{ page.admin_edit_url }}">{{ "fugue-edit-signiture" | icon }} Edit this page</a></div>
+            {% endif %}
+           </div>
+          </div>
+
+        </div>
+        <!-- #main -->
+      </div>
+      <!-- #main-container -->
+
+        {{ content_for_footer }}
+
+      <!-- .width-container -->
+
+    </div>
+    <!-- #wrap -->
+  </div>
+  <!-- #body -->
+</div>
+<!-- #pattern -->
+
+{% if site.has_background_image? %}
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="/javascripts/jquery.backstretch.min.js"></script>
+  <script type="text/javascript">
+  $j.backstretch("{{ site.background_image_url }}", {speed: 0});
+  </script>
+  <![endif]-->
+  <style>
+  body {
+    background: url({{ site.background_image_url }}) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+</style>
+{% endif %}
+</body>
+</html>

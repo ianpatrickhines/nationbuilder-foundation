@@ -1,0 +1,50 @@
+{% if page.public_activities_count > 0 or page.is_commentable? %}
+	<div id="stream">
+	<div id="comment">
+
+  {% if page.is_commentable? and page.type_name != 'Petition' %}
+    <div class="one_column">
+    	<div class="form_wrap">
+    	  <div class="form">
+          {% form_for comment %}
+            <div class="form_errors">{% error_messages_for comment %}</div>
+            <div class="arrow"></div>
+						<div class="face_comment">
+						{% text_area "content", class:"textarea" %}
+						</div>
+						<div class="face_comment">
+							<div class="update">
+              {% submit_tag "Post your comment", class:"fbbuttonConfirm fbbuttonConfirmb" %}
+							</div>
+              {% if site.has_rule_page? %}
+							<div class="remove">
+                <a href="{{ site.rule_page.url }}">Review the site rules</a>
+							</div>
+              {% endif %}
+							<div class="form_submit"></div>
+						</div>
+          {% endform_for %}
+        </div>
+      </div>
+    </div>
+    
+  {% endif %}
+
+	</div>
+
+  <div id="reactions">
+    <div id="page_activities" class="activities">
+      {% for activity in page.activities %}
+			<div class="face_comment">
+        <div class="activity">
+          {{ activity.show_page_view }}
+        </div>
+			</div>
+      {% endfor %}
+    </div>
+    {{ page.activities | paginate }}
+  </div>
+
+	</div>
+
+{% endif %}

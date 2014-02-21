@@ -1,0 +1,153 @@
+<div class="row">
+  <div class="large-9 medium-9 small-11 small-centered columns content-{{ request.template  | replace: '_', '-' }}" role="content">
+    <div class="form">
+      {% if request.sorta_logged_in? and request.current_signup.has_password? == true %}
+      <h2 class="text-center">Please verify your password</h2>
+      {% elsif request.sorta_logged_in? and request.current_signup.has_password? == false %}
+      <h2 class="text-center">
+        Please activate your account{% if request.current_signup.has_facebook_info? %}, or
+        <a href="{{ request.facebook_connect_url }}">sign in with Facebook</a>
+        .{% else %}.{% endif %}
+      </h2>
+      {% else %}
+      <h2 class="text-center">Sign in with Facebook or Twitter</h2>
+      {% endif %}
+
+  {% if request.sorta_logged_in? and request.current_signup.has_password? == true %}
+
+  {% form_for user_session %}
+      <div class="row">
+        <div class="medium-10 small-centered columns">
+          <div class="form-errors">{% error_messages_for user_session %}</div>
+          {% hidden_field_tag "user_session[email]", request.current_signup.email %}
+          <p>
+            <label for="user_session_password">Password</label>
+            {% password_field "password", class:"text" %}
+          </p>
+        </div>
+        <div class="medium-10 small-centered columns text-center">
+          {% submit_tag "Sign in with password", class:"submit-button" %}
+          <div class="form-submit"></div>
+
+          <div>
+            <a href="{{ request.new_password_reset_url }}">Forgot your password?</a>
+          </div>
+        </div>
+      </div>
+      {% if request.current_signup.has_facebook_info? or request.current_signup.has_twitter_info? %}
+      <div class="text-center">
+        <div class="padtop padbottom">
+          <hr>
+          <div class="orsignin_wrap">
+            <h3 class="text-center">
+              Or sign in with {% if request.current_signup.has_facebook_info? %}Facebook{% endif %}{% if request.current_signup.has_facebook_info? and request.current_signup.has_twitter_info? %} or {% endif %}{% if request.current_signup.has_twitter_info? %}Twitter{% endif %}
+            </h3>
+          </div>
+        </div>
+        <div class="row small-centered">
+          {% if request.current_signup.has_facebook_info? %}
+          <a href="{{ request.facebook_connect_url }}" class="button facebook-button">
+            <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">facebook</span>
+            Sign in with Facebook
+          </a>
+          {% endif %}
+        {% if request.current_signup.has_twitter_info? %}
+          <a href="{{ request.twitter_connect_url }}"  class="button twitter-button">
+            <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">twitter</span>
+            Sign in with Twitter
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+        <div class="text-center padtop">
+          <small class="byline">
+          (If you're not {{ request.current_signup.name_or_email }},
+          <a href="{{ request.current_signup.logout_url }}">click here</a>.)</small>
+        </div>
+        {% endform_for %}
+
+  {% elsif request.sorta_logged_in? and request.current_signup.has_password? == false %}
+
+    {% if request.current_signup.has_facebook_info? or request.current_signup.has_twitter_info? %}
+        <div class="medium-10 small-centered columns text-center">
+          {% if request.current_signup.has_facebook_info? %}
+          <a href="{{ request.facebook_connect_url }}" class="button facebook-button">
+            <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">facebook</span>
+            Sign in with Facebook
+          </a>
+          {% endif %}
+          {% if request.current_signup.has_twitter_info? %}
+          <a href="{{ request.twitter_connect_url }}"  class="button twitter-button">
+            <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">twitter</span>
+            Sign in with Twitter
+          </a>
+          {% endif %}
+        </div>
+        <div class="padtop">or...</div>
+      </div>
+      {% endif %}
+
+  {% form_for account %}
+
+  {% hidden_field_tag "account[email]", request.current_signup.email %}
+      <div class="padtopmore text-center">
+        {% submit_tag "Email account activation instructions" , class:"submit-button" %}
+        <div class="form-submit"></div>
+      </div>
+      {% endform_for %}
+      <div class="padtop text-center">
+        If you're not {{ request.current_signup.name_or_email }},
+        <a href="{{ request.current_signup.logout_url }}">click here</a>
+        .
+      </div>
+      {% else %}
+      <div class="medium-10 small-centered columns text-center">
+        <a href="{{ request.facebook_connect_url }}" class="button facebook-button">
+          <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">facebook</span>
+          Sign in with Facebook
+        </a>
+
+        <a href="{{ request.twitter_connect_url }}"  class="button twitter-button">
+          <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">twitter</span>
+          Sign in with Twitter
+        </a>
+      </div>
+
+      <hr/>
+
+      <h3 class="text-center padbottommore">Or sign in with your email address</h3>
+    </div>
+
+    <div class="medium-10 small-centered columns">
+      {% form_for user_session %}
+      <div class="form-errors">{% error_messages_for user_session %}</div>
+      <div class="row">
+        <div class="medium-6 columns">
+          <label for="user_session_email">Email Address</label>
+          {% email_field "email", class:"text" %}
+        </div>
+        <div class="medium-6 columns">
+          <label for="user_session_password">Password</label>
+          {% password_field "password", class:"text" %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-6 columns">
+          {% submit_tag "Sign in with email", class:"submit-button" %}
+          <div class="form-submit"></div>
+        </div>
+        <div class="medium-3 columns padtopmore">
+          <label for="user_session_remember_me" class="checkbox">{% check_box "remember_me", class:"checkbox" %} Remember me</label>
+        </div>
+        <div class="medium-3 columns padtopmore">
+          <small>
+            <a href="{{ request.new_password_reset_url }}">Forgot your password?</a>
+          </small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% endform_for %}
+{% endif %}
+</div>

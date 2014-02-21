@@ -1,0 +1,5 @@
+<ul class="homepage_excerpt-list">
+{% for post in tag.most_recent_published_pages %}
+  <li class="excerpt-block">{% include "homepage_excerpt" with post %}</li>
+{% endfor %}
+</ul>

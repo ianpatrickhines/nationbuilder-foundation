@@ -1,0 +1,367 @@
+<div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+    {% include "breadcrumbs" %}
+    {% include "features" %}
+    {% if page.headline.size > 0 %}
+    <h2 class="headline">{{ page.headline }}</h2>
+    {% endif %}
+    <div id="content">
+      {% if page.endorsement.intro.size > 0 %}
+      <div id="intro" class="intro">{{ page.endorsement.intro }}</div>
+      {% endif %}
+
+  {% if page.endorsement.content.size > 0 %}
+      <div id="endorsement-content">{{ page.endorsement.content }}</div>
+      {% endif %}
+
+  {% if page.endorsement.has_goal? %}
+  {% assign thermo_width = 50 %}
+      <div class="clearfix padbottom">
+        <div class="progress" style="width: {{ thermo_width }}%;">
+          <div class="bar bar-success" style="width: {{ page.endorsement.percent_of_goal | times:100 }}%;">
+            {% if page.endorsement.endorsements_count < 2 %}
+        <div class="bar-text">JUST STARTED</div>
+            {% else %}
+            <div class="bar-text">
+              {{ page.endorsement.endorsements_count | number_with_commas }} endorsements
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="bar-goal">
+          {{ page.endorsement.goal | number_with_commas }} endorsements
+        </div>
+      </div>
+      {% elsif page.endorsement.endorsements_count > 4 %}
+      <p> <strong>{{ page.endorsement.endorsements_count | number_with_commas }} endorsements</strong> 
+      </p>
+      {% endif %}
+
+  {% if page.endorsement.is_signed? %}
+
+
+  {% form_for endorsement %}
+      <div class="form-wrap">
+        <div class="form">
+
+          <h3 class="padbottommore">Thank you for signing!</h3>
+
+          <div class="form-errors">{% error_messages_for endorsements %}</div>
+          {% if page.is_commentable? %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_content">Change your comment</label>
+              {% text_area "content", class:"textarea" %}
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% if page.endorsement.is_image? %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_image">
+                Upload a {% if page.endorsement.require_organization? %}logo{% else %}picture{% endif %} (140x140)
+              </label>
+              {% file_field "image", class:"file" %}
+            </div>
+
+          </div>
+          {% if endorsement.has_image? %}
+          <div class="row">
+
+            <div class="columns">
+              <img src="{{ endorsement.large_square_image_url }}" width="140" height="140" border="0"/>
+            </div>
+
+          </div>
+          {% endif %}
+      {% endif %}
+
+      {% if page.is_commentable? %}
+      {% submit_tag "Update endorsement", class:"button submit-button" %}
+      {% endif %}
+
+      {{ page.endorsement.current_endorsement | delete_link message: "Remove endorsement" class_name: "button destroy-link" }}
+          <div class="form-submit"></div>
+
+        </div>
+        {% endform_for %}
+      </div>
+      {% else %}
+
+  {% form_for endorsement %}
+      <div class="form-wrap">
+        <div class="form">
+          {% if request.sorta_logged_in? %}
+          <h4 class="padbottommore">
+            Hi {{ request.current_signup.name_or_email }}, will {% if page.endorsement.require_organization? %}your organization{% else %}you{% endif %} endorse?
+          </h4>
+          {% if request.logged_in? == false %}
+          <div class="padbottommore">
+            If you're not {{ request.current_signup.name_or_email }},
+            <a href="{{ request.current_signup.logout_url }}">click here</a>
+            .
+          </div>
+          {% endif %}
+
+      {% else %}
+          <h4 class="padbottommore">
+            Will {% if page.endorsement.require_organization? %}your organization{% else %}you{% endif %} endorse?
+          </h4>
+          {% endif %}
+          <div class="form-errors">{% error_messages_for endorsement %}</div>
+          {% if page.endorsement.require_organization? %}
+
+      {% if page.endorsement.is_organization? %}
+          <div class="row">
+
+            <div class="medium-6 columns">
+              <label for="endorsement_employer">Organization / Company</label>
+              {% text_field "employer", class:"text" %}
+            </div>
+            <div class="medium-6 columns">
+              <label for="endorsement_occupation">Your Title</label>
+              {% text_field "occupation", class:"text" %}
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_is_organization" class="checkbox">
+                {% check_box "is_organization", class:"checkbox" %} My organization is making the endorsement
+              </label>
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+          <div class="row">
+
+            <div class="small-6 medium-6 large-6 columns">
+              <label for="endorsement_first_name">First Name</label>
+              {% text_field "first_name", class:"text" %}
+            </div>
+            <div class="small-6 medium-6 large-6 columns">
+              <label for="endorsement_last_name">Last Name</label>
+              {% text_field "last_name", class:"text" %}
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% else %}
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+          <div class="row">
+
+            <div class="small-6 medium-6 large-6 columns">
+              <label for="endorsement_first_name">First Name</label>
+              {% text_field "first_name", class:"text" %}
+            </div>
+            <div class="small-6 medium-6 large-6 columns">
+              <label for="endorsement_last_name">Last Name</label>
+              {% text_field "last_name", class:"text" %}
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% endif %}
+
+      {% if request.sorta_logged_in? == false %}
+          <div class="row">
+
+            <div class="medium-6 columns">
+              <label for="endorsement_email">Email</label>
+              {% email_field "email", class:"text" %}
+            </div>
+            {% if site.ask_for_mobiles? %}
+            <div class="medium-6 columns">
+              <label for="endorsement_mobile_number">Mobile phone (optional)</label>
+              {% phone_field "mobile_number", class:"text" %}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="row">
+
+            <div class="medium-6 columns">
+              <label for="endorsement_email_opt_in" class="checkbox">
+                {% check_box "email_opt_in", class:"checkbox" %} Send me email updates
+              </label>
+            </div>
+            {% if site.ask_for_mobiles? %}
+            <div class="medium-6 columns">
+              <label for="endorsement_mobile_opt_in" class="checkbox">
+                {% check_box "mobile_opt_in", class:"checkbox" %} Send me text message updates
+              </label>
+            </div>
+            {% endif %}
+          </div>
+          {% endif %}
+
+      {% if page.endorsement.is_organization? and page.endorsement.require_organization? == false %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_employer">Organization / Company (optional)</label>
+              {% text_field "employer", class:"text" %}
+            </div>
+
+          </div>
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_occupation">Your Title (optional)</label>
+              {% text_field "occupation", class:"text" %}
+            </div>
+
+          </div>
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_is_organization" class="checkbox">
+                {% check_box "is_organization", class:"checkbox" %} My organization is making the endorsement
+              </label>
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% if page.endorsement.is_phone? %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_phone_number">Phone</label>
+              {% phone_field "phone_number", class:"text" %}
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% if page.endorsement.is_address? %}
+      {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_submitted_address">Address (Street, City, State, Postal code)</label>
+              {% text_field "submitted_address", class:"text" %}
+            </div>
+
+          </div>
+          {% endif %}
+      {% endif %}
+      {% if page.is_commentable? %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_content">Comments (optional)</label>
+              {% text_area "content", class:"textarea" %}
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% if page.endorsement.is_image? %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_image">
+                Upload a {% if page.endorsement.require_organization? %}logo{% else %}picture{% endif %} (140x140)
+              </label>
+              {% file_field "image", class:"file" %}
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% if page.endorsement.is_volunteer? and site.ask_for_volunteers? %}
+      {% if request.sorta_logged_in? == false or request.current_signup.is_volunteer == false %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="endorsement_is_volunteer" class="checkbox">
+                {% check_box "is_volunteer", class:"checkbox" %} I want to volunteer
+              </label>
+            </div>
+
+          </div>
+          {% endif %}
+      {% endif %}
+
+      {% submit_tag "Add endorsement", class:"button submit-button" %}
+          <div class="form-submit"></div>
+
+        </div>
+        {% endform_for %}
+
+    {% if page.text_keyword_instructions.size > 0 %}
+        <div class="padbottom padtopmore">or {{ page.text_keyword_instructions }}</div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+  {% if page.tags_count > 0 %}
+      <div id="page-tags" class="page-tags">{% include "page_tags" with page %}</div>
+      {% endif %}
+      <div class="like-page"> <strong>Like this to spread the word:</strong>
+        {% include "like_page" %}
+      </div>
+      {% if page.endorsement.featured_endorsements.size > 0 %}
+      <div class="padtop">
+        <h4>Featured endorsements</h4>
+      </div>
+      {% if page.endorsement.is_image? %}
+
+  {% if page.endorsement.featured_endorsements_with_images.size > 0 %}
+      <div class="padtop">
+        {% for endorsement in page.endorsement.featured_endorsements_with_images %}
+        <img src="{{ endorsement.large_square_image_url }}" border="0" width="140" height="140">{% endfor %}</div>
+      {% endif %}
+      <div class="padtop">
+        {% if page.endorsement.featured_endorsements_without_images.size > 0 %}
+    {% for endorsement in page.endorsement.featured_endorsements_without_images %}
+    {% if endorsement.is_organization? %}
+        <span class="endorser">
+          {% if endorsement.signup.employer.size > 0 %}
+          <span class="employer">{{ endorsement.signup.employer }}</span>
+          -
+        {% endif %}
+        {{ endorsement.signup.published_name_linked }}{% if endorsement.signup.occupation.size > 0 %}, {{ endorsement.signup.occupation }}
+        {% endif %}
+        &nbsp;&middot;&nbsp;
+        </span>
+        {% else %}
+        <span class="endorser">
+          {{ endorsement.signup.published_name_linked }} &nbsp;&middot;&nbsp;
+        </span>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+      </div>
+      {% else %}
+      <div class="padtop">
+        {% for endorsement in page.endorsement.featured_endorsements %}
+    {% if endorsement.is_organization? %}
+    {{ endorsement.signup.employer }} - {{ endorsement.signup.published_name_linked }}, {{ endorsement.signup.occupation }}
+    {% else %}
+    {{ endorsement.signup.published_name_linked }}
+    {% endif %}
+    {% endfor %}
+      </div>
+      {% endif %}
+
+  {% endif %}
+
+  {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+    </div>
+  </div>
+</div>

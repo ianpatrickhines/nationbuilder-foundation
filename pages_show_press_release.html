@@ -1,0 +1,56 @@
+
+
+<div id="content">
+  
+  <div class="press-release">
+    
+    <div class="header">
+      
+      <div class="released-at">
+        {{ page.published_at | date: '%B %d, %Y' }}
+      </div>
+      
+      {% if page.has_author? %}
+      <div class="contact vcard padbottommore">
+        <div class="contact-name">
+          Contact: <span class="n">{{ page.author.published_name }}</span>
+        </div>
+        {% if page.author.has_phone? %}
+        <a href="tel:{{ page.author.phone_number }}" class="tel">
+          {{ page.author.phone_number }}
+        </a>
+        {% endif %}
+        {% if page.author.has_email? %}
+        <div class="email">
+          {{ page.author.email | enkode_email }}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <h2 class="headline">{{ page.headline }}</h2>
+      
+    </div>
+    
+  </div>
+  
+  <div id="intro" class="intro">
+    {{ page.press_release.content }}
+  </div>
+  
+  {% if page.tags_count > 0 %}
+  <div id="page-tags" class="page-tags">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+  
+  <div class="like-page">
+    <strong>Do you like this post?</strong>
+    {% include "like_page" %}
+  </div>
+  
+  {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+  
+</div>

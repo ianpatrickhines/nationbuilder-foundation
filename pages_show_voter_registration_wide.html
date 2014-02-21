@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+    {% include "breadcrumbs" %}
+    {% include "features" %}
+    {% if page.headline.size > 0 %}
+    <h2 class="headline">{{ page.headline }}</h2>
+    {% endif %}
+    <div id="content">
+      <div class="iframe-wrapper">
+        <iframe src="https://register.rockthevote.com/registrants/new?partner={{ page.voter_registration.rtv_id }}&source=embed-rtv234x60v1" width="100%" height="800" frameBorder="0"></iframe>
+      </div>
+      {% if page.tags_count > 0 %}
+      <div id="page-tags" class="page-tags">{% include "page_tags" with page %}</div>
+      {% endif %}
+      <div class="like-page"> <strong>Do you like this?</strong>
+        {% include "like_page" %}
+      </div>
+      {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+    </div>
+
+  </div>
+</div>

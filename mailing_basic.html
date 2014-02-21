@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html><head><title></title>
+<style type="text/css">
+body, td, font { font-size: 10pt; }
+td p { margin: 0em; }
+p { margin: 1em 0em; }
+td div p { margin: 1em 0em; }
+</style>
+</head><body marginheight=5 topmargin=5>
+<font face="Arial, Verdana, sans-serif" size=2>
+	
+{{ body }}
+
+<br/><br/>
+-=-=-<br/>
+{{ settings.official_name }}{% if settings.has_address? %} &middot; {{ settings.address.one_line }} {% endif %}
+<br/>This email was sent to {{ recipient.email }}.  To stop receiving emails, <a href="{{ settings.site.unsubscribe_url }}">click here</a>.
+{% if broadcaster.has_twitter? or broadcaster.has_facebook? %}
+<br/>You can also keep up with {{ broadcaster.name }}
+  {% if broadcaster.has_twitter? and broadcaster.has_facebook_page? %}
+    on <a href="{{ broadcaster.twitter_profile_url }}">Twitter</a> or <a href="{{ broadcaster.facebook_page_profile_url }}">Facebook</a>.
+  {% elsif broadcaster.has_twitter? %}
+    on <a href="{{ broadcaster.twitter_profile_url }}">Twitter</a>.
+  {% elsif broadcaster.has_facebook_page? %}
+  on <a href="{{ broadcaster.facebook_page_profile_url }}">Facebook</a>.
+  {% endif %}
+{% endif %}
+<br/>
+-=-=-<br/><br/>
+Created with <a href="http://nationbuilder.com/">NationBuilder</a>, the essential toolkit for leaders.
+</font>
+</body></html>

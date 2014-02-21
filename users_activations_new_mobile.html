@@ -1,0 +1,58 @@
+<div class="padcontainer">
+	<div class="content_container">
+
+<div class="form_wrap" align="left">
+<div class="form">
+  
+  {% unless request.is_ajax? %}
+  <div class="padtop">
+  <h2>Activate your account</h2>
+  </div>
+  {% endunless %}
+  
+  {% form_for activation %}
+
+  	<div class="form_errors">{% error_messages_for activation %}</div>
+
+    <input type="hidden" name="activation[activation_code]" value="{{ activation.activation_code }}" />
+
+  	<table cellpadding="0" cellspacing="0">
+  	  <tr height="10"></tr>
+  			<tr><td><label for="activation_first_name">First Name</label><br>{% text_field "first_name", class:"text" %}</td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="activation_last_name">Last Name</label><br>{% text_field "last_name", class:"text" %}</td></tr>
+				
+			<tr height="10"></tr>
+				<tr><td><label for="signup_username">User name</label><br>{% text_field "username", class:"text" %}<br>Your public profile will be at {{ site.full_url }}{% if request.current_signup.has_username? %}{{ request.current_signup.username }}{% else %}username{% endif %}</td></tr>
+	
+    {% if activation.is_address_needed %}
+  	<tr height="10"></tr>
+			<tr><td><label for="activation_submitted_address">Address (Street, City, State, Postal code)</label><br>{% text_field "submitted_address", class:"text" %}</td></tr>
+    {% endif %}
+  
+    {% if activation.is_mobile_needed and site.ask_for_mobiles? %}
+		<tr height="10"></tr>
+    	<tr><td><label for="activation_mobile_number">Mobile phone (optional)</label><br>{% phone_field "mobile_number", class:"text" %}</td></tr>
+		<tr height="10"></tr>
+			<tr><td><label for="activation_mobile_opt_in">{% check_box "mobile_opt_in", class:"check_box" %} Send me text message updates</label></td></tr>
+    {% endif %}
+  
+		<tr height="10"></tr>
+  		<tr><td><label for="activation_password">Choose your password</label><br>{% password_field "password", class:"text" %}</td></tr>
+		<tr height="10"></tr>
+			<tr><td><label for="activation_password_confirmation">Repeat password</label><br>{% password_field "password_confirmation", class:"text" %}</td></tr>
+
+  	  {% submit_tag "Activate account", class:"submit-button" %}
+			<tr height="10"></tr>
+				<tr><td><div class="form_submit"></div></td></tr>
+				
+				</table>
+	
+  {% endform_for %}
+
+</div>
+</div>
+
+	</div>
+</div>
+

@@ -1,0 +1,8 @@
+{% yield %}
+
+-=-=-
+This email was sent to {{ recipient.email }}.{% if page %}  To stop receiving updates on this page: {{ page.unsubscribe_url }}{% endif %}
+{{ settings.official_name }}{% if settings.has_address? %} - {{ settings.address.one_line }} {% endif %}
+-=-=-
+
+Created with NationBuilder - http://nationbuilder.com/

@@ -1,0 +1,63 @@
+
+
+{% if page.headline.size > 0 %}
+<h2 class="headline">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+  
+  <div class="stat-boxes clearfix">
+
+    <div class="stat-box">
+      <div class="stat-box-inner">
+        <div class="stat">{{ request.current_signup.capital_amount_format }}</div>
+        <div class="label">Balance</div>
+      </div>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-box-inner">
+        <div class="stat">{{ request.current_signup.received_capital_amount_format }}</div>
+        <div class="label">Earned</div>
+      </div>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-box-inner">
+        <div class="stat">{{ request.current_signup.spent_capital_amount_format }}</div>
+        <div class="label">Spent</div>
+      </div>
+    </div>
+
+  </div>
+
+  {% if request.current_signup.capitals.size > 0 %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th><span class="desktop-visible nowrap">Date</span></th>
+        </tr>
+      </thead>
+      {% for capital in request.current_signup.capitals %}
+      {% if capital.receiver_id == request.current_signup.id %}
+      <tr>
+        <td>{{ capital.activity.show_oneliner_view }}</td>
+        <td>{{ capital.amount_format }}</td>
+        <td><div class="desktop-visible nowrap">{{ capital.created_at | date_to_string }}</div></td>
+      </tr>
+      {% elsif capital.spender_id == request.current_signup.id %}
+      <tr>
+        <td>{{ capital.activity.show_oneliner_view }}</td>
+        <td>{{ capital.amount_spent_format }}</td>
+        <td><div class="desktop-visible nowrap">{{ capital.created_at | date_to_string }}</div></td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </table>
+  {% endif %}
+
+  {{ request.current_signup.capitals | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
+  
+</div>

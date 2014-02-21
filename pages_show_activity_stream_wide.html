@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+    {% include "breadcrumbs" %}
+    {% include "features" %}
+    {% if page.headline.size > 0 %}
+    <h2 class="headline padbottom">{{ page.headline }}</h2>
+    {% endif %}
+    <div id="content">
+      {% if site.has_friends_page? %}
+
+  {% if request.logged_in? == false or request.current_signup.has_facebook_authorization? == false %}
+      <div class="row padbottommore">
+        <div class="columns"> <strong>Connect to Facebook to find your friends.</strong>
+
+          <div class="padtopless">
+            <a href="{{ request.facebook_connect_url }}">
+              <img src="{{ "signin_with_facebook.png" | asset_path }}"></a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+  {% if request.logged_in? == false or request.current_signup.has_twitter_authorization? == false %}
+      <div class="row">
+        <div class="columns"> <strong>Connect to Twitter to find your friends here.</strong>
+
+          <div class="padtopless">
+            <a href="{{ request.twitter_connect_url }}">
+              <img src="{{ "signin_with_twitter.png" | asset_path }}"></a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+  {% endif %}
+
+  {% if request.logged_in? %}
+      <div id="stream">
+        <div class="reaction-wrap" id="reactions">
+
+          <ul id="stream-activities" class="activities">
+            {% for activity in page.activity_stream.activities_following %}
+            <li class="activity clearfix">
+              <div class="stream-pic">{{ activity.signup.profile_image }}</div>
+              {{ activity.show }}
+            </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+      </div>
+      {{ page.activity_stream.activities_following | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
+
+  {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<h2 class="headline">Your pages</h2>
+
+<table class="table table-striped content-list" id="content-list">
+  <th></th>
+  <th>Page name</th>
+  <th><div class="desktop-visible nowrap">Date authored</div></th>
+{% for authored_page in current_signup.authored_pages %}
+  <tr>
+    <td><a href="{{ authored_page.edit_url }}" class="action-button">edit</a></td>
+    <td>{% if authored_page.has_parent? %}<a href="{{ authored_page.parent.url }}">{{ authored_page.parent.name }}</a> &rarr;{% endif %} <a href="{{ authored_page.url }}">{{ authored_page.name }}</a></td>
+    <td><div class="desktop-visible nowrap">{{ authored_page.published_at | date_to_string }}</div></td>
+  </tr>
+{% endfor %}
+<tfoot>
+  <tr>
+    <td colspan="3">{{ current_signup.authored_pages | paginate }}</td>
+  </tr>
+</tfoot>
+</table>
+

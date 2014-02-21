@@ -1,0 +1,159 @@
+<div class="supporter-pic clearfix">
+  <div class="supporter-pic-left">
+    {{ request.current_signup.bigger_profile_image }}
+    <span class="pc">{{ request.current_signup.capital_amount_format }}</span>
+  </div>
+  <div class="supporter-pic-right">
+    <a href="{{ request.current_signup.settings_url }}" class="name" id="name">{{ request.current_signup.name_or_email }}</a>
+
+    <div id="myprofile">
+      {% if site.show_public_profiles? == false %}
+      {% elsif request.current_signup.is_profile_published? %}
+      <a href="{{ request.current_signup.profile_url }}">Public profile</a>
+      {% else %}
+      No public profile
+      {% endif %}
+      <span class="inline-block">(<a href="{{ request.current_signup.logout_url }}">Sign out</a>)</span>
+    </div>
+    <div class="user-status">
+      {% if request.current_signup.has_membership_level_badge %}
+      {% if site.has_membership_page? %}
+      <span class="badge"><a href="{{ site.membership_page.url }}">{{ request.current_signup.membership_level_badge }}</a></span>
+      {% else %}
+      <span class="badge">{{ request.current_signup.membership_level_badge }}</span>
+      {% endif %}
+      {% endif %}
+      {% if request.current_signup.is_banned? %}
+      <span class="">Banned</span>
+      {% elsif request.current_signup.rule_violations_count == 1 %}
+      <span class=""> {{ "fugue-flag-yellow" | icon }} Warning</span>
+      {% elsif request.current_signup.rule_violations_count == 2 %}
+      <span class=""> {{ "fugue-flag" | icon }} 1 violation</span>
+      {% elsif request.current_signup.rule_violations_count == 3 %}
+      <span class=""> {{ "fugue-flag-gray" | icon }} 2 violations</span>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if request.current_user.is_intern? %}
+<ul class="supporter-nav">
+  {% if request.current_user.can_publish? %}
+  {% if page_type == 'Blog' %}
+  <li><a href="{{ page.admin_new_subpage_url }}"><i class="icon-feather"></i> New blog post</a></li>
+  <li><a href="{{ page.admin_edit_url }}"><i class="icon-edit"></i> Edit this page</a></li>
+  {% elsif page_type == 'Suggestion Box' %}
+  <li><a href="{{ page.admin_new_subpage_url }}"><i class="icon-feather"></i> New suggestion</a></li>
+  <li><a href="{{ page.admin_edit_url }}"><i class="icon-edit"></i> Edit this page</a></li>
+  {% elsif page_type == 'Calendar' %}
+  <li><a href="{{ page.admin_new_subpage_url }}"><i class="icon-feather"></i> New event</a></li>
+  <li><a href="{{ page.admin_edit_url }}"><i class="icon-edit"></i> Edit this page</a></li>
+  {% elsif page_type == 'Blog Post' %}
+  <li><a href="{{ page.blog_post.admin_edit_url }}"><i class="icon-edit"></i> Edit this blog post</a></li>
+  {% elsif page_type == 'Question' %}
+  <li><a href="{{ page.question.admin_edit_url }}"><i class="icon-edit"></i> Edit this question</a></li>
+  {% elsif page_type == 'FAQ' %}
+  <li><a href="{{ page.faq.admin_edit_url }}"><i class="icon-edit"></i> Edit questions</a></li>
+  {% elsif page_type == 'Suggestion' %}
+  <li><a href="{{ page.suggestion.admin_edit_url }}"><i class="icon-edit"></i> Edit this suggestion</a></li>
+  {% elsif page_type == 'Event' %}
+  <li><a href="{{ page.event.admin_edit_url }}"><i class="icon-edit"></i> Edit this event</a></li>
+  {% elsif page_type == 'Profile' %}
+  <li><a href="{{ profile.admin_edit_url }}"><i class="icon-edit"></i> Edit this person</a></li>
+  {% elsif page %}
+  <li><a href="{{ page.admin_edit_url }}"><i class="icon-edit"></i> Edit this page</a></li>
+  {% endif %}
+  {% endif %}
+  <li><a href="{{ site.admin_dashboard_url }}"><i class="icon-equalizer"></i> Control panel</a></li>
+</ul>
+{% endif %}
+
+
+<ul class="supporter-nav">
+
+  {% for child in site.supporter_pages %}
+  <li {% if page == child %}class="on"{% endif %}><a href="{{ child.url }}">{{ child.icon | icon }} {{ child.name }}</a></li>
+  {% endfor %}
+
+  {% if page_type == 'User Page' %}
+  <li class="on"><a href="{{ site.edit_pages_url }}"><i class="icon-popup"></i> Your pages</a></li>
+  {% else %}
+  <li><a href="{{ site.edit_pages_url }}"><i class="icon-popup"></i> Your pages</a></li>
+  {% endif %}
+  {% if page_type == 'User Settings' %}
+  <li class="on"><a href="{{ request.current_signup.settings_url }}"><i class="icon-cog"></i> Settings</a></li>
+  {% else %}
+  <li><a href="{{ request.current_signup.settings_url }}"><i class="icon-cog"></i> Settings</a></li>
+  {% endif %}
+
+  {% if page and page.is_editing_available? %}
+  <li><a href="{{ page.edit_url }}"><i class="icon-edit"></i> Edit this page</a></li>
+  {% endif %}
+
+</ul>
+
+{% if site.has_button1? %}
+<a class="button supporter-nav-button" href="{{ site.button1_page.full_url_with_profile_recruiter }}">{{ site.button1_text }}</a>
+{% endif %}
+
+{% if site.has_button2? %}
+<a class="button supporter-nav-button" href="{{ site.button2_page.full_url_with_profile_recruiter }}">{{ site.button2_text }}</a>
+{% endif %}
+
+{% if site.has_button3? %}
+<a class="button supporter-nav-button" href="{{ site.button3_page.full_url_with_profile_recruiter }}">{{ site.button3_text }}</a>
+{% endif %}
+
+{% if request.current_signup.has_parent? %}
+<div class="clearfix padtop">
+  <div class="point-pic-left">
+    {{ request.current_signup.parent.profile_image }}
+  </div>
+  <div class="point-pic-right">
+    <div class="byline">
+      Point person: {{ request.current_signup.parent.published_name_linked }}
+    </div>
+    {% if request.current_signup.parent.has_twitter_info? %}
+    <a href="{{ request.current_signup.parent.twitter_profile_url }}"><i class="icon-twitter-squared"></i></a>
+    {% endif %}
+    {% if request.current_signup.parent.has_facebook_info? %}
+    <a href="{{ request.current_signup.parent.facebook_profile_url }}"><i class="icon-facebook-squared"></i></a>
+    {% endif %}
+    {% if request.current_signup.parent.has_email? %}
+    <a href="mailto:{{ request.current_signup.parent.email }}"><i class="icon-mail-alt"></i></a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+<div class="padtopmore">
+  <div class="box">
+    {% if site.has_facebook_page? %}
+    <div class="desktop-visible">
+      <div class="fb-like-box" data-href="{{ site.broadcaster.facebook_page_profile_url }}" data-width="240" data-show-faces="true" data-stream="false" data-header="false"></div>
+    </div>
+    <div class="mobile-visible">
+      <div class="fb-like-box" data-href="{{ site.broadcaster.facebook_page_profile_url }}" data-width="240" data-stream="false"></div>
+    </div>
+
+    {% else %}
+    <fb:like href="{{ site.full_url }}" colorscheme="{{ site.facebook_colorscheme }}" width="240"></fb:like>
+    {% endif %}
+
+    {% if site.has_twitter? %}
+    <div class="padtopmore">
+      <a href="{{ site.broadcaster.twitter_profile_url }}" class="twitter-follow-button" data-show-count="false">Follow @{{ site.broadcaster.twitter_login }} on Twitter</a>
+    </div>
+    {% endif %}
+    {% if page and page.has_rss? %}
+    <div class="padtopmore">
+      <a href="{{ page.rss_url }}"><i class="icon-rss"></i></a> <a href="{{ page.rss_url }}">Subscribe with RSS</a>
+    </div>
+    {% elsif page and page.has_parent? and page.parent.has_rss? %}
+    <div class="padtopmore">
+      <a href="{{ page.parent.rss_url }}"><i class="icon-rss"></i></a>
+      <a href="{{ page.parent.rss_url }}">Subscribe with RSS</a>
+    </div>
+    {% endif %}
+  </div>
+</div>

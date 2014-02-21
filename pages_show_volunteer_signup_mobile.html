@@ -1,0 +1,172 @@
+<div class="padcontainer">
+
+
+
+{% if page.show_stream? %}
+	{% if page.public_activities_count > 0 or page.is_commentable? %}
+		<div class="content_container_top">
+	{% else %}
+		<div class="content_container">
+	{% endif %}
+	{% else %}
+		<div class="content_container">
+{% endif %}
+
+{% if page.headline.size > 0 %}
+	<div id="headline">
+	  <h2>{{ page.headline }}</h2>
+	</div>
+{% endif %}
+
+<div id="content">
+
+	{% if page.volunteer_signup.content.size > 0 %}
+		<div id="intro">
+			{{ page.volunteer_signup.content }}
+		</div>
+	{% endif %}
+
+	<div class="one_column padbottom">
+	<div class="form_wrap">
+	<div class="form">
+
+	  {% if request.sorta_logged_in? %}
+
+	    {% if request.current_signup.is_volunteer? %}
+	      <div class="padtop text-content">
+	        <h4>Hi {{ request.current_signup.name_or_email }}, we have you down as a volunteer.</h4>
+	      </div>
+
+	      <div class="padtop text-content">
+	        You can update your info below.
+	      </div>
+	    {% else %}
+	      <div class="padtop text-content">
+	        <h4>Hi {{ request.current_signup.name_or_email }}, can you volunteer?</h4>
+	      </div>
+	  	{% endif %}
+
+	    {% if request.logged_in? == false %}
+		    <div class="padtop text-content">
+		      If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here</a>.
+		    </div>
+	    {% endif %}
+
+	  {% else %}
+
+	    <div class="padtop text-content">
+	      <h4>Will you volunteer?</h4>
+	    </div>
+
+	  {% endif %}
+
+		{% form_for volunteer_signup %}
+
+			<div class="form_errors">{% error_messages_for volunteer_signup %}</div>
+
+	    {% for volunteer_type in page.volunteer_signup.volunteer_types %}
+	      <p><label for="">
+	        {% check_box_tag 'volunteer_signup[volunteer_type_ids][]', volunteer_type.id, collection:volunteer_signup.volunteer_type_ids, member:volunteer_type.id, class:"checkbox" %}
+	        {{ volunteer_type.name }}
+	        </label></p>
+	    {% endfor %}
+	    {% hidden_field_tag 'volunteer_signup[volunteer_type_ids][]', '' %}
+
+	    <table cellpadding="0" cellspacing="0">
+	    {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+	      <tr height="10"></tr>
+				<tr>
+					<td><label for="volunteer_signup_first_name">First Name</label><br>{% text_field "first_name", class:"text" %}</td>
+				</tr>
+				<tr height="10"></tr>
+				<tr>
+					<td><label for="volunteer_signup_last_name">Last Name</label><br>{% text_field "last_name", class:"text" %}</td>
+				</tr>
+			{% endif %}
+
+			{% if request.sorta_logged_in? == false %}
+			<tr height="10"></tr>
+			  <tr>
+			    <td><label for="volunteer_signup_email">Email</label><br>{% email_field "email", class:"text", type:"email" %}</td>
+				</tr>
+					{% if site.ask_for_mobiles? %}
+					<tr height="10"></tr>
+					<tr>
+			    	<td><label for="volunteer_signup_mobile_number">Mobile phone (optional)</label><br>{% phone_field "mobile_number", class:"text" %}</td>
+					</tr>
+					{% endif %}
+			  <tr height="10"></tr>
+			  <tr>
+			    <td><label for="volunteer_signup_email_opt_in">{% check_box "email_opt_in", class:"checkbox" %} Send me email updates</label></td>
+				</tr>
+					{% if site.ask_for_mobiles? %}
+					<tr height="10"></tr>
+					<tr>
+			    	<td><label for="volunteer_signup_mobile_opt_in">{% check_box "mobile_opt_in", class:"checkbox" %} Send me text messages</label></td>
+					</tr>
+					{% endif %}
+			{% endif %}
+				{% if page.volunteer_signup.is_phone? %}
+			  <tr height="10"></tr>
+			  <tr>
+			    <td><label for="volunteer_signup_phone_number">Phone</label><br>{% phone_field "phone_number", class:"text" %}</p></td>
+				</tr>
+			  <tr height="10"></tr>
+			  <tr>
+			    <td><label for="volunteer_signup_phone_time">When is a good time to call?</label><br>{% text_field "phone_time", class:"text" %}</td>
+			  </tr>
+			  {% endif %}
+			</table>
+
+			{% if page.volunteer_signup.is_address? %}
+				{% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+				<p><label for="volunteer_signup_submitted_address">Address (Street, City, State, Postal code)</label><br>{% text_field "submitted_address", class:"text" %}</p>
+				{% endif %}
+			{% endif %}
+
+			<p><label for="volunteer_signup_availability">When are you available? (optional)</label><br>{% text_field "availability", class:"text" %}</p>
+
+			<p><label for="volunteer_signup_content">Comments, other ideas, etc. (optional)</label><br>{% text_area "content", class:"textarea autogrow" %}</p>
+
+			{% if site.ask_to_publish_to_stream? %}
+	    	<p><label for="volunteer_signup_is_private">{% check_box "is_private", class:"checkbox" %} Don't publish this on the website</label></p>
+			{% endif %}
+
+			  {% submit_tag "Save volunteer info", class:"submit-button" %}
+			  <div class="form_submit"></div>
+
+		{% endform_for %}
+
+
+	</div>
+	</div>
+	</div>
+
+	{% if page.tags_count > 0 %}
+		<div id="page_tags">
+			{% include "page_tags" with page %}
+		</div>
+	{% endif %}
+
+	<div class="padbottom padtop">
+		<div id="like_page">
+			<b>Like this to encourage your friends to volunteer.</b>
+			{% include "like_page_mobile" %}
+		</div>
+	</div>
+
+</div>
+
+
+	{% if page.show_stream? %}
+		{% if page.public_activities_count > 0 or page.is_commentable? %}
+			</div> <!-- end content_container_top -->
+		{% endif %}
+	  {% include "page_stream" %}
+		{% else %}
+			</div> <!-- end content_container -->
+	{% endif %}
+
+</div>
+
+

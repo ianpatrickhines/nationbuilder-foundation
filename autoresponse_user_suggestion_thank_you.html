@@ -1,0 +1,16 @@
+{{ recipient.first_name_or_friend }} --
+<br/><br/>
+Thank you for your {{ page.parent.suggestion_box.name }} suggestion.
+<br/><br/>
+Here's the link where people can respond:
+<br/>
+<a href="{{ page_url }}">{{ page_url }}</a>
+<br/><br/>
+<b>{{ page.headline }}</b>
+<br/><br/>
+{{ page.suggestion.content_for_mailing }}
+<br/><br/>
+Make changes here: <a href="{{ edit_url }}">{{ edit_url }}</a>
+<br/><br/>
+{{ broadcaster.name }}<br/>
+<a href="{{ site.full_url }}">{{ site.full_url }}</a><br/>

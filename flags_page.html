@@ -1,0 +1,34 @@
+<div id="flag-content" class="flag-content">
+  <h3 class="headline">Flagging page <a href="{{ page.url }}" target="_top">{{ page.headline }}</a></h3>
+
+  {% form_for flag %}
+
+  <div class="form-wrap">
+    <div class="form">
+
+      <div class="form-errors">{% error_messages_for flag %}</div>
+
+      {% hidden_field_tag "flag[page_id]", page.id %}
+
+      {% if site.has_rule_page? %}
+      <div class="row">
+
+        <div class="columns"><label for="flag_rule_id">Which rule was violated?</label> {% collection_select "rule_id", site.rule_page.rule.rules_collection, class:"select" %}</div>
+        {% endif %}
+
+      </div>
+
+      <div class="row">
+
+        <div class="columns"><label for="flag_content">Explanation (optional)</label>{% text_area "content", class:"textarea autogrow" %}</div>
+
+      </div>
+
+      {% submit_tag "Flag this page", class:"button submit-button" %}
+      <div class="form-submit"></div>
+
+    </div>
+  </div>
+
+  {% endform_for %}
+</div>

@@ -1,0 +1,45 @@
+WHAT: {{ page.headline }}<br/>
+WHEN: 
+{% if page.event.is_multi_day? %}
+  {{ page.event.local_start_at | event_time }} - {{ page.event.local_end_at | event_time }}
+{% else %}
+  {{ page.event.local_start_at | event_time }}
+{% endif %}<br/>
+
+{% if page.event.has_venue? %}
+  WHERE: 
+	{% if page.event.venue_name.size > 0 %}
+		{{ page.event.venue_name }}<br/>
+	{% endif %}
+	{% for line in page.event.venue_address.multi_line %}
+		{{ line }}<br/>
+	{% endfor %}
+	{% if page.event.has_venue_address? %}
+	<a href="{{ page.event.venue_address.google_map_link }}">Google map and directions</a><br/>
+	{% endif %}
+
+{% endif %}
+
+{% if page.event.has_contact? %}
+  CONTACT: 
+  {{ page.event.contact_name }}
+  {% if page.event.has_public_contact_email? %}
+  &middot; {{ page.event.contact_email | enkode_email }}
+  {% endif %}
+  {% if page.event.has_public_contact_phone_number? %}
+  &middot; {{ page.event.contact_phone_number }}
+  {% endif %}<br/>
+{% endif %}
+
+{% if page.event.is_user_ticket_required? %}
+  {% if page.event.has_user_ticket_purchase_url? %}
+	TICKETS START AT:
+  {{ page.event.user_ticket_price_with_currency }}
+	&middot; <a href="{{ page.event.user_ticket_purchase_url }}">Purchase tickets</a>
+  {% endif %}
+  <br/>
+{% elsif page.event.has_user_ticket_purchase_url? %}
+  TICKETS:
+  <a href="{{ page.event.user_ticket_purchase_url }}">FREE</a>
+  <br/>
+{% endif %}

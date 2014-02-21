@@ -1,0 +1,9 @@
+{% if page_tags.tags_count > 0 %}
+<div class="padbottom">
+  <div class="page-tag-background">
+  {% for tag in page_tags.tags %}
+    <span class="label radius"><a href="{{ tag.url }}">{{ tag.name }}</a></span>
+  {% endfor %}
+  </div>
+</div>
+{% endif %}

@@ -1,0 +1,23 @@
+<div class="padcontainer">
+<div class="content_container">
+	
+<div id="headline">
+	<h2>Pages tagged "{{ tag.name }}"</h2>
+</div>
+
+<hr/>
+<div id="content">
+	
+	<div class="tag" id="tag_{{ tag.id }}">
+	{% for post in tag.most_recent_published_pages %}
+		{% include "page_excerpt" with post %}	
+		<hr />
+	{% endfor %}
+	</div>
+
+	{{ tag.most_recent_published_pages | paginate }}
+
+</div>
+
+</div>
+</div>

@@ -1,0 +1,63 @@
+<div class="padcontainer">
+
+
+
+{% if page.show_stream? %}
+	{% if page.public_activities_count > 0 or page.is_commentable? %}
+		<div class="content_container_top">
+	{% else %}
+		<div class="content_container">
+	{% endif %}
+	{% else %}
+		<div class="content_container">
+{% endif %}
+
+{% if page.headline.size > 0 %}
+	<div id="headline">
+		<h2>{{ page.headline }}</h2>
+	</div>
+{% endif %}
+
+<div id="content">
+	
+	{% if page.rule.content.size > 0 %}
+	<div id="intro">
+	  {{ page.rule.content }}
+	</div>
+	{% endif %}
+
+	<div class="rule_list">
+	<ol>
+	{% for rule in page.rule.rules %}
+	  <li><div class="rule">{{ rule.name }}</div> {{ rule.content }}</li>
+	{% endfor %}
+	</ol>
+	</div>
+
+	
+</div>
+
+{% if page.tags_count > 0 %}
+	<div id="page_tags">
+		{% include "page_tags" with page %}
+	</div>
+{% endif %}
+
+<div class="padbottom padtop">
+	<div id="like_page">
+		<b>Do you like this?</b>
+		{% include "like_page_mobile" %}
+	</div>
+</div>
+	
+	</div>
+	
+	{% if page.show_stream? %}
+		{% if page.public_activities_count > 0 or page.is_commentable? %}
+			</div> <!-- end content_container_top -->	
+		{% endif %}
+	  {% include "page_stream" %}
+		{% else %}
+			</div> <!-- end content_container -->	
+	{% endif %}	
+</div>

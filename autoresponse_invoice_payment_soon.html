@@ -1,0 +1,5 @@
+{{ recipient.first_name_or_friend }} -- <br /><br /> 
+We trust that you’ve enjoyed using <a href="http://nationbuilder.com/">NationBuilder</a>, the essential toolkit for leaders. This is a courtesy reminder that your 14-day free trial is coming to an end. {% if nation.has_cim? %} On {{ nation.free_trial_ends_at | date_to_string }} your subscription will begin and the credit card on file will be charged {{ nation.amount_with_discount_format }}. {% else %} We don't have your credit card on file, so you need to <a href="{{ nation.billing_url }}">add your billing information</a> if you want to keep nation building past {{ nation.free_trial_ends_at | date_to_string }}. {% endif %}
+<br /><br /> Any changes to your subscription and billing information can be made from your nation’s control panel, here: <a href="{{ nation.billing_url }}">{{ nation.billing_url }}</a>. 
+<br /><br /> If you have any questions, please do not hesitate to contact us and we will take care of them right away. 
+<br /><br /> Thanks for trying out NationBuilder. <br /><br /><a href="{{ nation.admin_url }}">{{ nation.admin_url }}</a>

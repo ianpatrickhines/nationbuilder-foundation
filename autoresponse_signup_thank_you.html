@@ -1,0 +1,10 @@
+{{ recipient.first_name_or_friend }} --
+<br /><br />
+Thank you for joining {{ site.name }}.
+<br/><br/>
+{% if recipient.has_password? == false %}
+<a href="{{ recipient.account_activation_url }}">Click here to activate your account</a>.
+<br/><br/>
+{% endif %}
+{{ broadcaster.name }}<br/>
+<a href="{{ site.full_url }}">{{ site.full_url }}</a><br/>

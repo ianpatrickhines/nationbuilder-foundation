@@ -1,0 +1,22 @@
+{{ recipient.first_name_or_friend }} --
+<br/><br/>
+Your suggestion, "{{ page.headline }}", has received an official response from {{ page.suggestion.answer_author.name }}:<br /><br />
+
+{% if page.suggestion.is_answer_type? %}
+Answer Type: {{ page.suggestion.answer_type }}<br />
+{% endif %}
+
+Answer: {{ page.suggestion.answer_for_mailing }}<br /><br />
+
+{% if page.answer_author.is_profile_published? %}
+<br/><br/>
+More about {{ page.suggestion.answer_author.published_name }} here:<br/>
+<a href="{{ page.suggestion.answer_author.full_profile_url }}">{{ page.suggestion.answer_author.full_profile_url }}</a>
+{% endif %}
+<br/><br/>
+Here's the link to your suggestion:
+<br/>
+<a href="{{ page_url }}">{{ page_url }}</a>
+<br/><br/>
+{{ broadcaster.name }}<br/>
+<a href="{{ site.full_url }}">{{ site.full_url }}</a><br/>

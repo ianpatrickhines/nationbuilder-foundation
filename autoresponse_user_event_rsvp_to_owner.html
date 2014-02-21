@@ -1,0 +1,20 @@
+{{ recipient.first_name_or_friend }} --
+<br/><br/>
+{{ event_rsvp.signup.name_or_email }} just rsvped{% if event_rsvp.guests_count > 0 %} +{{ event_rsvp.guests_count }}{% endif %} 
+for {{ page.headline }}.
+<br/><br/>
+Name: {{ event_rsvp.signup.name }}<br/>
+Email: {{ event_rsvp.signup.email }}<br/>
+Guests: {{ event_rsvp.guests_count }}<br/>
+Referred by: {{ event_rsvp.recruiter.name_or_email }}
+<br/><br/>
+You can edit your {{ page.parent.calendar.event_name | downcase }} here:
+<br/><br/>
+<a href="{{ edit_url }}">{{ edit_url }}</a>
+<br/><br/>
+And you can invite others to come to your {{ page.parent.calendar.event_name | downcase }} with this link:
+<br/><br/>
+<a href="{{ page_url }}">{{ page_url }}</a>
+<br/><br/>
+{{ broadcaster.name }}<br/>
+<a href="{{ site.full_url }}">{{ site.full_url }}</a><br/>

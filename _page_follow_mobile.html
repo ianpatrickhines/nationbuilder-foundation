@@ -1,0 +1,5 @@
+{% if request.current_signup.following_page_ids contains page.id %}
+  <a href="{{ page.unfollow_url }}" class="delete">Stop following reactions</a>
+  {% else %}
+  <a href="{{ page.follow_url }}" class="post">Follow reactions</a>
+{% endif %}

@@ -1,0 +1,148 @@
+<div class="padcontainer">
+
+
+
+{% if page.show_stream? %}
+	{% if page.public_activities_count > 0 or page.is_commentable? %}
+		<div class="content_container_top">
+	{% else %}
+		<div class="content_container">
+	{% endif %}
+	{% else %}
+		<div class="content_container">
+{% endif %}
+
+{% if page.headline.size > 0 %}
+	<div id="headline">
+	  <h2>{{ page.headline }}</h2>
+	</div>
+{% endif %}
+
+<div id="content">
+
+	{% if page.signup.content.size > 0 %}
+		<div id="intro">
+			{{ page.signup.content }}
+		</div>
+	{% endif %}
+
+	<div class="one_column">
+	<div class="form_wrap">
+	<div class="form">
+
+		{% form_for signup %}
+
+		  {% if request.sorta_logged_in? %}
+		    <div class="padtop text-content">
+		      <h4>Hi {{ request.current_signup.name_or_email }}, thanks for joining!</h4>
+		    </div>
+
+		    {% if request.logged_in? == false %}
+	  	    <div class="padtop text-content">
+	  	      If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here to signup</a>.
+	  	    </div>
+		    {% endif %}
+
+		  {% endif %}
+
+			<div class="form_errors">{% error_messages_for signup %}</div>
+
+			<table cellpadding="0" cellspacing="0">
+			{% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+			  <tr height="10"></tr>
+					<tr><td><label for="signup_first_name">First Name</label><br>{% text_field "first_name", class:"text" %}</td></tr>
+				<tr height="10"></tr>
+					<tr><td><label for="signup_last_name">Last Name</label><br>{% text_field "last_name", class:"text" %}</td></tr>
+			{% endif %}
+
+			{% if request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %}
+			  <tr height="10"></tr>
+					<tr><td><label for="signup_email">Email</label><br>{% email_field "email", class:"text", type:"email" %}</td></tr>
+					{% if site.ask_for_mobiles? %}
+				<tr height="10"></tr>
+					<tr><td><label for="signup_mobile_number">Mobile phone</label><br>{% phone_field "mobile_number", class:"text" %}</td></tr>
+					{% endif %}
+				<tr height="10"></tr>
+					<tr><td><label for="signup_email_opt_in">{% check_box "email_opt_in", class:"checkbox" %} Send me email updates</label></td></tr>
+					{% if site.ask_for_mobiles? %}
+				<tr height="10"></tr>
+					<tr><td><label for="signup_mobile_opt_in">{% check_box "mobile_opt_in", class:"checkbox" %} Send me text message updates</label></td></tr>
+					{% endif %}
+			{% endif %}
+
+	    {% if page.signup.is_phone? %}
+  		<p><label for="signup_phone_number">Phone</label><br>{% phone_field "phone_number", class:"text" %}</p>
+  		{% endif %}
+
+  		{% if page.signup.is_address? %}
+
+				{% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+					<tr height="10"></tr>
+						<tr><td><label for="signup_submitted_address">Address (Street, City, State, Postal code)</label><br>{% text_field "submitted_address", class:"text" %}</td></tr>
+						<tr><td><label for="signup_country_code">Country</label><br>{% collection_select "country_code", page.signup.countries, "code", "name", class:"select" %}</td></tr>
+
+				{% endif %}
+
+			{% endif %} t
+
+			{% if page.signup.has_optional_tags? %}
+			<tr height="10"></tr>
+			  <tr><td><label for="signup_optional_tag">Choose one</label><br>{% collection_select "optional_tag", page.signup.optional_tags, class:"select" %}</td></tr>
+			{% endif %}
+
+			{% if page.signup.is_volunteers? and site.ask_for_volunteers? %}
+	  		{% if request.sorta_logged_in? == false or request.current_signup.is_volunteer == false %}
+				<tr height="10"></tr>
+	  			<tr><td><label for="signup_is_volunteer">{% check_box "is_volunteer", class:"checkbox" %} I want to volunteer</label></td></tr>
+	      {% endif %}
+	    {% endif %}
+
+			  {% if page.signup.is_all_info_collected? == false %}
+	  		  {% if request.sorta_logged_in? %}
+					<tr height="10"></tr>
+	  		    <tr><td>{% submit_tag "Update info", class:"submit-button" %}</td></tr>
+	  		  {% else %}
+					<tr height="10"></tr>
+						<tr><td>{% submit_tag "Signup", class:"submit-button" %}</td></tr>
+	        {% endif %}
+	      {% endif %}
+				</table>
+	      	<div class="form_submit"></div>
+
+		{% endform_for %}
+
+		{% if page.text_keyword_instructions.size > 0 %}
+			<div class="padbottom padtopmore">
+				or {{ page.text_keyword_instructions }}
+			</div>
+		{% endif %}
+
+
+	</div>
+	</div>
+	</div>
+
+	{% if page.tags_count > 0 %}
+		<div id="page_tags">
+			{% include "page_tags" with page %}
+		</div>
+	{% endif %}
+
+	<div class="padbottom padtop">
+		<div id="like_page">
+			<b>Like us to spread the word</b>
+			{% include "like_page_mobile" %}
+		</div>
+	</div>
+
+	</div>
+
+	{% if page.show_stream? %}
+		{% if page.public_activities_count > 0 or page.is_commentable? %}
+			</div> <!-- end content_container_top -->
+		{% endif %}
+	  {% include "page_stream" %}
+		{% else %}
+			</div> <!-- end content_container -->
+	{% endif %}
+</div>

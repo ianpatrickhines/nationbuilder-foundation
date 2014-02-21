@@ -1,0 +1,31 @@
+/* =============================================
+   This is an Internet Explorer only stylesheet. 
+   ============================================= */
+
+@import "compass/css3";
+@import "custom-mixins";
+
+// ie 9 and less
+
+// ie 8
+
+.lt-ie9 {
+  .page-excerpt {
+    @include nb-clearfix;
+    .small-button, .button {
+      float: left;
+      margin-right: 10px;
+      min-height: auto;
+    }
+  }
+  nav {
+    max-width: 67.5%;
+  }
+  .submit-button {
+    min-height: auto;
+  }
+  .email-signup {
+    margin-top: 15px;
+  }
+}
+

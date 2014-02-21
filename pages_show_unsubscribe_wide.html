@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="large-12 medium-12 small-12 columns">
+		{% include "breadcrumbs" %}
+	    {% include "features" %}
+	    {% if page.headline.size > 0 %}
+		<h2 class="headline">{{ page.headline }}</h2>
+		{% endif %}
+		<div class="form">
+			{% form_for unsubscribe %}
+			<div class="form-errors">{% error_messages_for unsubscribe %}</div>
+
+			<div class="row">
+				<div class="columns">
+					<label for="unsubscribe_email">Email</label>
+					{% email_field "email", class:"text" %}
+				</div>
+			</div>
+			{% submit_tag "Unsubscribe", class:"submit-button" %}
+			<div class="form-submit"></div>
+			{% endform_for %}
+		</div>
+	</div>
+</div>

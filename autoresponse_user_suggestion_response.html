@@ -1,0 +1,15 @@
+{{ recipient.first_name_or_friend }} --
+<br/><br/>
+Just a quick heads up that {{ tagging.signup.published_name }} tagged your {{ page.headline }} suggestion with "{{ tagging.tag.name }}."
+{% if tagging.author.is_profile_published? %}
+<br/><br/>
+More about {{ tagging.author.published_name }} here:<br/>
+<a href="{{ tagging.author.full_profile_url }}">{{ tagging.author.full_profile_url }}</a>
+{% endif %}
+<br/><br/>
+Here's the link to your suggestion:
+<br/>
+<a href="{{ page_url }}">{{ page_url }}</a>
+<br/><br/>
+{{ broadcaster.name }}<br/>
+<a href="{{ site.full_url }}">{{ site.full_url }}</a><br/>

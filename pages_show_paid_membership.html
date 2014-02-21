@@ -1,0 +1,47 @@
+
+
+{% if page.headline.size > 0 %}
+<h2 class="headline">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  {% if page.paid_membership.content.size > 0 %}
+  <div id="intro" class="intro">
+    {{ page.paid_membership.content }}
+  </div>
+  {% endif %}
+
+  {% for membership_option in page.paid_membership.membership_options %}
+
+  <ul class="membership-list clearfix">
+    <li class="membership">
+      <h3>{{ membership_option.membership_level_name }}</h3>
+
+      <div class="padtopless padbottomless">
+        <strong>{{ membership_option.amount }}</strong> every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}
+      </div>
+      {% if membership_option.has_membership_level_badge %}
+      <span class="badge">{{ membership_option.membership_level_badge }}</span>
+      {% endif %}
+      <hr/>
+      <div class="member-blurb">{{ membership_option.description }}</div>
+      <div class="padtopmore submit_link_wrap">
+        <div class="submit-link"><a href="{{ membership_option.purchase_url }}">Purchase</a></div>
+      </div>
+    </li>
+  </ul>
+
+  {% endfor %}
+
+  {% if page.tags_count > 0 %}
+  <div id="page-tags" class="page-tags">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+
+  {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+
+</div>

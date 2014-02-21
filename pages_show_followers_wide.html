@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+    {% include "breadcrumbs" %}
+    {% include "features" %}
+    {% if page.headline.size > 0 %}
+    <h2 class="headline">{{ page.headline }}</h2>
+    {% endif %}
+    <div id="content">
+      You have <strong>{{ request.current_signup.followers_count }}</strong>
+      followers.
+      <div class="padtop">
+        {% for follower in request.current_signup.followers %}
+    {% assign signup = follower.follower %}
+        <div class="people-list {% cycle 'odd', 'even' %}">{% include "signup_show" %}</div>
+        {% endfor %}
+      </div>
+      {{ request.current_signup.followers | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
+    </div>
+  </div>
+</div>

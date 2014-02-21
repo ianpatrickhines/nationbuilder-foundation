@@ -1,0 +1,73 @@
+
+
+{% if page.headline.size > 0 %}
+	<div id="headline">
+		<h2>{{ page.headline }}</h2>
+	</div>
+{% endif %}
+
+<div id="content">
+
+	<table class="nation_table" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="tnation">Nation</td>
+			<td class="tplan">Plan</td>
+			<td class="temail">Email blasting?</td>
+			<td class="ttext">Text messaging?</td>
+		</tr>
+	  {% for nation in current_signup.nations %}
+	    <tr>
+	      <td class="tnationname"><a href="{{ nation.admin_url }}">{{ nation.slug }}</a></td>
+				<td>{{ nation.signup_plan_name }}</td>
+				<td>{% if nation.is_email? %}{{ nation.email_plan_name }}{% endif %}</td>
+				<td>{% if nation.is_text? %}{{ nation.text_plan_name }}{% endif %}</td>
+	    </tr>
+	  {% endfor %}
+	</table>
+	
+	<div class="padtop">
+		<div class="submit_link"><a href="{{ site.nation_signup_page.url }}">Start a new nation</a></div>
+	</div>
+	
+	<hr />
+	
+	<div class="onecolumn_container">
+		<div class="onecolumn">
+
+	<div class="one_column">
+	<div class="form_wrap" align="left">
+	<div class="form">
+
+		<div class="padtopmore text-content">
+			<h4>Sign in to your nation</h4>
+		</div>
+
+	  {% form_for nation_signin %}
+
+	  	<div class="form_errors">{% error_messages_for nation_signin %}</div>
+
+			<div class="padtop">
+			<table>
+				<tr>
+					<td><label for="nation_slug"><b>Your NationBuilder URL</b></label><br/>{% text_field "slug", class:"text" %} .nationbuilder.com
+				</tr>
+			</table>
+			</div>	
+
+	  	<div class="padtopmore">
+	  	  {% submit_tag "Sign in to your nation", class:"submit-button" %}
+	  	  <div class="form_submit"></div>
+	  	</div>
+
+	  {% endform_for %}
+
+	</div>
+	</div>
+	</div>
+
+	  </div>
+	</div>
+	
+	
+	
+</div>

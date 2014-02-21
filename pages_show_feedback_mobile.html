@@ -1,0 +1,130 @@
+<div class="padcontainer">
+
+
+
+{% if page.show_stream? %}
+	{% if page.public_activities_count > 0 or page.is_commentable? %}
+		<div class="content_container_top">
+	{% else %}
+		<div class="content_container">
+	{% endif %}
+	{% else %}
+		<div class="content_container">
+{% endif %}
+
+{% if page.headline.size > 0 %}
+	<div id="headline">
+	  <h2>{{ page.headline }}</h2>
+	</div>
+{% endif %}
+
+<div id="content">
+
+	{% if page.feedback.content.size > 0 %}
+	  <div id="intro">
+	    {{ page.feedback.content }}
+	  </div>
+	{% endif %}
+
+	<div class="one_column padbottom">
+
+	<div class="form_wrap">
+	<div class="form">
+
+	  {% if request.sorta_logged_in? %}
+
+	    <div class="padtop text-content">
+	      <h4>Hi {{ request.current_signup.name_or_email }}.</h4>
+	    </div>
+  
+	    {% if request.logged_in? == false %}
+		    <div class="padtop text-content">
+		      If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here</a>.
+		    </div>
+	    {% endif %}
+
+	  {% else %}
+  
+	    <div class="padtop text-content">
+	      <h4>{{ page.feedback.content_name }}</h4>
+	    </div>
+    
+	  {% endif %}
+  
+	  {% form_for feedback %}
+  
+			<div class="form_errors">{% error_messages_for feedback %}</div>
+
+			<table cellpadding="0" cellspacing="0">
+			{% if page.feedback.is_content? %}
+			<tr height="10">
+			<tr><td><label for="feedback_content">{{ page.feedback.content_name }}</label><br/>{% text_area "content", class:"textarea autogrow" %}</td></tr>
+			{% endif %}
+		
+			{% if site.ask_to_publish_to_stream? %}
+			<tr><td><label for="feedback_is_private">{% check_box "is_private", class:"checkbox" %} Don't post this publicly</label></td></tr>
+			{% endif %}
+			
+		  {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+				<tr height="10"></tr>
+				<tr><td><label for="feedback_first_name">First Name</label><br>{% text_field "first_name", class:"text" %}</td></tr>
+				<tr height="10"></tr>
+			  <tr><td><label for="feedback_last_name">Last Name</label><br>{% text_field "last_name", class:"text" %}</td></tr>
+			{% endif %}
+	
+			{% if request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %}
+			  <tr height="10"></tr>
+			  <tr><td><label for="feedback_email">Email</label><br>{% email_field "email", class:"text", type:"email" %}</td></tr>
+					{% if site.ask_for_mobiles? %}
+				<tr height="10"></tr>
+			  <tr><td><label for="feedback_mobile_number">Mobile phone (optional)</label><br>{% phone_field "mobile_number", class:"text" %}</td></tr>
+					{% endif %}
+			  <tr height="10"></tr>
+			  <tr><td><label for="feedback_email_opt_in">{% check_box "email_opt_in", class:"checkbox" %} Send me email updates</td></tr>
+				{% if site.ask_for_mobiles? %}
+				<tr height="10"></tr>
+			  <tr><td><label for="feedback_mobile_opt_in">{% check_box "mobile_opt_in", class:"checkbox" %} Send me text messages</td></tr>
+				{% endif %}
+			{% endif %}
+		
+			{% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+			<tr height="10"></tr>
+			<tr><td><label for="feedback_submitted_address">Address (Street, City, State, Postal code)</label><br>{% text_field "submitted_address", class:"text" %}</td></tr>
+			{% endif %}
+
+	    {% if page.feedback.is_volunteers? and site.ask_for_volunteers? %}
+	  		{% if request.logged_in? == false or request.current_signup.is_volunteer == false %}
+			<tr height="10"></tr>
+			<tr><td><label for="feedback_is_volunteer">{% check_box "is_volunteer", class:"checkbox" %} I want to volunteer</label></td></tr>
+	  		{% endif %}
+			{% endif %}
+			
+			<tr height="10"></tr>
+			<tr><td>{% submit_tag page.feedback.submit_button_name, class:"submit-button" %}
+			  <div class="form_submit"></div></td></tr>
+			</table>
+  
+		{% endform_for %}
+
+	</div>
+	</div>  
+
+	</div>
+	
+	</div>
+	
+	{% if page.tags_count > 0 %}
+		<div id="page_tags">
+			{% include "page_tags" with page %}
+		</div>
+	{% endif %}
+	
+	{% if page.show_stream? %}
+		{% if page.public_activities_count > 0 or page.is_commentable? %}
+			</div> <!-- end content_container_top -->	
+		{% endif %}
+	  {% include "page_stream" %}
+		{% else %}
+			</div> <!-- end content_container -->	
+	{% endif %}	
+</div>

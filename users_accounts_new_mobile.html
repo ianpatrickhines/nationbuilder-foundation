@@ -1,0 +1,40 @@
+<div class="padcontainer">
+	<div class="content_container">
+
+<div class="form_wrap">
+<div class="form">
+
+  {% unless request.is_ajax? %}
+ 		<h2>Create a {{ site.name }} account</h2>
+  {% endunless %}
+
+  {% form_for account %}
+
+  	<div class="form_errors">{% error_messages_for account %}</div>
+
+    <p><label for="account_email">Email</label><br>{% email_field "email", class:"text", type:"email" %}</p>
+
+ 	  	{% submit_tag "Send account activation instructions", class:"submit-button" %}
+  	  <div class="form_submit"></div>
+
+  	<div class="padtopmore">
+  	  <a href="{{ request.new_password_reset_url }}">Reset my password</a>
+  	</div>
+
+		{% if request.logged_in? == false %}
+  	<div class="padtop">
+  	 <b>Or sign in instantly with Facebook or Twitter:</b>
+  	</div>
+  	<div class="padtop">
+  	  <a href="{{ request.facebook_connect_url }}"><img src="{{ "signin_with_facebook.png" | asset_path }}"></a>
+  	  <a href="{{ request.twitter_connect_url }}"><img src="{{ "signin_with_twitter.png" | asset_path }}"></a>
+  	</div>
+		{% endif %}
+
+  {% endform_for %}
+
+</div>
+</div>
+
+	</div>
+</div>

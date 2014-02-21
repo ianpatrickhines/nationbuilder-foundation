@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{{ page_title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="theme.scss" type="text/css">
+  <link rel="stylesheet" href="tablet-and-desktop.scss" type="text/css" media="screen and (min-width: 768px)">
+
+  <!-- because ie8 ignores media queries, we need this -->
+  <!--[if IE 8]>
+    <link rel="stylesheet" href="tablet-and-desktop.scss" type="text/css">
+  <![endif]-->
+
+  <!--[if lte IE 9]>
+  <link rel="stylesheet" href="ie.scss" type="text/css">
+  <![endif]-->
+
+  {{ content_for_header }}
+
+  <script type="text/javascript">
+    NB.appConfig.userIsLoggedIn = {{request.logged_in?}};
+  </script>
+
+</head>
+<body class="aware-theme v2-theme {{ page.page_class_name }} js">
+  <div id="pattern" class="pattern">
+    <div class="wrap" id="wrap">
+      <div id="body" class="page-{{ request.template | replace: '_', '-' }}">
+
+        <div class="header-container clearfix {% if site.has_background_image? %}no-background{% endif %}">
+          <div class="width-container clearfix">
+          </div>
+          <!-- .width-container -->
+        </div>
+        <!-- .header-container -->
+
+        <div class="main-container" id="middle">
+          <div class="main width-container clearfix">
+
+            {% include "columns_1" %}
+
+          </div>
+          <!-- .main -->
+        </div>
+        <!-- .main-container -->
+
+        <div class="width-container">
+          <footer class="clearfix">
+
+            {{ content_for_footer }}
+
+            {% if site.footer_content.size > 0 %}
+            <div class="footer-text">{{ site.footer_content }}</div>
+            <hr/>
+            {% endif %}
+
+            <div class="row">
+
+              <div class="span7 footer-left">
+                {% if request.logged_in? %}
+                  Hi <a href="{{ request.current_signup.settings_url }}">{{ request.current_signup.name_or_email }}</a>. View your
+                  {% if site.show_public_profiles? %}
+                    <a href="{{ request.current_signup.profile_url }}">public profile</a>,
+                  {% endif %}
+                  <a href="{{ request.current_signup.settings_url }}">account settings</a>, or
+                  <a href="{{ request.current_signup.logout_url }}">sign out</a>.
+                {% else %}
+                  Sign in with <a href="{{ request.facebook_connect_url }}">Facebook</a>, <a
+                      href="{{ request.twitter_connect_url }}">Twitter</a> or <a href="/login">email</a>.
+                {% endif %}
+              </div>
+              <div class="span5 footer-right">
+                <!-- The NationBuilder link below is required. If it is removed, we may add it back ourselves.
+                     You can style it or move it in different ways, but please leave it in the footer. -->
+                Created with <a href="http://nationbuilder.com/">NationBuilder</a>
+              </div>
+
+            </div>
+          </footer>
+        </div>
+        <!-- .width-container -->
+
+      </div>
+      <!-- #body -->
+    </div>
+    <!-- #wrap -->
+  </div>
+  <!-- #pattern -->
+
+{% if site.has_background_image? %}
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="/javascripts/jquery.backstretch.min.js"></script>
+  <script type="text/javascript">
+    jQuery.backstretch("{{ site.background_image_url }}", {speed: 0});
+  </script>
+  <![endif]-->
+  <style>
+    body {
+      background: url('{{ site.background_image_url }}') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+</style>
+{% endif %}
+</body>
+</html>
+

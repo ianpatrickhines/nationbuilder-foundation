@@ -1,0 +1,90 @@
+{{ recipient.first_name_or_friend }} --
+<br /><br />
+Thank you for donating.  Here is your receipt.
+<br /><br />
+
+<table cellpadding="0" cellspacing="0" border="0" width="600" style="font-family: Helvetica, Arial, sans-serif; color: 333; font-size: 15px; line-height: 20px; border: 1px solid #999;">
+  <tr height="15"></tr>
+  <tr>
+    <td width="15"></td>
+    <td valign="middle" align="left" width="60" height="50" style="border-right: 1px solid #999;">{% if site.has_meta_image? %}<img src="{{ site.meta_image_medium_url }}" width="50" height="50" border="0"/>{% endif %}</td>
+    <td valign="middle" align="left"><div style="font-size: 18px; line-height: 24px; padding-left: 10px; font-weight: normal;">{{ site.long_name }}<br/> Donation Receipt</div></td>
+    <td valign="top" align="right"><div style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Confirmation # <span style="font-weight: bold; font-size: 18px;">{{ donation.id }}</span></div></td>
+    <td width="15"></td>
+  </tr>
+  <tr height="35"></tr>
+  <tr>
+    <td colspan="5" valign="top" align="center">
+      
+      <table cellpadding="0" cellspacing="0" border="0" width="568">
+        <tr>
+          <td valign="top" align="left" width="284" style="border-right: 1px solid #999;">
+            
+<table cellspacing="0" cellpadding="0" width="269">
+	<tr>
+		<td width="85" valign="top" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Donor</td>
+		<td width="250" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;">{{ donation.name }}</td>
+	</tr>
+	<tr height="20"></tr>
+	<tr>
+		<td valign="top" align="left" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Address</td>
+		<td align="left" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;">{{ donation.billing_address.one_line }}</td>
+	</tr>
+	<tr height="20"></tr>
+	<tr>
+		<td valign="top" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Phone</td>
+		<td align="left" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;">{{ donation.billing_address.phone }}</td>
+	</tr>
+		<tr height="20"></tr>
+	<tr>
+		<td valign="top" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Email</td>
+		<td align="left" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;">{{ donation.email }}</td>
+	</tr>
+	 {% if donation.employer.size > 0 %}
+		<tr height="20"></tr>
+	<tr>
+		<td valign="top" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Employer</td>
+		<td align="left" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;">{{ donation.employer }}</td>
+	</tr>
+	 {% endif %}
+	 {% if donation.occupation.size > 0 %}
+		<tr height="20"></tr>
+	<tr>
+		<td valign="top" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Occupation</td>
+		<td align="left" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;">{{ donation.occupation }}</td>
+	</tr>
+	{% endif %}
+</table>
+
+      </td>
+      <td valign="top" align="right" width="284">
+        
+<table cellspacing="0" cellpadding="0" width="269">
+	<tr>
+		<td width="85" valign="top" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Amount</td>
+		<td width="249" height="35" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;"><div style="font-size: 30px;">{{ donation.amount_format }}</div></td>
+	</tr>
+	<tr height="20"></tr>
+	<tr>
+		<td valign="top" align="left" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Date</td>
+		<td align="left" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;">{{ donation.succeeded_at | date_to_string }}</td>
+	</tr>
+	<tr height="20"></tr>
+	<tr>
+		<td valign="top" align="left" style="text-transform: uppercase; line-height: 20px; font-size: 12px;">Type</td>
+		<td align="left" style="font-weight: bold; padding-left: 15px; font-size: 15px; vertical-align: top; text-align: left;">{{ donation.payment_type_name }}</td>
+	</tr>
+	<tr height="20"></tr>
+	<tr>
+		<td valign="top" align="left" style="text-transform: uppercase; line-height: 20px; font-size: 12px;" colspan="2">This donation is <b>{% if donation.merchant_account.is_taxable? == true %}not{% endif %} tax deductible</b>.</td>
+	</tr>
+</table>
+
+        </td>
+      </tr>
+    </table>
+
+    </td>
+  </tr>
+  <tr height="15"></tr>
+</table>

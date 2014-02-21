@@ -1,0 +1,174 @@
+{% if request.sorta_logged_in? and request.current_signup.has_password? == true %}
+
+  {% form_for user_session %}
+
+    <div class="form-errors">{% error_messages_for user_session %}</div>
+
+    {% hidden_field_tag "user_session[email]", request.current_signup.email %}
+
+    <label for="user_session_password">Password</label><br>{% password_field "password", class:"text" %}
+
+    {% submit_tag "Sign in with password", class:"submit-button" %}
+    <div class="form-submit"></div>
+
+    <div class="padtopmore">
+      <a href="{{ request.new_password_reset_url }}">Forgot your password?</a>
+    </div>
+
+    {% if request.current_signup.has_facebook_info? or request.current_signup.has_twitter_info? %}
+    <div align="center">
+      <div class="padtop padbottom">
+        <hr>
+        <div class="orsignin_wrap"><span id="orsignin">Or sign in with {% if request.current_signup.has_facebook_info? %}Facebook{% endif %} {% if request.current_signup.has_twitter_info? %}or Twitter{% endif %}</span>
+        </div>
+      </div>
+      {% if request.current_signup.has_facebook_info? %}
+      <a href="{{ request.facebook_connect_url }}"><img src="{{ "signin_with_facebook.png" | asset_path }}"
+        style="margin-right: 5px;" /></a>
+      {% endif %}
+      {% if request.current_signup.has_twitter_info? %}
+      <a href="{{ request.twitter_connect_url }}"><img src="{{ "signin_with_twitter.png" | asset_path }}"
+        style="margin-left: 5px;" /></a>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div align="center" class="padtop">
+      If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click
+      here</a>.
+    </div>
+
+  {% endform_for %}
+
+{% elsif request.sorta_logged_in? and request.current_signup.has_password? == false %}
+
+  <div class="oauth-links">
+    {% include "oauth_login_links" %}
+  </div>
+  {% form_for account %}
+
+  {% hidden_field_tag "account[email]", request.current_signup.email %}
+
+  <div class="padtopmore">
+    {% submit_tag "Email account activation instructions" , class:"submit-button" %}
+    <div class="form-submit"></div>
+  </div>
+
+  {% endform_for %}
+
+  <div class="padtop">
+    If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click
+    here</a>.
+  </div>
+
+{% else %}
+  <div class="row">
+    <div class="medium-4 columns oauth-links">
+      <h4>Sign in with</h4>
+      {% include "oauth_login_links" %}
+    </div>
+    <div class="medium-8 columns sign-in-with-email">
+      {% form_for user_session %}
+      <h4>Or sign in with email</h4>
+      <div class="row">
+        {% error_messages_for user_session %}
+        <div class="medium-6 columns">
+          {% email_field "email", class:"text", placeholder:"Email Address" %}
+        </div>
+        <div class="medium-6 columns">
+          {% password_field "password", class:"text", placeholder:"Password" %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="columns remember-me clearfix">
+          <label class="checkbox" for="user_session_remember_me"> {% check_box "remember_me" %} Remember me</label>
+          <input type="hidden" name="ajax" value="true">
+          <ul class="errors warning"></ul>
+       </div>
+      </div>
+      <div class="row">
+        <div class="columns">
+
+          {% if page.suggestion %}
+            {% submit_tag "Post your reaction", class:"submit-button post-comment" %}
+          {% else %}
+            {% submit_tag "Post your comment", class:"submit-button post-comment" %}
+          {% endif %}
+
+          <span class="or-create-account">
+          or
+
+          <a href="#" class="create-account-link">Create an account</a>
+          </span>
+        </div>
+        <div class="form-submitting"></div>
+      </div>
+      {% endform_for %}
+    </div>
+
+    <div class="medium-8 columns form sign-up hide">
+      {% form_for account %}
+      <h4>Create an account</h4>
+        {% error_messages_for account %}
+          {% email_field "email", class:"text", placeholder:"Email Address" %}
+        <input type="hidden" name="ajax" value="true"/>
+      <ul class="errors warning"></ul>
+      <div class="row">
+        <div class="columns">
+          {% submit_tag "Create account", class:"submit-button post-comment" %}
+
+          <span class="email-sign-in">
+          or
+
+          <a href="#" class="sign-in-with-email-link">Sign in with email</a>
+          </span>
+        </div>
+        <div class="form-submitting"></div>
+      </div>
+      {% endform_for %}
+    </div>
+  </div>
+
+  <a name="activation"></a>
+  <div class="row">
+    <div class="columns activation-message hide">
+        Please check your e-mail for a link to activate your account.
+    </div>
+  </div>
+  <div class="row activate-account hide" id="activate-account">
+    <div class="columns">
+      <form class="activation_form" method="POST" action="/users/a/">
+        <input type="hidden" class="text" id="pending_comment" name="pending_comment" value="{{ request.pending_comment }}"/>
+        <input type="hidden" class="text" id="pending_page_taggings" name="pending_page_taggings" value="{{ request.pending_page_taggings }}"/>
+        <input type="hidden" class="text" id="pending_page_id" name="pending_page_id" value="{{ request.pending_page_id }}"/>
+        <input type="hidden" class="text" id="pending_object_id" name="pending_object_id" value="{{ request.pending_object_id }}"/>
+        <h4>Activate your account</h4>
+        <div class="row">
+          <div class="medium-6 columns">
+            <input type="hidden" class="text" id="activation_code_input" name="activation_code" value="" placeholder="Activation code"/>
+            <input type="text" class="text" id="first_name" name="first_name" value="" placeholder="First Name"/>
+          </div>
+          <div class="medium-6 columns">
+            <input type="text" class="text" id="last_name" name="last_name" value="" placeholder="Last Name"/>
+          </div>
+          <input type="hidden" name="ajax" value="true"/>
+          <input type="hidden" name="inline" value="true"/>
+        </div>
+        <div class="row">
+          {% error_messages_for user_session %}
+          <div class="medium-6 columns">
+            <input id="activation_password_input" type="password" name="password" value="" placeholder="Set password" required/>
+          </div>
+          <div class="medium-6 columns">
+            <input id="activation_password_confirmation_input" type="password" name="password_confirmation" value="" placeholder="Password confirmation" required/>
+          </div>
+        </div>
+        <ul class="errors warning"></ul>
+        <div class="row">
+          {% submit_tag "Activate account", class:"submit-button post-comment" %}
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endif %}

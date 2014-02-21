@@ -1,0 +1,121 @@
+<div class="fixed">
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="/">{{ site.long_name }}</a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon">
+        <a href="#">
+          <span>menu</span>
+          {% comment %}replace with
+          <span>menu</span>
+          to add the word "menu" back to the mobile nav{% endcomment %}
+        </a>
+      </li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider hide-for-medium-up"></li>
+        {% if request.logged_in? or request.sorta_logged_in? %}
+        <li id="user-nav" class="has-dropdown">
+          <a href="#">
+            <img src="{{ request.current_signup.profile_image_url }}" alt="Photo: {{ request.current_signup.name_or_email }}" />
+            {{ request.current_signup.full_name_or_friend }}
+          </a>
+          <ul class="dropdown">
+            {% if site.show_public_profiles? %}
+            <li>
+              <a href="{{ request.current_signup.profile_url }}">Public Profile</a>
+            </li>
+            {% endif %}
+            <li>
+              <a href="{{ request.current_signup.settings_url }}">Account Settings</a>
+            </li>
+            <li>
+              <a href="{{ request.current_signup.logout_url }}">Sign Out</a>
+            </li>
+          </ul>
+        </li>
+        {% else %}
+        <li id="sign-in" class="has-form">
+          <a href="#" class="button" data-reveal-id="login-modal">Sign In</a>
+        </li>
+        {% endif %}
+      </ul>
+      <ul class="right">
+        {% for child in site.root_nav_pages %}
+        {% if child.leaf? or child.nav_children.size == 0 %}        
+        <li {% if child.is_or_is_ancestor_of_current_page? %}class="active"{% endif %}>
+          <a href="{{ child.url }}">{{ child.name }}</a>
+        </li>
+        <li class="divider"></li>
+        {% else %}        
+        <li class="{% if child.is_or_is_ancestor_of_current_page? %}active {% endif %}has-dropdown">
+          <a href="{{ child.url }}">{{ child.name }}</a>
+          <ul class="dropdown">
+            {% if site.show_parent_in_nav_dropdown? %}
+            <li class="show-parent">
+              <a href="{{ child.url }}">{{ child.name }}</a>
+            </li>
+            {% else %}
+            <li class="show-parent hide-for-large-up">
+              <a href="{{ child.url }}">{{ child.name }}</a>
+            </li>
+            {% endif %}            
+            {% for child2 in child.nav_children %}
+            <li>
+              <a href="{{ child2.url }}">{{ child2.name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li class="divider"></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  </nav>
+</div>
+{{ content_for_notifications }}
+
+{% if page.donation.has_merchant_account? == false %}
+<span class="red">
+  <div class="row"> <strong>No bank account:</strong>
+    This page will not work until you add a bank account
+  </div>
+</span>
+{% elsif page.donation.merchant_account.is_test_mode? %}
+<div data-alert class="alert-box error">
+  <div class="row">
+    <div class="columns"> <strong>Testing mode:</strong>
+      Transactions will not be processed. Use your regular credit card to test, you will not actually be charged.
+      <a href="#" class="close">&times;</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+<script type="text/javascript">
+$(document).ready(function() {
+$('div:has(div.notice.success.clearfix)').addClass('success');
+$('div:has(div.notice.error.clearfix)').addClass('error');
+});
+</script>
+
+<!-- Login Modal -->
+<div id="login-modal" class="reveal-modal small" data-reveal>
+  <div class="padtop">
+    <a class="button facebook-button" href="{{ request.facebook_connect_url }}">
+      <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">facebook</span>
+      Sign in with Facebook
+    </a>
+    <a class="button twitter-button" href="{{ request.twitter_connect_url }}">
+      <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">twitter</span>
+      Sign in with Twitter
+    </a>
+  </div>
+</div>

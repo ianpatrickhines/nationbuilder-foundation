@@ -1,0 +1,25 @@
+{% if request.logged_in? %}
+
+{% elsif request.sorta_logged_in? %}
+
+<div class="box">
+	Hi <strong>{{ request.current_signup.name_or_email }}.</strong><br/>
+	<div class="social">
+		Sign in with <a href="{{ request.facebook_connect_url }}">Facebook</a>, <a href="{{ request.twitter_connect_url }}">Twitter</a> or <a href="/login">email</a>.<br/>
+		Not {{ request.current_signup.name_or_email }}? <a href="{{ request.current_signup.logout_url }}">click here</a>.
+	</div>
+</div>
+
+{% else %}
+	
+	<div class="email-signup form">
+  {% form_for signup %}   
+   {% hidden_field_tag "page_id", page.id %} <div class="form-errors">{% error_messages_for signup %}</div>
+
+   	{% email_field "email", class:"text", placeholder:"Email address", required: "required" %}{% submit_tag "Join", class:"submit-button" %}
+ 	
+	    <div class="form-submit"></div>
+  {% endform_for %}
+</div>
+
+{% endif %}

@@ -1,0 +1,19 @@
+<div class="padtop" style="overflow: auto;">
+
+	<div style="float: left; width: 88px; margin-right: 10px;">
+		{% if request.sorta_logged_in? %}
+			<fb:like href="{{ page.full_url }}" show_faces="false" width="83" send="false" layout="button_count" action="like" colorscheme="{{ site.facebook_colorscheme }}" ref="r{{ current_signup.id }}"></fb:like>
+		{% else %}
+			<fb:like href="{{ page.full_url }}" show_faces="false" width="83" colorscheme="{{ site.facebook_colorscheme }}" send="false" layout="button_count" action="like"></fb:like>
+		{% endif %}
+	</div>
+
+	<div style="float: left; width: 93px; margin-right: 10px;">
+		<a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-text="{{ page.default_face_tweet_text }}" data-via="{{ site.broadcaster.twitter_login }}">Tweet</a>
+	</div>
+
+	<div style="float: left;">
+		<g:plusone count="false" size="medium"></g:plusone>
+	</div>
+
+</div>

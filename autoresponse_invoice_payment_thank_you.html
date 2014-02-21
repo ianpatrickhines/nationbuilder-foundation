@@ -1,0 +1,11 @@
+{{ recipient.first_name_or_friend }} --
+<br /><br />
+Thank you for being our customer.  Here is a simple receipt for your records.
+<br /><br />
+Date: {{ invoice_payment.succeeded_at | date_to_string }}<br />
+Invoice: {{ invoice.name }}<br />
+Amount: {{ invoice_payment.amount_in_dollars_format }}<br />
+Payment type: {{ invoice_payment.payment_type_name }}<br />
+Confirmation number: {{ invoice_payment.id }}
+<br /><br />
+<a href="{{ page.full_url }}">{{ page.full_url }}</a>

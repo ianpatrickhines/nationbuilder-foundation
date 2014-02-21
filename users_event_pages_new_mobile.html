@@ -1,0 +1,122 @@
+<div class="padcontainer">
+
+{% if page %}
+  <div class="padbottom">
+  <div class="breadcrumbs">
+    <a href="/">Home</a> &rarr; 
+    {% for ancestor in page.self_and_ancestors %}
+    <a href="{{ ancestor.url }}">{{ ancestor.name }}</a> &rarr; 
+    {% endfor %}
+  </div>
+  </div>
+
+	<div class="content_container">
+    <h2>Post your {{ page.calendar.event_name | downcase }}</h2>
+{% else %}
+  <div class="padbottom">
+  <div class="breadcrumbs">
+    <a href="/">Home</a> &rarr; 
+    <a href="/users/pages">Your pages</a> &rarr; 
+  </div>
+  </div>
+
+	<div class="content_container">
+    <h2>Post your event</h2>
+{% endif %}
+
+<div class="one_column">
+
+	{% form_for event_page %}
+  
+  <div class="form_wrap">
+		<div class="form padtop">
+
+			<div class="form_errors">{% error_messages_for event_page %}</div>
+			
+			<table cellpadding="0" cellspacing="0">
+				<tr height="10"></tr>
+					<tr><td><label for="event_page_name">Headline</label><br>{% text_field "page_headline", class:"text" %}</td></tr>
+				<tr height="10"></tr>
+			  	<tr><td><label for="event_page_start_at_chronic">When</label><br>{% text_field "start_at_chronic", class:"text" %}</td></tr>
+				<tr height="10"></tr>
+			    <tr><td><label for="event_page_duration_chronic">Length</label><br>{% text_field "duration_chronic", class:"text" %}</td></tr>
+			  <tr height="10"></tr>
+			  	<tr><td><label for="event_page_time_zone">Time zone</label><br>{% collection_select "time_zone", event_page.time_zones, class:"select" %}</td></tr>
+				<tr height="10"></tr>
+			    <tr><td><label for="event_page_capacity_count">Maximum capacity</label><br>{% text_field "capacity_count", class:"text" %}</td></tr>
+
+			{% if event_page.page_parent_id.size > 0 %}
+			  {% hidden_field_tag "event_page[page_parent_id]", event_page.page_parent_id %}
+			{% else %}
+			<tr height="10"></tr>
+			  <tr><td><label for="event_page_page_parent_id">Post in</label><br>{% collection_select "page_parent_id", event_page.calendars_available, class:"select" %}</td></tr>
+			{% endif %}
+			
+			<tr height="20"></tr>
+				<tr><td><h4>Contact info</h4></td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_contact_name">Name</label><br>{% text_field "contact_name", class:"text" %}</td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_contact_email">Email</label><br>{% text_field "contact_email", class:"text", type:"email" %}</td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_contact_phone_number">Phone</label><br>{% text_field "contact_phone_number", class:"text" %}</td></tr>
+			 <tr height="10"></tr>
+			  <tr><td>{% check_box "is_contact_email_private", class:"check_box" %} Don't publish email address</td></tr>
+			<tr height="10"></tr>
+			  <tr><td>{% check_box "is_contact_phone_private", class:"check_box" %} Don't publish phone number</td></tr>
+
+			<tr height="20"></tr>
+	      <tr><td><h4>Location</h4></td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_venue_name">Venue name</label><br>{% text_field "venue_name", class:"text" %}</td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_address1">Address</label><br>{% text_field "venue_address.address1", class:"text" %}<br>{% text_field "venue_address.address2", class:"text" %}</td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_city">City</label><br>{% text_field "venue_address.city", class:"text" %}</td></tr>
+					{% if settings.has_states? %}
+					<tr height="10"></tr>
+						<tr><td><label for="event_page_state">State</label><br>{% text_field "venue_address.state", class:"text" %}</td></tr>
+					{% endif %}
+					<tr height="10"></tr>
+						<tr><td><label for="event_page_zip">Postal code</label><br>{% text_field "venue_address.zip", class:"text" %}</td></td>
+			
+			<tr height="20"></tr>
+				<tr><td><h4>Ticket price</h4>
+	      If free, just leave at 0.00.</td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_user_ticket_price">Amount</label><br>{% text_field "user_ticket_price", class:"text" %}</td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_user_ticket_currency">Currency</label><br>{% collection_select "user_ticket_currency", event_page.currencies_available, class:"select" %}</td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_user_ticket_purchase_url">Ticket purchase URL</label><br>{% text_field "user_ticket_purchase_url", class:"text" %}</td></tr>
+			
+      <tr height="20"></tr>
+				<tr><td><h4>Description, include directions</h4></td></tr>
+			<tr height="10"></tr>
+      	<tr><td><div class="so_ie_does_not_put_this_in_the_footer">{% text_area "content_editable", class:"textarea" %}</div></td></tr>
+			<tr height="10"></tr>
+			  <tr><td><label for="event_page_accept_rsvps">{% check_box "accept_rsvps", class:"check_box" %} Allow people to RSVP</label></td></tr>
+			<tr height="10"></tr>
+ 				<tr><td><label for="event_page_allow_guests">{% check_box "allow_guests", class:"check_box" %} Allow people to bring guests (+1)</label></td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_show_guests">{% check_box "show_guests", class:"check_box" %} Show who is coming</label></td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_is_private">{% check_box "is_private", class:"check_box" %} Keep the RSVP page hidden from the rest of the site</label></td></tr>
+			<tr height="10"></tr>
+				<tr><td><label for="event_page_post_to_facebook">{% check_box "post_to_facebook", class:"check_box" %} Also post on Facebook so people can RSVP there</label></td></tr>
+			<tr height="20"></tr>
+			  <tr><td>{% submit_tag "Save and post", class:"submit-button" %}
+			  <div class="form_submit"></div></td></tr>
+			</table>
+				
+
+		</div> 	
+		
+	</div>
+		
+	{% endform_for %}
+
+</div>
+	
+	</div>
+</div>

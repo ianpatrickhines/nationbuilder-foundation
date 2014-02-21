@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+    {% include "breadcrumbs" %}
+    {% include "features" %}
+    {% if page.headline.size > 0 %}
+    <h2 class="headline">{{ page.headline }}</h2>
+    {% endif %}
+    <div id="content">
+      {% if page.leaderboard.content.size > 0 %}
+      <div id="intro" class="intro">{{ page.leaderboard.content }}</div>
+      {% endif %}
+
+  {% for leaderboard in page.page_leaderboards %}
+      <div class="leaderboard padbottom">
+        {% if leaderboard.has_goal? %}
+    {% assign thermo_width = 50 %}
+        <div class="clearfix">
+          <div class="progress" style="width: {{ thermo_width }}%;">
+            <div class="bar bar-success" style="width: {{ leaderboard.percent_of_goal | times:100 }}%;">
+              <div class="bar-text">{{ leaderboard.total }} {{ leaderboard.goal_name_short }}</div>
+            </div>
+          </div>
+
+          <div class="bar-goal">{{ leaderboard.goal }} {{ leaderboard.goal_name }}</div>
+        </div>
+        {% endif %}
+
+    {% if leaderboard.display_number_results > 0 %}
+        <h4>
+          Top {{ leaderboard.display_number_results }} {{ leaderboard.display_name }}
+        </h4>
+        {% for entry in leaderboard.entries %}
+        <div class="people-list {% cycle 'odd', 'even' %}">
+          <div class="people-list-pic">
+            {{ entry.signup.bigger_profile_image }}
+            <span class="leaderboard-rank">{{ entry.position }}</span>
+          </div>
+          <div class="people-name">{{ entry.signup.published_name_linked }}</div>
+          {{ entry.total }} {{ leaderboard.goal_name }}
+        </div>
+        {% endfor %}
+
+    {% endif %}
+      </div>
+      {% endfor %}
+      <div class="like-page"> <strong>Do you like this?</strong>
+        {% include "like_page" %}
+      </div>
+    </div>
+  </div>
+</div>

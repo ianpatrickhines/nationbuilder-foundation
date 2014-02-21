@@ -1,0 +1,398 @@
+<div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+    {% include "breadcrumbs" %}
+    {% include "features" %}
+    {% if page.headline.size > 0 %}
+    <h2 class="headline">{{ page.headline }}</h2>
+    {% endif %}
+    <div id="content">
+      {% if page.donation.content.size > 0 %}
+      <div id="intro" class="intro">{{ page.donation.content }}</div>
+      {% endif %}
+
+  {% if page.donation.show_recent_donor? %}
+  {% if page.most_recent_donation %}
+      <div class="padtop padbottom"> <strong>Who's donating:</strong>
+        <a href="{{ page.most_recent_donation.signup.profile_url }}">{{ page.most_recent_donation.signup.published_name_linked }}</a>
+        from {{ page.most_recent_donation.signup.address.location }} donated. Thank you!
+      </div>
+      {% endif %}
+  {% endif %}
+
+  {% if page.donation.has_amount_goal? %}
+      <div class="row">
+        <div class="medium-6 columns">
+          <div class="progress">
+            <span class="meter success" style="width: {{ page.donation.percent_of_amount_goal | times:100 }}%;">
+              {% comment %}{% if page.donations_count < 1 %}
+          <div class="bar-text">JUST STARTED</div>
+              {% else %}
+              <div class="bar-text">{{ page.donations_amount_format }} raised</div>
+              {% endif %}{% endcomment %}
+            </span>
+          </div>
+        </div>
+
+        <div class="medium-6 columns">
+          {% if page.donations_count < 1 %}
+      <div class="bar-text">JUST STARTED</div>
+          {% else %}
+          <div class="bar-text">{{ page.donations_amount_format }} raised</div>
+          {% endif %}
+          <div class="bar-goal">GOAL: {{ page.donation.amount_goal_format }}</div>
+        </div>
+      </div>
+      {% elsif page.donation.has_donor_goal? %}
+      <div class="row">
+        <div class="medium-6 columns">
+          <div class="progress">
+            <span class="meter success" style="width: {{ page.donation.percent_of_amount_goal | times:100 }}%;">
+              {% comment %}{% if page.donations_count < 1 %}
+          <div class="bar-text">JUST STARTED</div>
+              {% else %}
+              <div class="bar-text">{{ page.donations_amount_format }} raised</div>
+              {% endif %}{% endcomment %}
+            </span>
+          </div>
+        </div>
+
+        <div class="medium-6 columns">
+          {% if page.donations_count < 1 %}
+      <div class="bar-text">JUST STARTED</div>
+          {% else %}
+          <div class="bar-text">{{ page.donations_amount_format }} raised</div>
+          {% endif %}
+          <div class="bar-goal">GOAL: {{ page.donation.amount_goal_format }}</div>
+        </div>
+      </div>
+      {% endif %}
+
+  {% form_for donation autocomplete:off %}
+      <div class="form-wrap">
+        <div class="form">
+
+          <div class="form-errors">{% error_messages_for donation %}</div>
+          {% comment %}{% if page.donation.has_merchant_account? == false %}
+          <div class="padbottommore">
+            <span class="red"> <strong>No bank account:</strong>
+              This page will not work until you add a bank account
+            </span>
+          </div>
+          {% elsif page.donation.merchant_account.is_test_mode? %}
+          <div class="padbottom padtop">
+            <div data-alert class="alert-box error">
+              <strong>Testing mode:</strong>
+              Transactions will not be processed. Use your regular credit card to test, you will not actually be charged.
+              <a href="#" class="close">&times;</a>
+            </div>
+          </div>
+          {% endif %}{% endcomment %}
+          <div class="row">
+
+            <div class="medium-6 columns">
+              <div class="row">
+
+                <div class="small-6 medium-6 large-6 columns">
+                  <label for="donation_first_name">First Name</label>
+                  {% text_field "first_name", class:"text radius" %}
+                </div>
+                <div class="small-6 medium-6 large-6 columns">
+                  <label for="donation_last_name">Last Name</label>
+                  {% text_field "last_name", class:"text" %}
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="columns">
+                  <label for="donation_billing_address_country_code">Country</label>
+                  {% collection_select "billing_address.country_code", page.donation.countries, "code", "name", class:"select" %}
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="columns">
+                  <label for="donation_billing_address_address1">Address</label>
+                  {% text_field "billing_address.address1", class:"text" %}
+                  {% text_field "billing_address.address2", class:"text" %}
+                  {% text_field "billing_address.address3", class:"text not-us-or-canada hide" %}
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="medium-4 columns">
+                  <label for="donation_billing_address_city">City</label>
+                  {% text_field "billing_address.city", class:"text" %}
+                </div>
+                <div class="medium-4 columns us-or-canada us-only hide">
+                  <label for="donation_state">State</label>
+                  {% collection_select "billing_address.state", page.donation.us_states, "code", "name", class:"select" %}
+                </div>
+                <div class="medium-4 columns us-or-canada canada-only hide">
+                  <label for="donation_billing_address_state">State</label>
+                  {% text_field "billing_address.state", class:"text" %}
+                </div>
+                <div class="medium-4 columns">
+                  <label for="donation_billing_address_zip">Postal code</label>
+                  {% text_field "billing_address.zip", class:"text" %}
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="medium-6 columns">
+                  <label for="donation_email">Email</label>
+                  {% email_field "email", class:"text" %}
+                </div>
+                <div class="medium-6 columns">
+                  <label for="donation_billing_address_phone_number">Phone</label>
+                  {% phone_field "billing_address.phone_number", class:"text" %}
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="columns">
+                  <label class="checkbox" for="donation_email_opt_in">{% check_box "email_opt_in" %} Send email updates</label>
+                </div>
+
+              </div>
+              {% if page.donation.merchant_account.is_employer_and_occupation_required? %}
+              <div class="row">
+
+                <div class="medium-6 columns">
+                  <label for="donation_employer">Employer</label>
+                  {% text_field "employer", class:"text" %}
+                </div>
+                <div class="medium-6 columns">
+                  <label for="donation_occupation">Occupation</label>
+                  {% text_field "occupation", class:"text" %}
+                </div>
+
+              </div>
+              {% if page.donation.merchant_account.is_employer_address_required? %}
+              <div class="row">
+
+                <div class="columns">
+                  <label for="donation_work_address_country">Employer Country</label>
+                  {% collection_select "work_address.country_code", page.donation.countries, "code", "name", class:"select" %}
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="columns">
+                  <label for="donation_work_address_address1">Employer Address</label>
+                  {% text_field "work_address.address1", class:"text" %}
+                  {% text_field "work_address.address2", class:"text" %}
+                  {% text_field "work_address.address3", class:"text work-not-us-or-canada hide" %}
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="medium-4 columns">
+                  <label for="donation_work_address_city">Employer City</label>
+                  {% text_field "work_address.city", class:"text" %}
+                </div>
+                <div class="medium-4 columns work-us-or-canada">
+                  <label for="donation_work_address_state">State</label>
+                  {% text_field "work_address.state", class:"text" %}
+                </div>
+                <div class="medium-4 columns">
+                  <label for="donation_work_address_zip">Postal code</label>
+                  {% text_field "work_address.zip", class:"text" %}
+                </div>
+
+              </div>
+              {% elsif page.donation.merchant_account.is_employer_city_required? %}
+              <div class="row">
+
+                <div class="columns">
+                  <label for="donation_work_address_country">Employer Country</label>
+                  {% collection_select "work_address.country_code", page.donation.countries, "code", "name", class:"select" %}
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="medium-4 columns">
+                  <label for="donation_work_address_city">Employer City</label>
+                  {% text_field "work_address.city", class:"text" %}
+                </div>
+                <div class="medium-4 columns work-us-or-canada hide">
+                  <label for="donation_work_address_state">State</label>
+                  {% text_field "work_address.state", class:"text" %}
+                </div>
+                <div class="medium-4 columns">
+                  <label for="donation_work_address_zip">Postal code</label>
+                  {% text_field "work_address.zip", class:"text" %}
+                </div>
+
+              </div>
+              {% endif %}
+              <div class="row">
+
+                <div class="columns">
+                  <div class="padtopless padbottomless">
+                    Law requires we ask for your employer and occupation. If you don't have an employer or are retired, put N/A, and if you are self-employed put "self-employed" in employer and describe your occupation.
+                  </div>
+                </div>
+
+              </div>
+              {% if page.donation.merchant_account.is_nyc_doing_business_required? %}
+              <div class="row">
+
+                <div class="columns">
+                  <div class="padtopless padbottom">
+                    If you are doing business with the City, enter the agency and business category. List the "Doing Business Entity" and your relationship in the 'Employer' and 'Occupation' fields.
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="columns">
+                  <label for="donation_doing_business_with_nyc_agency">City Agency/Agencies</label>
+                  {% text_field "doing_business_with_nyc_agency", class:"text" %}
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="columns">
+                  <label for="donation_doing_business_with_nyc_business_category">Business Category</label>
+                  {% text_field "doing_business_with_nyc_business_category", class:"text" %}
+                </div>
+
+              </div>
+              {% endif %}
+
+              {% if page.donation.merchant_account.is_corporate_contribution_required? %}
+              <div class="row">
+
+                <div class="columns input-checkbox">
+                  <label for="donation_is_corporate_contribution">
+                    {% check_box "is_corporate_contribution", class:"checkbox" %} This is a contribution from a business.
+                  </label>
+                </div>
+
+              </div>
+              {% endif %}
+              {% endif %}
+              <div class="row">
+                {% if page.donation.merchant_account.is_taxable? %}
+                <div class="columns">
+                  Contributions are <i>not</i>
+                  tax deductible.
+                </div>
+                {% else %}
+                <div class="columns">Contributions are tax deductible.</div>
+                {% endif %}
+              </div>
+
+            </div>
+            <div class="medium-6 columns">
+              <div class="row">
+                <div class="columns">
+                  <label for="donation_amounts">Amount</label>
+                  {% if request.current_order %}
+                  {% for item in request.current_order.items %}
+                  {% if item.num_time_periods and item.time_period_type %}
+                  {{ item.quantity }} {{ item.name }} @ {{ item.amount }} - billed automatically every {{ item.num_time_periods }} {{item.time_period_type }}
+                  {% else %}
+                  {{ item.quantity }} {{ item.name }} @ {{ item.amount }}
+                  {% endif %}
+                  {% endfor %}
+                  {{ request.current_order.form_amount_options }}
+                  <a href="{{ page.donation.clear_order_url }}">Clear order</a>
+                  {% else %}
+                  <div class="radio-inline">{{ page.donation.form_amount_options }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              {% if page.donation.has_merchant_account? and page.donation.merchant_account.is_paypal_express? == false %}
+              <div class="row">
+                <div class="columns">
+                  <label for="donation_card_number">Credit card number</label>
+                  {% text_field "card_number", class:"text" %}
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="columns cc padbottom">{{ page.donation.merchant_account.accepted_card_icons }}</div>
+              </div>
+
+              <div class="row">
+
+                <div class="large-6 columns">
+                  <label for="donation_card_expires_on">Expires</label>
+                  {{ page.donation.form_card_expires_on }}
+                </div>
+
+                <div class="large-6 columns">
+                  <label for="donation_card_verification">Security code (on back)</label>
+                  {% text_field "card_verification", class:"text" %}
+                </div>
+              </div>
+              {% endif %}
+              <div class="row">
+                <div class="columns">
+                  {% if page.donation.merchant_account.has_contribution_rules? %}
+                  <label for="is_confirmation_text">
+                    <strong>Contribution rules</strong>
+                  </label>
+                  {{ page.donation.merchant_account.contribution_rules }}
+                  <label for="donation_is_confirmed" class="checkbox padtop">
+                    {% check_box "is_confirmed", class:"checkbox" %} I confirm that the above statements are true and accurate.
+                  </label>
+                  {% endif %}
+
+                  {% if page.donation.merchant_account.is_de? %}
+                  <label for="donation_is_de_confirmed" class="checkbox">
+                    {% check_box "is_de_confirmed", class:"checkbox" %}
+                    I agree to the Democracy Engine
+                    <a href="http://www.democracyengine.com/subscriber_tos" target="_new">Terms of Service</a>
+                    and
+                    <a href="http://www.democracyengine.com/subscriber_privacy_policy" target="_new">Privacy Policy</a>
+                    . You will not receive any emails from them, they just deliver your donation to us.
+                  </label>
+                  {% endif %}
+
+                  {% if site.ask_to_publish_to_stream? %}
+                  <label for="donation_is_private" class="checkbox">
+                    {% check_box "is_private", class:"checkbox" %} Don't publish my donation on the website.
+                  </label>
+                  {% endif %}
+
+                  {% if page.donation.has_merchant_account? and page.donation.merchant_account.is_paypal_express? %}
+                  <div class="padtop">
+                    {% submit_tag "Continue to Paypal", class:"success-button" %}
+                  </div>
+                  <div class="padtopmore">{{ page.donation.merchant_account.accepted_card_icons }}</div>
+                  {% else %}
+                  <div class="padtop">{% submit_tag "Process Donation", class:"submit-button" %}</div>
+                  {% endif %}
+                </div>
+                <div class="form-submit"></div>
+
+              </div>
+
+            </div>
+          </div>
+          {% endform_for %}
+
+  {% if page.tags_count > 0 %}
+          <div class="page-tags">{% include "page_tags" with page %}</div>
+          {% endif %}
+
+  {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+        </div>
+      </div>
+    </div>

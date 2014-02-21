@@ -1,0 +1,20 @@
+{{ recipient.first_name_or_friend }} --
+<br /><br />
+{% if invoice.is_closed? %}
+Thank you for paying your invoice.
+{% elsif invoice.is_overdue? %}
+This invoice is overdue.
+{% else %}
+You have a new invoice.
+{% endif %}
+<br /><br />
+Date: {{ invoice.sent_at | date_to_string }}<br />
+Invoice: {{ invoice.name }}<br />
+{% if invoice.is_closed? %}
+Amount: {{ invoice.amount_with_discount_format }}<br />
+{% else %}
+Amount due: {{ invoice.amount_due_format }}<br/>
+{% endif %}
+Status: {{ invoice.status }}<br/>
+<br />
+<a href="{{ invoice_payment_url }}">Your invoice</a>.

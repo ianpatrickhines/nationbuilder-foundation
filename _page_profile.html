@@ -1,0 +1,558 @@
+<div class="excerpt">
+
+{% case page_profile.type_name %}
+
+{% when 'Activity Stream' %}
+
+<p>
+
+{% when 'ActBlue' %}
+
+<a class="button submit-link" href="{{ page_profile.actblue.actblue_page_url_with_tracking }}">Donate on ActBlue</a>
+
+{% when 'Basic' %}
+
+{{ page_profile.basic.content }}
+
+{% when 'Blog' %}
+
+{% for post in page_profile.blog.most_recent_blog_posts limit: 3 %}
+<p>
+  <strong><a href="{{ post.url }}">{{ post.headline }}</a></strong><br/>
+  Posted by {{ post.author.published_name_linked }} &middot; {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
+  {% if post.show_stream? %}
+  {% if post.public_activities_count > 0 %}
+  &middot; <a href="{{ post.url }}#reactions">{{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}</a>
+  {% endif %}
+  {% endif %}
+</p>
+{% endfor %}
+
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">See all posts</a>
+  {% if page_profile.blog.is_posting_public? %}
+  or <a class="button destroy-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">{{ page_profile.blog.public_posting_prompt }}</a>
+  {% endif %}
+
+{% when 'Blog Post' %}
+
+{{ page_profile.blog_post.content }}
+{% if page_profile.blog_post.is_extended? %}
+ <span class="read-more"><a href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Read more</a></span>
+{% endif %}
+
+{% when 'Calendar' %}
+
+{% if page_profile.calendar.content.size > 0 %}
+{{ page_profile.calendar.content }}
+{% endif %}
+
+{% if page_profile.calendar.show_map? %}
+
+{% if page_profile.calendar.events_upcoming_count > 0 %}
+
+<div class="padbottommore">
+  <div class="form-wrap">
+    <div class="form">
+      <div class="padtopmore">
+        {{ page_profile.calendar.events_upcoming_map }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+{% endif %}
+
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">See all events</a>
+  {% if page_profile.calendar.allow_user_submitted? %}
+  or <a class="button destroy-link" href="{{ page_profile.calendar.new_event_url }}">Host your own</a>
+  {% endif %}
+
+{% when 'Donation' %}
+
+{% assign thermo_width = 50 %}
+
+{% if page_profile.donation.has_amount_goal? %}
+
+<div class="clearfix">
+  <div class="progress" style="width: {{ thermo_width }}%;">
+    <div class="bar bar-success" style="width: {{ page_profile.donation.percent_of_amount_goal | times:100 }}%;">
+      {% if page_profile.donations_count < 1 %}
+      <div class="bar-text">JUST STARTED</div>
+      {% else %}
+      <div class="bar-text">{{ page_profile.donations_amount_format }} raised</div>
+      {% endif %}
+    </div>
+  </div>
+
+<div class="bar-goal">GOAL: {{ page_profile.donation.amount_goal_format }}</div>
+
+</div>
+
+{% elsif page_profile.donation.has_donor_goal? %}
+
+<div class="clearfix">
+  <div class="progress" style="width: {{ thermo_width }}%;">
+    <div class="bar bar-success" style="width: {{ page_profile.donation.percent_of_donor_goal | times:100 }}%;">
+        {% if page_profile.donations_count < 2 %}
+        <div class="bar-text">JUST STARTED</div>
+        {% else %}
+        <div class="bar-text">{{ page_profile.donations_count }} donors</div>
+        {% endif %}
+    </div>
+  </div>
+
+<div class="bar-goal">{{ page_profile.donation.donor_goal }} donors</div>
+
+</div>
+{% endif %}
+
+{% if page_profile.donation.content.size > 0 %}
+{{ page_profile.donation.content }}
+{% endif %}
+
+<a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Donate</a>
+
+{% when 'Endorsement' %}
+
+{% if page_profile.endorsement.intro.size > 0 %}
+{{ page_profile.endorsement.intro }}
+{% endif %}
+
+{% if page_profile.endorsement.content.size > 0 %}
+  {{ page_profile.endorsement.content }}
+{% endif %}
+
+<a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Endorse</a>
+
+{% when 'Event' %}
+
+{% if page_profile.event.content.size > 0 %}
+{{ page_profile.event.content }}
+{% endif %}
+
+<div class="event-detail">
+  <div class="subhead">WHEN</div>
+  <div class="subtext">
+    {% if page_profile.event.is_multi_day? %}
+    {{ page_profile.event.local_start_at | event_time }} - {{ page_profile.event.local_end_at | event_time }}
+    {% else %}
+    {{ page_profile.event.local_start_at | event_time }}
+    {% endif %}
+  </div>
+</div>
+
+{% if page_profile.event.has_venue? %}
+
+<div class="event-detail">
+  <div class="subhead">WHERE</div>
+  <div class="subtext">
+    {% if page_profile.event.venue_name.size > 0 %}
+    {{ page_profile.event.venue_name }}<br/>
+    {% endif %}
+    {% for line in page_profile.event.venue_address.multi_line %}
+    {{ line }}<br/>
+    {% endfor %}
+    {% if page_profile.event.has_venue_address? %}
+    <a href="{{ page_profile.event.venue_address.google_map_link }}">Google map and directions</a>
+    {% endif %}
+  </div>
+</div>
+
+{% endif %}
+
+{% if page_profile.event.is_ticket_required? %}
+{{ page_profile.event.ticket_price_with_currency }}
+{% elsif page_profile.event.is_user_ticket_required? %}
+{{ page_profile.event.user_ticket_price_with_currency }}
+{% endif %}
+
+{% if page_profile.event.is_ticket_required? or page_profile.event.is_user_ticket_required? %} &middot; {% endif %}
+
+{% if page_profile.event.show_guests? and page_profile.event.rsvps_count > 0 %}
+<a href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">{{ page_profile.event.rsvps_count }} rsvp{% if page_profile.event.rsvps_count > 1 %}s{% endif %}</a>
+{% endif %}
+
+{% if page_profile.event.is_maximum_capacity? %}
+  <a class="button destroy-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">sold out</a>
+{% elsif page_profile.event.is_past? == false %}
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">rsvp</a>
+{% endif %}
+
+{% when 'FAQ' %}
+
+{% if page_profile.faq.content.size > 0 %}
+{{ page_profile.faq.content }}
+{% endif %}
+
+<div class="padtopmore">
+<ul class="question-list">
+  {% for child in page_profile.children %}
+  {% if child.type_name == 'Question' %}
+  <li><a href="{{ child.url }}">{{ child.headline }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul>
+</div>
+
+{% when 'Feedback' %}
+
+{% if page_profile.feedback.content.size > 0 %}
+{{ page_profile.feedback.content }}
+{% endif %}
+
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">{{ page_profile.feedback.submit_button_name }}</a>
+
+{% when 'Find Friends' %}
+
+<p>
+
+  {% when 'Follows' %}
+
+<p>
+
+  {% when 'Followers' %}
+
+<p>
+
+  {% when 'Leaderboard' %}
+
+  {% if page_profile.leaderboard.content.size > 0 %}
+  {{ page_profile.leaderboard.content }}
+  {% endif %}
+
+  {% for leaderboard in page_profile.page_leaderboards %}
+
+    <div class="leaderboard padbottom">
+
+      {% if leaderboard.has_goal? %}
+      {% assign thermo_width = 50 %}
+
+      <div class="clearfix">
+        <div class="progress" style="width: {{ thermo_width }}%;">
+          <div class="bar bar-success" style="width: {{ leaderboard.percent_of_goal | times:100 }}%;">
+            <div class="bar-text">{{ leaderboard.total }} {{ leaderboard.goal_name_short }}</div>
+          </div>
+        </div>
+
+        <div class="bar-goal">{{ leaderboard.goal }} {{ leaderboard.goal_name }}</div>
+
+      </div>
+
+      {% endif %}
+
+  {% if leaderboard.display_number_results > 0 %}
+
+  <strong>Top 5 {{ leaderboard.display_name }}</strong>
+
+  <hr style="margin: 5px 0 10px 0;" />
+
+  {% for entry in leaderboard.entries limit: 5 %}
+  <div class="people-list {% cycle 'odd', 'even' %}">
+    <div class="people-list-pic">{{ entry.signup.bigger_profile_image }} <span class="leaderboard-rank">{{ entry.position }}</span></div>
+    <div class="people-name">{{ entry.signup.published_name_linked }}</div>
+    {{ entry.total }} {{ leaderboard.goal_name }}
+  </div>
+  {% endfor %}
+
+  {% endif %}
+
+  </div>
+
+{% endfor %}
+
+{% when 'Moneybomb' %}
+
+{% if page_profile.moneybomb.content.size > 0 %}
+{{ page_profile.moneybomb.content }}
+{% endif %}
+
+{% if page_profile.moneybomb.has_start_at? and page_profile.moneybomb.is_active? == false and page_profile.moneybomb.is_past? == false %}
+<div class="event-detail">
+  <div class="subhead" style="text-transform: uppercase;">COUNTDOWN TO {{ page_profile.moneybomb.local_start_at | moneybomb_time }}</div>
+  <div class="subtext">
+    <div id="pre_countdown_{{ page_profile.slug }}" class="countdown"></div>
+  </div>
+</div>
+{% elsif page_profile.moneybomb.is_active? %}
+<div class="event-detail">
+  <div class="subhead" style="text-transform: uppercase;">TIME LEFT TO DONATE</div>
+  <div class="subtext">
+    <div id="active_countdown_{{ page_profile.slug }}" class="countdown"></div>
+  </div>
+</div>
+{% endif %}
+
+{% assign thermo_width = 50 %}
+
+{% if page_profile.moneybomb.has_amount_goal? %}
+<div class="clearfix">
+  <div class="progress" style="width: {{ thermo_width }}%;">
+    <div class="bar bar-success" style="width: {{ page_profile.moneybomb.percent_of_amount_goal | times:100 }}%;">
+      {% if page_profile.pledges_count < 1 %}
+      <div class="bar-text">JUST STARTED</div>
+      {% else %}
+      <div class="bar-text">{{ page_profile.pledges_amount_format }} pledged</div>
+      {% endif %}
+      </div>
+     </div>
+
+    <div class="bar-goal">{{ page_profile.moneybomb.amount_goal_format }}</div>
+
+</div>
+
+{% elsif page_profile.moneybomb.has_pledger_goal? %}
+
+<div class="clearfix">
+  <div class="progress" style="width: {{ thermo_width }}%;">
+    <div class="bar bar-success" style="width: {{ page_profile.moneybomb.percent_of_pledger_goal | times:100 }}%;">
+      {% if page_profile.pledges_count < 2 %}
+      <div class="bar-text">JUST STARTED</div>
+      {% else %}
+      <div class="bar-text">{{ page_profile.pledges_count }} pledgers</div>
+      {% endif %}
+      </div>
+     </div>
+
+    <div class="bar-goal">{{ page_profile.moneybomb.pledger_goal }} PLEDGERS</div>
+
+</div>
+
+{% endif %}
+
+<script type="text/javascript" src="/javascripts/jquery.countdown.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+
+    var moneyBomb = new NB.Liquid.MoneyBomb();
+
+    moneyBomb.setCountdown({
+      $el :  $('#pre_countdown_{{ page_profile.slug }}'),
+      until: +{{ page_profile.moneybomb.seconds_until }}
+    });
+
+    moneyBomb.setCountdown({
+      $el :  $('#active_countdown_{{ page_profile.slug }}'),
+      until: +{{ page_profile.moneybomb.seconds_until }}
+    });
+});
+</script>
+
+{% if page_profile.moneybomb.is_active? %}
+  <a class="button submit-link" href="{{ page_profile.moneybomb.donation_page.url }}">Donate now</a>
+{% else %}
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Pledge now</a>
+{% endif %}
+
+{% when 'Paid Membership' %}
+
+{% if page_profile.paid_membership.content.size > 0 %}
+{{ page_profile.paid_membership.content }}
+{% else %}
+<p>
+  {% endif %}
+
+  {% for membership_option in page_profile.paid_membership.membership_options %}
+
+  <strong><a href="{{ membership_option.purchase_url }}">{{ membership_option.membership_level_name }}</strong></a>: Purchase for <a href="{{ membership_option.purchase_url }}">{{ membership_option.amount }} every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}</a>
+  <br/>
+
+  {% endfor %}
+
+  {% when 'Petition' %}
+
+  {% if page_profile.petition.intro.size > 0 %}
+  {{ page_profile.petition.intro }}
+  {% endif %}
+
+  {% if page_excerpt.petition.has_goal? %}
+{% assign thermo_width = 50 %}
+
+<div class="clearfix">
+  <div class="progress" style="width: {{ thermo_width }}%;">
+    <div class="bar bar-success" style="width: {{ page_profile.petition.percent_of_goal | times:100 }}%;">
+      {% if page_profile.petition.signatures_count < 2 %}
+      <div class="bar-text">JUST STARTED</div>
+      {% else %}
+      <div class="bar-text">{{ page_profile.petition.signatures_count | number_with_commas }} {{ page_profile.petition.signature_name | pluralize | upcase }}</div>
+      {% endif %}
+      </div>
+  </div>
+  <div class="bar-goal">{{ page_profile.petition.goal | number_with_commas }} {{ page_profile.petition.signature_name | pluralize | downcase }}</div>
+</div>
+  {% elsif page_profile.petition.signatures_count > 4 %}
+  <div class="bar-goal">{{ page_profile.petition.signatures_count | number_with_commas }} {{ page_profile.petition.signature_name | pluralize | downcase }}</div>
+  {% endif %}
+
+{% if page_profile.petition.content.size > 0 %}
+<div id="petition-content">
+  {{ page_profile.petition.content }}
+</div>
+{% endif %}
+
+  <a class="submit-link submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Add {{ page_profile.petition.signature_name }}</a>
+
+{% when 'Political Capital' %}
+
+<p>
+
+  {% when 'Press Release' %}
+
+<div class="released-at padtop">
+  {{ page_profile.published_at | date: '%B %d, %Y' }}
+</div>
+
+{% if page_profile.has_author? %}
+<div class="padbottomless">
+  <div class="contact">
+
+    <div class="contact-name">
+      Contact: {{ page_profile.author.published_name }}
+    </div>
+    {% if page_profile.author.has_phone? %}
+    <div class="contact-phone">
+      {{ page_profile.author.phone_number }}
+    </div>
+    {% endif %}
+    {% if page_profile.author.has_email? %}
+    <div class="contact-email">
+      {{ page_profile.author.email | enkode_email }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+{{ page_profile.press_release.content }}
+
+{% when 'Question' %}
+
+{% if page_profile.question.content.size > 0 %}
+{{ page_profile.question.content }}
+{% endif %}
+
+{% if page_profile.question.answer.size > 0 %}
+<div class="row padtopmore">
+  <div class="columns">
+    <div class="answer-wrap clearfix"><div class="answer-a">A:</div><div class="answer">{{ page_profile.question.answer }}</div></div>
+  </div>
+</div>
+{% endif %}
+
+
+{% when 'Recruiting' %}
+
+{% if page_profile.recruiting.content.size > 0 %}
+{{ page_profile.recruiting.content }}
+{% endif %}
+
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Start recruiting</a>
+
+{% when 'Redirect' %}
+
+<p>
+
+  {% when 'Rules' %}
+
+  {% if page_profile.rule.content.size > 0 %}
+  {{ page_profile.rule.content }}
+  {% endif %}
+
+<div class="rule-list">
+  <ol>
+    {% for rule in page_profile.rule.rules %}
+    <li><div class="rule">{{ rule.name }}</div> {{ rule.content }}</li>
+    {% endfor %}
+  </ol>
+</div>
+
+{% when 'Signup' %}
+
+{% if page_profile.signup.content.size > 0 %}
+{{ page_profile.signup.content }}
+{% endif %}
+
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Sign up</a>
+
+{% when 'Suggestion Box' %}
+
+{% if page_profile.suggestion_box.content.size > 0 %}
+{{ page_profile.suggestion_box.content }}
+{% endif %}
+
+{% when 'Suggestion' %}
+
+{% if page_profile.suggestion.content.size > 0 %}
+{{ page_profile.suggestion.content }}
+{% else %}
+  {% endif %}
+
+{% if page_profile.suggestion.is_answered? %}
+  <div class="answer clearfix">
+    <strong>Official response from {{ page_profile.suggestion.answer_author.published_name_linked }}</strong>
+      {% if page_profile.suggestion.is_answer_type? %}
+      {{ page_profile.suggestion.answer_type_html }}
+      {% endif %}
+   <div class="row">
+    <div class="columns"><i class="icon-up-dir" /></i><div class="answer-wrap truncate-500" data-truncate="500">{% if page_profile.suggestion.answer.size > 0 %}{{ page_profile.suggestion.answer }}{% else %}{% endif %}</div></div>
+  </div>
+</div>
+{% endif %}
+
+{% when 'Survey' %}
+
+{% if page_profile.survey.content.size > 0 %}
+{{ page_profile.survey.content }}
+{% endif %}
+
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Take the survey</a>
+
+{% when 'Unsubscribe' %}
+
+<p>
+
+  {% when 'Volunteer Signup' %}
+
+  {% if page_profile.volunteer_signup.content.size > 0 %}
+  {{ page_profile.volunteer_signup.content }}
+  {% endif %}
+
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Become a volunteer</a>
+
+{% when 'Vote Pledge' %}
+
+{% if page_profile.vote_pledge.has_yes_goal? %}
+{% assign thermo_width = 50 %}
+
+<div class="clearfix padtopmore">
+  <div class="progress" style="width: {{ thermo_width }}%;">
+    <div class="bar bar-success" style="width: {{ page_profile.vote_pledge.percent_of_yes_goal | times:100 }}%;">
+      {% if page_profile.vote_pledge.yes_votes_count < 2 %}
+      <div class="bar-text">JUST STARTED</div>
+      {% else %}
+      <div class="bar-text">{{ page_profile.vote_pledge.yes_votes_count | number_with_commas }} VOTES FOUND</div>
+      {% endif %}
+     </div>
+   </div>
+
+    <div class="bar-goal">{{ page_profile.vote_pledge.yes_goal | number_with_commas }} votes</div>
+</div>
+
+{% elsif page_profile.vote_pledge.yes_votes_count > 4 %}
+<div class="bar-goal">{{ page_profile.vote_pledge.yes_votes_count | number_with_commas }} votes</div>
+{% endif %}
+
+{% if page_profile.vote_pledge.content.size > 0 %}
+{{ page_profile.vote_pledge.content }}
+{% endif %}
+
+  <a class="button submit-link" href="{{ page_profile.url | recruiter_url recruiter_id:profile.id }}">Pledge your vote</a>
+
+{% when 'Voter Registration' %}
+
+<p>
+
+  {% endcase %}
+
+</div>

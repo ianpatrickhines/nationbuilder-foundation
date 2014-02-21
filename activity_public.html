@@ -1,0 +1,23 @@
+<div class="activity activity-{{ activity.id }}">
+
+	{% block oneliner %}
+		Something happened.
+	{% endblock oneliner %}
+
+	<span class="activity-time">
+		{% if activity.is_private? %}
+			{{ 'lock.gif' | icon }}
+		{% endif %}
+		{{ activity.created_at | time_ago }}
+		{% if activity.type_name == 'Comment' and request.logged_in? and site.has_rule_page? and activity.data.has_rule_violation? == nil %}
+		  <span class="activity-links">&middot; <a href="{{ activity.flag_url }}" class="flag">Flag</a></span>
+		{% endif %}
+	</span>
+
+	<div class="activity-content">
+		{% block activity_content %}
+
+		{% endblock %}
+	</div>
+
+</div>

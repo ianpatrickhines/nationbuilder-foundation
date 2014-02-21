@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+    {% include "breadcrumbs" %}
+    {% include "features" %}
+    {% if page.headline.size > 0 %}
+    <div class="headline">
+
+      <h2>{{ page.headline }}</h2>
+      {% if page.has_author? %}
+  {% include "page_byline" %}
+  {% endif %}
+    </div>
+    {% endif %}
+
+{% if page.suggestion.has_image? %}
+    <div class="padtop">
+      <img src="{{ page.suggestion.image_url }}" width="600" border="0" />
+    </div>
+    {% endif %}
+    <div id="content">
+      <div id="intro" class="intro">
+        {% if page.suggestion.content.size > 0 %}
+    {{ page.suggestion.content }}
+    {% else %}
+    {% endif %}
+    
+    {% if page.suggestion.is_answered? %}
+        <div class="row padtopmore">
+          <div class="columns">
+            <div class="answer clearfix">
+              <div> <strong>Official response from {{ page.suggestion.answer_author.published_name_linked }}
+              {% if page.suggestion.is_answer_type? %}
+              {{ page.suggestion.answer_type_html }}
+              {% endif %}</strong> 
+              </div> <i class="icon-up-dir" /></i>
+            <div class="answer-wrap">
+              {% if page.suggestion.answer.size > 0 %}{{ page.suggestion.answer }}{% else %}
+              <p></p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% if page.tags_count > 0 %}
+    <div id="page-tags" class="page-tags">{% include "page_tags" with page %}</div>
+    {% endif %}
+    <div class="like-page"> <strong>Do you like this suggestion?</strong>
+      {% include "like_page" %}
+    </div>
+    {% if page.show_stream? %}
+{% include "page_stream_for_suggestions" %}
+{% endif %}
+  </div>
+</div>
+</div>

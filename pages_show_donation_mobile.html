@@ -1,0 +1,318 @@
+<div class="padcontainer">
+
+
+
+{% if page.show_stream? %}
+	{% if page.public_activities_count > 0 or page.is_commentable? %}
+		<div class="content_container_top">
+	{% else %}
+		<div class="content_container">
+	{% endif %}
+	{% else %}
+		<div class="content_container">
+{% endif %}
+
+{% if page.headline.size > 0 %}
+	<div id="headline">
+	  <h2>{{ page.headline }}</h2>
+	</div>
+{% endif %}
+
+<div id="content">
+	
+	{% if page.donation.content.size > 0 %}
+		 <div id="intro">
+			{{ page.donation.content }}
+		</div>
+	{% endif %}
+
+	{% if page.donation.show_recent_donor? %}
+	  {% if page.most_recent_donation %}
+		
+	      <p><b>Who's donating:</b>
+	      <a href="{{ page.most_recent_donation.signup.profile_url }}">{{ page.most_recent_donation.signup.published_name_linked }}</a> from {{ page.most_recent_donation.signup.address.location }} donated.  Thank you!</p>
+	  {% endif %}
+	{% endif %}
+
+	{% assign thermo_width = 200 %}
+
+	{% if page.donation.has_amount_goal? %}
+	    <div class="thermo_donate_container">
+	      <div class="padbottomless">
+	          <div class="thermometer_progress_text" style="width: {{ thermo_width }}px;">
+	            {% if page.donations_count < 1 %}
+	              JUST STARTED
+	            {% else %}
+	              {{ page.donations_amount_format }} raised
+	            {% endif %}
+	          </div>
+	          <div align="left" class="thermometer_background" style="width: {{ thermo_width }}px;">
+	            <div class="thermometer_progress" style="width: {{ page.donation.percent_of_amount_goal | times:thermo_width }}px;"></div>
+	          </div>
+	      </div>
+	    </div>
+
+	    <div class="horizontalgoal">GOAL: {{ page.donation.amount_goal_format }}</div>
+
+	{% elsif page.donation.has_donor_goal? %}
+
+	    <div class="thermo_donate_container">
+	      <div class="padbottomless">
+	        <div class="thermometer_progress_text" style="width: {{ thermo_width }}px;">
+	          {% if page.donations_count < 2 %}
+	            JUST STARTED
+	          {% else %}
+	            {{ page.donations_count }} donors
+	          {% endif %}
+	        </div>
+	        <div align="left" class="thermometer_background" style="width: {{ thermo_width }}px;">
+	          <div class="thermometer_progress" style="width: {{ page.donation.percent_of_donor_goal | times:thermo_width }}px;"></div>
+	        </div>
+	      </div>
+	    </div>
+
+	   <div class="horizontalgoal">GOAL: {{ page.donation.donor_goal }} DONORS</div>
+  
+	{% endif %}
+
+	{% form_for donation autocomplete:off %}
+
+	  <div class="form_wrap_twocol">
+		<div class="form">
+
+	    <div class="form_errors">
+		
+				{% error_messages_for donation %}
+				
+			</div>			
+		
+			{% if page.donation.has_merchant_account? == false %}
+					<p><span class="red"><b>No bank account:</b> This page will not work until you add a bank account</span></p>
+			{% elsif page.donation.merchant_account.is_test_mode? %}
+					<p><span class="red"><b>Testing mode:</b> Transactions will not be processed. Use your regular credit card to test, you will not actually be charged.</span></p>
+			{% endif %}
+		
+			<table cellpadding="0" cellspacing="0">
+				<tr height="10"></tr>
+				<tr>
+					<td><label for="donation_first_name">First Name</label><br>{% text_field "first_name", class:"text" %}</td>
+				</tr>
+				<tr height="10"></tr>
+				<tr>
+					<td><label for="donation_last_name">Last Name</label><br>{% text_field "last_name", class:"text" %}</td>
+				</tr>
+				<tr height="10"></tr>
+				<tr>
+					<td><label for="donation_country">Country</label><br>{% collection_select "billing_address.country_code", page.donation.countries, "code", "name", class:"select" %}</td>
+				</tr>
+				<tr height="10"></tr>
+					<tr>
+						<td><label for="donation_address1">Address</label>
+							<br/>{% text_field "billing_address.address1", class:"text" %}
+							<br/>{% text_field "billing_address.address2", class:"text" %}
+							<br/>{% text_field "billing_address.address3", class:"text not_us_or_canada" %}</td>
+					</tr>
+					<tr height="10"></tr>
+						<tr>
+							<td><label for="donation_city">City</label><br>{% text_field "billing_address.city", class:"text" %}</td>
+						</tr>
+					<tr height="10"></tr>
+						<tr>
+							<td class="us_or_canada"><label for="donation_state">State</label><br>{% text_field "billing_address.state", class:"text" %}</td>
+						</tr>
+					<tr height="10"></tr>
+						<tr>
+							<td><label for="donation_zip">Postal code</label><br>{% text_field "billing_address.zip", class:"text" %}</td>
+						</tr>
+					<tr height="10"></tr>
+						<tr>
+							<td><label for="donation_email">Email</label><br>{% email_field "email", class:"text", type:"email" %}</td>
+						</tr>
+					<tr height="10"></tr>
+						<tr>
+							<td><label for="donation_phone">Phone</label><br>{% text_field "billing_address.phone_number", class:"text" %}</td>
+						</tr>
+					<tr height="10"></tr>
+						<tr>
+							<td>{% check_box "email_opt_in" %} Send me email updates</td>
+						</tr>			
+
+			    {% if page.donation.merchant_account.is_employer_and_occupation_required? %}		
+	  			
+						<tr height="10"></tr>
+	  					<tr>
+	  						<td><label for="donation_employer">Employer</label><br>{% text_field "employer", class:"text" %}</td>
+							</tr>
+						<tr height="10"></tr>
+							<tr>
+	  						<td><label for="donation_occupation">Occupation</label><br>{% text_field "occupation", class:"text" %}</td>
+	  					</tr>
+	
+						{% if page.donation.merchant_account.is_employer_address_required? %}
+						
+							<tr height="10"></tr>
+								<tr>
+									<td><label for="donation_work_address_country">Employer Country</label><br>{% collection_select "work_address.country_code", page.donation.countries, "code", "name", class:"select" %}</td>
+								</tr>
+							<tr height="10"></tr>
+								<tr>
+									<td><label for="donation_work_address_address1">Employer Address</label>
+											<br/>{% text_field "work_address.address1", class:"text" %}
+											<br/>{% text_field "work_address.address2", class:"text" %}
+											<br/>{% text_field "work_address.address3", class:"text work_not_us_or_canada" %}</td>
+								</tr>
+							<tr height="10"></tr>
+								<tr>
+									<td><label for="donation_work_address_city">Employer City</label><br>{% text_field "work_address.city", class:"text" %}</td>
+								</tr>
+							<tr height="10"></tr>
+								<tr>
+									<td class="work_us_or_canada"><label for="donation_work_address_state">State</label><br>{% text_field "work_address.state", class:"text" %}</td>
+								</tr>
+							<tr height="10"></tr>
+									<tr>
+										<td><label for="donation_work_address_zip">Postal code</label><br>{% text_field "work_address.zip", class:"text" %}</td>
+									</tr>
+							
+						{% elsif page.donation.merchant_account.is_employer_city_required? %}
+						
+							<tr height="10"></tr>
+								<tr>
+									<td><label for="donation_work_address_country">Employer Country</label><br>{% collection_select "work_address.country_code", page.donation.countries, "code", "name", class:"select" %}</td>
+								</tr>
+							<tr height="10"></tr>
+								<tr>
+									<td><label for="donation_work_address_city">Employer City</label><br>{% text_field "work_address.city", class:"text" %}</td>
+								</tr>
+								<tr height="10"></tr>
+								<tr>
+									<td class="work_us_or_canada"><label for="donation_work_address_state">State</label><br>{% text_field "work_address.state", class:"text" %}</td>
+								</tr>
+								<tr height="10"></tr>
+									<td><label for="donation_work_address_zip">Postal code</label><br>{% text_field "work_address.zip", class:"text" %}</td>
+								</tr>
+							</table>
+						
+						{% endif %}
+            {% if page.donation.merchant_account.is_corporate_contribution_required? %}
+              <p><label for="donation_is_corporate_contribution">{% check_box "is_corporate_contribution", class:"checkbox" %} This is a contribution from a business.</label></p>
+            {% endif %}
+						<p>
+	  				Law requires we ask for your employer and occupation.  If you don't have an employer or are retired, put N/A, and if you are self-employed put "self-employed" in employer and describe your occupation.</p>
+					{% endif %}
+		
+			    {% if page.donation.merchant_account.is_taxable? %}
+					  <p>Contributions are <i>not</i> tax deductible.</p>
+					{% else %}
+					  <p>Contributions are tax deductible.</p>
+					{% endif %}
+
+				<table cellpadding="0" cellspacing="0">
+					<tr height="10"></tr>
+					<tr>
+						<td><label for="donation_amounts">Amount</label><br/>
+							{% if request.current_order %}
+								{% for item in request.current_order.items %}
+								  {% if item.num_time_periods and item.time_period_type %}
+								    {{ item.quantity }} {{ item.name }} @ {{ item.amount }} - billed automatically every {{ item.num_time_periods }} {{item.time_period_type }} <br/>
+								  {% else %}
+									  {{ item.quantity }} {{ item.name }} @ {{ item.amount }} <br/>
+									{% endif %}
+								{% endfor %}
+								{{ request.current_order.form_amount_options }}
+  						  <a href="{{ page.donation.clear_order_url }}">Clear order</a>								
+							{% else %}
+								{{ page.donation.form_amount_options }}
+							{% endif %}</td>
+						</tr>
+
+          {% if page.donation.has_merchant_account? and page.donation.merchant_account.is_paypal_express? == false %}
+  					<tr height="10"></tr>
+  					<tr>
+  						<td><label for="donation_card_number">Credit card number</label><br>{% text_field "card_number", class:"text" %}</td>
+						</tr>
+						<tr height="10"></tr>
+						<tr>
+  						<td>{{ page.donation.merchant_account.accepted_card_icons }}</td>
+  					</tr>
+  					<tr height="10"></tr>
+  						<tr>
+  							<td><label for="donation_card_expires_on">Expires</label><br>{{ page.donation.form_card_expires_on }}</td>
+							</tr>
+						<tr height="10"></tr>
+							<tr>
+  							<td><label for="donation_card_verification">Security code (on back)</label><br>{% text_field "card_verification", class:"text" %}</td>
+  						</tr>
+					{% endif %}
+	
+		      {% if page.donation.merchant_account.has_contribution_rules? %}
+						<tr height="10"></tr>
+						<tr>
+		  				<td><label for="is_confirmation_text">Contribution rules</label><br/>
+							  {{ page.donation.merchant_account.contribution_rules }}</td>
+						</tr>
+						<tr height="10"></tr>
+						<tr>
+							<td><label for="donation_is_confirmed">{% check_box "is_confirmed", class:"checkbox" %} I confirm that the above statements are true and accurate.</label></td>
+						</tr>
+					{% endif %}
+					
+					{% if page.donation.merchant_account.is_de? %}
+						<tr height="10"></tr>
+						<tr>
+							<td><label for="donation_is_de_confirmed">{% check_box "is_de_confirmed", class:"checkbox" %}
+							I agree to the Democracy Engine <a href="http://www.democracyengine.com/subscriber_tos" target="_new">Terms of Service</a> 
+							and <a href="http://www.democracyengine.com/subscriber_privacy_policy" target="_new">Privacy Policy</a>. You will not receive any emails from them, they just deliver your donation to us.
+						</label></td>
+					</tr>
+					{% endif %}
+				
+					{% if site.ask_to_publish_to_stream? %}
+					<tr height="10"></tr>
+					<tr>
+						<td><label for="donation_is_private">{% check_box "is_private", class:"checkbox" %} Don't publish my donation on the website.</label></td>
+					</tr>
+					{% endif %}
+			
+					  {% if page.donation.has_merchant_account? and page.donation.merchant_account.is_paypal_express? %}
+  					  <tr height="10"></tr>
+    						<tr>
+    							<td>{% submit_tag "Continue to Paypal", class:"success-button" %}</td>
+    							<td><div id="paypal_cards">{{ page.donation.merchant_account.accepted_card_icons }}</div></td>
+    						</tr>
+					  {% else %}
+							<tr height="10"></tr>
+								<tr>
+					    		<td>{% submit_tag "Process Donation", class:"success-button" %}</td>
+								</tr>
+					  {% endif %}
+							<tr height="10"></tr>
+							<tr>
+					  		<td><div class="form_submit"></div></td>
+							</tr>
+					</table>
+	
+		</div>
+		</div>
+	
+	{% endform_for %}
+	
+</div>	
+
+	{% if page.tags_count > 0 %}
+		<div id="page_tags">
+			{% include "page_tags" with page %}
+		</div>
+	{% endif %}
+	
+	{% if page.show_stream? %}
+		{% if page.public_activities_count > 0 or page.is_commentable? %}
+			</div> <!-- end content_container_top -->	
+		{% endif %}
+	  {% include "page_stream" %}
+		{% else %}
+			</div> <!-- end content_container -->	
+	{% endif %}
+	
+	</div>
+</div>

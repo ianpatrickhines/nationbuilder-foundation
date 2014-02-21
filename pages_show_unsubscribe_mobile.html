@@ -1,0 +1,30 @@
+<div class="padcontainer">
+
+
+
+<div class="content_container">
+
+<div class="one_column padbottom">
+<div class="form_wrap">
+  
+  {% if page.headline.size > 0 %}
+			<h2>{{ page.headline }}</h2>
+  {% endif %}
+
+	<div class="form">
+	{% form_for unsubscribe %}
+
+	  <div class="form_errors">{% error_messages_for unsubscribe %}</div>
+  
+		<p><label for="unsubscribe_email">Email</label><br>{% email_field "email", class:"text", type:"email" %}</p>
+  
+	    {% submit_tag "Unsubscribe", class:"submit-button" %}
+	    <div class="form_submit"></div>
+  
+	{% endform_for %}
+	</div>
+</div>
+</div>
+
+</div>
+</div>

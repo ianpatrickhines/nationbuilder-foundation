@@ -1,0 +1,20 @@
+{% if page.level > 0 %}
+  {% assign home = page.parent %}
+{% else %}  
+  {% assign home = page %}
+{% endif %}
+  
+	<div id="page_nav">
+	<div id="breadcrumbs">
+    <div class="padbottom">
+    <div class="breadcrumbs">
+      <a href="/">Home</a> &rarr; 
+      {% for ancestor in page.ancestors %}
+				{% if ancestor.is_homepage? == false %}
+        <a href="{{ ancestor.url }}">{{ ancestor.name }}</a> &rarr; 
+				{% endif %}
+      {% endfor %}
+    </div>
+    </div>
+	</div>
+	</div>

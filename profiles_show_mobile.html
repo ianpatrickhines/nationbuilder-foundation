@@ -1,0 +1,83 @@
+<div class="padcontainer">
+	<div class="content_container">
+		  
+	<div class="profile_container">
+		<div class="profile_image"><h2>{{ profile.profile_image }}</h2></div>
+	
+		<div class="profile_info">
+			<div class="profile_name">{{ profile.published_name }}
+
+				<div class="profile_badge_pc">
+			  {% if profile.has_membership_level_badge %}
+			    {% if site.has_membership_page? %}
+			      <span class="badge"><a href="{{ site.membership_page.url }}">{{ profile.membership_level_badge }}</a></span>
+			    {% else %}
+			      <span class="badge">{{ profile.membership_level_badge }}</span>
+			    {% endif %}
+			  {% endif %}
+			  <span class="pc">{{ profile.capital_amount_format }}</span>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		
+{% if profile.has_bio? %}
+<div class="padtop">
+{{ profile.bio | link_urls }}
+</div>
+{% endif %}
+
+<div class="padtop">
+{% if profile.has_twitter_info? %}
+<span class="network"><b>t:</b> <a href="{{ profile.twitter_profile_url }}">@{{ profile.twitter_login }}</a>
+{% endif %}
+</span>
+{% if profile.has_facebook_info? %}
+<span class="network"><b>f:</b> <a href="{{ profile.facebook_profile_url }}">/{{ profile.facebook_profile_url_path }}</a></span>
+{% endif %}
+{% if profile.has_website? %}
+<b>w:</b> <a href="{{ profile.website }}">{{ profile.website }}</a>
+{% endif %}
+</div>
+
+<div id="signup_follow_{{ profile.id }}">
+{% include "signup_follow" with profile %}
+</div>
+
+
+
+<div class="padbottom" style="clear: both;"></div>
+  
+  {% if request.logged_in? %}
+  <div id="signup_note_form" class="padbottom">
+    <div class="user_profile_note_container">
+    	{% form_for profile_note %}
+				{% hidden_field_tag "profile_note[signup_id]", profile.id %}
+    		<div class="form">
+
+    			<div class="form_errors">{% error_messages_for profile_note %}</div>
+          {% text_area "content", class:"textarea" %} 
+    			<div class="padtopless">
+    	      {% submit_tag "Post note", class:"submit-button" %}
+    	      <div class="form_submit"></div>
+    			</div>
+
+    		</div>
+
+    	{% endform_for %}
+	  </div>
+	</div>
+  {% endif %}
+  
+	<div id="page_activities" class="activities">
+		{% for activity in profile.activities %}
+			<div class="activity">
+				{{ activity.show }}
+			</div>
+		{% endfor %}
+	</div>
+	
+	{{ profile.activities | paginate }}
+	
+	</div>
+</div>

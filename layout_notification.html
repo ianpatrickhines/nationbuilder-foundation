@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html><head><title></title>
+<style type="text/css">
+body, td, font { font-size: 10pt; }
+td p { margin: 0em; }
+p { margin: 1em 0em; }
+td div p { margin: 1em 0em; }
+</style>
+</head><body marginheight=5 topmargin=5>
+<font face="Arial, Verdana, sans-serif" size=2>
+	
+{% yield %}
+
+<br/><br/>
+-=-=-<br/>
+This email was sent to {{ recipient.email }}.
+{% if page %}
+	To stop receiving updates on this page, <a href="{{ page.unsubscribe_url }}">unfollow here</a>.
+{% endif %}
+<br/>
+{{ settings.official_name }}{% if settings.has_address? %} &middot; {{ settings.address.one_line }} {% endif %}
+<br/><br/>
+Created with <a href="http://nationbuilder.com/">NationBuilder</a>, the essential toolkit for leaders.
+</font>
+</body></html>

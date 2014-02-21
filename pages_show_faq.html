@@ -1,0 +1,66 @@
+
+
+{% if page.headline.size > 0 %}
+<h2 class="headline">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  {% if page.faq.content.size > 0 %}
+  <div id="intro" class="intro">
+    {{ page.faq.content }}
+  </div>
+  {% endif %}
+
+  <ul class="question-list">
+    {% for child in page.children %}
+    {% if child.type_name == 'Question' %}
+    <li><a href="{{ child.url }}">{{ child.headline }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+  <div class="faq faq-{{ page.id }}">
+    {% for child in page.children %}
+    <div class="page-excerpt question-page-{{ child.id }}">
+
+      {% if child.type_name == 'Question' %}
+      <h3><a href="{{ child.url }}">{{ child.headline }}</a></h3>
+
+      <div class="excerpt">
+        {% if child.question.content.size > 0 %}
+        {{ child.question.content }}
+        {% endif %}
+        {% if child.question.answer.size > 0 %}
+        <div class="row padtopmore">
+          <div class="columns">
+            <div class="answer-wrap clearfix">
+              <div class="answer-a">A:</div>
+              <div class="answer">{{ child.question.answer }}</div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if page.tags_count > 0 %}
+  <div id="page-tags" class="page-tags">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+
+  <div class="like-page">
+    <strong>Was this helpful?</strong>
+    {% include "like_page" %}
+  </div>
+
+  {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+
+</div>

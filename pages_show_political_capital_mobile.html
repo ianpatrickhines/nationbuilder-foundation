@@ -1,0 +1,79 @@
+<div class="padcontainer">
+
+
+
+<div class="content_container">
+
+{% if page.headline.size > 0 %}
+	<div id="headline">
+	  <h2>{{ page.headline }}</h2>
+	</div>
+{% endif %}
+
+<div id="content">
+	<div class="padtopmore">
+	<div class="supporter_pc_balance_bg">
+
+	<div style="float: left;">
+  
+	  {{ "fugue-jar-open" | icon }} <b>Balance</b>
+	  <div class="padtopless"><span class="pc" id="pc_big">{{ request.current_signup.capital_amount_format }}</span></div>
+
+	</div>
+
+	<div style="float: right;">
+  
+	  <div style="float: left; padding-right: 15px;">
+	  {{ "fugue-jar--plus" | icon }} <b>Earned</b>
+	  <div class="padtopless"><span class="pc" id="pc_earned_big">{{ request.current_signup.received_capital_amount_format }}</span></div>
+	  </div>
+	  <div style="float: left;">
+	  {{ "fugue-jar--minus" | icon }} <b>Spent</b>
+	  <div class="padtopless"><span class="pc" id="pc_spent_big">{{ request.current_signup.spent_capital_amount_format }}</span></div>
+	  </div>
+
+	  <div style="clear: left;"></div>
+
+	</div>
+	<div style="clear: both;"></div>
+
+	</div>
+	</div>
+
+	{% if request.current_signup.capitals.size > 0 %}
+	  <div class="padtopmore">
+	  <!-- ledger table -->
+	  <table cellpadding="3" cellspacing="0" width="100%">
+	  <tr>
+	  <td align="left" width="60%"><b>Description</b></td>
+	  <td align="left" width="15%"><b>Amount</b></td>
+	  <td align="left" width="20%" style="padding-right: 5px;"><b>Date</b></td>
+	  </tr>
+	  <tr>
+	  <td width="100%" colspan="3"><hr style="margin: 5px 0 10px 0;"></td>
+	  </tr>
+	  {% for capital in request.current_signup.capitals %}
+	    {% if capital.receiver_id == request.current_signup.id %}
+	      <tr class="supporter_ledger_green">
+	      <td valign="top" align="left" class="supporter_ledger_desc" width="60%">{{ capital.activity.show_oneliner_view }}</td>
+	      <td width="15%">{{ capital.amount_format }}</td>
+	      <td width="20%" nowrap style="padding-right: 5px;">{{ capital.created_at | date_to_string }}</td>
+	      </tr>
+	    {% elsif capital.spender_id == request.current_signup.id %}
+	      <tr class="supporter_ledger_red">
+	      <td valign="top" align="left" class="supporter_ledger_desc" width="60%">{{ capital.activity.show_oneliner_view }}</td>
+	      <td width="15%">{{ capital.amount_spent_format }}</td>
+	      <td width="20%" nowrap style="padding-right: 5px;">{{ capital.created_at | date_to_string }}</td>
+	      </tr>
+	    {% endif %}
+	    <tr height="5"></tr>
+	  {% endfor %}
+	  </table>
+	  <!-- ledger table ends --> 
+
+	    {{ request.current_signup.capitals | paginate }}
+	  </div>
+	{% endif %}
+
+</div>
+</div>

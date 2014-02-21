@@ -1,0 +1,35 @@
+{{ recipient.first_name_or_friend }} --
+<br/><br/>
+Thank you for hosting a {{ page.parent.name }} {{ page.parent.calendar.event_name | downcase }}.
+<br/><br/>
+Here's the link where people can RSVP:
+<br/><br/>
+<a href="{{ page_url }}">{{ page_url }}</a>
+<br/><br/>
+Please double check your {{ page.parent.calendar.event_name | downcase }} details below.
+<br/><br/>
+Contact: {{ page.event.contact_name }}<br/>
+Email: {{ page.event.contact_email }}{% if page.event.is_contact_email_private? %} (not published on site){% endif %}<br/>
+Phone: {{ page.event.contact_phone }}{% if page.event.is_contact_phone_private? %} (not published on site){% endif %}<br/>
+<br/>
+
+Name: {{ page.headline }}<br/>
+When: 
+{% if page.event.is_multi_day? %}
+  {{ page.event.local_start_at | event_time }} - {{ page.event.local_end_at | event_time }}
+{% else %}
+  {{ page.event.local_start_at | event_time }}
+{% endif %}<br/>
+Length: {{ page.event.duration_in_words }}<br/>
+Time zone: {{ page.event.time_zone }}<br/>
+Venue name: {{ page.event.venue_name }}<br/>
+Address: {% if page.event.has_venue_address? %}{{ page.event.venue_address.one_line }}{% endif %}<br/>
+Maximum capacity: {% if page.event.maximum_capacity == 0 %}NONE{% else %}{{ page.event.maximum_capacity }}{% endif %}<br/>
+Ticket price: {% if page.event.user_ticket_price_in_cents == 0 %}FREE{% else %}{{ page.event.user_ticket_price_with_currency }}{% endif %}<br/>
+Ticket purchase URL: {{ page.event.user_ticket_purchase_url }}<br/>
+{% if page.event.content.size > 0 %} 
+<br/><br/>
+Description: {{ page.event.content_for_mailing }}
+{% endif %}
+<br/><br/>
+Make changes here: <a href="{{ edit_url }}">{{ edit_url }}</a>

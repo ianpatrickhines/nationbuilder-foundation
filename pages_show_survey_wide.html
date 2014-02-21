@@ -1,0 +1,192 @@
+<div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+    {% include "breadcrumbs" %}
+    {% include "features" %}
+    {% if page.headline.size > 0 %}
+    <h2 class="headline">{{ page.headline }}</h2>
+    {% endif %}
+    <div id="content">
+      {% if page.survey.content.size > 0 %}
+      <div id="intro" class="intro">{{ page.survey.content }}</div>
+      {% endif %}
+      <div class="form-wrap">
+        <div class="form">
+          {% if request.sorta_logged_in? %}
+
+      {% if request.logged_in? == false %}
+          <div class="padbottommore">
+            <h4>
+              Hi {{ request.current_signup.name_or_email }}, will you answer a few questions?
+            </h4>
+
+            <small>
+              If you're not {{ request.current_signup.name_or_email }},
+              <a href="{{ request.current_signup.logout_url }}">click here</a>
+              .
+            </small>
+          </div>
+          {% endif %}
+
+      {% endif %}
+
+      {% if page.survey.is_responded? %}
+
+      {% include "next_survey_question" %}
+
+      {% elsif page.survey.is_next_question? %}
+
+      {% form_for survey_response %}
+          <div class="form-errors">{% error_messages_for survey_response %}</div>
+          {% hidden_field_tag 'survey_question_response[survey_question_id]', page.survey.next_question.id %}
+          <h3 class="headline">{{ page.survey.next_question.content }}</h3>
+          {% if page.survey.next_question.intro.size > 0 %}
+          <div class="row">
+            <div class="columns">{{ page.survey.next_question.intro | new_line_to_br }}</div>
+          </div>
+          {% endif %}
+
+      {% if page.survey.next_question.is_multiple_choice? %}
+      {% for possible_response in page.survey.next_question.possible_responses %}
+          <div class="row">
+            <div class="columns">
+              <label for="survey-choice-{{possible_response.id}}" class="radio">
+                {{possible_response.radio_button }} {{ possible_response.name }}
+              </label>
+            </div>
+          </div>
+          {% endfor %}
+      {% elsif page.survey.next_question.is_yes_no? %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="radio-button-yes" class="radio">{{ page.survey.next_question.yes_radio_button }} Yes</label>
+            </div>
+
+          </div>
+          <div class="row">
+
+            <div class="columns">
+              <label for="radio-button-no" class="radio">{{ page.survey.next_question.no_radio_button }} No</label>
+            </div>
+
+          </div>
+          {% elsif page.survey.next_question.is_text? %}
+          <div class="row">
+
+            <div class="columns">{% text_area "content", class:"textarea" %}</div>
+
+          </div>
+          {% endif %}
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+          <div class="row">
+
+            <div class="medium-6 columns">
+              <label for="survey_response_first_name">First Name</label>
+              {% text_field "first_name", class:"text" %}
+            </div>
+            <div class="medium-6 columns">
+              <label for="survey_response_last_name">Last Name</label>
+              {% text_field "last_name", class:"text" %}
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% if request.sorta_logged_in? == false %}
+          <div class="row">
+
+            <div class="medium-6 columns">
+              <label for="survey_response_email">Email</label>
+              {% email_field "email", class:"text" %}
+            </div>
+            {% if site.ask_for_mobiles? %}
+            <div class="medium-6 columns">
+              <label for="survey_response_mobile_number">Mobile phone (optional)</label>
+              {% phone_field "mobile_number", class:"text" %}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="row">
+
+            <div class="medium-6 columns">
+              <label class="checkbox" for="survey_response_email_opt_in">
+                {% check_box "email_opt_in", class:"checkbox" %} Send me email updates
+              </label>
+            </div>
+            {% if site.ask_for_mobiles? %}
+            <div class="medium-6 columns">
+              <label class="checkbox" for="survey_response_mobile_opt_in">
+                {% check_box "mobile_opt_in", class:"checkbox" %} Send me text messages
+              </label>
+            </div>
+            {% endif %}
+          </div>
+          {% endif %}
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+          <div class="row">
+
+            <div class="columns">
+              <label for="survey_response_submitted_address">Address (Street, City, State, Postal code)</label>
+              {% text_field "submitted_address", class:"text" %}
+            </div>
+
+          </div>
+          {% endif %}
+
+      {% if page.survey.is_volunteers? and site.ask_for_volunteers? %}
+      {% if request.sorta_logged_in? == false or request.current_signup.is_volunteer == false %}
+          <div class="row">
+
+            <div class="columns">
+              <label class="checkbox" for="survey_response_is_volunteer">
+                {% check_box "is_volunteer", class:"checkbox" %} I want to volunteer
+              </label>
+            </div>
+
+          </div>
+          {% endif %}
+      {% endif %}
+
+      {% if site.ask_to_publish_to_stream? %}
+          <div class="row">
+
+            <div class="columns">
+              <label class="checkbox" for="survey_response_is_private">
+                {% check_box "is_private", class:"checkbox" %} Don't publish my responses on the website
+              </label>
+            </div>
+
+          </div>
+          {% endif %}
+          <div class="row padtop">
+
+            <div class="columns">
+              {% submit_tag "Next question", class:"submit-button" %}
+              <div class="form-submit"></div>
+            </div>
+
+          </div>
+          {% endform_for %}
+
+    {% else %}
+          <p>
+            <span class="red">This survey has no published questions.</span>
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% if page.tags_count > 0 %}
+    <div class="page-tags">{% include "page_tags" with page %}</div>
+    {% endif %}
+    <div class="like-page"> <strong>Do you like this survey?</strong>
+      {% include "like_page" %}
+    </div>
+    {% if page.show_stream? %}
+{% include "page_stream" %}
+{% endif %}
+  </div>
+</div>

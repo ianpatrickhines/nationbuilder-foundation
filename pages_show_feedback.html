@@ -1,0 +1,125 @@
+
+
+{% if page.headline.size > 0 %}
+<h2 class="headline">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  {% if page.feedback.content.size > 0 %}
+  <div id="intro" class="intro">
+    {{ page.feedback.content }}
+  </div>
+  {% endif %}
+
+  <div class="form-wrap">
+    <div class="form">
+
+      {% if request.sorta_logged_in? %}
+
+      <h4>Hi {{ request.current_signup.name_or_email }}.</h4>
+
+      {% if request.logged_in? == false %}
+      <div class="padtop">
+        If you're not {{ request.current_signup.name_or_email }},
+        <a href="{{ request.current_signup.logout_url }}">click here</a>.
+      </div>
+      {% endif %}
+
+      {% else %}
+
+      <h4>{{ page.feedback.content_name }}</h4>
+
+      {% endif %}
+
+      {% form_for feedback %}
+
+      <div class="form-errors">{% error_messages_for feedback %}</div>
+
+      {% if page.feedback.is_content? %}
+      <div class="row padtopmore">
+        <div class="columns">
+          <label for="feedback_content">{{ page.feedback.content_name }}</label>{% text_area "content", class:"textarea autogrow" %}
+        </div>
+      </div>
+
+      {% if site.ask_to_publish_to_stream? %}
+      <div class="row">
+        <div class="columns">
+          <label class="checkbox" for="feedback_is_private">{% check_box "is_private", class:"checkbox" %} Don't post this publicly</label>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+      <div class="row">
+        <div class="small-6 medium-6 large-6 columns">
+          <label for="feedback_first_name">First Name</label>{% text_field "first_name", class:"text" %}
+        </div>
+        <div class="small-6 medium-6 large-6 columns"><label for="feedback_last_name">Last Name</label>{% text_field "last_name", class:"text" %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %}
+      <div class="row">
+        <div class="medium-6 columns"><label for="feedback_email">Email</label>{% email_field "email", class:"text" %}</div>
+
+        {% if site.ask_for_mobiles? %}
+        <div class="medium-6 columns">
+          <label for="feedback_mobile_number">Mobile phone (optional)</label>{% phone_field "mobile_number", class:"text" %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="row">
+        <div class="medium-6 columns">
+          <label class="checkbox" for="feedback_email_opt_in">{% check_box "email_opt_in", class:"checkbox" %} Send me email updates</label>
+        </div>
+        {% if site.ask_for_mobiles? %}
+        <div class="medium-6 columns">
+          <label class="checkbox" for="feedback_mobile_opt_in">{% check_box "mobile_opt_in", class:"checkbox" %} Send me text messages</label>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+
+      {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+      <div class="row">
+        <div class="columns">
+          <label for="feedback_submitted_address">Address (Street, City, State, Postal code)</label>{% text_field "submitted_address", class:"text" %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if page.feedback.is_volunteers? and site.ask_for_volunteers? %}
+      {% if request.logged_in? == false or request.current_signup.is_volunteer == false %}
+      <div class="row">
+        <div class="columns">
+          <label class="checkbox" for="feedback_is_volunteer">{% check_box "is_volunteer", class:"checkbox" %} I want to volunteer</label>
+        </div>
+      </div>
+      {% endif %}
+      {% endif %}
+
+      {% submit_tag page.feedback.submit_button_name, class:"submit-button" %}
+      <div class="form-submit"></div>
+
+      {% endform_for %}
+
+    </div>
+  </div>
+
+  {% if page.tags_count > 0 %}
+  <div id="page-tags" class="page-tags">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+
+  {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+
+</div>

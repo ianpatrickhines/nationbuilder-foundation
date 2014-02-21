@@ -1,0 +1,37 @@
+{% if page.features_count > 0 %}
+
+{% if page.features.size > 0 %}
+
+{% assign first_feature_height = page.features.first.image_height %}
+{% if page.features.size == 1 %}
+  {% assign first_feature_height = 'none' %}
+{% endif %}
+<div id="page-features" class="page-features" style="max-height: {{ first_feature_height  }}px">
+  {% if page.features.size == 1 %}
+  
+  {% for feature in page.features %}  
+  <a href="{{ feature.page.url }}" class="single-feature">
+    <img data-interchange="[{{ feature.large_image_url }}, (small)], [{{ feature.image_url }}, (medium)], [{{ feature.image_url }}, (large)]" />
+  </a>  
+  {% endfor %}
+  
+  {% else %}
+
+  <ul class="featured-content-slider" data-orbit>
+    {% for feature in page.features %}
+    <li>
+      <a href="{{ feature.page.url }}" class="single-feature">
+      <img data-interchange="[{{ feature.large_image_url }}, (small)], [{{ feature.image_url }}, (medium)], [{{ feature.image_url }}, (large)]" />
+      {% if feature.headline.size > 0 %}
+      <div class="orbit-caption"><a href="{{ feature.page.url }}">{{ feature.headline }}</a></div>
+      {% endif %}
+    </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% endif %}
+</div>
+{% endif %}
+
+{% endif %}

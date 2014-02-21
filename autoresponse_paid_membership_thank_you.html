@@ -1,0 +1,20 @@
+{{ recipient.first_name_or_friend }} --
+<br /><br />
+Thank you for becoming a member of {{ site.name }}.
+<br /><br />
+Your membership level is: {{ paid_membership_page_level.membership_level_name }}.
+<br /><br />
+Your membership expires on: {{ recipient.membership_expires_at | date_to_long_string }}.
+<br/><br/>
+
+{% if paid_membership_page_level.auto_renew? %}
+  Your membership will renew automatically.
+  <br/><br/>
+{% endif %}
+
+{{ broadcaster.name }}<br/>
+{{ site.full_url }}<br/>
+<br/><br/>
+<b>{{ page.headline }}</b>
+<br/><br/>
+Become a member here: <a href="{{ page.full_url_with_recruiter }}">{{ page.full_url_with_recruiter }}</a>

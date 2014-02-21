@@ -1,0 +1,10 @@
+{{ recipient.first_name_or_friend }} --
+<br /><br />
+You have violated a rule. You have lost {{ setting.capital_plural_name }} and will be banned from participation after 3 rule violations. We hope that you will take the time to review the rules page so that you can avoid further infractions, as we would like for you to remain a member of our community. Thank you for your understanding.
+<br/><br/>
+{% if site.has_rule_page? %}
+<a href="{{ site.rule_page.full_url }}">{{ site.rule_page.full_url }}</a>
+<br/><br/>
+{% endif %}
+{{ broadcaster.name }}<br/>
+<a href="{{ site.full_url }}">{{ site.full_url }}</a><br/>

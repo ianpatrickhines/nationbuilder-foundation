@@ -1,0 +1,88 @@
+{% if page.public_activities_count > 0 or page.is_commentable? %}
+<div id="stream">
+  <hr/>
+  <div id="comment" class="comment">
+
+    {% if page.public_activities_count == 1 %}
+    <a name="addreaction"></a>
+
+    <h3>Showing 1 reaction</h3>
+    {% elsif page.public_activities_count > 1 %}
+    <a name="addreaction"></a>
+
+    <h3>Showing {{ page.public_activities_count }} reactions</h3>
+    {% elsif page.is_commentable? %}
+    <a name="addreaction"></a>
+
+    <h3>Be the first to comment</h3>
+    {% endif %}
+
+
+    <div class="page-follow page-follow-{{ page.id }}">
+      {% include "page_follow" %}
+    </div>
+
+    <div class="reaction-wrap">
+      {% if page.is_commentable? and page.type_name != 'Petition' and page.type_name != 'Endorsement' %}
+      <div class="form-wrap">
+        <div class="form">
+
+          {% form_for comment %}
+
+          {% if page.type_name == 'Suggestion' %}
+          {% if page.suggestion.suggestion_box_tag_names.size > 0 %}
+          <div class="row">
+            <div class="columns">
+              <div class="tag-page">
+                <strong>How would you tag this suggestion?</strong>
+                {% include "suggestion_tag_list" %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endif %}
+
+
+          <div class="form-errors">{% error_messages_for comment %}</div>
+          {% text_area "content", class:"textarea autogrow" %}
+          <input type="hidden" class="text" id="pending_object_id" name="pending_object_id" value="{{ request.pending_object_id }}"/>
+          {% if request.logged_in? %}
+            {% submit_tag "Post your comment", class:"submit-button" %}
+          {% else %}
+            {% submit_tag "Post your comment", class:"submit-button hide" %}
+          {% endif %}
+
+          {% if request.logged_in? and site.has_rule_page? %}
+          <div class="review-rules"><a href="{{ site.rule_page.url }}">Review the site rules</a></div>
+          {% endif %}
+          <div class="form-submit"></div>
+          {% endform_for %}
+        </div>
+        {% unless request.logged_in? %}
+        <div class="user-session-form-container">
+
+          {% include "user_session_form" %}
+
+        </div>
+        {% endunless %}
+      </div>
+
+      {% endif %}
+
+      <div id="reactions" class="content-list">
+        <ul id="page-stream" class="activities">
+          {% for activity in page.activities %}
+          <li class="activity clearfix">
+            <div class="stream-pic">{{ activity.signup.profile_image }}</div>
+            {{ activity.show_page_view }}
+          </li>
+          {% endfor %}
+        </ul>
+        {{ page.activities | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endif %}

@@ -1,0 +1,397 @@
+
+
+{% if page.headline.size > 0 %}
+<div id="headline">
+  <h2>{{ page.headline }}</h2>
+  {% if page.has_author? %}
+  {% include "page_byline" %}
+  {% endif %}
+</div>
+{% endif %}
+
+<div id="content">
+  {% if page.event.content.size > 0 %}
+  <div id="intro" class="intro">
+    {{ page.event.content }}
+  </div>
+  {% endif %}
+
+  <div class="event-detail">
+    <div class="subhead">WHEN</div>
+    <div class="subtext">
+      {% if page.event.is_multi_day? %}
+      {{ page.event.local_start_at | event_time }} - {{ page.event.local_end_at | event_date }}
+      {{ page.event.local_start_at | event_time }} - {{ page.event.local_end_at | event_date }}
+      {% else %}
+      {{ page.event.local_start_at | event_time }} - {{ page.event.local_end_at | event_just_time }}
+      {% endif %}
+    </div>
+  </div>
+
+  {% if page.event.has_venue? %}
+
+  <div class="event-detail">
+    <div class="subhead">WHERE</div>
+    <div class="subtext">
+      {% if page.event.venue_name.size > 0 %}
+      {{ page.event.venue_name }}<br/>
+      {% endif %}
+      {% for line in page.event.venue_address.multi_line %}
+      {{ line }}<br/>
+      {% endfor %}
+      {% if page.event.has_venue_address? %}
+      <a href="{{ page.event.venue_address.google_map_link }}">Google map and directions</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if page.event.has_contact? %}
+
+  <div class="event-detail">
+    <div class="subhead">CONTACT</div>
+    <div class="subtext">
+      {{ page.event.contact_name }}
+      {% if page.event.has_public_contact_email? %}
+      &middot; {{ page.event.contact_email | enkode_email }}
+      {% endif %}
+      {% if page.event.has_public_contact_phone_number? %}
+      &middot; {{ page.event.contact_phone_number }}
+      {% endif %}
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if page.event.is_ticket_required? %}
+
+  {% if page.event.show_guests? and page.event.rsvps_count > 0 %}
+  <div class="event-detail">
+    <div class="subhead">{{ page.event.rsvps_count | number_with_commas }} RSVP{% if page.event.rsvps_count > 1 %}S{% endif %}</div>
+    <div class="subtext">
+      {% for rsvp in page.event.rsvps %}
+      {{ rsvp.signup.smaller_profile_image }}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="padtop padbottom">
+
+    {% if page.event.is_maximum_capacity? %}
+
+    <div class="padtop">Sorry, this event is sold out.</div>
+
+    {% else %}
+
+    {% form_for order %}
+
+    <div class="form-wrap">
+      <div class="form">
+
+          <h4>Will you come?</h4>
+
+        {% for ticket_level in page.event.ticket_levels %}
+
+        	<div class="padtopmore"><strong>{{ ticket_level.form_quantity }}</strong></div>
+          {% if ticket_level.description.size > 0 %}
+          {{ ticket_level.description }}
+          {% endif %}
+
+        {% endfor %}
+
+        {% if page.event.is_hosts? or request.current_recruiter %}
+        <label for="order_recruiter_id" class="padtopmore">Did a host refer you?</label>
+        <select name="order[recruiter_id]">
+          <option value="">No</option>
+          {% if request.current_recruiter %}
+          <option value="{{ request.current_recruiter.id }}" selected>{{ request.current_recruiter.published_name }}</option>
+          {% endif %}
+          {% for host in page.event.hosts %}
+          <option value="{{ host.signup_id }}">{{ host.name }}</option>
+          {% endfor %}
+        </select>
+        {% endif %}
+
+        <div class="padtopmore">
+          {% submit_tag "Purchase tickets", class:"submit-button" %}
+          <div class="form-submit"></div>
+        </div>
+
+      </div>
+    </div>
+
+    {% endform_for %}
+
+    {% endif %}
+
+  </div>
+
+  {% else %}
+
+  {% if page.event.is_user_ticket_required? %}
+
+  <div class="event-detail">
+    <div class="subhead">TICKETS</div>
+    <div class="subtext">
+      {{ page.event.user_ticket_price_with_currency }}
+      {% if page.event.has_user_ticket_purchase_url? %}
+      &middot; <a href="{{ page.event.user_ticket_purchase_url }}">Purchase tickets</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% elsif page.event.has_user_ticket_purchase_url? %}
+
+  <div class="event-detail">
+    <div class="subhead">TICKETS</div>
+    <div class="subtext">
+      <a href="{{ page.event.user_ticket_purchase_url }}">FREE</a>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if page.event.show_guests? and page.event.rsvps_count > 0 %}
+  <div class="event-detail">
+  <div class="subhead">{{ page.event.rsvps_count | number_with_commas }} RSVP{% if page.event.rsvps_count > 1 %}S{% endif %}</div>
+  <div class="subtext">
+    {% for rsvp in page.event.rsvps %}
+    {{ rsvp.signup.smaller_profile_image }}
+    {% endfor %}
+  </div>
+  </div>
+  {% endif %}
+
+  {% if page.event.is_rsvped? %}
+
+  <div class="padtop">
+
+    {% form_for event_rsvp %}
+
+    <div class="form-wrap">
+      <div class="form">
+
+          {% if page.event.current_rsvp.is_canceled? %}
+          <h3>Your RSVP was canceled.</h3>
+          {% else %}
+          <h3>Thank you for rsvp'ing.  We'll see you there!</h3>
+          {% endif %}
+
+        {% if request.sorta_logged_in? and request.logged_in? == false %}
+
+          If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here</a>.
+
+        {% endif %}
+
+        {% if page.event.current_rsvp.is_canceled? %}
+
+          <a href="{{ page.event.uncancel_rsvp_url }}">Oops, nevermind!  I really do want to come.</a>
+
+        {% else %}
+
+        {% if page.event.allow_guests? %}
+
+        <div class="form-errors">{% error_messages_for event_rsvp %}</div>
+
+        {% if page.event.allow_guests? and page.event.current_rsvp.is_canceled? == false %}
+
+        <label for="event_rsvp_guests_count" class="padtop">Change the number of guests you're bringing</label>
+        	{% text_field "guests_count", class:"text" %}
+
+        {% endif %}
+
+        <label for="event_rsvp_is_canceled" class="checkbox padtop">{% check_box "is_canceled", class:"checkbox" %} Cancel, I'm not coming. </label>
+
+        <div class="padtopmore">
+          {% submit_tag "Update RSVP", class:"submit-button" %}
+          <div class="form-submit"></div>
+        </div>
+
+        {% else %}
+
+        <div class="padtop">
+          {{ page.event.current_rsvp | delete_link message: "Cancel RSVP" class_name: "button destroy-link" }}
+        </div>
+
+        {% endif %}
+
+        {% endif %}
+
+      </div>
+    </div>
+
+    {% endform_for %}
+  </div>
+
+  {% elsif page.event.accept_rsvps?  %}
+
+  <div class="padtop padbottom">
+
+    {% if page.event.is_maximum_capacity? %}
+
+    <div class="padbottom"><span class="warning">Sorry, this event is sold out.</span></div>
+
+    {% else %}
+
+    {% form_for event_rsvp %}
+
+    <div class="form-wrap">
+      <div class="form">
+
+        {% if request.sorta_logged_in? %}
+
+          <h4>Hi {{ request.current_signup.name_or_email }}, will you come?</h4>
+
+        {% if request.logged_in? == false %}
+        <div class="padtop text-content">
+          If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">click here</a>.
+        </div>
+        {% endif %}
+
+        {% else %}
+
+          <h4>Will you come?</h4>
+
+        {% endif %}
+
+        <div class="padtopmore"></div>
+        <div class="form-errors">{% error_messages_for event_rsvp %}</div>
+
+          {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+          <div class="row">
+            <div class="medium-6 columns"><label for="event_rsvp_first_name">First Name</label>{% text_field "first_name", class:"text" %}</div>
+            <div class="medium-6 columns"><label for="event_rsvp_last_name">Last Name</label>{% text_field "last_name", class:"text" %}</div>
+          </div>
+          {% endif %}
+
+          <div class="row">
+          {% if request.sorta_logged_in? == false %}
+          <div class="medium-6 columns"><label for="event_rsvp_email">Email</label>{% email_field "email", class:"text" %}</div>
+          {% if site.ask_for_mobiles? %}
+          <div class="medium-6 columns"><label for="event_rsvp_mobile_number">Mobile phone (optional)</label>{% phone_field "mobile_number", class:"text" %}</div>
+          {% endif %}
+          </div>
+
+          <div class="row">
+          <div class="medium-6 columns"><label for="event_rsvp_email_opt_in" class="checkbox">{% check_box "email_opt_in", class:"checkbox" %} Send me email updates</label></div>
+          {% if site.ask_for_mobiles? %}
+          <div class="medium-6 columns">
+          <label for="event_rsvp_mobile_opt_in" class="checkbox">{% check_box "mobile_opt_in", class:"checkbox" %} Send me text messages</label></div>
+          {% endif %}
+          {% endif %}
+          </div>
+
+        {% if page.event.is_phone? %}
+        <div class="row">
+          <div class="columns"><label for="event_rsvp_phone_number">Phone</label>{% phone_field "phone_number", class:"text" %}</div>
+        </div>
+        {% endif %}
+        {% if page.event.is_address? %}
+        <div class="row">
+          <div class="columns"><label for="event_rsvp_submitted_address">Address (Street, City, State, Postal code)</label>{% text_field "submitted_address", class:"text" %}</div>
+        </div>
+        {% endif %}
+        {% if page.event.allow_guests? %}
+        <div class="row">
+          <div class="medium-6 columns"><label for="event_rsvp_guests_count">How many other people are you bringing?</label>{% text_field "guests_count", class:"text" %}</div>
+        </div>
+        {% endif %}
+        {% if page.event.is_hosts? or request.current_recruiter %}
+        <div class="row">
+          <div class="medium-6 columns"><label for="event_rsvp_recruiter_id">Did a host refer you?</label>
+          <select name="event_rsvp[recruiter_id]">
+            <option value="">No</option>
+            {% if request.current_recruiter %}
+            <option value="{{ request.current_recruiter.id }}" selected>{{ request.current_recruiter.published_name }}</option>
+            {% endif %}
+            {% for host in page.event.hosts %}
+            <option value="{{ host.signup_id }}">{{ host.name }}</option>
+            {% endfor %}
+          </select></div>
+        </div>
+        {% endif %}
+        {% if page.event.is_volunteers? and site.ask_for_volunteers? %}
+        {% if request.logged_in? == false or request.current_signup.is_volunteer == false %}
+        <div class="row">
+          <div class="medium-6 columns"><label for="event_rsvp_is_volunteer" class="checkbox">{% check_box "is_volunteer", class:"checkbox" %} I want to volunteer</label></div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% if page.event.is_shifts? and page.event.shifts.size > 0 %}
+        <div class="row">
+          <div class="medium-6 columns">Choose shifts</div>
+        </div>
+        <div class="row">
+          <div class="columns">
+        {% for day in page.event.shifts_grouped_by_day %}
+
+          {{ day.last.first.display_date }}:
+          {% for shift in day.last %}
+            <label class="checkbox">{% check_box_tag 'event_rsvp[shift_ids][]', shift.id, collection:page.event.shift_ids, member:shift.id, class:"checkbox" %} {{ shift.display_time }}
+            {% if page.event.show_guests == true %}
+            ({{ shift.rsvps_count_with_goal }})
+            {% endif %}</label>
+          {% endfor %}
+
+        {% endfor %}
+        {% hidden_field_tag 'event_rsvp[shift_ids][]', '' %}
+        </div>
+        </div>
+        {% endif %}
+
+        {% if site.ask_to_publish_to_stream? %}
+        <div class="row">
+          <div class="medium-6 columns"><label for="event_rsvp_is_private" class="checkbox">{% check_box "is_private", class:"checkbox" %} Don't publish my RSVP on the website</label></div>
+        </div>
+        {% endif %}
+        {% if page.event.has_facebook? %}
+        <div class="row">
+          <div class="medium-6 columns"><label for="event_rsvp_post_to_facebook" class="checkbox">{% check_box "post_to_facebook", class:"checkbox" %} Also RSVP on <a href="{{ page.event.facebook_url }}">Facebook</a> </label></div>
+        </div>
+        {% endif %}
+
+        <div class="padtop">
+          {% submit_tag "Send RSVP", class:"submit-button" %}
+          <div class="form-submit"></div>
+        </div>
+
+        {% if page.event.is_user_ticket_required? %}
+          <div class="padtopmore">
+            NOTE: After RSVP, you will still need to purchase a ticket
+            {% if page.event.has_user_ticket_purchase_url? %}
+            <a href="{{ page.event.user_ticket_purchase_url }}">here</a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        </div>
+      </div>
+
+    {% endform_for %}
+
+    {% if page.text_keyword_instructions.size > 0 %}
+    <div class="padbottom padtopmore">
+      <i class="icon-phone-squared"></i>or {{ page.text_keyword_instructions }}
+    </div>
+    {% endif %}
+
+    {% endif %}
+
+  </div>
+
+  {% endif %}
+
+  {% endif %}
+
+  {% if page.tags_count > 0 %}
+  <div id="page-tags" class="page-tags">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+
+  {% if page.show_stream? %}
+  {% include "page_stream" %}
+  {% endif %}
+</div>

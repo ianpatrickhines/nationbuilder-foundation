@@ -1,0 +1,46 @@
+{% form_for vote_pledge %}  
+
+  <h4>
+    No, I will not
+    {% if vote_pledge.could_vote? %}
+    vote for
+    {% else %}
+    support
+    {% endif %}
+    {{ site.candidate_first_name_or_site_name }}.
+  </h4>
+{% if page.vote_pledge.no_content.size > 0 %}
+{{ page.vote_pledge.no_content }}
+{% endif %}
+
+{% hidden_field_tag "vote_pledge[will_vote_status]", "-1" %}
+
+<div class="form-errors">{% error_messages_for vote_pledge %}</div>
+
+<div class="row">
+  <div class="columns"><label class="checkbox" for="vote_pledge_do_not_contact">{% check_box "do_not_contact", class:"checkbox" %} Do not contact me</label></div>
+</div>
+
+{% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+<div class="row">
+  <div class="small-6 medium-6 large-6 columns"><label for="vote_pledge_first_name">First Name</label>{% text_field "first_name", class:"text" %}</div>
+  <div class="small-6 medium-6 large-6 columns"><label for="vote_pledge_last_name">Last Name</label>{% text_field "last_name", class:"text" %}</div>
+</div>
+{% endif %}
+
+{% if request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %}
+<div class="row">
+  <div class="columns"><label for="vote_pledge_email">Email</label>{% email_field "email", class:"text" %}</div>
+</div>
+{% endif %}
+
+{% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+<div class="row">
+  <div class="columns"><label for="vote_pledge_submitted_address">Address (Street, City, Postal code) -- to see if you can vote</label>{% text_field "submitted_address", class:"text" %}</div>
+</div>
+{% endif %}
+
+{% submit_tag "Save settings", class:"submit-button" %}
+<div class="form-submit"></div>
+
+{% endform_for %}
