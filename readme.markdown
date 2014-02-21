@@ -15,3 +15,15 @@ To see a live demo of the theme, check out <http://foundation.ianpatrickhines.co
 The Foundation theme framework is Copyright (c) 2014 ZURB, inc. and subject to the [MIT License](https://github.com/zurb/foundation/blob/master/LICENSE). 
 
 This repository — the Foundation NationBuilder theme — is Copyright (c) 2014 Ian Patrick Hines and is also subject to the [MIT License](https://github.com/ianpatrickhines/nationbuilder-foundation/blob/master/LICENSE.markdown). 
+
+## How to use this theme
+
+**Note:** *This theme is not designed to be used “as-is.” It has been left intentionally raw and unstyled, albeit functional.*
+
+You’ll find that the overall structure of this theme has been relatively unchanged from NationBuilder’s Aware theme. What has changed is its grid, which has been converted to Foundation, its top navigation, and its stylesheets. All files are in a single directory (as required by NationBuilder).
+
+[theme.scss](https://github.com/ianpatrickhines/nationbuilder-foundation/blob/master/theme.scss) includes Foundation’s smart CSS defaults. You can override these by [customizing your own build of Foundation](http://foundation.zurb.com/develop/download.html) and replacing the contents of *theme.scss* with your own CSS.
+
+[tablet-and-desktop.scss](https://github.com/ianpatrickhines/nationbuilder-foundation/blob/master/tablet-and-desktop.scss) includes a variety of styles designed to force Foundation’s styles on native NationBuilder HTML elements. NationBuilder’s liquid markup outputs some code snippets that cannot be modified to conform with Foundation’s syntax (pagination, for example), so additional styles were required to create aesthetic uniformity. 
+
+To use this theme on your nation, download this repository to your local drive, create a new NationBuilder theme (do not clone your existing theme… create a new, blank theme), and upload every file in the directory to that theme. Publish the theme, and you're in business.
