@@ -22,7 +22,7 @@ This repository — the Foundation NationBuilder theme — is Copyright (c) 2014
 
 You’ll find that the overall structure of this theme has been relatively unchanged from NationBuilder’s Aware theme. What has changed is its grid, which has been converted to Foundation, its top navigation, and its stylesheets. All files are in a single directory (as required by NationBuilder).
 
-[theme.scss](https://github.com/ianpatrickhines/nationbuilder-foundation/blob/master/theme.scss) includes Foundation’s smart CSS defaults. You can override these by [customizing your own build of Foundation](http://foundation.zurb.com/develop/download.html) and replacing the contents of *theme.scss* with your own CSS.
+[foundation.scss](https://github.com/ianpatrickhines/nationbuilder-foundation/blob/master/foundation.scss) includes Foundation’s Sass files, all of which are included in the theme and can be edited individually.
 
 [tablet-and-desktop.scss](https://github.com/ianpatrickhines/nationbuilder-foundation/blob/master/tablet-and-desktop.scss) includes a variety of styles designed to force Foundation’s styles on native NationBuilder HTML elements. NationBuilder’s liquid markup outputs some code snippets that cannot be modified to conform with Foundation’s syntax (pagination, for example), so additional styles were required to create aesthetic uniformity. 
 
