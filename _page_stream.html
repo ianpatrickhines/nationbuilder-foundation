@@ -44,7 +44,7 @@
 
 
           <div class="form-errors">{% error_messages_for comment %}</div>
-          {% text_area "content", class:"textarea autogrow" %}
+          {% text_area "content", class:"textarea autogrow", placeholder:"Join the discussion…" %}
           <input type="hidden" class="text" id="pending_object_id" name="pending_object_id" value="{{ request.pending_object_id }}"/>
           {% if request.logged_in? %}
             {% submit_tag "Post your comment", class:"submit-button" %}
@@ -73,7 +73,9 @@
         <ul id="page-stream" class="activities">
           {% for activity in page.activities %}
           <li class="activity clearfix">
-            <div class="stream-pic">{{ activity.signup.profile_image }}</div>
+            <div class="stream-pic">
+              {% if activity.signup.has_twitter_info? %}<a href="{{ activity.signup.twitter_profile_url }}">{% elsif activity.signup.has_facebook_info? %}<a href="{{ activity.signup.facebook_profile_url }}">{% else %}{% endif %}<img src="{{ activity.signup.profile_image_url }}" border="0" width="72" height="72" class="profile_image" original-title="{{ activity.signup.published_name }}">{% if activity.signup.has_twitter_info? %}</a>{% elsif activity.signup.has_facebook_info? %}</a>{% else %}{% endif %}
+            </div>        
             {{ activity.show_page_view }}
           </li>
           {% endfor %}

@@ -1,0 +1,66 @@
+$clouds: #ecf0f1;
+
+ul.activities {
+	margin: 3em 0 15px 0 !important;
+	list-style: none;
+}
+
+.activities li .stream-pic {
+	float: left;
+	width: 72px;
+	height: 72px;
+}
+
+.activities li .stream-pic a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.profile_image {
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+}
+
+.activities li.activity {
+	margin: 0 0 3em 0;
+	border-top: 1px solid $clouds;
+	padding-top: 3em;
+}
+
+.activities li .activity {
+	margin: 0;
+	padding-left: 100px;
+	word-break: break-word;
+}
+
+.activities li .activity .activity-content {
+	padding-top: 1.9em;
+}
+
+@media only screen and (max-width: 40em) { 
+
+	.activities li .stream-pic {
+		float: left;
+		width: 48px;
+		height: 48px;
+	}
+
+	.activities li .stream-pic a {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.activities li .activity {
+		margin: 0;
+		padding-left: 60px;
+		word-break: break-word;
+	}
+
+	.activities li .activity .activity-content {
+		padding-top: 1.5em;
+	}
+
+} /* max-width 640px, mobile-only styles, use when QAing mobile issues */

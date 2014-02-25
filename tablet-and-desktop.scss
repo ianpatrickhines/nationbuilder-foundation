@@ -1,13 +1,15 @@
-/* ===================================================================================
-   This is the stylesheet where you can override Foundation's default styles, which can 
-   be found in theme.scss. Any styles you add below will override the default stylesheet.
-   =================================================================================== */
+// ===================================================================================
+// This is the stylesheet where you can override Foundation's default styles, which can 
+// be found in theme.scss. Any styles you add below will override the default stylesheet.
+// =================================================================================== */
 
 // Colors
 
 $notice: #ecf0f1;
 $success: #27ae60;
 $error: #e74c3c;
+
+@import "page_stream";
 
 #main {
 	margin-top: 1em;
