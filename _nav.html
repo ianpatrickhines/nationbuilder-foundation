@@ -28,6 +28,14 @@
             {{ request.current_signup.full_name_or_friend }}
           </a>
           <ul class="dropdown">
+            {% if request.current_signup.is_admin? == true %}
+            <li>
+              <a href="/admin">Control Panel</a>
+            </li>
+            <li>
+              <a href="{{ page.admin_edit_url }}">Edit This Page</a>
+            </li>
+            {% endif %}
             {% if site.show_public_profiles? %}
             <li>
               <a href="{{ request.current_signup.profile_url }}">Public Profile</a>
@@ -43,18 +51,18 @@
         </li>
         {% else %}
         <li id="sign-in" class="has-form">
-          <a href="#" class="button" data-reveal-id="login-modal">Sign In</a>
+          <a href="#" class="button" data-reveal-id="login-modal">Sign in</a>
         </li>
         {% endif %}
       </ul>
       <ul class="right">
         {% for child in site.root_nav_pages %}
-        {% if child.leaf? or child.nav_children.size == 0 %}        
+        {% if child.leaf? or child.nav_children.size == 0 %}
         <li {% if child.is_or_is_ancestor_of_current_page? %}class="active"{% endif %}>
           <a href="{{ child.url }}">{{ child.name }}</a>
         </li>
         <li class="divider"></li>
-        {% else %}        
+        {% else %}
         <li class="{% if child.is_or_is_ancestor_of_current_page? %}active {% endif %}has-dropdown">
           <a href="{{ child.url }}">{{ child.name }}</a>
           <ul class="dropdown">
@@ -66,7 +74,7 @@
             <li class="show-parent hide-for-large-up">
               <a href="{{ child.url }}">{{ child.name }}</a>
             </li>
-            {% endif %}            
+            {% endif %}
             {% for child2 in child.nav_children %}
             <li>
               <a href="{{ child2.url }}">{{ child2.name }}</a>
@@ -84,11 +92,11 @@
 {{ content_for_notifications }}
 
 {% if page.donation.has_merchant_account? == false %}
-<span class="red">
+<div data-alert class="alert-box error">
   <div class="row"> <strong>No bank account:</strong>
     This page will not work until you add a bank account
   </div>
-</span>
+</div>
 {% elsif page.donation.merchant_account.is_test_mode? %}
 <div data-alert class="alert-box error">
   <div class="row">
