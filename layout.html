@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ page_title }}</title>
   <link rel="stylesheet" href="foundation.css" />
-  <link rel="stylesheet" href="tablet-and-desktop.css" />  
+  <link rel="stylesheet" href="tablet-and-desktop.css" />
+  <link href="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.css" rel="stylesheet">
   <script src="modernizr.js"></script>
 
   {{ content_for_header }}
@@ -22,12 +23,12 @@
 
   <!-- Main Page Content and Sidebar -->
 
-  <div id="{% if request.is_sidebar? %}columns-2{% else %}columns-1{% endif %}">    
+  <div id="{% if request.is_sidebar? %}columns-2{% else %}columns-1{% endif %}">
       {% if request.is_sidebar? %}
       {% include "columns_2" %}
       {% else %}
       {% include "columns_1" %}
-      {% endif %}    
+      {% endif %}
   </div>
 
   <!-- End Main Content and Sidebar -->
@@ -100,6 +101,7 @@
   {% endif %}
   <script src="foundation.min.js"></script>
   <script>$(document).foundation();</script>
+  <script src="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.js"></script>
   {{ content_for_footer }}
 </body>
 </html>
