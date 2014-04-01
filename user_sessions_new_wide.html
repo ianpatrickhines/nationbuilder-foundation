@@ -46,16 +46,10 @@
         </div>
         <div class="row small-centered">
           {% if request.current_signup.has_facebook_info? %}
-          <a href="{{ request.facebook_connect_url }}" class="button facebook-button">
-            <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">facebook</span>
-            Sign in with Facebook
-          </a>
+          <a href="{{ request.facebook_connect_url }}" class="button facebook expand"><span class="ss-icon ss-social-regular ss-facebook" style="padding-right: 5px; font-size: .8em;"></span>Sign in with Facebook</a>
           {% endif %}
         {% if request.current_signup.has_twitter_info? %}
-          <a href="{{ request.twitter_connect_url }}"  class="button twitter-button">
-            <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">twitter</span>
-            Sign in with Twitter
-          </a>
+          <a href="{{ request.twitter_connect_url }}"  class="button twitter expand"><span class="ss-icon ss-social-regular ss-twitter" style="padding-right: 5px; font-size: .8em;"></span>Sign in with Twitter</a>
           {% endif %}
         </div>
         {% endif %}
@@ -71,16 +65,10 @@
     {% if request.current_signup.has_facebook_info? or request.current_signup.has_twitter_info? %}
         <div class="medium-10 small-centered columns text-center">
           {% if request.current_signup.has_facebook_info? %}
-          <a href="{{ request.facebook_connect_url }}" class="button facebook-button">
-            <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">facebook</span>
-            Sign in with Facebook
-          </a>
+          <a href="{{ request.facebook_connect_url }}" class="button facebook expand"><span class="ss-icon ss-social-regular ss-facebook" style="padding-right: 5px; font-size: .8em;"></span>Sign in with Facebook</a>
           {% endif %}
           {% if request.current_signup.has_twitter_info? %}
-          <a href="{{ request.twitter_connect_url }}"  class="button twitter-button">
-            <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">twitter</span>
-            Sign in with Twitter
-          </a>
+          <a href="{{ request.twitter_connect_url }}"  class="button twitter expand"><span class="ss-icon ss-social-regular ss-twitter" style="padding-right: 5px; font-size: .8em;"></span>Sign in with Twitter</a>
           {% endif %}
         </div>
         <div class="padtop">or...</div>
@@ -102,15 +90,9 @@
       </div>
       {% else %}
       <div class="medium-10 small-centered columns text-center">
-        <a href="{{ request.facebook_connect_url }}" class="button facebook-button">
-          <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">facebook</span>
-          Sign in with Facebook
-        </a>
+        <a href="{{ request.facebook_connect_url }}" class="button facebook expand"><span class="ss-icon ss-social-regular ss-facebook" style="padding-right: 5px; font-size: .8em;"></span>Sign in with Facebook</a>
 
-        <a href="{{ request.twitter_connect_url }}"  class="button twitter-button">
-          <span class="ss-icon ss-social-regular" style="padding-right: 5px; font-size: .8em;">twitter</span>
-          Sign in with Twitter
-        </a>
+        <a href="{{ request.twitter_connect_url }}"  class="button twitter expand"><span class="ss-icon ss-social-regular ss-twitter" style="padding-right: 5px; font-size: .8em;"></span>Sign in with Twitter</a>
       </div>
 
       <hr/>

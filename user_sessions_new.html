@@ -47,10 +47,10 @@
                <div class="orsignin_wrap"><span id="orsignin">Or sign in with {% if request.current_signup.has_facebook_info? %}Facebook{% endif %} {% if request.current_signup.has_twitter_info? %}or Twitter{% endif %}</span></div>
                </div>
               {% if request.current_signup.has_facebook_info? %}
-                <a href="{{ request.facebook_connect_url }}"><img src="{{ "signin_with_facebook.png" | asset_path }}" style="margin-right: 5px;" /></a>
+                <a href="{{ request.facebook_connect_url }}" class="button facebook expand"><span class="ss-icon ss-social-regular ss-facebook" style="padding-right: 5px; font-size: .8em;"></span>Facebook</a>
               {% endif %}
               {% if request.current_signup.has_twitter_info? %}
-                <a href="{{ request.twitter_connect_url }}"><img src="{{ "signin_with_twitter.png" | asset_path }}" style="margin-left: 5px;" /></a>
+                <a href="{{ request.twitter_connect_url }}"  class="button twitter expand"><span class="ss-icon ss-social-regular ss-twitter" style="padding-right: 5px; font-size: .8em;"></span>Twitter</a>
               {% endif %}
               </div>
           {% endif %}
@@ -69,12 +69,12 @@
     <div class="padtopmore">
       {% if request.current_signup.has_facebook_info? %}
         <div class="padtopless">
-        <a href="{{ request.facebook_connect_url }}"><img src="{{ "signin_with_facebook.png" | asset_path }}"></a>
+        <a href="{{ request.facebook_connect_url }}" class="button facebook expand"><span class="ss-icon ss-social-regular ss-facebook" style="padding-right: 5px; font-size: .8em;"></span>Facebook</a>
         </div>
       {% endif %}
       {% if request.current_signup.has_twitter_info? %}
         <div class="padtopless">
-        <a href="{{ request.twitter_connect_url }}"><img src="{{ "signin_with_twitter.png" | asset_path }}"></a>
+        <a href="{{ request.twitter_connect_url }}"  class="button twitter expand"><span class="ss-icon ss-social-regular ss-twitter" style="padding-right: 5px; font-size: .8em;"></span>Twitter</a>
         </div>
       {% endif %}
       <div class="padtop">or...</div>
@@ -107,7 +107,7 @@
   {% endunless %}
 
   <div class="padtop">
-  <a href="{{ request.facebook_connect_url }}"><img src="{{ "signin_with_facebook.png" | asset_path }}" style="margin-right: 5px;" /></a>  <a href="{{ request.twitter_connect_url }}"><img src="{{ "signin_with_twitter.png" | asset_path }}" style="margin-left: 5px;" /></a>
+  <a href="{{ request.facebook_connect_url }}" class="button facebook expand"><span class="ss-icon ss-social-regular ss-facebook" style="padding-right: 5px; font-size: .8em;"></span>Facebook</a> <a href="{{ request.twitter_connect_url }}"  class="button twitter expand"><span class="ss-icon ss-social-regular ss-twitter" style="padding-right: 5px; font-size: .8em;"></span>Twitter</a>
   </div>
 
   <div class="padtop">

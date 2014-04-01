@@ -1,10 +1,10 @@
 {% if page %}
-<ul class="breadcrumbs">
-  <li><a href="/">Home</a> <span class="divider">/</span></li>
+{% comment %}<ul class="breadcrumbs">
+  <li><a href="/">Home</a></li>
   {% for ancestor in page.self_and_ancestors %}
-  <li><a href="{{ ancestor.url }}">{{ ancestor.name }}</a></li> 
+  <li><a href="{{ ancestor.url }}">{{ ancestor.name }}</a></li>
   {% endfor %}
-</ul>
+</ul>{% endcomment %}
 
 <h2 class="headline">Post your {{ page.calendar.event_name | downcase }}</h2>
 {% else %}
@@ -18,148 +18,148 @@
 {% endif %}
 
 <div class="padbottommore">
-  
+
   {% form_for event_page %}
-  
+
   <div class="form-wrap">
     <div class="form">
-      
+
       <div class="form-errors">{% error_messages_for event_page %}</div>
-      
+
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_name">Headline</label>{% text_field "page_headline", class:"text" %}</div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="medium-6 columns"><label for="event_page_start_at_chronic">When</label>{% text_field "start_at_chronic", class:"text" %}</div>
         <div class="medium-6 columns"><label for="event_page_duration_chronic">Length</label>{% text_field "duration_chronic", class:"text" %}</div>
-        
+
       </div>
-      
+
       <div class="row">
-        
+
         <div class="medium-6 columns"><label for="event_page_time_zone">Time zone</label>{% collection_select "time_zone", event_page.time_zones, class:"select" %}</div>
         <div class="medium-6 columns"><label for="event_page_capacity_count">Maximum capacity</label>{% text_field "capacity_count", class:"text" %}</div>
-        
+
       </div>
-      
+
       {% if event_page.page_parent_id.size > 0 %}
       {% hidden_field_tag "event_page[page_parent_id]", event_page.page_parent_id %}
       {% else %}
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_page_parent_id">Post in</label>{% collection_select "page_parent_id", event_page.calendars_available, class:"select" %}</div>
-        
+
       </div>
       {% endif %}
-      
+
       <h4 class="padtopmore padbottom">Contact info</h4>
-      
+
       <div class="row">
         <div class="columns"><label for="event_page_contact_name">Name</label>{% text_field "contact_name", class:"text" %}</div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="medium-6 columns"><label for="event_page_contact_email">Email</label>{% text_field "contact_email", class:"text" %}</div>
         <div class="medium-6 columns"><label for="event_page_contact_phone_number">Phone</label>{% text_field "contact_phone_number", class:"text" %}</div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="medium-6 columns"><label for="event_page_is_contact_email_private" class="checkbox">{% check_box "is_contact_email_private", class:"check_box" %} Don't publish email address</label></div>
         <div class="medium-6 columns"><label for="event_page_is_contact_phone_private" class="checkbox">{% check_box "is_contact_phone_private", class:"check_box" %} Don't publish phone number</label></div>
-        
+
       </div>
-      
+
       <h4 class="padtopmore padbottom">Location</h4>
-      
+
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_venue_name">Venue name</label>{% text_field "venue_name", class:"text" %}</div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_address1">Address</label>
           {% text_field "venue_address.address1", class:"text" %}
           {% text_field "venue_address.address2", class:"text" %}</div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="small-12 medium-4 large-4 columns"><label for="event_page_city">City</label>{% text_field "venue_address.city", class:"text" %}</div>
         {% if settings.has_states? %}
         <div class="small-12 medium-4 large-4 columns"><label for="event_page_state">State</label>{% text_field "venue_address.state", class:"text" %}</div>
         {% endif %}
         <div class="small-12 medium-4 large-4 columns"><label for="event_page_zip">Postal code</label>{% text_field "venue_address.zip", class:"text" %}</div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_country_code">Country</label>{% collection_select "venue_address.country_code", event_page.countries, "code", "name", class:"select" %}</div>
-        
+
       </div>
-      
+
       <h4 class="padtopmore padbottom">Ticket price</h4>
       <div class="padbottom">If free, just leave at 0.00.</div>
-      
+
       <div class="row">
-        
+
         <div class="medium-6 columns"><label for="event_page_user_ticket_price">Amount</label>{% text_field "user_ticket_price", class:"text" %}</div>
         <div class="medium-6 columns"><label for="event_page_user_ticket_currency">Currency</label>{% collection_select "user_ticket_currency", event_page.currencies_available, class:"select" %}</div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_user_ticket_purchase_url">Ticket purchase URL</label>{% text_field "user_ticket_purchase_url", class:"text" %}</div>
-        
+
       </div>
-      
+
       <h4 class="padbottom">Description, include directions</h4>
-      
+
       <div class="row">
-        
+
         <div class="columns"><div class="so_ie_does_not_put_this_in_the_footer">{% text_area "content_editable", class:"textarea-tinymce" %}</div></div>
-        
+
       </div>
       <div class="row padtopmore">
-        
+
         <div class="columns"><label for="event_page_accept_rsvps" class="checkbox">{% check_box "accept_rsvps", class:"check_box" %} Allow people to RSVP</label></div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_allow_guests" class="checkbox">{% check_box "allow_guests", class:"check_box" %} Allow people to bring guests (+1)</label></div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_show_guests" class="checkbox">{% check_box "show_guests", class:"check_box" %} Show who is coming</label></div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_is_private" class="checkbox">{% check_box "is_private", class:"check_box" %} Keep the RSVP page hidden from the rest of the site</label></div>
-        
+
       </div>
       <div class="row">
-        
+
         <div class="columns"><label for="event_page_post_to_facebook" class="checkbox">{% check_box "post_to_facebook", class:"check_box" %} Also post on Facebook so people can RSVP there</label></div>
-        
+
       </div>
-      
+
       <div class="padtop">
         {% submit_tag "Save and post", class:"submit-button" %}
         <div class="form-submit"></div>
       </div>
-      
-    </div> 	
-    
+
+    </div>
+
   </div>
-  
+
   {% endform_for %}
-  
+
 </div>
