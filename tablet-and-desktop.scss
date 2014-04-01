@@ -1,5 +1,5 @@
 // ===================================================================================
-// This is the stylesheet where you can override Foundation's default styles, which can 
+// This is the stylesheet where you can override Foundation's default styles, which can
 // be found in theme.scss. Any styles you add below will override the default stylesheet.
 // =================================================================================== */
 
@@ -63,7 +63,7 @@
   margin-bottom: 1.25rem;
   position: relative;
   padding: 0.875rem 1.5rem 0.875rem 0.875rem;
-  background-color: $alert-color;  
+  background-color: $alert-color;
   font-size: 0.8125rem;
   color: #333;
   max-width: 88em;
@@ -85,7 +85,7 @@
   background: transparent;
 }
 
-.flash-close:hover {  
+.flash-close:hover {
   background: transparent;
 }
 
@@ -203,4 +203,24 @@ div.pagination {
 
 small, small a.flash-close {
   font-size: .75rem;
+}
+
+// Event Page Styles
+
+.event-detail {
+  padding-bottom: 1rem;
+
+  .subhead {
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+  }
+
+  .subtext {
+    line-height: 1.2em;
+  }
+}
+
+.byline {
+  font-size: 0.8em;
+  padding-bottom: 1rem;
 }
