@@ -5,18 +5,28 @@
 {% endif %}
 
 <div id="content">
-  
+
   You have <strong>{{ request.current_signup.followers_count }}</strong> followers.
-  
-  <div class="padtop">
-    {% for follower in request.current_signup.followers %}
+
+  <div class="padtop padbottommore">
+    <table>
+        {% comment %}<thead>
+          <tr>
+            <th width="200">Table Header</th>
+            <th>Table Header</th>
+            <th width="150">Table Header</th>
+            <th width="150">Table Header</th>
+          </tr>
+        </thead>{% endcomment %}
+        <tbody>
+        {% for follower in request.current_signup.followers %}
     {% assign signup = follower.follower %}
-    <div class="people-list {% cycle 'odd', 'even' %}">
-      {% include "signup_show" %}
-    </div>
-    {% endfor %}  
+        {% include "signup_show" %}
+        {% endfor %}
+        </tbody>
+      </table>
   </div>
-  
+
   {{ request.current_signup.followers | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
-  
+
 </div>

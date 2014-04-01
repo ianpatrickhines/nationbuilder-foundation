@@ -52,17 +52,17 @@
         </div>
         {% endif %}
 
-        {% if page.signup.is_phone? %}      
+        {% if page.signup.is_phone? %}
         <div class="row">
           <div class="columns"><label for="signup_phone_number">Phone</label>{% phone_field "phone_number", class:"text" %}</div>
         </div>
         {% endif %}
-     
+
       {% if page.signup.is_address? %}
-      <div class="row"> 
+      <div class="row">
 
       {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
-      
+
           <div class="medium-6 columns"><label for="signup_submitted_address">Address (Street, City, State, Postal code)</label>{% text_field "submitted_address", class:"text" %}</div>
           <div class="medium-6 columns"><label for="signup_country_code">Country</label>{% collection_select "country_code", page.signup.countries, "code", "name", class:"select" %}</div>
       {% endif %}
@@ -115,7 +115,7 @@
   {% endif %}
 
   <div class="like-page">
-    <strong>Like us to spread the word</strong>
+    <strong>Share this page:</strong>
     {% include "like_page" %}
   </div>
 

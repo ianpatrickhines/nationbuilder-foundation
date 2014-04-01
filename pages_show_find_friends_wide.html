@@ -1,13 +1,12 @@
 <div class="row">
   <div class="large-12 medium-12 small-12 columns">
-    {% include "breadcrumbs" %}
-    {% include "features" %}
+
     {% if page.headline.size > 0 %}
     <h2 class="headline">{{ page.headline }}</h2>
     {% endif %}
     <div id="content">
       {% if request.logged_in? %}
-  
+
   {% if request.current_signup.has_facebook_authorization? %}
       <!-- facebook connected -->
       <div class="padbottommore">You connected your Facebook account.</div>
@@ -23,13 +22,13 @@
 
       <div class="padbottommore">
         <div class="padbottomless"> <strong>You have <em>not</em>
-            connected your Facebook account.</strong> 
+            connected your Facebook account.</strong>
         </div>
         <a href="{{ request.facebook_connect_url }}">
           <img src="{{ "signin_with_facebook.png" | asset_path }}"></a>
       </div>
       {% endif %}
-  
+
   {% if request.current_signup.has_twitter_authorization? %}
       <!-- twitter connected -->
       <div class="padtopmore padbottommore">You connected your Twitter account.</div>
@@ -45,13 +44,13 @@
 
       <div class="padtopmore padbottommore">
         <div class="padbottomless"> <strong>You have <em>not</em>
-            connected your Twitter account.</strong> 
+            connected your Twitter account.</strong>
         </div>
         <a href="{{ request.twitter_connect_url }}">
           <img src="{{ "signin_with_twitter.png" | asset_path }}"></a>
       </div>
       {% endif %}
-  
+
   {% else %}
       <!-- not connected state -->
 

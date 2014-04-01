@@ -5,40 +5,50 @@
 {% endif %}
 
 <div id="content">
-  
+
   <p>You are following <strong>{{ request.current_signup.followings_count }}</strong> people.</p>
 
   {% if site.has_friends_page? %}
-  
+
   {% if request.current_signup.has_facebook_authorization? == false %}
-  
+
   <div class="padbottommore">
     <div class="padbottomless"><strong>You have <em>not</em> connected your Facebook account.</strong></div>
     <a href="{{ request.facebook_connect_url }}"><img src="{{ "signin_with_facebook.png" | asset_path }}"></a>
   </div>
-  
+
   {% endif %}
-  
+
   {% if request.current_signup.has_twitter_authorization? == false %}
-  
+
   <div class="padbottommore">
     <div class="padbottomless"><strong>You have <i>not</i> connected your Twitter account.</strong></div>
     <a href="{{ request.twitter_connect_url }}"><img src="{{ "signin_with_twitter.png" | asset_path }}"></a>
   </div>
-  
+
   {% endif %}
-  
+
   {% endif %}
-  
+
 </div>
 
-  <div class="padtop">
-  {% for following in request.current_signup.followings %}
-  {% assign signup = following.following %}
-    <div class="people-list {% cycle 'odd', 'even' %}">
-      {% include "signup_show" %}
-    </div>
-  {% endfor %}
+  <div class="padtop padbottommore">
+  <table>
+        {% comment %}<thead>
+          <tr>
+            <th width="200">Table Header</th>
+            <th>Table Header</th>
+            <th width="150">Table Header</th>
+            <th width="150">Table Header</th>
+          </tr>
+        </thead>{% endcomment %}
+        <tbody>
+        {% for following in request.current_signup.followings %}
+    {% assign signup = following.following %}
+        {% include "signup_show" %}
+        {% endfor %}
+        </tbody>
+      </table>
   </div>
-  
+
   {{ request.current_signup.followings | paginate prev_label: "&laquo;" next_label: "&raquo;" }}

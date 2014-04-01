@@ -1,6 +1,6 @@
 <div class="padcontainer">
 
-  
+
 
   <div class="content-container">
 
@@ -41,28 +41,32 @@
             </div>
 
             {% if page.calendar.events_upcoming_nearby_count > 0 %}
-            {% if page.calendar.events_upcoming_nearby_count > 1 %}
-            <div class="padtop">
-              <strong>Found {{ page.calendar.events_upcoming_nearby_count }} {{ page.calendar.event_name | pluralize | downcase }}.</strong>
-            </div>
-            {% endif %}
-            <div class="padtop">
-              <div class="map">{{ page.calendar.events_upcoming_nearby_map }}</div>
-            </div>
-            {% else %}
-            <div class="padtopmore">
-              <strong>No {{ page.calendar.event_name | pluralize | downcase }} found nearby,</strong> try widening your search
-              {% if page.calendar.allow_user_submitted? %}
-              or maybe
-              <a href="{{ page.calendar.new_event_url }}">host your own</a>?
+              {% if page.calendar.events_upcoming_nearby_count > 1 %}
+              <div class="padtopmore padbottommore">
+                <strong>Found {{ page.calendar.events_upcoming_nearby_count }} {{ page.calendar.event_name | pluralize | downcase }}.</strong>
+              </div>
+              {% elsif page.calendar.events_upcoming_nearby_count == 1 %}
+              <div class="padtopmore padbottommore">
+                <strong>Found {{ page.calendar.events_upcoming_nearby_count }} {{ page.calendar.event_name | downcase }}.</strong>
+              </div>
               {% endif %}
-            </div>
-            {% if page.calendar.events_upcoming.size > 0 %}
-            <div class="map-wrap padtop">
-              <div class="showing-all padbottomless">Showing all {{ page.calendar.events_upcoming_count }} {{ page.calendar.event_name | pluralize | downcase }} instead.</div>
-              {{ page.calendar.events_upcoming_map }}
-            </div>
-            {% endif %}
+
+              <div class="map panel">{{ page.calendar.events_upcoming_nearby_map }}</div>
+
+            {% else %}
+              <div class="padtopmore padbottommore">
+                <strong>No {{ page.calendar.event_name | pluralize | downcase }} found nearby,</strong> try widening your search
+                {% if page.calendar.allow_user_submitted? %}
+                or maybe
+                <a href="{{ page.calendar.new_event_url }}">host your own</a>?
+                {% endif %}
+              </div>
+              {% if page.calendar.events_upcoming.size > 0 %}
+              <div class="map-wrap panel">
+                <div class="showing-all padbottomless">Showing all {{ page.calendar.events_upcoming_count }} {{ page.calendar.event_name | pluralize | downcase }} instead.</div>
+                {{ page.calendar.events_upcoming_map }}
+              </div>
+              {% endif %}
             {% endif %}
 
           </div>
@@ -76,7 +80,10 @@
 
       <div class="event-wrap">
         {% for event in page.calendar.events_upcoming_nearby %}
-        {% include "event" %}
+        <div class="section">
+          {% include "event" %}
+        </div>
+        {% if forloop.last %}{% else %}<hr>{% endif %}
         {% endfor %}
       </div>
 
@@ -86,7 +93,10 @@
 
       <div class="event-wrap">
         {% for event in page.calendar.events_upcoming %}
-        {% include "event" %}
+        <div class="section">
+          {% include "event" %}
+        </div>
+        {% if forloop.last %}{% else %}<hr>{% endif %}
         {% endfor %}
       </div>
 
@@ -124,11 +134,14 @@
 
       {% else %}
 
-      <ul class="event-wrap">
+      <div class="event-wrap">
         {% for event in page.calendar.events_upcoming %}
-        <li>{% include "event" %}</li>
+        <div class="section">
+          {% include "event" %}
+        </div>
+        {% if forloop.last %}{% else %}<hr>{% endif %}
         {% endfor %}
-      </ul>
+      </div>
 
       {% if page.calendar.allow_user_submitted? %}
       <div class="padtopmore">

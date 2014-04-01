@@ -3,13 +3,13 @@
 {% if page.headline.size > 0 %}
 
 <div class="headline">
-  
+
   <h2>{{ page.headline }}</h2>
-  
+
   {% if page.has_author? %}
   {% include "page_byline" %}
   {% endif %}
-  
+
 </div>
 {% endif %}
 
@@ -27,11 +27,11 @@
     {{ page.suggestion.content }}
     {% else %}
     {% endif %}
-    
+
     {% if page.suggestion.is_answered? %}
     <div class="row padtopmore">
       <div class="columns">
-        <div class="answer clearfix"> 
+        <div class="answer clearfix panel">
           <div>
             <strong>
               Official response from {{ page.suggestion.answer_author.published_name_linked }}
@@ -54,7 +54,7 @@
 {% endif %}
 
 <div class="like-page">
-  <strong>Do you like this suggestion?</strong>
+  <strong>Share this page:</strong>
   {% include "like_page" %}
 </div>
 

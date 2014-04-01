@@ -1,38 +1,29 @@
-
-
 {% if page.headline.size > 0 %}
 <h2 class="headline">{{ page.headline }}</h2>
 {% endif %}
-
 <div id="content">
-  
   {% if page.question.content.size > 0 %}
-  <div id="intro" class="intro">
-    {{ page.question.content }}
-  </div>
+  <div id="intro" class="intro">{{ page.question.content }}</div>
   {% endif %}
-  
+
   {% if page.question.answer.size > 0 %}
   <div class="row padbottommore">
     <div class="columns">
-      <div class="answer-wrap clearfix"><div class="answer-a">A:</div> <div class="answer">{{ page.question.answer }}</div></div>
+      <div class="answer-wrap clearfix panel">
+        <h4>Answer:</h4>
+        <div class="answer">{{ page.question.answer }}</div>
+      </div>
     </div>
   </div>
   {% endif %}
-  
+
   {% if page.tags_count > 0 %}
-  <div id="page-tags" class="page-tags">
-    {% include "page_tags" with page %}
-  </div>
+  <div id="page-tags" class="page-tags">{% include "page_tags" with page %}</div>
   {% endif %}
-  
-  <div class="like-page">
-    <strong>Was this helpful?</strong>
+  <div class="like-page"> <strong>Share this page:</strong>
     {% include "like_page" %}
   </div>
-  
   {% if page.show_stream? %}
   {% include "page_stream" %}
   {% endif %}
-  
 </div>

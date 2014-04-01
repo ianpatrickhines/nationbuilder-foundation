@@ -18,14 +18,14 @@
       {% endif %}
     </div>
 
-    <a href="{{ post.url }}#addreaction" class="button small-button">
+    <a href="{{ post.url }}#addreaction" class="button small">
       {% if post.public_activities_count > 0 %}
           {{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}
         {% else %}
           Add your reaction
         {% endif %}
     </a>
-    {{ "Share" | share_button page_id: post.id }}
+
   </div>
 
   <hr/>

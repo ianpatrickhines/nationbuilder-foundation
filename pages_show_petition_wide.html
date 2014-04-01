@@ -1,7 +1,6 @@
 <div class="row">
   <div class="large-12 medium-12 small-12 columns">
-    {% include "breadcrumbs" %}
-    {% include "features" %}
+
     {% if page.headline.size > 0 %}
     <h2 class="headline">{{ page.headline }}</h2>
     {% endif %}
@@ -237,7 +236,7 @@
 {% if page.tags_count > 0 %}
       <div id="page-tags" class="page-tags">{% include "page_tags" with page %}</div>
       {% endif %}
-      <div class="like-page"> <strong>Like this to spread the word:</strong>
+      <div class="like-page"> <strong>Share this page:</strong>
         {% include "like_page" %}
       </div>
       {% if page.petition.is_image? and page.petition.signatures_with_images.size > 0 %}
