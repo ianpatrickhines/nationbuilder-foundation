@@ -211,3 +211,15 @@ div.pagination li {
 
 small, small a.flash-close {
   font-size: .75rem; }
+
+.event-detail {
+  padding-bottom: 1rem; }
+  .event-detail .subhead {
+    font-weight: bold;
+    padding-bottom: 0.5rem; }
+  .event-detail .subtext {
+    line-height: 1.2em; }
+
+.byline {
+  font-size: 0.8em;
+  padding-bottom: 1rem; }
