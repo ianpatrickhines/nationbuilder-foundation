@@ -200,7 +200,7 @@ $button-disabled-opacity: 0.7 !default;
   @if $include-html-button-classes {
 
     // Default styles applied outside of media query
-    button, .button {
+    button, .button, .submit-button, .submit-link, .success-link {
       @include button-base;
       @include button-size;
       @include button-style;
