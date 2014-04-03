@@ -1406,7 +1406,7 @@ select {
 
 /* Colours */
 /* Colours */
-button, .button {
+button, .button, .submit-button, .submit-link, .success-link {
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
@@ -1437,78 +1437,78 @@ button, .button {
   -webkit-appearance: none;
   border: none;
   font-weight: normal !important; }
-  button:hover, button:focus, .button:hover, .button:focus {
+  button:hover, button:focus, .button:hover, .button:focus, .submit-button:hover, .submit-button:focus, .submit-link:hover, .submit-link:focus, .success-link:hover, .success-link:focus {
     background-color: #007095; }
-  button:hover, button:focus, .button:hover, .button:focus {
+  button:hover, button:focus, .button:hover, .button:focus, .submit-button:hover, .submit-button:focus, .submit-link:hover, .submit-link:focus, .success-link:hover, .success-link:focus {
     color: white; }
-  button.secondary, .button.secondary {
+  button.secondary, .button.secondary, .submit-button.secondary, .submit-link.secondary, .success-link.secondary {
     background-color: #e7e7e7;
     border-color: #b9b9b9;
     color: #333333;
     -webkit-border-radius: 3px;
     border-radius: 3px; }
-    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
+    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus, .submit-button.secondary:hover, .submit-button.secondary:focus, .submit-link.secondary:hover, .submit-link.secondary:focus, .success-link.secondary:hover, .success-link.secondary:focus {
       background-color: #b9b9b9; }
-    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
+    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus, .submit-button.secondary:hover, .submit-button.secondary:focus, .submit-link.secondary:hover, .submit-link.secondary:focus, .success-link.secondary:hover, .success-link.secondary:focus {
       color: #333333; }
-  button.success, .button.success {
+  button.success, .button.success, .submit-button.success, .submit-link.success, .success-link.success {
     background-color: #43ac6a;
     border-color: #368a55;
     color: white;
     -webkit-border-radius: 3px;
     border-radius: 3px; }
-    button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
+    button.success:hover, button.success:focus, .button.success:hover, .button.success:focus, .submit-button.success:hover, .submit-button.success:focus, .submit-link.success:hover, .submit-link.success:focus, .success-link.success:hover, .success-link.success:focus {
       background-color: #368a55; }
-    button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
+    button.success:hover, button.success:focus, .button.success:hover, .button.success:focus, .submit-button.success:hover, .submit-button.success:focus, .submit-link.success:hover, .submit-link.success:focus, .success-link.success:hover, .success-link.success:focus {
       color: white; }
-  button.alert, .button.alert {
+  button.alert, .button.alert, .submit-button.alert, .submit-link.alert, .success-link.alert {
     background-color: #f04124;
     border-color: #cf2a0e;
     color: white;
     -webkit-border-radius: 3px;
     border-radius: 3px; }
-    button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
+    button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus, .submit-button.alert:hover, .submit-button.alert:focus, .submit-link.alert:hover, .submit-link.alert:focus, .success-link.alert:hover, .success-link.alert:focus {
       background-color: #cf2a0e; }
-    button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
+    button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus, .submit-button.alert:hover, .submit-button.alert:focus, .submit-link.alert:hover, .submit-link.alert:focus, .success-link.alert:hover, .success-link.alert:focus {
       color: white; }
-  button.large, .button.large {
+  button.large, .button.large, .submit-button.large, .submit-link.large, .success-link.large {
     padding-top: 1.125rem;
     padding-right: 2.25rem;
     padding-bottom: 1.1875rem;
     padding-left: 2.25rem;
     font-size: 1.25rem;
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
-  button.small, .button.small {
+  button.small, .button.small, .submit-button.small, .submit-link.small, .success-link.small {
     padding-top: 0.875rem;
     padding-right: 1.75rem;
     padding-bottom: 0.9375rem;
     padding-left: 1.75rem;
     font-size: 0.8125rem;
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
-  button.tiny, .button.tiny {
+  button.tiny, .button.tiny, .submit-button.tiny, .submit-link.tiny, .success-link.tiny {
     padding-top: 0.625rem;
     padding-right: 1.25rem;
     padding-bottom: 0.6875rem;
     padding-left: 1.25rem;
     font-size: 0.6875rem;
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
-  button.expand, .button.expand {
+  button.expand, .button.expand, .submit-button.expand, .submit-link.expand, .success-link.expand {
     padding-right: 0;
     padding-left: 0;
     width: 100%; }
-  button.left-align, .button.left-align {
+  button.left-align, .button.left-align, .submit-button.left-align, .submit-link.left-align, .success-link.left-align {
     text-align: left;
     text-indent: 0.75rem; }
-  button.right-align, .button.right-align {
+  button.right-align, .button.right-align, .submit-button.right-align, .submit-link.right-align, .success-link.right-align {
     text-align: right;
     padding-right: 0.75rem; }
-  button.radius, .button.radius {
+  button.radius, .button.radius, .submit-button.radius, .submit-link.radius, .success-link.radius {
     -webkit-border-radius: 3px;
     border-radius: 3px; }
-  button.round, .button.round {
+  button.round, .button.round, .submit-button.round, .submit-link.round, .success-link.round {
     -webkit-border-radius: 1000px;
     border-radius: 1000px; }
-  button.disabled, button[disabled], .button.disabled, .button[disabled] {
+  button.disabled, button[disabled], .button.disabled, .button[disabled], .submit-button.disabled, .submit-button[disabled], .submit-link.disabled, .submit-link[disabled], .success-link.disabled, .success-link[disabled] {
     background-color: #008cba;
     border-color: #007095;
     color: white;
@@ -1518,13 +1518,13 @@ button, .button {
     box-shadow: none;
     -webkit-border-radius: 3px;
     border-radius: 3px; }
-    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
+    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus, .submit-button.disabled:hover, .submit-button.disabled:focus, .submit-button[disabled]:hover, .submit-button[disabled]:focus, .submit-link.disabled:hover, .submit-link.disabled:focus, .submit-link[disabled]:hover, .submit-link[disabled]:focus, .success-link.disabled:hover, .success-link.disabled:focus, .success-link[disabled]:hover, .success-link[disabled]:focus {
       background-color: #007095; }
-    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
+    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus, .submit-button.disabled:hover, .submit-button.disabled:focus, .submit-button[disabled]:hover, .submit-button[disabled]:focus, .submit-link.disabled:hover, .submit-link.disabled:focus, .submit-link[disabled]:hover, .submit-link[disabled]:focus, .success-link.disabled:hover, .success-link.disabled:focus, .success-link[disabled]:hover, .success-link[disabled]:focus {
       color: white; }
-    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
+    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus, .submit-button.disabled:hover, .submit-button.disabled:focus, .submit-button[disabled]:hover, .submit-button[disabled]:focus, .submit-link.disabled:hover, .submit-link.disabled:focus, .submit-link[disabled]:hover, .submit-link[disabled]:focus, .success-link.disabled:hover, .success-link.disabled:focus, .success-link[disabled]:hover, .success-link[disabled]:focus {
       background-color: #008cba; }
-    button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .button[disabled].secondary {
+    button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .button[disabled].secondary, .submit-button.disabled.secondary, .submit-button[disabled].secondary, .submit-link.disabled.secondary, .submit-link[disabled].secondary, .success-link.disabled.secondary, .success-link[disabled].secondary {
       background-color: #e7e7e7;
       border-color: #b9b9b9;
       color: #333333;
@@ -1534,13 +1534,13 @@ button, .button {
       box-shadow: none;
       -webkit-border-radius: 3px;
       border-radius: 3px; }
-      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
+      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus, .submit-button.disabled.secondary:hover, .submit-button.disabled.secondary:focus, .submit-button[disabled].secondary:hover, .submit-button[disabled].secondary:focus, .submit-link.disabled.secondary:hover, .submit-link.disabled.secondary:focus, .submit-link[disabled].secondary:hover, .submit-link[disabled].secondary:focus, .success-link.disabled.secondary:hover, .success-link.disabled.secondary:focus, .success-link[disabled].secondary:hover, .success-link[disabled].secondary:focus {
         background-color: #b9b9b9; }
-      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
+      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus, .submit-button.disabled.secondary:hover, .submit-button.disabled.secondary:focus, .submit-button[disabled].secondary:hover, .submit-button[disabled].secondary:focus, .submit-link.disabled.secondary:hover, .submit-link.disabled.secondary:focus, .submit-link[disabled].secondary:hover, .submit-link[disabled].secondary:focus, .success-link.disabled.secondary:hover, .success-link.disabled.secondary:focus, .success-link[disabled].secondary:hover, .success-link[disabled].secondary:focus {
         color: #333333; }
-      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
+      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus, .submit-button.disabled.secondary:hover, .submit-button.disabled.secondary:focus, .submit-button[disabled].secondary:hover, .submit-button[disabled].secondary:focus, .submit-link.disabled.secondary:hover, .submit-link.disabled.secondary:focus, .submit-link[disabled].secondary:hover, .submit-link[disabled].secondary:focus, .success-link.disabled.secondary:hover, .success-link.disabled.secondary:focus, .success-link[disabled].secondary:hover, .success-link[disabled].secondary:focus {
         background-color: #e7e7e7; }
-    button.disabled.success, button[disabled].success, .button.disabled.success, .button[disabled].success {
+    button.disabled.success, button[disabled].success, .button.disabled.success, .button[disabled].success, .submit-button.disabled.success, .submit-button[disabled].success, .submit-link.disabled.success, .submit-link[disabled].success, .success-link.disabled.success, .success-link[disabled].success {
       background-color: #43ac6a;
       border-color: #368a55;
       color: white;
@@ -1550,13 +1550,13 @@ button, .button {
       box-shadow: none;
       -webkit-border-radius: 3px;
       border-radius: 3px; }
-      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
+      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus, .submit-button.disabled.success:hover, .submit-button.disabled.success:focus, .submit-button[disabled].success:hover, .submit-button[disabled].success:focus, .submit-link.disabled.success:hover, .submit-link.disabled.success:focus, .submit-link[disabled].success:hover, .submit-link[disabled].success:focus, .success-link.disabled.success:hover, .success-link.disabled.success:focus, .success-link[disabled].success:hover, .success-link[disabled].success:focus {
         background-color: #368a55; }
-      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
+      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus, .submit-button.disabled.success:hover, .submit-button.disabled.success:focus, .submit-button[disabled].success:hover, .submit-button[disabled].success:focus, .submit-link.disabled.success:hover, .submit-link.disabled.success:focus, .submit-link[disabled].success:hover, .submit-link[disabled].success:focus, .success-link.disabled.success:hover, .success-link.disabled.success:focus, .success-link[disabled].success:hover, .success-link[disabled].success:focus {
         color: white; }
-      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
+      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus, .submit-button.disabled.success:hover, .submit-button.disabled.success:focus, .submit-button[disabled].success:hover, .submit-button[disabled].success:focus, .submit-link.disabled.success:hover, .submit-link.disabled.success:focus, .submit-link[disabled].success:hover, .submit-link[disabled].success:focus, .success-link.disabled.success:hover, .success-link.disabled.success:focus, .success-link[disabled].success:hover, .success-link[disabled].success:focus {
         background-color: #43ac6a; }
-    button.disabled.alert, button[disabled].alert, .button.disabled.alert, .button[disabled].alert {
+    button.disabled.alert, button[disabled].alert, .button.disabled.alert, .button[disabled].alert, .submit-button.disabled.alert, .submit-button[disabled].alert, .submit-link.disabled.alert, .submit-link[disabled].alert, .success-link.disabled.alert, .success-link[disabled].alert {
       background-color: #f04124;
       border-color: #cf2a0e;
       color: white;
@@ -1566,11 +1566,11 @@ button, .button {
       box-shadow: none;
       -webkit-border-radius: 3px;
       border-radius: 3px; }
-      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus {
+      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus, .submit-button.disabled.alert:hover, .submit-button.disabled.alert:focus, .submit-button[disabled].alert:hover, .submit-button[disabled].alert:focus, .submit-link.disabled.alert:hover, .submit-link.disabled.alert:focus, .submit-link[disabled].alert:hover, .submit-link[disabled].alert:focus, .success-link.disabled.alert:hover, .success-link.disabled.alert:focus, .success-link[disabled].alert:hover, .success-link[disabled].alert:focus {
         background-color: #cf2a0e; }
-      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus {
+      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus, .submit-button.disabled.alert:hover, .submit-button.disabled.alert:focus, .submit-button[disabled].alert:hover, .submit-button[disabled].alert:focus, .submit-link.disabled.alert:hover, .submit-link.disabled.alert:focus, .submit-link[disabled].alert:hover, .submit-link[disabled].alert:focus, .success-link.disabled.alert:hover, .success-link.disabled.alert:focus, .success-link[disabled].alert:hover, .success-link[disabled].alert:focus {
         color: white; }
-      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus {
+      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus, .submit-button.disabled.alert:hover, .submit-button.disabled.alert:focus, .submit-button[disabled].alert:hover, .submit-button[disabled].alert:focus, .submit-link.disabled.alert:hover, .submit-link.disabled.alert:focus, .submit-link[disabled].alert:hover, .submit-link[disabled].alert:focus, .success-link.disabled.alert:hover, .success-link.disabled.alert:focus, .success-link[disabled].alert:hover, .success-link[disabled].alert:focus {
         background-color: #f04124; }
 
 @media only screen and (min-width: 40.063em) {
@@ -2115,7 +2115,6 @@ select::-ms-expand {
 
   select:hover {
     background: #f3f3f3; } }
-
 /* Attach elements to the beginning or end of an input */
 .prefix,
 .postfix {
@@ -2674,28 +2673,24 @@ kbd {
 
   to {
     -webkit-transform: rotate(360deg); } }
-
 @-moz-keyframes rotate {
   from {
     -moz-transform: rotate(0deg); }
 
   to {
     -moz-transform: rotate(360deg); } }
-
 @-o-keyframes rotate {
   from {
     -o-transform: rotate(0deg); }
 
   to {
     -o-transform: rotate(360deg); } }
-
 @keyframes rotate {
   from {
     transform: rotate(0deg); }
 
   to {
     transform: rotate(360deg); } }
-
 /* Orbit Graceful Loading */
 .slideshow-wrapper {
   position: relative; }
@@ -2779,7 +2774,7 @@ kbd {
     left: 10px;
     font-size: 12px;
     color: white;
-    background: rgba(0, 0, 0, 0);
+    background: transparent;
     z-index: 10; }
     .orbit-container .orbit-slide-number span {
       font-weight: 700;
@@ -3473,7 +3468,6 @@ div.switch {
 
   to {
     position: relative; } }
-
 /* Colours */
 table {
   background: white;
@@ -4468,7 +4462,6 @@ blockquote p {
 
   @page {
     margin: 0.5cm; }
-
   p,
   h2,
   h3 {
@@ -4800,7 +4793,7 @@ ul.off-canvas-list {
   left: 0;
   right: 0;
   z-index: 1002;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+  -webkit-tap-highlight-color: transparent; }
   @media only screen and (min-width: 40.063em) {
     .move-right .exit-off-canvas:hover {
       background: rgba(255, 255, 255, 0.05); } }
@@ -4824,7 +4817,7 @@ ul.off-canvas-list {
   left: 0;
   right: 0;
   z-index: 1002;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+  -webkit-tap-highlight-color: transparent; }
   @media only screen and (min-width: 40.063em) {
     .move-left .exit-off-canvas:hover {
       background: rgba(255, 255, 255, 0.05); } }
