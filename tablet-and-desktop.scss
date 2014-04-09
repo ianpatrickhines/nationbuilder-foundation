@@ -25,6 +25,21 @@
 
 // Padding
 
+.table {
+  display: table;
+  margin: 0 auto;
+}
+
+.big-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .padtopless {
   padding-top: 5px;
 }
