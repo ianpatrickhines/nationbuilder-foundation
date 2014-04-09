@@ -89,7 +89,7 @@
       {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
       <div class="row">
         <div class="columns">
-          <label for="feedback_submitted_address">Address (Street, City, State, Postal code)</label>{% text_field "submitted_address", class:"text" %}
+          <label for="feedback_submitted_address">Address (Street, City, State, Zip code)</label>{% text_field "submitted_address", class:"text" %}
         </div>
       </div>
       {% endif %}

@@ -63,7 +63,7 @@
 
       {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
 
-          <div class="medium-6 columns"><label for="signup_submitted_address">Address (Street, City, State, Postal code)</label>{% text_field "submitted_address", class:"text" %}</div>
+          <div class="medium-6 columns"><label for="signup_submitted_address">Address (Street, City, State, Zip code)</label>{% text_field "submitted_address", class:"text" %}</div>
           <div class="medium-6 columns"><label for="signup_country_code">Country</label>{% collection_select "country_code", page.signup.countries, "code", "name", class:"select" %}</div>
       {% endif %}
 
