@@ -239,3 +239,9 @@ small, small a.flash-close {
   font-size: 0.8em;
   padding-bottom: 1rem;
 }
+
+.inline-labels {
+  input, label {
+    display: inline;
+  }
+}
