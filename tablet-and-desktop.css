@@ -60,6 +60,18 @@ ul.activities {
 #columns-1, #columns-2 {
   padding-top: 1em; }
 
+.table {
+  display: table;
+  margin: 0 auto; }
+
+.big-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem; }
+
+.section {
+  padding-top: 2rem;
+  padding-bottom: 2rem; }
+
 .padtopless {
   padding-top: 5px; }
 
@@ -223,3 +235,6 @@ small, small a.flash-close {
 .byline {
   font-size: 0.8em;
   padding-bottom: 1rem; }
+
+.inline-labels input, .inline-labels label {
+  display: inline; }

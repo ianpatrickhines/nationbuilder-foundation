@@ -99,6 +99,10 @@ img {
 img {
   display: inline-block;
   vertical-align: middle; }
+  img.img-circle {
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+    border-radius: 500px; }
 
 textarea {
   height: auto;
