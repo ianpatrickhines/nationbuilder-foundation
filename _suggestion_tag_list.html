@@ -1,4 +1,4 @@
-<ul class="suggestion-tag-list checkbox-inline">
+<ul class="suggestion-tag-list checkbox-inline inline-list padtopmore padbottommore">
 {% for tag_name in page.suggestion.suggestion_box_tag_names %}
   {% assign class_and_id_name = 'suggestion-' + tag_name %}
   {% capture class_and_id_name %}suggestion-{{ tag_name | downcase }}{% endcapture %}

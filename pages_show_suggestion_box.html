@@ -97,7 +97,7 @@
         {% else %}
         <p>{% endif %}</div>
         {% if post.suggestion.is_answered? %}
-        <div class="answer clearfix">
+        <div class="answer panel clearfix">
           <div> <strong>Official response from {{ post.suggestion.answer_author.published_name_linked }}
             {% if post.suggestion.is_answer_type? %}
             {{ post.suggestion.answer_type_html }}
