@@ -20,21 +20,15 @@
 
 
 {% if page.petition.has_goal? %}
-{% assign thermo_width = 50 %}
-<div class="clearfix">
-  <div class="progress" style="width: {{ thermo_width }}%;">
-    <div class="bar bar-success" style="width: {{ page.petition.percent_of_goal | times:100 }}%;">
-      {% if page.petition.signatures_count < 2 %}
-      <div class="bar-text">JUST STARTED</div>
-      {% else %}
-      <div class="bar-text">{{ page.petition.signatures_count | number_with_commas }} {{ page.petition.signature_name | pluralize | upcase }}</div>
-      {% endif %}
-    </div>
-  </div>
-  <div class="bar-goal">{{ page.petition.goal | number_with_commas }} {{ page.petition.signature_name | pluralize | downcase }}</div>
+
+<div class="small-12 medium-12 large-12 text-center columns padbottommore">
+<strong>GOAL: {{ page.petition.goal | number_with_commas }} {{ page.petition.signature_name | pluralize | upcase }}</strong>
 </div>
-{% elsif page.petition.signatures_count > 4 %}
-<div class="bar-goal">{{ page.petition.signatures_count | number_with_commas }} {{ page.petition.signature_name | pluralize | downcase }}</div>
+
+<div class="nice round progress small-12 medium-12 large-12 columns">
+  <span class="meter" style="width: {{ page.petition.percent_of_goal | times:100 }}%"></span>
+</div>
+
 {% endif %}
 
 {% if page.petition.is_signed? %}
