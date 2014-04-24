@@ -12,27 +12,58 @@
   </div>
   {% endif %}
 
-  {% for membership_option in page.paid_membership.membership_options %}
+  <div class="row">
+    {% for membership_option in page.paid_membership.membership_options limit:3 %}
+    <div class="small-12 medium-4 large-4 columns">
+      <ul class="pricing-table">
+        <li class="title">{{ membership_option.membership_level_name }}</li>
+        <li class="price"><strong>{{ membership_option.amount }}</strong> every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}</li>
+        <li class="description">{{ membership_option.description }}</li>
+        <li class="cta-button"><a class="button" href="{{ membership_option.purchase_url }}">Purchase</a></li>
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
 
-  <ul class="membership-list clearfix">
-    <li class="membership">
-      <h3>{{ membership_option.membership_level_name }}</h3>
 
-      <div class="padtopless padbottomless">
-        <strong>{{ membership_option.amount }}</strong> every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}
-      </div>
-      {% if membership_option.has_membership_level_badge %}
-      <span class="badge">{{ membership_option.membership_level_badge }}</span>
-      {% endif %}
-      <hr/>
-      <div class="member-blurb">{{ membership_option.description }}</div>
-      <div class="padtopmore submit_link_wrap">
-        <div class="submit-link"><a href="{{ membership_option.purchase_url }}">Purchase</a></div>
-      </div>
-    </li>
-  </ul>
+  <div class="row">
+    {% for membership_option in page.paid_membership.membership_options limit:3 offset:3 %}
+    <div class="small-12 medium-4 large-4 columns">
+      <ul class="pricing-table">
+        <li class="title">{{ membership_option.membership_level_name }}</li>
+        <li class="price"><strong>{{ membership_option.amount }}</strong> every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}</li>
+        <li class="description">{{ membership_option.description }}</li>
+        <li class="cta-button"><a class="button" href="{{ membership_option.purchase_url }}">Purchase</a></li>
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
 
-  {% endfor %}
+<div class="row">
+    {% for membership_option in page.paid_membership.membership_options limit:3 offset:6 %}
+    <div class="small-12 medium-4 large-4 columns">
+      <ul class="pricing-table">
+        <li class="title">{{ membership_option.membership_level_name }}</li>
+        <li class="price"><strong>{{ membership_option.amount }}</strong> every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}</li>
+        <li class="description">{{ membership_option.description }}</li>
+        <li class="cta-button"><a class="button" href="{{ membership_option.purchase_url }}">Purchase</a></li>
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    {% for membership_option in page.paid_membership.membership_options limit:3 offset:9 %}
+    <div class="small-12 medium-4 large-4 columns">
+      <ul class="pricing-table">
+        <li class="title">{{ membership_option.membership_level_name }}</li>
+        <li class="price"><strong>{{ membership_option.amount }}</strong> every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}</li>
+        <li class="description">{{ membership_option.description }}</li>
+        <li class="cta-button"><a class="button" href="{{ membership_option.purchase_url }}">Purchase</a></li>
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
 
   {% if page.tags_count > 0 %}
   <div id="page-tags" class="page-tags">
