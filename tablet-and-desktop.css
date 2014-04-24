@@ -1,4 +1,132 @@
 /* Colours */
+#t7_timer {
+  width: 220px;
+  height: 55px;
+  position: relative; }
+
+#t7_vals {
+  width: 100%;
+  clear: both;
+  margin: 0px auto; }
+
+.t7_numbs {
+  font-size: 28px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-align: left;
+  color: white; }
+
+#t7_y {
+  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-d59207f66ff5208ae524a59a34f0f412.png);
+  background-repeat: no-repeat;
+  float: left;
+  width: 48px;
+  height: 35px;
+  background-color: transparent;
+  padding: 0px 0px 0px 3px;
+  margin: 1px;
+  letter-spacing: 7px; }
+
+#t7_d {
+  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-d59207f66ff5208ae524a59a34f0f412.png);
+  background-repeat: no-repeat;
+  float: left;
+  width: 48px;
+  height: 35px;
+  background-color: transparent;
+  padding: 0px 0px 0px 3px;
+  margin: 1px;
+  letter-spacing: 7px; }
+
+#t7_h {
+  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-d59207f66ff5208ae524a59a34f0f412.png);
+  background-repeat: no-repeat;
+  float: left;
+  width: 48px;
+  height: 35px;
+  background-color: transparent;
+  padding: 0px 0px 0px 3px;
+  margin: 1px;
+  letter-spacing: 7px; }
+
+#t7_m {
+  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-d59207f66ff5208ae524a59a34f0f412.png);
+  background-repeat: no-repeat;
+  float: left;
+  width: 47px;
+  height: 35px;
+  background-color: transparent;
+  padding: 0px 0px 0px 3px;
+  margin: 1px;
+  letter-spacing: 7px; }
+
+#t7_s {
+  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-nc-4f109d66d692d7b9e9fea4d80e7e3480.png);
+  background-repeat: no-repeat;
+  float: left;
+  width: 46px;
+  height: 35px;
+  background-color: transparent;
+  padding: 0px 0px 0px 3px;
+  margin: 1px;
+  letter-spacing: 7px; }
+
+#t7_labels {
+  width: 100%;
+  clear: both;
+  margin: 0px auto; }
+
+.t7_labs {
+  position: relative;
+  left: -4px;
+  top: -10px;
+  font-size: 9px;
+  font-family: Verdana, Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: #333333; }
+
+#t7_yl {
+  float: left;
+  width: 51px;
+  height: 15px;
+  padding: 0px;
+  margin: 0px; }
+
+#t7_dl {
+  float: left;
+  width: 54px;
+  height: 15px;
+  padding: 0px;
+  margin: 0px; }
+
+#t7_hl {
+  float: left;
+  width: 45px;
+  height: 15px;
+  padding: 0px;
+  margin: 0px; }
+
+#t7_ml {
+  float: left;
+  width: 53px;
+  height: 15px;
+  padding: 0px;
+  margin: 0px; }
+
+#t7_sl {
+  float: left;
+  width: 46px;
+  height: 15px;
+  padding: 0px;
+  margin: 0px; }
+
+.countdown {
+  width: 220px;
+  height: 55px;
+  text-align: center;
+  line-height: 34px; }
+
 ul.activities {
   margin: 3em 0 15px 0 !important;
   list-style: none; }
