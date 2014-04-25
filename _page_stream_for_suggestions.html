@@ -72,7 +72,19 @@
         <ul id="page-activities" class="activities">
           {% for activity in page.activities %}
           <li class="activity clearfix">
-            <div class="stream-pic">{{ activity.signup.profile_image }}</div>
+            <div class="stream-pic">
+              {% if site.show_public_profiles? == false %}
+              {% if activity.signup.has_twitter_info? %}<a href="{{ activity.signup.twitter_profile_url }}">{% elsif activity.signup.has_facebook_info? %}<a href="{{ activity.signup.facebook_profile_url }}">{% else %}{% endif %}
+              {% if activity.signup.has_facebook_info? %}
+              <img src="http://graph.facebook.com/{{ activity.signup.facebook_uid }}/picture?width=72&height=72" alt="Profile Photo">
+              {% else %}
+              <img src="{{ activity.signup.profile_image_url }}" alt="Profile Photo">
+              {% endif %}
+              {% if activity.signup.has_twitter_info? %}</a>{% elsif activity.signup.has_facebook_info? %}</a>{% else %}{% endif %}
+              {% else %}
+              {{ activity.signup.profile_image }}
+              {% endif %}
+            </div>
             {{ activity.show_page_view }}
           </li>
           {% endfor %}

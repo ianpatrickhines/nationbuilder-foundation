@@ -24,7 +24,11 @@
         {% if request.logged_in? or request.sorta_logged_in? %}
         <li id="user-nav" class="has-dropdown">
           <a href="#">
-            <img src="{{ request.current_signup.profile_image_url }}" alt="Photo: {{ request.current_signup.name_or_email }}" />
+            {% if request.current_signup.has_facebook_info? %}
+            <img src="http://graph.facebook.com/{{ request.current_signup.facebook_uid }}/picture?width=72&height=72" alt="Profile Photo">
+            {% else %}
+            <img src="{{ request.current_signup.profile_image_url }}" alt="Profile Photo">
+            {% endif %}
             {{ request.current_signup.full_name_or_friend }}
           </a>
           <ul class="dropdown">
