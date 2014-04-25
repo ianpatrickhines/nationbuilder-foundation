@@ -22,8 +22,7 @@
         <div class="medium-6 columns">
           <div class="progress">
             <span class="meter success" style="width: {{ page.donation.percent_of_amount_goal | times:100 }}%;">
-              {% comment %}{% if page.donations_count
-              < 1 %}
+              {% comment %}{% if page.donations_count < 1 %}
           <div class="bar-text">JUST STARTED</div>
               {% else %}
               <div class="bar-text">{{ page.donations_amount_format }} raised</div>
@@ -33,8 +32,7 @@
         </div>
 
         <div class="medium-6 columns">
-          {% if page.donations_count
-          < 1 %}
+          {% if page.donations_count < 1 %}
       <div class="bar-text">JUST STARTED</div>
           {% else %}
           <div class="bar-text">{{ page.donations_amount_format }} raised</div>
@@ -47,8 +45,7 @@
         <div class="medium-6 columns">
           <div class="progress">
             <span class="meter success" style="width: {{ page.donation.percent_of_amount_goal | times:100 }}%;">
-              {% comment %}{% if page.donations_count
-              < 1 %}
+              {% comment %}{% if page.donations_count < 1 %}
           <div class="bar-text">JUST STARTED</div>
               {% else %}
               <div class="bar-text">{{ page.donations_amount_format }} raised</div>
@@ -58,8 +55,7 @@
         </div>
 
         <div class="medium-6 columns">
-          {% if page.donations_count
-          < 1 %}
+          {% if page.donations_count < 1 %}
       <div class="bar-text">JUST STARTED</div>
           {% else %}
           <div class="bar-text">{{ page.donations_amount_format }} raised</div>
