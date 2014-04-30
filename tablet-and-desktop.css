@@ -269,9 +269,13 @@ ul.activities {
 .form-errors {
   background-color: #f04124;
   color: white; }
+  .form-errors h2 {
+    font-size: 1.5rem;
+    padding: 1rem;
+    color: white !important; }
   .form-errors ul {
-    list-style-type: none;
-    padding: 10px; }
+    list-style-type: disc;
+    padding: 1rem; }
 
 .label a {
   color: inherit; }

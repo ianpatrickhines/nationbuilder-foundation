@@ -126,12 +126,18 @@
 // Form Errors
 
 .form-errors {
-  background-color: #f04124;
+  background-color: $alert-color;
   color: white;
 
+  h2 {
+    font-size: 1.5rem;
+    padding: 1rem;
+    color: white !important;
+  }
+
   ul {
-    list-style-type: none;
-    padding: 10px;
+    list-style-type: disc;
+    padding: 1rem;
   }
 }
 
