@@ -13,23 +13,15 @@
   {% endif %}
 
   {% if page.vote_pledge.has_yes_goal? %}
-  {% assign thermo_width = 50 %}
-  <div class="clearfix">
-    <div class="progress" style="width: {{ thermo_width }}%;">
-      <div class="bar bar-success" style="width: {{ page.vote_pledge.percent_of_yes_goal | times:100 }}%;">
-        {% if page.vote_pledge.yes_votes_count < 2 %}
-        <div class="bar-text">JUST STARTED</div>
-        {% else %}
-        <div class="bar-text">{{ page.vote_pledge.yes_votes_count | number_with_commas }} VOTES FOUND</div>
-        {% endif %}
-      </div>
-    </div>
 
-    <div class="bar-goal">{{ page.vote_pledge.yes_goal | number_with_commas }} votes</div>
+  <div class="small-12 medium-12 large-12 text-center columns padbottommore">
+  <strong>GOAL: {{ page.vote_pledge.yes_goal | number_with_commas }} votes</strong>
   </div>
 
-  {% elsif page.vote_pledge.yes_votes_count > 4 %}
-  <div class="padbottom"><h4>{{ page.vote_pledge.yes_votes_count | number_with_commas }} votes</h4></div>
+  <div class="nice round progress small-12 medium-12 large-12 columns">
+    <span class="meter" style="width: {{ page.vote_pledge.percent_of_yes_goal | times:100 }}%"></span>
+  </div>
+
   {% endif %}
 
   {% if page.vote_pledge.is_pledged? %}
