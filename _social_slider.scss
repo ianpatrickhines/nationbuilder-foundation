@@ -9,6 +9,7 @@ $include-html-panel-classes: $include-html-classes !default;
 $social-slider-bg: scale-color(#fff, $lightness: -5%) !default;
 $social-slider-border-style: solid !default;
 $social-slider-border-size: 4px !default;
+$social-slider-radius: $global-radius !default;
 
 // We use this % to control how much we darken things on hover
 $social-slider-function-factor: -11% !default;
@@ -57,7 +58,7 @@ $social-slider-link-color: inherit !default;
     @include box-sizing(border-box);
     padding: $social-slider-padding;
     position: relative;
-    @include radius($global-radius);
+    @include radius($social-slider-radius);
     img {
       float: left;
       margin-right: .5em;
