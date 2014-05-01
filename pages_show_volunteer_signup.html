@@ -12,6 +12,10 @@
   </div>
   {% endif %}
 
+  {% if page.show_social_slider? and page.public_activities_count > 0 %}
+  {% include "social_slider" %}
+  {% endif %}
+
   <div class="form-wrap">
     <div class="form">
 

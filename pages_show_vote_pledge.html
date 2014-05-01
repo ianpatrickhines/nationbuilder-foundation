@@ -12,6 +12,10 @@
   </div>
   {% endif %}
 
+  {% if page.show_social_slider? and page.public_activities_count > 0 %}
+  {% include "social_slider" %}
+  {% endif %}
+
   {% if page.vote_pledge.has_yes_goal? %}
 
   <div class="small-12 medium-12 large-12 text-center columns padbottommore">

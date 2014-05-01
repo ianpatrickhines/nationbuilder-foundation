@@ -1,0 +1,74 @@
+@import "global";
+
+//
+// @variables
+//
+$include-html-panel-classes: $include-html-classes !default;
+
+// We use these to control the background and border styles
+$social-slider-bg: scale-color(#fff, $lightness: -5%) !default;
+$social-slider-border-style: solid !default;
+$social-slider-border-size: 4px !default;
+
+// We use this % to control how much we darken things on hover
+$social-slider-function-factor: -11% !default;
+$social-slider-border-color: scale-color($social-slider-bg, $lightness: $social-slider-function-factor) !default;
+
+// We use these to set default inner padding and bottom margin
+$social-slider-margin-bottom: rem-calc(20) !default;
+$social-slider-padding: rem-calc(10) !default;
+$social-slider-height: rem-calc(68) !default;
+$social-slider-width: rem-calc(160) !default;
+
+// We use these to set default font colors
+$social-slider-font-color: #333 !default;
+$social-slider-font-color-alt: #fff !default;
+
+$social-slider-link-color: inherit !default;
+
+// social slider
+
+#slider-cards {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: $social-slider-height;
+  margin: .625em 0 1.625em 0;
+  .slider-card-wrap {
+    position: absolute;
+    left: 1680px;
+    width: 9999px;
+    top: 0;
+    @include single-transition($property:all, $speed:0.4s, $ease:ease-out);
+  }
+  .slider-card {
+    width: $social-slider-width;
+    position: relative;
+    text-align: left;
+    display: block;
+    float: left;
+    text-align: left;
+  }
+  .slider-card-profile {
+    background: $social-slider-bg;
+    color: $social-slider-font-color;
+    border-left: $social-slider-border-size $social-slider-border-style $social-slider-border-color;
+    height: $social-slider-height;
+    @include box-sizing(border-box);
+    padding: $social-slider-padding;
+    position: relative;
+    @include radius($global-radius);
+    img {
+      float: left;
+      margin-right: .5em;
+    }
+    .slider-name {
+      position: relative;
+      line-height: $social-slider-height;
+      top: -.7em;
+      a:link, a:visited, a:active {
+        color: $social-slider-link-color;
+      }
+    }
+  }
+}

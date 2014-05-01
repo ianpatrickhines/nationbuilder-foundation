@@ -10,6 +10,7 @@
   {% if page.event.content.size > 0 %}
   <div id="intro" class="intro">{{ page.event.content }}</div>
   {% endif %}
+
   <div class="panel">
     <div class="event-detail">
       <div class="subhead">WHEN</div>
@@ -144,6 +145,10 @@
     {% endfor %}
     </div>
   </div>
+  {% endif %}
+
+  {% if page.show_social_slider? and page.public_activities_count > 0 %}
+  {% include "social_slider" %}
   {% endif %}
 
   {% if page.event.is_rsvped? %}

@@ -8,13 +8,8 @@
       <div id="intro" class="intro">{{ page.donation.content }}</div>
       {% endif %}
 
-  {% if page.donation.show_recent_donor? %}
-  {% if page.most_recent_donation %}
-      <div class="padtop padbottom"> <strong>Who's donating:</strong>
-        <a href="{{ page.most_recent_donation.signup.profile_url }}">{{ page.most_recent_donation.signup.published_name_linked }}</a>
-        from {{ page.most_recent_donation.signup.address.location }} donated. Thank you!
-      </div>
-      {% endif %}
+  {% if page.show_social_slider? and page.public_activities_count > 0 %}
+  {% include "social_slider" %}
   {% endif %}
 
   {% if page.donation.has_amount_goal? %}
