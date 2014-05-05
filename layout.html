@@ -6,7 +6,7 @@
   <title>{{ page_title }}</title>
   <link rel="stylesheet" href="foundation.css" />
   <link rel="stylesheet" href="tablet-and-desktop.css" />
-  <link href="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.css" rel="stylesheet">
+  {% comment %}Remove this stylesheet before using this theme{% endcomment %}<link href="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.css" rel="stylesheet">
   <script src="modernizr.js"></script>
 
   {{ content_for_header }}
@@ -101,8 +101,21 @@
   {% endif %}
   <script src="foundation.min.js"></script>
   <script>$(document).foundation();</script>
-  <script src="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.js"></script>
+  {% comment %}Remove this javascript before using this theme{% endcomment %}<script src="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.js"></script>
   <script type="text/javascript" src="jquery.ui.effect-slide.min.js"></script>
+  {% comment %}Remove this javascript before using this theme{% endcomment %}<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '536789988bfdf77006001e7f');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
   {{ content_for_footer }}
 </body>
 </html>
