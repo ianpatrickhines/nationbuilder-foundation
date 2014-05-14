@@ -1,6 +1,5 @@
 <div class="row">
   <div class="large-12 medium-12 small-12 columns">
-
     {% if page.headline.size > 0 %}
     <h2 class="headline">{{ page.headline }}</h2>
     {% endif %}
@@ -8,22 +7,23 @@
       {% if page.invoice.content.size > 0 %}
       <div id="intro" class="intro">{{ page.invoice.content }}</div>
       {% endif %}
-
-{% if outstanding_invoices.size == 0 %}
-      <div class="row">
-        <div class="columns">You have no outstanding invoices.</div>
-      </div>
-      {% else %}
+    </div>
+    {% if outstanding_invoices.size == 0 %}
+    <div class="row">
+      <div class="columns">You have no outstanding invoices.</div>
+    </div>
+    {% else %}
 
 {% if outstanding_invoices.size == 1 %}
 {% for invoice in outstanding_invoices %}
-      <h4 class="padbottomless">{{ invoice.name }}</h4>
-      <table class="table table-striped">
-        <tr>
+    <h4 class="padbottomless">{{ invoice.name }}</h4>
+    <div class="padbottommore">
+      <table class="table-striped" >
+        <thead>
           <th width="12%">Quantity</th>
           <th>Name</th>
           <th class="amount">Amount</th>
-        </tr>
+        </thead>
         {% for item in invoice.items %}
         <tr>
           <td class="invoice-quantity">{{ item.quantity }}</td>
@@ -31,232 +31,221 @@
           <td class="amount">{{ item.amount }}</td>
         </tr>
         {% endfor %}
-        <tr>
+        <tfoot>
           <td colspan="3" class="invoice-total">
-            <span class="label">Total</span>
+            <span class="label secondary">Total</span>
             <span class="price-invoice">{{ invoice.amount_due_format }}</span>
           </td>
-        </tr>
+        </tfoot>
       </table>
-      {% endfor %}
+    </div>
+    {% endfor %}
 
 {% else %}
 
 {% for invoice in outstanding_invoices %}
-      <div class="expander">
-        <h4 class="expander-head">
-          {{ invoice.name }}
-          <span class="expander-sign"> <strong>[ + ]</strong>
-          </span>
-        </h4>
-
-        <div class="expander-content">
-          <!-- EXPANDING CONTENT BEGIN -->
-          <table class="table table-striped">
-            <tr>
-              <th width="12%">Quantity</th>
-              <th>Name</th>
-              <th class="amount">Amount</th>
-            </tr>
-            {% for item in invoice.items %}
-            <tr>
-              <td class="invoice-quantity">{{ item.quantity }}</td>
-              <td>{{ item.name }}</td>
-              <td class="amount">{{ item.amount }}</td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
-      </div>
-      <!-- EXPANDING CONTENT END -->
-      <table class="table">
+    <div class="padbottommore">
+      <h4 class="padbottomless">{{ invoice.name }}</h4>
+      <table class="table-striped" style="margin-bottom: 1rem;">
+        <thead>
+          <th width="12%">Quantity</th>
+          <th>Name</th>
+          <th class="amount">Amount</th>
+        </thead>
+        {% for item in invoice.items %}
         <tr>
+          <td class="invoice-quantity">{{ item.quantity }}</td>
+          <td>{{ item.name }}</td>
+          <td class="amount">{{ item.amount }}</td>
+        </tr>
+        {% endfor %}
+        <tfoot>
           <td colspan="3" class="invoice-total">
-            <span class="label">Total</span>
+            <span class="label secondary">Total</span>
             <span class="price-invoice">{{ invoice.amount_due_format }}</span>
           </td>
-        </table>
-        {% endfor %}
+        </tfoot>
+      </table>
+    </div>
+    {% endfor %}
 {% endif %}
 
 {% form_for invoice_payment %}
-        <div class="form-wrap">
-          <div class="form">
+    <div class="form-wrap">
+      <div class="form">
 
-            <div class="form-errors">{% error_messages_for invoice_payment %}</div>
-            {% if page.invoice.merchant_account.is_test_mode? %}
-            <div class="row">
-              <div class="columns">
-                <span class="red"> <strong>Testing mode:</strong>
-                  Transactions will not be processed. Use your regular credit card to test, you will not actually be charged.
-                </span>
-              </div>
-            </div>
-            {% endif %}
+        <div class="form-errors">{% error_messages_for invoice_payment %}</div>
+        {% if page.invoice.merchant_account.is_test_mode? %}
+        <div class="row">
+          <div class="columns">
+            <span class="red"> <strong>Testing mode:</strong>
+              Transactions will not be processed. Use your regular credit card to test, you will not actually be charged.
+            </span>
+          </div>
+        </div>
+        {% endif %}
 
     {% if outstanding_invoices.size > 1 %}
-            <div class="row">
-              <div class="columns">
-                <label for="invoice_payment_invoice_id">Invoice to pay</label>
-                {% collection_select "invoice_id", outstanding_invoices, "id", "name", class:"select" %}
-              </div>
-            </div>
-            {% else %}
-            <input type="hidden" name="invoice_payment[invoice_id]" id="invoice_payment_invoice_id" value="{{ outstanding_invoices[0].id }}">
-            {% endif %}
-            <div class="row">
-              <div class="columns">
+        <div class="row">
+          <div class="columns">
+            <label for="invoice_payment_invoice_id">Invoice to pay</label>
+            {% collection_select "invoice_id", outstanding_invoices, "id", "name", class:"select" %}
+          </div>
+        </div>
+        {% else %}
+        <input type="hidden" name="invoice_payment[invoice_id]" id="invoice_payment_invoice_id" value="{{ outstanding_invoices[0].id }}">
+        {% endif %}
+        <div class="row">
+          <div class="columns">
 
+            <div class="row">
+
+              <div class="medium-6 columns">
                 <div class="row">
 
                   <div class="medium-6 columns">
-                    <div class="row">
+                    <label for="invoice_payment_first_name">First Name</label>
+                    {% text_field "first_name", class:"text" %}
+                  </div>
+                  <div class="medium-6 columns">
+                    <label for="invoice_payment_last_name">Last Name</label>
+                    {% text_field "last_name", class:"text" %}
+                  </div>
 
-                      <div class="medium-6 columns">
-                        <label for="invoice_payment_first_name">First Name</label>
-                        {% text_field "first_name", class:"text" %}
-                      </div>
-                      <div class="medium-6 columns">
-                        <label for="invoice_payment_last_name">Last Name</label>
-                        {% text_field "last_name", class:"text" %}
-                      </div>
+                </div>
+                <div class="row">
 
-                    </div>
-                    <div class="row">
+                  <div class="columns">
+                    <label for="invoice_payment_billing_address_country_code">Country</label>
+                    {% collection_select "billing_address.country_code", page.invoice.countries, "code", "name", class:"select" %}
+                  </div>
 
-                      <div class="columns">
-                        <label for="invoice_payment_billing_address_country_code">Country</label>
-                        {% collection_select "billing_address.country_code", page.invoice.countries, "code", "name", class:"select" %}
-                      </div>
+                </div>
+                <div class="row">
 
-                    </div>
-                    <div class="row">
-
-                      <div class="columns">
-                        <label for="invoice_payment_billing_address_address1">Address</label>
-                        {% text_field "billing_address.address1", class:"text" %}
+                  <div class="columns">
+                    <label for="invoice_payment_billing_address_address1">Address</label>
+                    {% text_field "billing_address.address1", class:"text" %}
                 {% text_field "billing_address.address2", class:"text" %}
                 {% text_field "billing_address.address3", class:"text not-us-or-canada" %}
-                      </div>
-
-                    </div>
-                    <div class="row">
-
-                      <div class="medium-4 large-4 columns">
-                        <label for="invoice_payment_billing_address_city">City</label>
-                        {% text_field "billing_address.city", class:"text" %}
-                      </div>
-                      <div class="span4 us-or-canada us-only">
-                        <label for="invoice_payment_billing_address_state">State</label>
-                        {% collection_select "billing_address.state", page.invoice.us_states, "code", "name", class:"select" %}
-                      </div>
-                      <div class="span4 us-or-canada canada-only">
-                        <label for="invoice_payment_billing_address_state">State</label>
-                        {% text_field "billing_address.state", class:"text" %}
-                      </div>
-                      <div class="medium-4 large-4 columns">
-                        <label for="invoice_payment_billing_address_zip">Postal code</label>
-                        {% text_field "billing_address.zip", class:"text" %}
-                      </div>
-
-                    </div>
-                    <div class="row">
-
-                      <div class="medium-6 columns">
-                        <label for="invoice_payment_email">Email</label>
-                        {% email_field "email", class:"text" %}
-                      </div>
-                      <div class="medium-6 columns">
-                        <label for="invoice_payment_phone">Phone</label>
-                        {% text_field "billing_address.phone_number", class:"text" %}
-                      </div>
-
-                    </div>
-                    {% if page.invoice.merchant_account.is_paypal_express? %}
-                    <div class="row">
-
-                      <div class="columns">
-                        {% submit_tag "Continue to PayPal", class:"success-button" %}
-                      </div>
-
-                    </div>
-                    <div class="row padtopmore">
-
-                      <div class="columns">{{ page.invoice.merchant_account.accepted_card_icons }}</div>
-
-                    </div>
-                    {% endif %}
-                  </div>
-                  <!-- .medium-6 columns -->
-                  {% if page.invoice.merchant_account.is_paypal_express? == false %}
-                  <div class="medium-6 columns">
-                    <label for="invoice_payment_card_number">Credit card number</label>
-                    {% text_field "card_number", class:"text" %}
                   </div>
 
-                  <div class="medium-6 columns cc">{{ page.invoice.merchant_account.accepted_card_icons }}</div>
-
-                  <div class="medium-3 columns">
-                    <label for="invoice_payment_card_expires_on_1i">Expires</label>
-                    {{ page.invoice.form_card_expires_on }}
-                  </div>
-
-                  <div class="medium-3 columns">
-                    <label for="invoice_payment_card_verification">Security code (on back)</label>
-                    {% text_field "card_verification", class:"text" %}
-                  </div>
-
-                  <div class="medium-6 columns">{% submit_tag "Process Payment", class:"success-button" %}</div>
-
-                  <div class="medium-6 columns">
-                    <div class="form-submit"></div>
-                  </div>
-                  {% endif %}
                 </div>
+                <div class="row">
 
+                  <div class="medium-4 large-4 columns">
+                    <label for="invoice_payment_billing_address_city">City</label>
+                    {% text_field "billing_address.city", class:"text" %}
+                  </div>
+                  <div class="medium-4 large-4 columns us-or-canada us-only">
+                    <label for="invoice_payment_billing_address_state">State</label>
+                    {% collection_select "billing_address.state", page.invoice.us_states, "code", "name", class:"select" %}
+                  </div>
+                  <div class="medium-4 large-4 columns us-or-canada canada-only">
+                    <label for="invoice_payment_billing_address_state">State</label>
+                    {% text_field "billing_address.state", class:"text" %}
+                  </div>
+                  <div class="medium-4 large-4 columns">
+                    <label for="invoice_payment_billing_address_zip">Postal code</label>
+                    {% text_field "billing_address.zip", class:"text" %}
+                  </div>
+
+                </div>
+                <div class="row">
+
+                  <div class="medium-6 columns">
+                    <label for="invoice_payment_email">Email</label>
+                    {% email_field "email", class:"text" %}
+                  </div>
+                  <div class="medium-6 columns">
+                    <label for="invoice_payment_phone">Phone</label>
+                    {% text_field "billing_address.phone_number", class:"text" %}
+                  </div>
+
+                </div>
+                {% if page.invoice.merchant_account.is_paypal_express? %}
+                <div class="row">
+
+                  <div class="columns">{% submit_tag "Continue to PayPal", class:"button" %}</div>
+
+                </div>
+                <div class="row padtopmore">
+
+                  <div class="columns">{{ page.invoice.merchant_account.accepted_card_icons }}</div>
+
+                </div>
+                {% endif %}
               </div>
+              <!-- .medium-6 columns -->
+              {% if page.invoice.merchant_account.is_paypal_express? == false %}
+              <div class="medium-6 columns">
+                <label for="invoice_payment_card_number">Credit card number</label>
+                {% text_field "card_number", class:"text" %}
+              </div>
+
+              <div class="medium-6 columns cc">{{ page.invoice.merchant_account.accepted_card_icons }}</div>
+
+              <div class="medium-3 columns">
+                <label for="invoice_payment_card_expires_on_1i">Expires</label>
+                {{ page.invoice.form_card_expires_on }}
+              </div>
+
+              <div class="medium-3 columns">
+                <label for="invoice_payment_card_verification">Security code (on back)</label>
+                {% text_field "card_verification", class:"text" %}
+              </div>
+
+              <div class="medium-6 columns">{% submit_tag "Process Payment", class:"button" %}</div>
+
+              <div class="medium-6 columns">
+                <div class="form-submit"></div>
+              </div>
+              {% endif %}
             </div>
 
           </div>
         </div>
-        {% endform_for %}
+
+      </div>
+    </div>
+    {% endform_for %}
 
 {% endif %}
 
 
 {% if closed_invoices.size > 0 %}
-        <div class="padbottomless">
-          <h4>Closed invoices</h4>
-        </div>
+    <div class="padbottomless">
+      <h4>Closed invoices</h4>
+    </div>
 
-        <table class="table table-striped">
-          <tr>
-            <th>Invoice</th>
-            <th>Amount</th>
-            <th>Closed on</th>
-            <th>PDF</th>
-          </tr>
-          {% for invoice in closed_invoices %}
-          <tr>
-            <td>{{ invoice.name }}</td>
-            <td>{{ invoice.amount_with_discount_format }}</td>
-            <td>{{ invoice.closed_at | date_to_string }}</td>
-            <td>
-              <a href="{{ invoice.pdf_url }}">PDF</a>
-            </td>
-          </tr>
-          {% endfor %}
-        </table>
-        {% endif %}
+    <table class="table table-striped">
+      <tr>
+        <th>Invoice</th>
+        <th>Amount</th>
+        <th>Closed on</th>
+        <th>PDF</th>
+      </tr>
+      {% for invoice in closed_invoices %}
+      <tr>
+        <td>{{ invoice.name }}</td>
+        <td>{{ invoice.amount_with_discount_format }}</td>
+        <td>{{ invoice.closed_at | date_to_string }}</td>
+        <td>
+          <a href="{{ invoice.pdf_url }}">PDF</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
 
 {% if page.show_stream? %}
 {% include "page_stream" %}
 {% endif %}
-        <script src="/assets/liquid/invoices.js"></script>
-        <script>
+    <script src="/assets/liquid/invoices.js"></script>
+    <script>
   jQuery(function () {
     NB.Liquid.Invoices.init();
   });
 </script>
-      </div>
-    </div>
+  </div>
+</div>
