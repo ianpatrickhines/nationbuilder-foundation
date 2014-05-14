@@ -315,7 +315,7 @@ select {
   #slider-cards .slider-card-profile {
     background: #f2f2f2;
     color: #333333;
-    border-left: 4px solid #d8d8d8;
+    border-left: 4px solid #008cba;
     height: 4.25rem;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -326,7 +326,8 @@ select {
     border-radius: 3px; }
     #slider-cards .slider-card-profile img {
       float: left;
-      margin-right: .5em; }
+      margin-right: .5em;
+      height: 100%; }
     #slider-cards .slider-card-profile .slider-name {
       position: relative;
       line-height: 4.25rem;
