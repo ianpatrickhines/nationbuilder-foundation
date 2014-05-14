@@ -13,7 +13,7 @@ $social-slider-radius: $global-radius !default;
 
 // We use this % to control how much we darken things on hover
 $social-slider-function-factor: -11% !default;
-$social-slider-border-color: scale-color($social-slider-bg, $lightness: $social-slider-function-factor) !default;
+$social-slider-border-color: $primary-color !default;
 
 // We use these to set default inner padding and bottom margin
 $social-slider-margin-bottom: rem-calc(20) !default;
@@ -62,6 +62,7 @@ $social-slider-link-color: inherit !default;
     img {
       float: left;
       margin-right: .5em;
+      height: 100%;
     }
     .slider-name {
       position: relative;
