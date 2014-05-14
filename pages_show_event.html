@@ -65,8 +65,12 @@
     </div>
     <div class="subtext">
       {% for rsvp in page.event.rsvps %}
-        {{ rsvp.signup.smaller_profile_image }}
-        {% endfor %}
+        {% if rsvp.signup.has_facebook_info? %}
+        <img src="http://graph.facebook.com/{{ rsvp.signup.facebook_uid }}/picture?width=24&height=24" alt="Profile Photo" border="0" width="24" height="24" class="profile_image" original-title="{{ rsvp.signup.full_name_or_friend }}">
+        {% else %}
+        <img src="{{ rsvp.signup.profile_image_url }}" alt="Profile Photo" border="0" width="24" height="24" class="profile_image" original-title="{{ rsvp.signup.full_name_or_friend }}">
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
   {% endif %}
@@ -141,8 +145,12 @@
     </div>
     <div class="subtext">
       {% for rsvp in page.event.rsvps %}
-    {{ rsvp.signup.smaller_profile_image }}
-    {% endfor %}
+        {% if rsvp.signup.has_facebook_info? %}
+        <img src="http://graph.facebook.com/{{ rsvp.signup.facebook_uid }}/picture?width=24&height=24" alt="Profile Photo" border="0" width="24" height="24" class="profile_image" original-title="{{ rsvp.signup.full_name_or_friend }}">
+        {% else %}
+        <img src="{{ rsvp.signup.profile_image_url }}" alt="Profile Photo" border="0" width="24" height="24" class="profile_image" original-title="{{ rsvp.signup.full_name_or_friend }}">
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
   {% endif %}
