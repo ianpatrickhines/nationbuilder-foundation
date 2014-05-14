@@ -48,7 +48,11 @@
         {% if activity_type == activity.type_name %}
         <div class="slider-card" data-id="{{ activity.signup.profile_url }}">
           <div class="slider-card-profile clearfix">
-            {{ activity.signup.profile_image }}
+            {% if activity.signup.has_facebook_info? %}
+            <img src="http://graph.facebook.com/{{ activity.signup.facebook_uid }}/picture?width=72&height=72" alt="Profile Photo">
+            {% else %}
+            <img src="{{ activity.signup.profile_image_url }}" alt="Profile Photo">
+            {% endif %}
             <span class="slider-name">
               {% if activity.data.is_organization == true %}
               {{ activity.signup.employer }}
