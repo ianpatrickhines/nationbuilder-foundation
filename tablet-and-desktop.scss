@@ -5,6 +5,7 @@
 
 // Colors
 
+@import "global";
 @import "colors";
 @import "countdown_timer";
 @import "page_stream";
@@ -16,7 +17,7 @@
 
 #user-nav img {
   max-height: 24px;
-  padding-right: 5px;
+  margin-right: 5px;
 }
 
 // Global Structure
