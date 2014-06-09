@@ -254,3 +254,14 @@ small, small a.flash-close {
     display: inline;
   }
 }
+
+.within {
+  display: block;
+  padding-bottom: 1rem;
+  text-align: center;
+  @media #{$large-up} {
+    display: inline;
+    padding-bottom: 0;
+    text-align: left;
+  }
+}

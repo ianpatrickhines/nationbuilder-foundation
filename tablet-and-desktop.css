@@ -528,3 +528,13 @@ small, small a.flash-close {
 
 .inline-labels input, .inline-labels label {
   display: inline; }
+
+.within {
+  display: block;
+  padding-bottom: 1rem;
+  text-align: center; }
+  @media only screen and (min-width: 64.063em) {
+    .within {
+      display: inline;
+      padding-bottom: 0;
+      text-align: left; } }
