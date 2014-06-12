@@ -538,3 +538,6 @@ small, small a.flash-close {
       display: inline;
       padding-bottom: 0;
       text-align: left; } }
+
+.fb_iframe_widget {
+  line-height: 11px; }
