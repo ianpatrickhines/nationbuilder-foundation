@@ -4216,6 +4216,10 @@ meta.foundation-mq-topbar {
     color: white; }
   .no-js .top-bar-section .has-dropdown:hover > .dropdown {
     display: block; } }
+.name h1 img {
+  height: 1.3125rem;
+  margin-top: -0.25rem; }
+
 /* Colours */
 .text-left {
   text-align: left !important; }
@@ -4795,6 +4799,10 @@ blockquote p {
     text-align: justify !important; } }
 /* Colours */
 /* Colours */
+.name h1 img {
+  height: 1.3125rem;
+  margin-top: -0.25rem; }
+
 .off-canvas-wrap {
   -webkit-backface-visibility: hidden;
   position: relative;

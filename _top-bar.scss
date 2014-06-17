@@ -622,3 +622,10 @@ $topbar-arrows: true !default; //Set false to remove the triangle icon from the 
     }
   }
 }
+
+// Logo height in top bar
+
+.name h1 img {
+  height: rem-calc($topbar-height) - 1.5rem;
+  margin-top: -0.25rem;
+}
