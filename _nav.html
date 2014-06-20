@@ -2,11 +2,19 @@
   <nav class="top-bar" data-topbar>
     <ul class="title-area">
       <!-- Title Area -->
+      {% if site.has_meta_image? %}
+      <li class="name">
+        <h1>
+          <a href="/"><img src="{{ site.meta_image_url }}"></a>
+        </h1>
+      </li>
+      {% else %}
       <li class="name">
         <h1>
           <a href="/">{{ site.long_name }}</a>
         </h1>
       </li>
+      {% endif %}
       <li class="toggle-topbar menu-icon">
         <a href="#">
           <span>menu</span>
