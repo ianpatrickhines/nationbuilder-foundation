@@ -2799,7 +2799,7 @@ kbd {
   border-radius: 3px; }
 
 /* Colours */
-.label {
+.label, .page_tag_warning {
   font-weight: normal;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   text-align: center;
@@ -2812,20 +2812,22 @@ kbd {
   padding: 0.25rem 0.5rem 0.375rem;
   font-size: 0.6875rem;
   background-color: #008cba;
-  color: white; }
-  .label.radius {
+  color: white;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+  .label.radius, .page_tag_warning.radius {
     -webkit-border-radius: 3px;
     border-radius: 3px; }
-  .label.round {
+  .label.round, .page_tag_warning.round {
     -webkit-border-radius: 1000px;
     border-radius: 1000px; }
-  .label.alert {
+  .label.alert, .page_tag_warning.alert {
     background-color: #f04124;
     color: white; }
-  .label.success {
+  .label.success, .page_tag_warning.success {
     background-color: #43ac6a;
     color: white; }
-  .label.secondary {
+  .label.secondary, .page_tag_warning.secondary {
     background-color: #e7e7e7;
     color: #333333; }
 

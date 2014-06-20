@@ -88,10 +88,11 @@ $label-font-family: $body-font-family !default;
 
 @include exports("label") {
   @if $include-html-label-classes {
-    .label {
+    .label, .page_tag_warning {
       @include label-base;
       @include label-size;
       @include label-style;
+      @include radius($global-radius);
 
       &.radius { @include label-style(false, true); }
       &.round { @include label-style(false, $radius:1000px); }
