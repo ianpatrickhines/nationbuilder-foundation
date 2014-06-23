@@ -1,0 +1,9 @@
+// Extends Foundation’s button styles to NationBuilder’s buttons
+
+@import
+  "global",
+  "buttons";
+
+.submit-button, .submit-link, .success-link {
+  @extend .button;
+}

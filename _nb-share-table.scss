@@ -1,0 +1,34 @@
+// Share table == layout for share buttons at the bottom of most pages
+
+@import "global";
+
+.sharetable {
+  min-height: 39px;
+  .facebook-cell,
+  .twitter-cell,
+  .gplus-cell {
+    float: left;
+    text-align: left;
+    vertical-align: top;
+  }
+  .facebook-cell {
+    padding: 0 20px 15px 0;
+    width: 200px;
+  }
+  .twitter-cell {
+    padding: 0 20px 0 0;
+    width: 150px;
+
+    a {
+      text-indent: -999em;
+      display: inline-block;
+    }
+  }
+  .gplus-cell {
+    width: 52px;
+  }
+}
+
+.like-page {
+  margin-top: 15px;
+}

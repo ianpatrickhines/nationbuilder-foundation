@@ -1,0 +1,50 @@
+// Padding
+
+@import "global";
+
+#columns-1, #columns-2 {
+  padding-top: 1em;
+}
+
+.table {
+  display: table;
+  margin: 0 auto;
+}
+
+.big-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.padtopless {
+  padding-top: 5px;
+}
+
+.padtop {
+  padding-top: 10px;
+}
+
+.padtopmore {
+  padding-top: 15px;
+}
+
+.padbottomless {
+  padding-bottom: 5px;
+}
+
+.padbottom {
+  padding-bottom: 10px;
+}
+
+.padbottommore {
+  padding-bottom: 15px;
+}
+
+.fb_iframe_widget {
+  line-height: 11px;
+}

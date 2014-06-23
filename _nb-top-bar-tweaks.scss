@@ -1,0 +1,15 @@
+// Fixes the default height and positioning of the automatically rendered site logo (meta image) in the top bar
+
+@import
+  "global",
+  "top-bar";
+
+.name h1 img {
+  height: rem-calc($topbar-height) - 1.5rem;
+  margin-top: -0.25rem;
+}
+
+#user-nav img {
+  max-height: 24px;
+  margin-right: 5px;
+}

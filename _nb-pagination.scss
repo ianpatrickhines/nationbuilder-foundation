@@ -1,0 +1,22 @@
+// You’re not able to edit the way NationBuilder outputs its HTML for pagination, so this adapts Foundation’s CSS to that HTML structure
+
+@import
+  "global",
+  "pagination";
+
+div.pagination ul {
+  @include pagination;
+
+  li {
+    &.active { @include pagination-current-item(); }
+    &.disabled { @include pagination-unavailable-item(); }
+  }
+}
+
+.pagination-centered {
+  @include pagination-container(true);
+
+  div.pagination ul {
+    @include pagination(true, false);
+  }
+}

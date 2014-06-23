@@ -3,26 +3,33 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Begin Page Title -->
   <title>{{ page_title }}</title>
-  <link rel="stylesheet" href="foundation.css" />
-  <link rel="stylesheet" href="tablet-and-desktop.css" />
+  <!-- End Page Title -->
+
+  <!-- Begin Stylesheets -->
+  <link rel="stylesheet" href="style.min.css" />
   {% comment %}Remove this stylesheet before using this theme{% endcomment %}<link href="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.css" rel="stylesheet">
+  <!-- End Stylesheets -->
+
   <script src="modernizr.js"></script>
 
+  <!-- Begin NationBuilder’s “Content For Header” Include -->
   {{ content_for_header }}
 
   <script type="text/javascript">
     NB.appConfig.userIsLoggedIn = {{request.logged_in?}};
   </script>
+  <!-- End NationBuilder’s “Content For Header” Include -->
 </head>
 <body id="{{ page.slug }}">
 
-  <!-- Nav Bar -->
+  <!-- Begin Nav Bar -->
   {% include "nav" %}
-  <!-- End Nav -->
+  <!-- End Nav Bar -->
 
-  <!-- Main Page Content and Sidebar -->
-
+  <!-- Begin Main Page Content and Sidebar -->
   <div id="{% if request.is_sidebar? %}columns-2{% else %}columns-1{% endif %}">
       {% if request.is_sidebar? %}
       {% include "columns_2" %}
@@ -30,11 +37,9 @@
       {% include "columns_1" %}
       {% endif %}
   </div>
-
   <!-- End Main Content and Sidebar -->
 
-  <!-- Footer -->
-
+  <!-- Begin Footer -->
   <footer>
     <div class="row">
       <div class="large-12 columns">
@@ -82,23 +87,9 @@
       </div>
     </div>
   </footer>
-  {% if site.has_background_image? %}
-  <!--[if lt IE 9]>
-  <script type="text/javascript" src="/javascripts/jquery.backstretch.min.js"></script>
-  <script type="text/javascript">
-      jQuery.backstretch("{{ site.background_image_url }}", {speed: 0});
-    </script>
-  <![endif]-->
-  <style>
-      body {
-        background: url('{{ site.background_image_url }}') no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-      }
-  </style>
-  {% endif %}
+  <!-- End Footer -->
+
+  <!-- Begin Javascript -->
   <script src="foundation.min.js"></script>
   <script>$(document).foundation();</script>
   {% comment %}Remove this javascript before using this theme{% endcomment %}<script src="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.js"></script>
@@ -116,6 +107,10 @@
       s.parentNode.insertBefore(t, s);
     })();
   </script>
+  <!-- End Javascript -->
+
+  <!-- Begin NationBuilder’s “Content For Footer” Include -->
   {{ content_for_footer }}
+  <!-- End NationBuilder’s “Content For Footer” Include -->
 </body>
 </html>

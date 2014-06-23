@@ -1,0 +1,9 @@
+// Applies label styles to NationBuilder’s “.page_tag_warning”, which is automatically applied to suggestion pages
+
+@import
+  "global",
+  "labels";
+
+.page_tag_warning {
+  @extend .label;
+}

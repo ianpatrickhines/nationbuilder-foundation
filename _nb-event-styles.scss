@@ -1,0 +1,16 @@
+// Event Page Styles
+
+@import "global";
+
+.event-detail {
+  padding-bottom: 1rem;
+
+  .subhead {
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+  }
+
+  .subtext {
+    line-height: 1.2em;
+  }
+}

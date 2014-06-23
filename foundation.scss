@@ -7,6 +7,7 @@
 
 // Behold, here are all the Foundation components.
 @import
+  "grid",
   "accordion",
   "alert-boxes",
   "block-grid",
@@ -18,7 +19,7 @@
   "dropdown-buttons",
   "flex-video",
   "forms",
-  "grid",
+  "icon-bar",
   "inline-lists",
   "joyride",
   "keystrokes",
@@ -29,11 +30,12 @@
   "panels",
   "pricing-tables",
   "progress-bars",
+  "range-slider",
   "reveal",
   "side-nav",
   "split-buttons",
   "sub-nav",
-  "switch",
+  "switches",
   "tables",
   "tabs",
   "thumbs",
@@ -41,4 +43,5 @@
   "top-bar",
   "type",
   "offcanvas",
-  "visibility";
+  "visibility",
+  "custom";

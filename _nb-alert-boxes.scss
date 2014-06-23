@@ -1,0 +1,62 @@
+// NationBuilder Alert Styles
+
+@import
+  "global",
+  "grid",
+  "alert-boxes";
+
+#flash {
+  margin-bottom: 1em;
+  background-color: $alert-color;
+}
+
+.notice {
+  border: none;
+  display: block;
+  font-weight: normal;
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding: 0.875rem 1.5rem 0.875rem 0.875rem;
+  background-color: $alert-color;
+  font-size: 0.8125rem;
+  color: #333;
+  max-width: $row-width;
+  margin: 0 auto;
+  border: none;
+}
+
+.flash-close {
+  font-size: 1.375rem;
+  padding: 0 9px 6px 4px;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  margin: -0.6875rem 0 0 0;
+  right: 0.25rem;
+  color: #333333;
+  opacity: 0.3;
+  height: 1.375rem;
+  background: transparent;
+}
+
+.flash-close:hover {
+  background: transparent;
+}
+
+.success {
+  background-color: $success-color !important;
+  color: white !important;
+}
+
+.error {
+  background-color: $warning-color !important;
+  color: white !important;
+}
+
+.alert-box.error {
+  border-color: $warning-color;
+}
+
+.alert-box .row {
+  max-width: $row-width;
+}

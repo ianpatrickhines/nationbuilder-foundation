@@ -15,7 +15,7 @@ $label-radius: $global-radius !default;
 
 // We use these to style the label text
 $label-font-sizing: rem-calc(11) !default;
-$label-font-weight: normal !default;
+$label-font-weight: $font-weight-normal !default;
 $label-font-color: #333 !default;
 $label-font-color-alt: #fff !default;
 $label-font-family: $body-font-family !default;
@@ -88,11 +88,10 @@ $label-font-family: $body-font-family !default;
 
 @include exports("label") {
   @if $include-html-label-classes {
-    .label, .page_tag_warning {
+    .label {
       @include label-base;
       @include label-size;
       @include label-style;
-      @include radius($global-radius);
 
       &.radius { @include label-style(false, true); }
       &.round { @include label-style(false, $radius:1000px); }

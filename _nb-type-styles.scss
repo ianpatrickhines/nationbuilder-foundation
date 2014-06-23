@@ -1,0 +1,29 @@
+// Miscellaneous typography changes
+
+@import "global";
+
+.label a {
+  color: inherit;
+}
+
+.byline {
+  font-size: 0.8em;
+  padding-bottom: 1rem;
+}
+
+.inline-labels {
+  input, label {
+    display: inline;
+  }
+}
+
+.within {
+  display: block;
+  padding-bottom: 1rem;
+  text-align: center;
+  @media #{$large-up} {
+    display: inline;
+    padding-bottom: 0;
+    text-align: left;
+  }
+}

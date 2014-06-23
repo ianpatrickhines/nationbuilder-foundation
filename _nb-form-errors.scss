@@ -1,0 +1,19 @@
+// NB Form Errors Styles
+
+@import "global";
+
+.form-errors {
+  background-color: $alert-color;
+  color: white;
+
+  h2 {
+    font-size: 1.5rem;
+    padding: 1rem;
+    color: white !important;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding: 1rem;
+  }
+}
