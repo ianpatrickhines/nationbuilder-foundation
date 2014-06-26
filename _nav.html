@@ -88,9 +88,22 @@
             </li>
             {% endif %}
             {% for child2 in child.nav_children %}
-            <li>
-              <a href="{{ child2.url }}">{{ child2.name }}</a>
-            </li>
+              {% if child2.nav_children.size > 0 %}
+              <li class="has-dropdown">
+                <a href="{{ child2.url }}">{{ child2.name }}</a>
+                <ul class="dropdown">
+                  {% for child3 in child2.nav_children %}
+                  <li>
+                    <a href="{{ child3.url }}">{{ child3.name }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% else %}
+                <li>
+                  <a href="{{ child2.url }}">{{ child2.name }}</a>
+                </li>
+              {% endif %}
             {% endfor %}
           </ul>
         </li>
