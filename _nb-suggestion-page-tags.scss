@@ -4,6 +4,12 @@
   "global",
   "labels";
 
-.page_tag_warning {
+.page_tag_warning, {
   @extend .label;
+  @extend .label.secondary;
+}
+
+.page_tag_notice {
+  @extend .label;
+  @extend .label.success;
 }
