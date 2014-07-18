@@ -2898,7 +2898,7 @@ kbd {
   background: white;
   z-index: 50;
   min-width: 100%;
-  padding: 10px; }
+  padding: 0 !important; }
   [data-magellan-expedition] .sub-nav, [data-magellan-expedition-clone] .sub-nav {
     margin-bottom: 0; }
     [data-magellan-expedition] .sub-nav dd, [data-magellan-expedition-clone] .sub-nav dd {
