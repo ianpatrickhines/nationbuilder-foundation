@@ -13,52 +13,24 @@
   {% endif %}
 
   {% if page.donation.has_amount_goal? %}
-      <div class="row">
-        <div class="medium-6 columns">
-          <div class="progress">
-            <span class="meter success" style="width: {{ page.donation.percent_of_amount_goal | times:100 }}%;">
-              {% comment %}{% if page.donations_count < 1 %}
-          <div class="bar-text">JUST STARTED</div>
-              {% else %}
-              <div class="bar-text">{{ page.donations_amount_format }} raised</div>
-              {% endif %}{% endcomment %}
-            </span>
+        <div class="row">
+          <div class="small-11 medium-11 large-11 small-centered text-center columns padbottommore"> <strong>{{ page.donations_amount_format }} raised</strong>
+            (GOAL: {{ page.donation.amount_goal_format | number_with_commas }})
+          </div>
+          <div class="nice round progress small-11 medium-11 large-11 small-centered columns">
+            <span class="meter" style="width: {{ page.donation.percent_of_amount_goal | times:100 }}%"></span>
           </div>
         </div>
-
-        <div class="medium-6 columns">
-          {% if page.donations_count < 1 %}
-      <div class="bar-text">JUST STARTED</div>
-          {% else %}
-          <div class="bar-text">{{ page.donations_amount_format }} raised</div>
-          {% endif %}
-          <div class="bar-goal">GOAL: {{ page.donation.amount_goal_format }}</div>
-        </div>
-      </div>
-      {% elsif page.donation.has_donor_goal? %}
-      <div class="row">
-        <div class="medium-6 columns">
-          <div class="progress">
-            <span class="meter success" style="width: {{ page.donation.percent_of_amount_goal | times:100 }}%;">
-              {% comment %}{% if page.donations_count < 1 %}
-          <div class="bar-text">JUST STARTED</div>
-              {% else %}
-              <div class="bar-text">{{ page.donations_amount_format }} raised</div>
-              {% endif %}{% endcomment %}
-            </span>
+        {% elsif page.donation.has_donor_goal? %}
+        <div class="row">
+          <div class="small-11 medium-11 large-11 small-centered text-center columns padbottommore">
+            <strong>GOAL: {{ page.donation.amount_goal_format | number_with_commas }}</strong>
+          </div>
+          <div class="nice round progress small-11 medium-11 large-11 small-centered columns">
+            <span class="meter" style="width: {{ page.donation.percent_of_donor_goal | times:100 }}%"></span>
           </div>
         </div>
-
-        <div class="medium-6 columns">
-          {% if page.donations_count < 1 %}
-      <div class="bar-text">JUST STARTED</div>
-          {% else %}
-          <div class="bar-text">{{ page.donations_amount_format }} raised</div>
-          {% endif %}
-          <div class="bar-goal">GOAL: {{ page.donation.amount_goal_format }}</div>
-        </div>
-      </div>
-      {% endif %}
+        {% endif %}
 
   {% form_for donation autocomplete:off %}
       <div class="form-wrap">
