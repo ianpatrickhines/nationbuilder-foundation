@@ -1514,7 +1514,7 @@ select {
       content: " ";
       margin: 0; }
 
-button, .button, .submit-button, .submit-link, .success-link {
+button, .button {
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
@@ -1537,117 +1537,117 @@ button, .button, .submit-button, .submit-link, .success-link {
   border-color: #007095;
   color: white;
   transition: background-color 300ms ease-out; }
-  button:hover, button:focus, .button:hover, .submit-button:hover, .submit-link:hover, .success-link:hover, .button:focus, .submit-button:focus, .submit-link:focus, .success-link:focus {
+  button:hover, button:focus, .button:hover, .button:focus {
     background-color: #007095; }
-  button:hover, button:focus, .button:hover, .submit-button:hover, .submit-link:hover, .success-link:hover, .button:focus, .submit-button:focus, .submit-link:focus, .success-link:focus {
+  button:hover, button:focus, .button:hover, .button:focus {
     color: white; }
-  button.secondary, .button.secondary, .secondary.submit-button, .secondary.submit-link, .secondary.success-link {
+  button.secondary, .button.secondary {
     background-color: #e7e7e7;
     border-color: #007095;
     color: #333333; }
-    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .secondary.submit-button:hover, .secondary.submit-link:hover, .secondary.success-link:hover, .button.secondary:focus, .secondary.submit-button:focus, .secondary.submit-link:focus, .secondary.success-link:focus {
+    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
       background-color: #007095; }
-    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .secondary.submit-button:hover, .secondary.submit-link:hover, .secondary.success-link:hover, .button.secondary:focus, .secondary.submit-button:focus, .secondary.submit-link:focus, .secondary.success-link:focus {
+    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
       color: #333333; }
-  button.success, .button.success, .success.submit-button, .success.submit-link, .success.success-link {
+  button.success, .button.success {
     background-color: #43ac6a;
     border-color: #007095;
     color: white; }
-    button.success:hover, button.success:focus, .button.success:hover, .success.submit-button:hover, .success.submit-link:hover, .success.success-link:hover, .button.success:focus, .success.submit-button:focus, .success.submit-link:focus, .success.success-link:focus {
+    button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
       background-color: #007095; }
-    button.success:hover, button.success:focus, .button.success:hover, .success.submit-button:hover, .success.submit-link:hover, .success.success-link:hover, .button.success:focus, .success.submit-button:focus, .success.submit-link:focus, .success.success-link:focus {
+    button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
       color: white; }
-  button.alert, .button.alert, .alert.submit-button, .alert.submit-link, .alert.success-link {
+  button.alert, .button.alert {
     background-color: #f04124;
     border-color: #007095;
     color: white; }
-    button.alert:hover, button.alert:focus, .button.alert:hover, .alert.submit-button:hover, .alert.submit-link:hover, .alert.success-link:hover, .button.alert:focus, .alert.submit-button:focus, .alert.submit-link:focus, .alert.success-link:focus {
+    button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
       background-color: #007095; }
-    button.alert:hover, button.alert:focus, .button.alert:hover, .alert.submit-button:hover, .alert.submit-link:hover, .alert.success-link:hover, .button.alert:focus, .alert.submit-button:focus, .alert.submit-link:focus, .alert.success-link:focus {
+    button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
       color: white; }
-  button.large, .button.large, .large.submit-button, .large.submit-link, .large.success-link {
+  button.large, .button.large {
     padding-top: 1.125rem;
     padding-right: 2.25rem;
     padding-bottom: 1.1875rem;
     padding-left: 2.25rem;
     font-size: 1.25rem; }
-  button.small, .button.small, .small.submit-button, .small.submit-link, .small.success-link {
+  button.small, .button.small {
     padding-top: 0.875rem;
     padding-right: 1.75rem;
     padding-bottom: 0.9375rem;
     padding-left: 1.75rem;
     font-size: 0.8125rem; }
-  button.tiny, .button.tiny, .tiny.submit-button, .tiny.submit-link, .tiny.success-link {
+  button.tiny, .button.tiny {
     padding-top: 0.625rem;
     padding-right: 1.25rem;
     padding-bottom: 0.6875rem;
     padding-left: 1.25rem;
     font-size: 0.6875rem; }
-  button.expand, .button.expand, .expand.submit-button, .expand.submit-link, .expand.success-link {
+  button.expand, .button.expand {
     padding-right: 0;
     padding-left: 0;
     width: 100%; }
-  button.left-align, .button.left-align, .left-align.submit-button, .left-align.submit-link, .left-align.success-link {
+  button.left-align, .button.left-align {
     text-align: left;
     text-indent: 0.75rem; }
-  button.right-align, .button.right-align, .right-align.submit-button, .right-align.submit-link, .right-align.success-link {
+  button.right-align, .button.right-align {
     text-align: right;
     padding-right: 0.75rem; }
-  button.radius, .button.radius, .radius.submit-button, .radius.submit-link, .radius.success-link {
+  button.radius, .button.radius {
     border-radius: 3px; }
-  button.round, .button.round, .round.submit-button, .round.submit-link, .round.success-link {
+  button.round, .button.round {
     border-radius: 1000px; }
-  button.disabled, button[disabled], .button.disabled, .disabled.submit-button, .disabled.submit-link, .disabled.success-link, .button[disabled], [disabled].submit-button, [disabled].submit-link, [disabled].success-link {
+  button.disabled, button[disabled], .button.disabled, .button[disabled] {
     background-color: #008cba;
     border-color: #007095;
     color: white;
     cursor: default;
     opacity: 0.7;
     box-shadow: none; }
-    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .disabled.submit-button:hover, .disabled.submit-link:hover, .disabled.success-link:hover, .button.disabled:focus, .disabled.submit-button:focus, .disabled.submit-link:focus, .disabled.success-link:focus, .button[disabled]:hover, [disabled].submit-button:hover, [disabled].submit-link:hover, [disabled].success-link:hover, .button[disabled]:focus, [disabled].submit-button:focus, [disabled].submit-link:focus, [disabled].success-link:focus {
+    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
       background-color: #007095; }
-    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .disabled.submit-button:hover, .disabled.submit-link:hover, .disabled.success-link:hover, .button.disabled:focus, .disabled.submit-button:focus, .disabled.submit-link:focus, .disabled.success-link:focus, .button[disabled]:hover, [disabled].submit-button:hover, [disabled].submit-link:hover, [disabled].success-link:hover, .button[disabled]:focus, [disabled].submit-button:focus, [disabled].submit-link:focus, [disabled].success-link:focus {
+    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
       color: white; }
-    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .disabled.submit-button:hover, .disabled.submit-link:hover, .disabled.success-link:hover, .button.disabled:focus, .disabled.submit-button:focus, .disabled.submit-link:focus, .disabled.success-link:focus, .button[disabled]:hover, [disabled].submit-button:hover, [disabled].submit-link:hover, [disabled].success-link:hover, .button[disabled]:focus, [disabled].submit-button:focus, [disabled].submit-link:focus, [disabled].success-link:focus {
+    button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
       background-color: #008cba; }
-    button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .disabled.secondary.submit-button, .disabled.secondary.submit-link, .disabled.secondary.success-link, .button[disabled].secondary, [disabled].secondary.submit-button, [disabled].secondary.submit-link, [disabled].secondary.success-link {
+    button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .button[disabled].secondary {
       background-color: #e7e7e7;
       border-color: #007095;
       color: #333333;
       cursor: default;
       opacity: 0.7;
       box-shadow: none; }
-      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .disabled.secondary.submit-button:hover, .disabled.secondary.submit-link:hover, .disabled.secondary.success-link:hover, .button.disabled.secondary:focus, .disabled.secondary.submit-button:focus, .disabled.secondary.submit-link:focus, .disabled.secondary.success-link:focus, .button[disabled].secondary:hover, [disabled].secondary.submit-button:hover, [disabled].secondary.submit-link:hover, [disabled].secondary.success-link:hover, .button[disabled].secondary:focus, [disabled].secondary.submit-button:focus, [disabled].secondary.submit-link:focus, [disabled].secondary.success-link:focus {
+      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
         background-color: #007095; }
-      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .disabled.secondary.submit-button:hover, .disabled.secondary.submit-link:hover, .disabled.secondary.success-link:hover, .button.disabled.secondary:focus, .disabled.secondary.submit-button:focus, .disabled.secondary.submit-link:focus, .disabled.secondary.success-link:focus, .button[disabled].secondary:hover, [disabled].secondary.submit-button:hover, [disabled].secondary.submit-link:hover, [disabled].secondary.success-link:hover, .button[disabled].secondary:focus, [disabled].secondary.submit-button:focus, [disabled].secondary.submit-link:focus, [disabled].secondary.success-link:focus {
+      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
         color: #333333; }
-      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .disabled.secondary.submit-button:hover, .disabled.secondary.submit-link:hover, .disabled.secondary.success-link:hover, .button.disabled.secondary:focus, .disabled.secondary.submit-button:focus, .disabled.secondary.submit-link:focus, .disabled.secondary.success-link:focus, .button[disabled].secondary:hover, [disabled].secondary.submit-button:hover, [disabled].secondary.submit-link:hover, [disabled].secondary.success-link:hover, .button[disabled].secondary:focus, [disabled].secondary.submit-button:focus, [disabled].secondary.submit-link:focus, [disabled].secondary.success-link:focus {
+      button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
         background-color: #e7e7e7; }
-    button.disabled.success, button[disabled].success, .button.disabled.success, .disabled.success.submit-button, .disabled.success.submit-link, .disabled.success.success-link, .button[disabled].success, [disabled].success.submit-button, [disabled].success.submit-link, [disabled].success.success-link {
+    button.disabled.success, button[disabled].success, .button.disabled.success, .button[disabled].success {
       background-color: #43ac6a;
       border-color: #007095;
       color: white;
       cursor: default;
       opacity: 0.7;
       box-shadow: none; }
-      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .disabled.success.submit-button:hover, .disabled.success.submit-link:hover, .disabled.success.success-link:hover, .button.disabled.success:focus, .disabled.success.submit-button:focus, .disabled.success.submit-link:focus, .disabled.success.success-link:focus, .button[disabled].success:hover, [disabled].success.submit-button:hover, [disabled].success.submit-link:hover, [disabled].success.success-link:hover, .button[disabled].success:focus, [disabled].success.submit-button:focus, [disabled].success.submit-link:focus, [disabled].success.success-link:focus {
+      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
         background-color: #007095; }
-      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .disabled.success.submit-button:hover, .disabled.success.submit-link:hover, .disabled.success.success-link:hover, .button.disabled.success:focus, .disabled.success.submit-button:focus, .disabled.success.submit-link:focus, .disabled.success.success-link:focus, .button[disabled].success:hover, [disabled].success.submit-button:hover, [disabled].success.submit-link:hover, [disabled].success.success-link:hover, .button[disabled].success:focus, [disabled].success.submit-button:focus, [disabled].success.submit-link:focus, [disabled].success.success-link:focus {
+      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
         color: white; }
-      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .disabled.success.submit-button:hover, .disabled.success.submit-link:hover, .disabled.success.success-link:hover, .button.disabled.success:focus, .disabled.success.submit-button:focus, .disabled.success.submit-link:focus, .disabled.success.success-link:focus, .button[disabled].success:hover, [disabled].success.submit-button:hover, [disabled].success.submit-link:hover, [disabled].success.success-link:hover, .button[disabled].success:focus, [disabled].success.submit-button:focus, [disabled].success.submit-link:focus, [disabled].success.success-link:focus {
+      button.disabled.success:hover, button.disabled.success:focus, button[disabled].success:hover, button[disabled].success:focus, .button.disabled.success:hover, .button.disabled.success:focus, .button[disabled].success:hover, .button[disabled].success:focus {
         background-color: #43ac6a; }
-    button.disabled.alert, button[disabled].alert, .button.disabled.alert, .disabled.alert.submit-button, .disabled.alert.submit-link, .disabled.alert.success-link, .button[disabled].alert, [disabled].alert.submit-button, [disabled].alert.submit-link, [disabled].alert.success-link {
+    button.disabled.alert, button[disabled].alert, .button.disabled.alert, .button[disabled].alert {
       background-color: #f04124;
       border-color: #007095;
       color: white;
       cursor: default;
       opacity: 0.7;
       box-shadow: none; }
-      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .disabled.alert.submit-button:hover, .disabled.alert.submit-link:hover, .disabled.alert.success-link:hover, .button.disabled.alert:focus, .disabled.alert.submit-button:focus, .disabled.alert.submit-link:focus, .disabled.alert.success-link:focus, .button[disabled].alert:hover, [disabled].alert.submit-button:hover, [disabled].alert.submit-link:hover, [disabled].alert.success-link:hover, .button[disabled].alert:focus, [disabled].alert.submit-button:focus, [disabled].alert.submit-link:focus, [disabled].alert.success-link:focus {
+      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus {
         background-color: #007095; }
-      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .disabled.alert.submit-button:hover, .disabled.alert.submit-link:hover, .disabled.alert.success-link:hover, .button.disabled.alert:focus, .disabled.alert.submit-button:focus, .disabled.alert.submit-link:focus, .disabled.alert.success-link:focus, .button[disabled].alert:hover, [disabled].alert.submit-button:hover, [disabled].alert.submit-link:hover, [disabled].alert.success-link:hover, .button[disabled].alert:focus, [disabled].alert.submit-button:focus, [disabled].alert.submit-link:focus, [disabled].alert.success-link:focus {
+      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus {
         color: white; }
-      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .disabled.alert.submit-button:hover, .disabled.alert.submit-link:hover, .disabled.alert.success-link:hover, .button.disabled.alert:focus, .disabled.alert.submit-button:focus, .disabled.alert.submit-link:focus, .disabled.alert.success-link:focus, .button[disabled].alert:hover, [disabled].alert.submit-button:hover, [disabled].alert.submit-link:hover, [disabled].alert.success-link:hover, .button[disabled].alert:focus, [disabled].alert.submit-button:focus, [disabled].alert.submit-link:focus, [disabled].alert.success-link:focus {
+      button.disabled.alert:hover, button.disabled.alert:focus, button[disabled].alert:hover, button[disabled].alert:focus, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert:hover, .button[disabled].alert:focus {
         background-color: #f04124; }
 
 button::-moz-focus-inner {
@@ -1655,7 +1655,7 @@ button::-moz-focus-inner {
   padding: 0; }
 
 @media only screen and (min-width: 40.063em) {
-  button, .button, .submit-button, .submit-link, .success-link {
+  button, .button {
     display: inline-block; } }
 .button-group {
   list-style: none;
@@ -1669,101 +1669,101 @@ button::-moz-focus-inner {
   .button-group > li {
     margin: 0;
     float: left; }
-    .button-group > li > button, .button-group > li .button, .button-group > li .submit-button, .button-group > li .submit-link, .button-group > li .success-link {
+    .button-group > li > button, .button-group > li .button {
       border-left: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group > li:first-child button, .button-group > li:first-child .button, .button-group > li:first-child .submit-button, .button-group > li:first-child .submit-link, .button-group > li:first-child .success-link {
+    .button-group > li:first-child button, .button-group > li:first-child .button {
       border-left: 0; }
     .button-group > li:first-child {
       margin-left: 0; }
-  .button-group.radius > * > button, .button-group.radius > * .button, .button-group.radius > * .submit-button, .button-group.radius > * .submit-link, .button-group.radius > * .success-link {
+  .button-group.radius > * > button, .button-group.radius > * .button {
     border-left: 1px solid;
     border-color: rgba(255, 255, 255, 0.5); }
-  .button-group.radius > *:first-child button, .button-group.radius > *:first-child .button, .button-group.radius > *:first-child .submit-button, .button-group.radius > *:first-child .submit-link, .button-group.radius > *:first-child .success-link {
+  .button-group.radius > *:first-child button, .button-group.radius > *:first-child .button {
     border-left: 0; }
-  .button-group.radius > *, .button-group.radius > * > a, .button-group.radius > * > button, .button-group.radius > * > .button, .button-group.radius > * > .submit-button, .button-group.radius > * > .submit-link, .button-group.radius > * > .success-link {
+  .button-group.radius > *, .button-group.radius > * > a, .button-group.radius > * > button, .button-group.radius > * > .button {
     border-radius: 0; }
-  .button-group.radius > *:first-child, .button-group.radius > *:first-child > a, .button-group.radius > *:first-child > button, .button-group.radius > *:first-child > .button, .button-group.radius > *:first-child > .submit-button, .button-group.radius > *:first-child > .submit-link, .button-group.radius > *:first-child > .success-link {
+  .button-group.radius > *:first-child, .button-group.radius > *:first-child > a, .button-group.radius > *:first-child > button, .button-group.radius > *:first-child > .button {
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px; }
-  .button-group.radius > *:last-child, .button-group.radius > *:last-child > a, .button-group.radius > *:last-child > button, .button-group.radius > *:last-child > .button, .button-group.radius > *:last-child > .submit-button, .button-group.radius > *:last-child > .submit-link, .button-group.radius > *:last-child > .success-link {
+  .button-group.radius > *:last-child, .button-group.radius > *:last-child > a, .button-group.radius > *:last-child > button, .button-group.radius > *:last-child > .button {
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px; }
-  .button-group.round > * > button, .button-group.round > * .button, .button-group.round > * .submit-button, .button-group.round > * .submit-link, .button-group.round > * .success-link {
+  .button-group.round > * > button, .button-group.round > * .button {
     border-left: 1px solid;
     border-color: rgba(255, 255, 255, 0.5); }
-  .button-group.round > *:first-child button, .button-group.round > *:first-child .button, .button-group.round > *:first-child .submit-button, .button-group.round > *:first-child .submit-link, .button-group.round > *:first-child .success-link {
+  .button-group.round > *:first-child button, .button-group.round > *:first-child .button {
     border-left: 0; }
-  .button-group.round > *, .button-group.round > * > a, .button-group.round > * > button, .button-group.round > * > .button, .button-group.round > * > .submit-button, .button-group.round > * > .submit-link, .button-group.round > * > .success-link {
+  .button-group.round > *, .button-group.round > * > a, .button-group.round > * > button, .button-group.round > * > .button {
     border-radius: 0; }
-  .button-group.round > *:first-child, .button-group.round > *:first-child > a, .button-group.round > *:first-child > button, .button-group.round > *:first-child > .button, .button-group.round > *:first-child > .submit-button, .button-group.round > *:first-child > .submit-link, .button-group.round > *:first-child > .success-link {
+  .button-group.round > *:first-child, .button-group.round > *:first-child > a, .button-group.round > *:first-child > button, .button-group.round > *:first-child > .button {
     border-bottom-left-radius: 1000px;
     border-top-left-radius: 1000px; }
-  .button-group.round > *:last-child, .button-group.round > *:last-child > a, .button-group.round > *:last-child > button, .button-group.round > *:last-child > .button, .button-group.round > *:last-child > .submit-button, .button-group.round > *:last-child > .submit-link, .button-group.round > *:last-child > .success-link {
+  .button-group.round > *:last-child, .button-group.round > *:last-child > a, .button-group.round > *:last-child > button, .button-group.round > *:last-child > .button {
     border-bottom-right-radius: 1000px;
     border-top-right-radius: 1000px; }
   .button-group.even-2 li {
     width: 50%; }
-    .button-group.even-2 li > button, .button-group.even-2 li .button, .button-group.even-2 li .submit-button, .button-group.even-2 li .submit-link, .button-group.even-2 li .success-link {
+    .button-group.even-2 li > button, .button-group.even-2 li .button {
       border-left: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-2 li:first-child button, .button-group.even-2 li:first-child .button, .button-group.even-2 li:first-child .submit-button, .button-group.even-2 li:first-child .submit-link, .button-group.even-2 li:first-child .success-link {
+    .button-group.even-2 li:first-child button, .button-group.even-2 li:first-child .button {
       border-left: 0; }
-    .button-group.even-2 li button, .button-group.even-2 li .button, .button-group.even-2 li .submit-button, .button-group.even-2 li .submit-link, .button-group.even-2 li .success-link {
+    .button-group.even-2 li button, .button-group.even-2 li .button {
       width: 100%; }
   .button-group.even-3 li {
     width: 33.33333%; }
-    .button-group.even-3 li > button, .button-group.even-3 li .button, .button-group.even-3 li .submit-button, .button-group.even-3 li .submit-link, .button-group.even-3 li .success-link {
+    .button-group.even-3 li > button, .button-group.even-3 li .button {
       border-left: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-3 li:first-child button, .button-group.even-3 li:first-child .button, .button-group.even-3 li:first-child .submit-button, .button-group.even-3 li:first-child .submit-link, .button-group.even-3 li:first-child .success-link {
+    .button-group.even-3 li:first-child button, .button-group.even-3 li:first-child .button {
       border-left: 0; }
-    .button-group.even-3 li button, .button-group.even-3 li .button, .button-group.even-3 li .submit-button, .button-group.even-3 li .submit-link, .button-group.even-3 li .success-link {
+    .button-group.even-3 li button, .button-group.even-3 li .button {
       width: 100%; }
   .button-group.even-4 li {
     width: 25%; }
-    .button-group.even-4 li > button, .button-group.even-4 li .button, .button-group.even-4 li .submit-button, .button-group.even-4 li .submit-link, .button-group.even-4 li .success-link {
+    .button-group.even-4 li > button, .button-group.even-4 li .button {
       border-left: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-4 li:first-child button, .button-group.even-4 li:first-child .button, .button-group.even-4 li:first-child .submit-button, .button-group.even-4 li:first-child .submit-link, .button-group.even-4 li:first-child .success-link {
+    .button-group.even-4 li:first-child button, .button-group.even-4 li:first-child .button {
       border-left: 0; }
-    .button-group.even-4 li button, .button-group.even-4 li .button, .button-group.even-4 li .submit-button, .button-group.even-4 li .submit-link, .button-group.even-4 li .success-link {
+    .button-group.even-4 li button, .button-group.even-4 li .button {
       width: 100%; }
   .button-group.even-5 li {
     width: 20%; }
-    .button-group.even-5 li > button, .button-group.even-5 li .button, .button-group.even-5 li .submit-button, .button-group.even-5 li .submit-link, .button-group.even-5 li .success-link {
+    .button-group.even-5 li > button, .button-group.even-5 li .button {
       border-left: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-5 li:first-child button, .button-group.even-5 li:first-child .button, .button-group.even-5 li:first-child .submit-button, .button-group.even-5 li:first-child .submit-link, .button-group.even-5 li:first-child .success-link {
+    .button-group.even-5 li:first-child button, .button-group.even-5 li:first-child .button {
       border-left: 0; }
-    .button-group.even-5 li button, .button-group.even-5 li .button, .button-group.even-5 li .submit-button, .button-group.even-5 li .submit-link, .button-group.even-5 li .success-link {
+    .button-group.even-5 li button, .button-group.even-5 li .button {
       width: 100%; }
   .button-group.even-6 li {
     width: 16.66667%; }
-    .button-group.even-6 li > button, .button-group.even-6 li .button, .button-group.even-6 li .submit-button, .button-group.even-6 li .submit-link, .button-group.even-6 li .success-link {
+    .button-group.even-6 li > button, .button-group.even-6 li .button {
       border-left: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-6 li:first-child button, .button-group.even-6 li:first-child .button, .button-group.even-6 li:first-child .submit-button, .button-group.even-6 li:first-child .submit-link, .button-group.even-6 li:first-child .success-link {
+    .button-group.even-6 li:first-child button, .button-group.even-6 li:first-child .button {
       border-left: 0; }
-    .button-group.even-6 li button, .button-group.even-6 li .button, .button-group.even-6 li .submit-button, .button-group.even-6 li .submit-link, .button-group.even-6 li .success-link {
+    .button-group.even-6 li button, .button-group.even-6 li .button {
       width: 100%; }
   .button-group.even-7 li {
     width: 14.28571%; }
-    .button-group.even-7 li > button, .button-group.even-7 li .button, .button-group.even-7 li .submit-button, .button-group.even-7 li .submit-link, .button-group.even-7 li .success-link {
+    .button-group.even-7 li > button, .button-group.even-7 li .button {
       border-left: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-7 li:first-child button, .button-group.even-7 li:first-child .button, .button-group.even-7 li:first-child .submit-button, .button-group.even-7 li:first-child .submit-link, .button-group.even-7 li:first-child .success-link {
+    .button-group.even-7 li:first-child button, .button-group.even-7 li:first-child .button {
       border-left: 0; }
-    .button-group.even-7 li button, .button-group.even-7 li .button, .button-group.even-7 li .submit-button, .button-group.even-7 li .submit-link, .button-group.even-7 li .success-link {
+    .button-group.even-7 li button, .button-group.even-7 li .button {
       width: 100%; }
   .button-group.even-8 li {
     width: 12.5%; }
-    .button-group.even-8 li > button, .button-group.even-8 li .button, .button-group.even-8 li .submit-button, .button-group.even-8 li .submit-link, .button-group.even-8 li .success-link {
+    .button-group.even-8 li > button, .button-group.even-8 li .button {
       border-left: 1px solid;
       border-color: rgba(255, 255, 255, 0.5); }
-    .button-group.even-8 li:first-child button, .button-group.even-8 li:first-child .button, .button-group.even-8 li:first-child .submit-button, .button-group.even-8 li:first-child .submit-link, .button-group.even-8 li:first-child .success-link {
+    .button-group.even-8 li:first-child button, .button-group.even-8 li:first-child .button {
       border-left: 0; }
-    .button-group.even-8 li button, .button-group.even-8 li .button, .button-group.even-8 li .submit-button, .button-group.even-8 li .submit-link, .button-group.even-8 li .success-link {
+    .button-group.even-8 li button, .button-group.even-8 li .button {
       width: 100%; }
 
 .button-bar:before, .button-bar:after {
@@ -2169,10 +2169,10 @@ button::-moz-focus-inner {
   .f-dropdown.large {
     max-width: 800px; }
 
-.dropdown.button, .dropdown.submit-button, .dropdown.submit-link, .dropdown.success-link, button.dropdown {
+.dropdown.button, button.dropdown {
   position: relative;
   padding-right: 3.5625rem; }
-  .dropdown.button:after, .dropdown.submit-button:after, .dropdown.submit-link:after, .dropdown.success-link:after, button.dropdown:after {
+  .dropdown.button:after, button.dropdown:after {
     position: absolute;
     content: "";
     width: 0;
@@ -2181,37 +2181,37 @@ button::-moz-focus-inner {
     border-style: solid;
     border-color: white transparent transparent transparent;
     top: 50%; }
-  .dropdown.button:after, .dropdown.submit-button:after, .dropdown.submit-link:after, .dropdown.success-link:after, button.dropdown:after {
+  .dropdown.button:after, button.dropdown:after {
     border-width: 0.375rem;
     right: 1.40625rem;
     margin-top: -0.15625rem; }
-  .dropdown.button:after, .dropdown.submit-button:after, .dropdown.submit-link:after, .dropdown.success-link:after, button.dropdown:after {
+  .dropdown.button:after, button.dropdown:after {
     border-color: white transparent transparent transparent; }
-  .dropdown.button.tiny, .dropdown.tiny.submit-button, .dropdown.tiny.submit-link, .dropdown.tiny.success-link, button.dropdown.tiny {
+  .dropdown.button.tiny, button.dropdown.tiny {
     padding-right: 2.625rem; }
-    .dropdown.button.tiny:before, .dropdown.tiny.submit-button:before, .dropdown.tiny.submit-link:before, .dropdown.tiny.success-link:before, button.dropdown.tiny:before {
+    .dropdown.button.tiny:before, button.dropdown.tiny:before {
       border-width: 0.375rem;
       right: 1.125rem;
       margin-top: -0.125rem; }
-    .dropdown.button.tiny:after, .dropdown.tiny.submit-button:after, .dropdown.tiny.submit-link:after, .dropdown.tiny.success-link:after, button.dropdown.tiny:after {
+    .dropdown.button.tiny:after, button.dropdown.tiny:after {
       border-color: white transparent transparent transparent; }
-  .dropdown.button.small, .dropdown.small.submit-button, .dropdown.small.submit-link, .dropdown.small.success-link, button.dropdown.small {
+  .dropdown.button.small, button.dropdown.small {
     padding-right: 3.0625rem; }
-    .dropdown.button.small:after, .dropdown.small.submit-button:after, .dropdown.small.submit-link:after, .dropdown.small.success-link:after, button.dropdown.small:after {
+    .dropdown.button.small:after, button.dropdown.small:after {
       border-width: 0.4375rem;
       right: 1.3125rem;
       margin-top: -0.15625rem; }
-    .dropdown.button.small:after, .dropdown.small.submit-button:after, .dropdown.small.submit-link:after, .dropdown.small.success-link:after, button.dropdown.small:after {
+    .dropdown.button.small:after, button.dropdown.small:after {
       border-color: white transparent transparent transparent; }
-  .dropdown.button.large, .dropdown.large.submit-button, .dropdown.large.submit-link, .dropdown.large.success-link, button.dropdown.large {
+  .dropdown.button.large, button.dropdown.large {
     padding-right: 3.625rem; }
-    .dropdown.button.large:after, .dropdown.large.submit-button:after, .dropdown.large.submit-link:after, .dropdown.large.success-link:after, button.dropdown.large:after {
+    .dropdown.button.large:after, button.dropdown.large:after {
       border-width: 0.3125rem;
       right: 1.71875rem;
       margin-top: -0.15625rem; }
-    .dropdown.button.large:after, .dropdown.large.submit-button:after, .dropdown.large.submit-link:after, .dropdown.large.success-link:after, button.dropdown.large:after {
+    .dropdown.button.large:after, button.dropdown.large:after {
       border-color: white transparent transparent transparent; }
-  .dropdown.button.secondary:after, .dropdown.secondary.submit-button:after, .dropdown.secondary.submit-link:after, .dropdown.secondary.success-link:after, button.dropdown.secondary:after {
+  .dropdown.button.secondary:after, button.dropdown.secondary:after {
     border-color: #333333 transparent transparent transparent; }
 
 .flex-video {
@@ -2300,7 +2300,7 @@ select::-ms-expand {
   line-height: 2.3125rem; }
 
 /* Adjust padding, alignment and radius if pre/post element is a button */
-.postfix.button, .postfix.submit-button, .postfix.submit-link, .postfix.success-link {
+.postfix.button {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
@@ -2309,7 +2309,7 @@ select::-ms-expand {
   line-height: 2.125rem;
   border: none; }
 
-.prefix.button, .prefix.submit-button, .prefix.submit-link, .prefix.success-link {
+.prefix.button {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
@@ -2318,22 +2318,22 @@ select::-ms-expand {
   line-height: 2.125rem;
   border: none; }
 
-.prefix.button.radius, .prefix.radius.submit-button, .prefix.radius.submit-link, .prefix.radius.success-link {
+.prefix.button.radius {
   border-radius: 0;
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px; }
 
-.postfix.button.radius, .postfix.radius.submit-button, .postfix.radius.submit-link, .postfix.radius.success-link {
+.postfix.button.radius {
   border-radius: 0;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px; }
 
-.prefix.button.round, .prefix.round.submit-button, .prefix.round.submit-link, .prefix.round.success-link {
+.prefix.button.round {
   border-radius: 0;
   border-bottom-left-radius: 1000px;
   border-top-left-radius: 1000px; }
 
-.postfix.button.round, .postfix.round.submit-button, .postfix.round.submit-link, .postfix.round.success-link {
+.postfix.button.round {
   border-radius: 0;
   border-bottom-right-radius: 1000px;
   border-top-right-radius: 1000px; }
@@ -2723,7 +2723,7 @@ label.error {
 .joyride-content-wrapper {
   width: 100%;
   padding: 1.125rem 1.25rem 1.5rem; }
-  .joyride-content-wrapper .button, .joyride-content-wrapper .submit-button, .joyride-content-wrapper .submit-link, .joyride-content-wrapper .success-link {
+  .joyride-content-wrapper .button {
     margin-bottom: 0 !important; }
 
 /* Add a little css triangle pip, older browser just miss out on the fanciness of it */
@@ -2863,7 +2863,7 @@ kbd {
   padding: 0.125rem 0.25rem 0;
   border-radius: 3px; }
 
-.label, .page_tag_warning, .page_tag_notice {
+.label {
   font-weight: normal;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   text-align: center;
@@ -2877,20 +2877,20 @@ kbd {
   font-size: 0.6875rem;
   background-color: #008cba;
   color: white; }
-  .label.radius, .radius.page_tag_warning, .radius.page_tag_notice {
+  .label.radius {
     border-radius: 3px; }
-  .label.round, .round.page_tag_warning, .round.page_tag_notice {
+  .label.round {
     border-radius: 1000px; }
-  .label.alert, .alert.page_tag_warning, .alert.page_tag_notice {
+  .label.alert {
     background-color: #f04124;
     color: white; }
-  .label.warning, .warning.page_tag_warning, .warning.page_tag_notice {
+  .label.warning {
     background-color: #f08a24;
     color: white; }
-  .label.success, .success.page_tag_warning, .page_tag_notice {
+  .label.success {
     background-color: #43ac6a;
     color: white; }
-  .label.secondary, .page_tag_warning, .secondary.page_tag_notice {
+  .label.secondary {
     background-color: #e7e7e7;
     color: #333333; }
 
@@ -3522,17 +3522,17 @@ dialog[open] {
       font-weight: bold;
       text-transform: uppercase; }
 
-.split.button, .split.submit-button, .split.submit-link, .split.success-link {
+.split.button {
   position: relative;
   padding-right: 5.0625rem; }
-  .split.button span, .split.submit-button span, .split.submit-link span, .split.success-link span {
+  .split.button span {
     display: block;
     height: 100%;
     position: absolute;
     right: 0;
     top: 0;
     border-left: solid 1px; }
-    .split.button span:after, .split.submit-button span:after, .split.submit-link span:after, .split.success-link span:after {
+    .split.button span:after {
       position: absolute;
       content: "";
       width: 0;
@@ -3541,62 +3541,62 @@ dialog[open] {
       border-style: inset;
       top: 50%;
       left: 50%; }
-    .split.button span:active, .split.submit-button span:active, .split.submit-link span:active, .split.success-link span:active {
+    .split.button span:active {
       background-color: rgba(0, 0, 0, 0.1); }
-  .split.button span, .split.submit-button span, .split.submit-link span, .split.success-link span {
+  .split.button span {
     border-left-color: rgba(255, 255, 255, 0.5); }
-  .split.button span, .split.submit-button span, .split.submit-link span, .split.success-link span {
+  .split.button span {
     width: 3.09375rem; }
-    .split.button span:after, .split.submit-button span:after, .split.submit-link span:after, .split.success-link span:after {
+    .split.button span:after {
       border-top-style: solid;
       border-width: 0.375rem;
       top: 48%;
       margin-left: -0.375rem; }
-  .split.button span:after, .split.submit-button span:after, .split.submit-link span:after, .split.success-link span:after {
+  .split.button span:after {
     border-color: white transparent transparent transparent; }
-  .split.button.secondary span, .split.secondary.submit-button span, .split.secondary.submit-link span, .split.secondary.success-link span {
+  .split.button.secondary span {
     border-left-color: rgba(255, 255, 255, 0.5); }
-  .split.button.secondary span:after, .split.secondary.submit-button span:after, .split.secondary.submit-link span:after, .split.secondary.success-link span:after {
+  .split.button.secondary span:after {
     border-color: white transparent transparent transparent; }
-  .split.button.alert span, .split.alert.submit-button span, .split.alert.submit-link span, .split.alert.success-link span {
+  .split.button.alert span {
     border-left-color: rgba(255, 255, 255, 0.5); }
-  .split.button.success span, .split.success.submit-button span, .split.success.submit-link span, .split.success.success-link span {
+  .split.button.success span {
     border-left-color: rgba(255, 255, 255, 0.5); }
-  .split.button.tiny, .split.tiny.submit-button, .split.tiny.submit-link, .split.tiny.success-link {
+  .split.button.tiny {
     padding-right: 3.75rem; }
-    .split.button.tiny span, .split.tiny.submit-button span, .split.tiny.submit-link span, .split.tiny.success-link span {
+    .split.button.tiny span {
       width: 2.25rem; }
-      .split.button.tiny span:after, .split.tiny.submit-button span:after, .split.tiny.submit-link span:after, .split.tiny.success-link span:after {
+      .split.button.tiny span:after {
         border-top-style: solid;
         border-width: 0.375rem;
         top: 48%;
         margin-left: -0.375rem; }
-  .split.button.small, .split.small.submit-button, .split.small.submit-link, .split.small.success-link {
+  .split.button.small {
     padding-right: 4.375rem; }
-    .split.button.small span, .split.small.submit-button span, .split.small.submit-link span, .split.small.success-link span {
+    .split.button.small span {
       width: 2.625rem; }
-      .split.button.small span:after, .split.small.submit-button span:after, .split.small.submit-link span:after, .split.small.success-link span:after {
+      .split.button.small span:after {
         border-top-style: solid;
         border-width: 0.4375rem;
         top: 48%;
         margin-left: -0.375rem; }
-  .split.button.large, .split.large.submit-button, .split.large.submit-link, .split.large.success-link {
+  .split.button.large {
     padding-right: 5.5rem; }
-    .split.button.large span, .split.large.submit-button span, .split.large.submit-link span, .split.large.success-link span {
+    .split.button.large span {
       width: 3.4375rem; }
-      .split.button.large span:after, .split.large.submit-button span:after, .split.large.submit-link span:after, .split.large.success-link span:after {
+      .split.button.large span:after {
         border-top-style: solid;
         border-width: 0.3125rem;
         top: 48%;
         margin-left: -0.375rem; }
-  .split.button.expand, .split.expand.submit-button, .split.expand.submit-link, .split.expand.success-link {
+  .split.button.expand {
     padding-left: 2rem; }
-  .split.button.secondary span:after, .split.secondary.submit-button span:after, .split.secondary.submit-link span:after, .split.secondary.success-link span:after {
+  .split.button.secondary span:after {
     border-color: #333333 transparent transparent transparent; }
-  .split.button.radius span, .split.radius.submit-button span, .split.radius.submit-link span, .split.radius.success-link span {
+  .split.button.radius span {
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px; }
-  .split.button.round span, .split.round.submit-button span, .split.round.submit-link span, .split.round.success-link span {
+  .split.button.round span {
     border-bottom-right-radius: 1000px;
     border-top-right-radius: 1000px; }
 
@@ -4429,7 +4429,7 @@ meta.foundation-mq-topbar {
     padding-top: .35rem;
     padding-bottom: .35rem;
     font-size: 0.75rem; }
-  .top-bar .button, .top-bar .submit-button, .top-bar .submit-link, .top-bar .success-link, .top-bar button {
+  .top-bar .button, .top-bar button {
     padding-top: .45rem;
     padding-bottom: .35rem;
     margin-bottom: 0;
@@ -4526,40 +4526,40 @@ meta.foundation-mq-topbar {
       font-size: 0.8125rem;
       font-weight: normal;
       text-transform: none; }
-      .top-bar-section ul li > a.button, .top-bar-section ul li > a.submit-button, .top-bar-section ul li > a.submit-link, .top-bar-section ul li > a.success-link {
+      .top-bar-section ul li > a.button {
         font-size: 0.8125rem;
         padding-right: 15px;
         padding-left: 15px;
         background-color: #008cba;
         border-color: #007095;
         color: white; }
-        .top-bar-section ul li > a.button:hover, .top-bar-section ul li > a.submit-button:hover, .top-bar-section ul li > a.submit-link:hover, .top-bar-section ul li > a.success-link:hover, .top-bar-section ul li > a.button:focus, .top-bar-section ul li > a.submit-button:focus, .top-bar-section ul li > a.submit-link:focus, .top-bar-section ul li > a.success-link:focus {
+        .top-bar-section ul li > a.button:hover, .top-bar-section ul li > a.button:focus {
           background-color: #007095; }
-        .top-bar-section ul li > a.button:hover, .top-bar-section ul li > a.submit-button:hover, .top-bar-section ul li > a.submit-link:hover, .top-bar-section ul li > a.success-link:hover, .top-bar-section ul li > a.button:focus, .top-bar-section ul li > a.submit-button:focus, .top-bar-section ul li > a.submit-link:focus, .top-bar-section ul li > a.success-link:focus {
+        .top-bar-section ul li > a.button:hover, .top-bar-section ul li > a.button:focus {
           color: white; }
-      .top-bar-section ul li > a.button.secondary, .top-bar-section ul li > a.secondary.submit-button, .top-bar-section ul li > a.secondary.submit-link, .top-bar-section ul li > a.secondary.success-link {
+      .top-bar-section ul li > a.button.secondary {
         background-color: #e7e7e7;
         border-color: #007095;
         color: #333333; }
-        .top-bar-section ul li > a.button.secondary:hover, .top-bar-section ul li > a.secondary.submit-button:hover, .top-bar-section ul li > a.secondary.submit-link:hover, .top-bar-section ul li > a.secondary.success-link:hover, .top-bar-section ul li > a.button.secondary:focus, .top-bar-section ul li > a.secondary.submit-button:focus, .top-bar-section ul li > a.secondary.submit-link:focus, .top-bar-section ul li > a.secondary.success-link:focus {
+        .top-bar-section ul li > a.button.secondary:hover, .top-bar-section ul li > a.button.secondary:focus {
           background-color: #007095; }
-        .top-bar-section ul li > a.button.secondary:hover, .top-bar-section ul li > a.secondary.submit-button:hover, .top-bar-section ul li > a.secondary.submit-link:hover, .top-bar-section ul li > a.secondary.success-link:hover, .top-bar-section ul li > a.button.secondary:focus, .top-bar-section ul li > a.secondary.submit-button:focus, .top-bar-section ul li > a.secondary.submit-link:focus, .top-bar-section ul li > a.secondary.success-link:focus {
+        .top-bar-section ul li > a.button.secondary:hover, .top-bar-section ul li > a.button.secondary:focus {
           color: #333333; }
-      .top-bar-section ul li > a.button.success, .top-bar-section ul li > a.success.submit-button, .top-bar-section ul li > a.success.submit-link, .top-bar-section ul li > a.success.success-link {
+      .top-bar-section ul li > a.button.success {
         background-color: #43ac6a;
         border-color: #007095;
         color: white; }
-        .top-bar-section ul li > a.button.success:hover, .top-bar-section ul li > a.success.submit-button:hover, .top-bar-section ul li > a.success.submit-link:hover, .top-bar-section ul li > a.success.success-link:hover, .top-bar-section ul li > a.button.success:focus, .top-bar-section ul li > a.success.submit-button:focus, .top-bar-section ul li > a.success.submit-link:focus, .top-bar-section ul li > a.success.success-link:focus {
+        .top-bar-section ul li > a.button.success:hover, .top-bar-section ul li > a.button.success:focus {
           background-color: #007095; }
-        .top-bar-section ul li > a.button.success:hover, .top-bar-section ul li > a.success.submit-button:hover, .top-bar-section ul li > a.success.submit-link:hover, .top-bar-section ul li > a.success.success-link:hover, .top-bar-section ul li > a.button.success:focus, .top-bar-section ul li > a.success.submit-button:focus, .top-bar-section ul li > a.success.submit-link:focus, .top-bar-section ul li > a.success.success-link:focus {
+        .top-bar-section ul li > a.button.success:hover, .top-bar-section ul li > a.button.success:focus {
           color: white; }
-      .top-bar-section ul li > a.button.alert, .top-bar-section ul li > a.alert.submit-button, .top-bar-section ul li > a.alert.submit-link, .top-bar-section ul li > a.alert.success-link {
+      .top-bar-section ul li > a.button.alert {
         background-color: #f04124;
         border-color: #007095;
         color: white; }
-        .top-bar-section ul li > a.button.alert:hover, .top-bar-section ul li > a.alert.submit-button:hover, .top-bar-section ul li > a.alert.submit-link:hover, .top-bar-section ul li > a.alert.success-link:hover, .top-bar-section ul li > a.button.alert:focus, .top-bar-section ul li > a.alert.submit-button:focus, .top-bar-section ul li > a.alert.submit-link:focus, .top-bar-section ul li > a.alert.success-link:focus {
+        .top-bar-section ul li > a.button.alert:hover, .top-bar-section ul li > a.button.alert:focus {
           background-color: #007095; }
-        .top-bar-section ul li > a.button.alert:hover, .top-bar-section ul li > a.alert.submit-button:hover, .top-bar-section ul li > a.alert.submit-link:hover, .top-bar-section ul li > a.alert.success-link:hover, .top-bar-section ul li > a.button.alert:focus, .top-bar-section ul li > a.alert.submit-button:focus, .top-bar-section ul li > a.alert.submit-link:focus, .top-bar-section ul li > a.alert.success-link:focus {
+        .top-bar-section ul li > a.button.alert:hover, .top-bar-section ul li > a.button.alert:focus {
           color: white; }
     .top-bar-section ul li > button {
       font-size: 0.8125rem;
@@ -4665,7 +4665,7 @@ meta.foundation-mq-topbar {
           display: block; }
       .top-bar-section .dropdown li.has-form {
         padding: 8px 15px; }
-      .top-bar-section .dropdown li .button, .top-bar-section .dropdown li .submit-button, .top-bar-section .dropdown li .submit-link, .top-bar-section .dropdown li .success-link, .top-bar-section .dropdown li button {
+      .top-bar-section .dropdown li .button, .top-bar-section .dropdown li button {
         top: auto; }
     .top-bar-section .dropdown label {
       padding: 8px 15px 2px;
@@ -4695,9 +4695,6 @@ meta.foundation-mq-topbar {
       width: auto; }
     .top-bar input,
     .top-bar .button,
-    .top-bar .submit-button,
-    .top-bar .submit-link,
-    .top-bar .success-link,
     .top-bar button {
       font-size: 0.875rem;
       position: relative;
@@ -5419,573 +5416,3 @@ th.hide-for-touch {
 
   th.show-for-print {
     display: table-cell !important; } }
-#t7_timer {
-  width: 220px;
-  height: 55px;
-  position: relative; }
-
-#t7_vals {
-  width: 100%;
-  clear: both;
-  margin: 0px auto; }
-
-.t7_numbs {
-  font-size: 28px;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  text-align: left;
-  color: white; }
-
-#t7_y {
-  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-d59207f66ff5208ae524a59a34f0f412.png);
-  background-repeat: no-repeat;
-  float: left;
-  width: 48px;
-  height: 35px;
-  background-color: transparent;
-  padding: 0px 0px 0px 3px;
-  margin: 1px;
-  letter-spacing: 7px; }
-
-#t7_d {
-  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-d59207f66ff5208ae524a59a34f0f412.png);
-  background-repeat: no-repeat;
-  float: left;
-  width: 48px;
-  height: 35px;
-  background-color: transparent;
-  padding: 0px 0px 0px 3px;
-  margin: 1px;
-  letter-spacing: 7px; }
-
-#t7_h {
-  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-d59207f66ff5208ae524a59a34f0f412.png);
-  background-repeat: no-repeat;
-  float: left;
-  width: 48px;
-  height: 35px;
-  background-color: transparent;
-  padding: 0px 0px 0px 3px;
-  margin: 1px;
-  letter-spacing: 7px; }
-
-#t7_m {
-  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-d59207f66ff5208ae524a59a34f0f412.png);
-  background-repeat: no-repeat;
-  float: left;
-  width: 47px;
-  height: 35px;
-  background-color: transparent;
-  padding: 0px 0px 0px 3px;
-  margin: 1px;
-  letter-spacing: 7px; }
-
-#t7_s {
-  background-image: url(//d3n8a8pro7vhmx.cloudfront.net/assets/countdown/countdown2-nc-4f109d66d692d7b9e9fea4d80e7e3480.png);
-  background-repeat: no-repeat;
-  float: left;
-  width: 46px;
-  height: 35px;
-  background-color: transparent;
-  padding: 0px 0px 0px 3px;
-  margin: 1px;
-  letter-spacing: 7px; }
-
-#t7_labels {
-  width: 100%;
-  clear: both;
-  margin: 0px auto; }
-
-.t7_labs {
-  position: relative;
-  left: -4px;
-  top: -10px;
-  font-size: 9px;
-  font-family: Verdana, Arial, sans-serif;
-  font-weight: bold;
-  text-align: center;
-  color: #333333; }
-
-#t7_yl {
-  float: left;
-  width: 51px;
-  height: 15px;
-  padding: 0px;
-  margin: 0px; }
-
-#t7_dl {
-  float: left;
-  width: 54px;
-  height: 15px;
-  padding: 0px;
-  margin: 0px; }
-
-#t7_hl {
-  float: left;
-  width: 45px;
-  height: 15px;
-  padding: 0px;
-  margin: 0px; }
-
-#t7_ml {
-  float: left;
-  width: 53px;
-  height: 15px;
-  padding: 0px;
-  margin: 0px; }
-
-#t7_sl {
-  float: left;
-  width: 46px;
-  height: 15px;
-  padding: 0px;
-  margin: 0px; }
-
-.countdown {
-  width: 220px;
-  height: 55px;
-  text-align: center;
-  line-height: 34px; }
-
-ul.activities {
-  margin: 3em 0 15px 0 !important;
-  list-style: none; }
-
-.activities li .stream-pic {
-  float: left;
-  width: 72px;
-  height: 72px; }
-
-.activities li .stream-pic a {
-  display: block;
-  width: 100%;
-  height: 100%; }
-
-.profile_image {
-  border-radius: 0;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0; }
-
-.activities li.activity {
-  margin: 0 0 3em 0;
-  border-top: 1px solid #ecf0f1;
-  padding-top: 3em; }
-
-.activities li .activity {
-  margin: 0;
-  padding-left: 100px;
-  word-break: break-word; }
-
-.activities li .activity .activity-content {
-  padding-top: 1.9em; }
-
-@media only screen and (max-width: 40em) {
-  .activities li .stream-pic {
-    float: left;
-    width: 48px;
-    height: 48px; }
-
-  .activities li .stream-pic a {
-    display: block;
-    width: 100%;
-    height: 100%; }
-
-  .activities li .activity {
-    margin: 0;
-    padding-left: 60px;
-    word-break: break-word; }
-
-  .activities li .activity .activity-content {
-    padding-top: 1.5em; } }
-/* max-width 640px, mobile-only styles, use when QAing mobile issues */
-#slider-cards {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 4.25rem;
-  margin: .625em 0 1.625em 0; }
-  #slider-cards .slider-card-wrap {
-    position: absolute;
-    left: 1680px;
-    width: 9999px;
-    top: 0;
-    transition: all 0.4s ease-out; }
-  #slider-cards .slider-card {
-    width: 10rem;
-    position: relative;
-    text-align: left;
-    display: block;
-    float: left;
-    text-align: left; }
-  #slider-cards .slider-card-profile {
-    background: #f2f2f2;
-    color: #333333;
-    border-left: 4px solid #008cba;
-    height: 4.25rem;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0.625rem;
-    position: relative;
-    border-radius: 3px; }
-    #slider-cards .slider-card-profile img {
-      float: left;
-      margin-right: .5em;
-      height: 100%; }
-    #slider-cards .slider-card-profile .slider-name {
-      position: relative;
-      line-height: 4.25rem;
-      top: -.7em; }
-      #slider-cards .slider-card-profile .slider-name a:link, #slider-cards .slider-card-profile .slider-name a:visited, #slider-cards .slider-card-profile .slider-name a:active {
-        color: inherit; }
-
-#flash {
-  margin-bottom: 1em;
-  background-color: #f04124; }
-
-.notice {
-  border: none;
-  display: block;
-  font-weight: normal;
-  margin-bottom: 1.25rem;
-  position: relative;
-  padding: 0.875rem 1.5rem 0.875rem 0.875rem;
-  background-color: #f04124;
-  font-size: 0.8125rem;
-  color: #333;
-  max-width: 62.5rem;
-  margin: 0 auto;
-  border: none; }
-
-.flash-close {
-  font-size: 1.375rem;
-  padding: 0 9px 6px 4px;
-  line-height: 0;
-  position: absolute;
-  top: 50%;
-  margin: -0.6875rem 0 0 0;
-  right: 0.25rem;
-  color: #333333;
-  opacity: 0.3;
-  height: 1.375rem;
-  background: transparent; }
-
-.flash-close:hover {
-  background: transparent; }
-
-.success {
-  background-color: #43ac6a !important;
-  color: white !important; }
-
-.error {
-  background-color: #f08a24 !important;
-  color: white !important; }
-
-.alert-box.error {
-  border-color: #f08a24; }
-
-.alert-box .row {
-  max-width: 62.5rem; }
-
-.form-errors {
-  background-color: #f04124;
-  color: white; }
-  .form-errors h2 {
-    font-size: 1.5rem;
-    padding: 1rem;
-    color: white !important; }
-  .form-errors ul {
-    list-style-type: disc;
-    padding: 1rem; }
-
-.name h1 img {
-  height: 1.3125rem;
-  margin-top: -0.25rem; }
-
-#user-nav img {
-  max-height: 24px;
-  margin-right: 5px; }
-
-@media only screen and (max-width: 64em) {
-  .radio-inline input[type="radio"], .radio-inline input[type="checkbox"], .checkbox-inline input[type="radio"], .checkbox-inline input[type="checkbox"] {
-    display: none; }
-    .radio-inline input[type="radio"] + label, .radio-inline input[type="checkbox"] + label, .checkbox-inline input[type="radio"] + label, .checkbox-inline input[type="checkbox"] + label {
-      border-style: solid;
-      border-width: 0px;
-      cursor: pointer;
-      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-      font-weight: normal;
-      line-height: normal;
-      margin: 0 0 1.25rem;
-      position: relative;
-      text-decoration: none;
-      text-align: center;
-      -webkit-appearance: none;
-      -webkit-border-radius: 0;
-      display: inline-block;
-      padding-top: 1rem;
-      padding-right: 2rem;
-      padding-bottom: 1.0625rem;
-      padding-left: 2rem;
-      font-size: 1rem;
-      background-color: #008cba;
-      border-color: #007095;
-      color: white;
-      transition: background-color 300ms ease-out; }
-      .radio-inline input[type="radio"] + label:hover, .radio-inline input[type="radio"] + label:focus, .radio-inline input[type="checkbox"] + label:hover, .radio-inline input[type="checkbox"] + label:focus, .checkbox-inline input[type="radio"] + label:hover, .checkbox-inline input[type="radio"] + label:focus, .checkbox-inline input[type="checkbox"] + label:hover, .checkbox-inline input[type="checkbox"] + label:focus {
-        background-color: #007095; }
-      .radio-inline input[type="radio"] + label:hover, .radio-inline input[type="radio"] + label:focus, .radio-inline input[type="checkbox"] + label:hover, .radio-inline input[type="checkbox"] + label:focus, .checkbox-inline input[type="radio"] + label:hover, .checkbox-inline input[type="radio"] + label:focus, .checkbox-inline input[type="checkbox"] + label:hover, .checkbox-inline input[type="checkbox"] + label:focus {
-        color: white; }
-      .radio-inline input[type="radio"] + label.secondary, .radio-inline input[type="checkbox"] + label.secondary, .checkbox-inline input[type="radio"] + label.secondary, .checkbox-inline input[type="checkbox"] + label.secondary {
-        background-color: #e7e7e7;
-        border-color: #007095;
-        color: #333333; }
-        .radio-inline input[type="radio"] + label.secondary:hover, .radio-inline input[type="radio"] + label.secondary:focus, .radio-inline input[type="checkbox"] + label.secondary:hover, .radio-inline input[type="checkbox"] + label.secondary:focus, .checkbox-inline input[type="radio"] + label.secondary:hover, .checkbox-inline input[type="radio"] + label.secondary:focus, .checkbox-inline input[type="checkbox"] + label.secondary:hover, .checkbox-inline input[type="checkbox"] + label.secondary:focus {
-          background-color: #007095; }
-        .radio-inline input[type="radio"] + label.secondary:hover, .radio-inline input[type="radio"] + label.secondary:focus, .radio-inline input[type="checkbox"] + label.secondary:hover, .radio-inline input[type="checkbox"] + label.secondary:focus, .checkbox-inline input[type="radio"] + label.secondary:hover, .checkbox-inline input[type="radio"] + label.secondary:focus, .checkbox-inline input[type="checkbox"] + label.secondary:hover, .checkbox-inline input[type="checkbox"] + label.secondary:focus {
-          color: #333333; }
-      .radio-inline input[type="radio"] + label.success, .radio-inline input[type="checkbox"] + label.success, .checkbox-inline input[type="radio"] + label.success, .checkbox-inline input[type="checkbox"] + label.success {
-        background-color: #43ac6a;
-        border-color: #007095;
-        color: white; }
-        .radio-inline input[type="radio"] + label.success:hover, .radio-inline input[type="radio"] + label.success:focus, .radio-inline input[type="checkbox"] + label.success:hover, .radio-inline input[type="checkbox"] + label.success:focus, .checkbox-inline input[type="radio"] + label.success:hover, .checkbox-inline input[type="radio"] + label.success:focus, .checkbox-inline input[type="checkbox"] + label.success:hover, .checkbox-inline input[type="checkbox"] + label.success:focus {
-          background-color: #007095; }
-        .radio-inline input[type="radio"] + label.success:hover, .radio-inline input[type="radio"] + label.success:focus, .radio-inline input[type="checkbox"] + label.success:hover, .radio-inline input[type="checkbox"] + label.success:focus, .checkbox-inline input[type="radio"] + label.success:hover, .checkbox-inline input[type="radio"] + label.success:focus, .checkbox-inline input[type="checkbox"] + label.success:hover, .checkbox-inline input[type="checkbox"] + label.success:focus {
-          color: white; }
-      .radio-inline input[type="radio"] + label.alert, .radio-inline input[type="checkbox"] + label.alert, .checkbox-inline input[type="radio"] + label.alert, .checkbox-inline input[type="checkbox"] + label.alert {
-        background-color: #f04124;
-        border-color: #007095;
-        color: white; }
-        .radio-inline input[type="radio"] + label.alert:hover, .radio-inline input[type="radio"] + label.alert:focus, .radio-inline input[type="checkbox"] + label.alert:hover, .radio-inline input[type="checkbox"] + label.alert:focus, .checkbox-inline input[type="radio"] + label.alert:hover, .checkbox-inline input[type="radio"] + label.alert:focus, .checkbox-inline input[type="checkbox"] + label.alert:hover, .checkbox-inline input[type="checkbox"] + label.alert:focus {
-          background-color: #007095; }
-        .radio-inline input[type="radio"] + label.alert:hover, .radio-inline input[type="radio"] + label.alert:focus, .radio-inline input[type="checkbox"] + label.alert:hover, .radio-inline input[type="checkbox"] + label.alert:focus, .checkbox-inline input[type="radio"] + label.alert:hover, .checkbox-inline input[type="radio"] + label.alert:focus, .checkbox-inline input[type="checkbox"] + label.alert:hover, .checkbox-inline input[type="checkbox"] + label.alert:focus {
-          color: white; }
-      .radio-inline input[type="radio"] + label.large, .radio-inline input[type="checkbox"] + label.large, .checkbox-inline input[type="radio"] + label.large, .checkbox-inline input[type="checkbox"] + label.large {
-        padding-top: 1.125rem;
-        padding-right: 2.25rem;
-        padding-bottom: 1.1875rem;
-        padding-left: 2.25rem;
-        font-size: 1.25rem; }
-      .radio-inline input[type="radio"] + label.small, .radio-inline input[type="checkbox"] + label.small, .checkbox-inline input[type="radio"] + label.small, .checkbox-inline input[type="checkbox"] + label.small {
-        padding-top: 0.875rem;
-        padding-right: 1.75rem;
-        padding-bottom: 0.9375rem;
-        padding-left: 1.75rem;
-        font-size: 0.8125rem; }
-      .radio-inline input[type="radio"] + label.tiny, .radio-inline input[type="checkbox"] + label.tiny, .checkbox-inline input[type="radio"] + label.tiny, .checkbox-inline input[type="checkbox"] + label.tiny {
-        padding-top: 0.625rem;
-        padding-right: 1.25rem;
-        padding-bottom: 0.6875rem;
-        padding-left: 1.25rem;
-        font-size: 0.6875rem; }
-      .radio-inline input[type="radio"] + label.expand, .radio-inline input[type="checkbox"] + label.expand, .checkbox-inline input[type="radio"] + label.expand, .checkbox-inline input[type="checkbox"] + label.expand {
-        padding-right: 0;
-        padding-left: 0;
-        width: 100%; }
-      .radio-inline input[type="radio"] + label.left-align, .radio-inline input[type="checkbox"] + label.left-align, .checkbox-inline input[type="radio"] + label.left-align, .checkbox-inline input[type="checkbox"] + label.left-align {
-        text-align: left;
-        text-indent: 0.75rem; }
-      .radio-inline input[type="radio"] + label.right-align, .radio-inline input[type="checkbox"] + label.right-align, .checkbox-inline input[type="radio"] + label.right-align, .checkbox-inline input[type="checkbox"] + label.right-align {
-        text-align: right;
-        padding-right: 0.75rem; }
-      .radio-inline input[type="radio"] + label.radius, .radio-inline input[type="checkbox"] + label.radius, .checkbox-inline input[type="radio"] + label.radius, .checkbox-inline input[type="checkbox"] + label.radius {
-        border-radius: 3px; }
-      .radio-inline input[type="radio"] + label.round, .radio-inline input[type="checkbox"] + label.round, .checkbox-inline input[type="radio"] + label.round, .checkbox-inline input[type="checkbox"] + label.round {
-        border-radius: 1000px; }
-      .radio-inline input[type="radio"] + label.disabled, .radio-inline input[type="radio"] + label[disabled], .radio-inline input[type="checkbox"] + label.disabled, .radio-inline input[type="checkbox"] + label[disabled], .checkbox-inline input[type="radio"] + label.disabled, .checkbox-inline input[type="radio"] + label[disabled], .checkbox-inline input[type="checkbox"] + label.disabled, .checkbox-inline input[type="checkbox"] + label[disabled] {
-        background-color: #008cba;
-        border-color: #007095;
-        color: white;
-        cursor: default;
-        opacity: 0.7;
-        box-shadow: none; }
-        .radio-inline input[type="radio"] + label.disabled:hover, .radio-inline input[type="radio"] + label.disabled:focus, .radio-inline input[type="radio"] + label[disabled]:hover, .radio-inline input[type="radio"] + label[disabled]:focus, .radio-inline input[type="checkbox"] + label.disabled:hover, .radio-inline input[type="checkbox"] + label.disabled:focus, .radio-inline input[type="checkbox"] + label[disabled]:hover, .radio-inline input[type="checkbox"] + label[disabled]:focus, .checkbox-inline input[type="radio"] + label.disabled:hover, .checkbox-inline input[type="radio"] + label.disabled:focus, .checkbox-inline input[type="radio"] + label[disabled]:hover, .checkbox-inline input[type="radio"] + label[disabled]:focus, .checkbox-inline input[type="checkbox"] + label.disabled:hover, .checkbox-inline input[type="checkbox"] + label.disabled:focus, .checkbox-inline input[type="checkbox"] + label[disabled]:hover, .checkbox-inline input[type="checkbox"] + label[disabled]:focus {
-          background-color: #007095; }
-        .radio-inline input[type="radio"] + label.disabled:hover, .radio-inline input[type="radio"] + label.disabled:focus, .radio-inline input[type="radio"] + label[disabled]:hover, .radio-inline input[type="radio"] + label[disabled]:focus, .radio-inline input[type="checkbox"] + label.disabled:hover, .radio-inline input[type="checkbox"] + label.disabled:focus, .radio-inline input[type="checkbox"] + label[disabled]:hover, .radio-inline input[type="checkbox"] + label[disabled]:focus, .checkbox-inline input[type="radio"] + label.disabled:hover, .checkbox-inline input[type="radio"] + label.disabled:focus, .checkbox-inline input[type="radio"] + label[disabled]:hover, .checkbox-inline input[type="radio"] + label[disabled]:focus, .checkbox-inline input[type="checkbox"] + label.disabled:hover, .checkbox-inline input[type="checkbox"] + label.disabled:focus, .checkbox-inline input[type="checkbox"] + label[disabled]:hover, .checkbox-inline input[type="checkbox"] + label[disabled]:focus {
-          color: white; }
-        .radio-inline input[type="radio"] + label.disabled:hover, .radio-inline input[type="radio"] + label.disabled:focus, .radio-inline input[type="radio"] + label[disabled]:hover, .radio-inline input[type="radio"] + label[disabled]:focus, .radio-inline input[type="checkbox"] + label.disabled:hover, .radio-inline input[type="checkbox"] + label.disabled:focus, .radio-inline input[type="checkbox"] + label[disabled]:hover, .radio-inline input[type="checkbox"] + label[disabled]:focus, .checkbox-inline input[type="radio"] + label.disabled:hover, .checkbox-inline input[type="radio"] + label.disabled:focus, .checkbox-inline input[type="radio"] + label[disabled]:hover, .checkbox-inline input[type="radio"] + label[disabled]:focus, .checkbox-inline input[type="checkbox"] + label.disabled:hover, .checkbox-inline input[type="checkbox"] + label.disabled:focus, .checkbox-inline input[type="checkbox"] + label[disabled]:hover, .checkbox-inline input[type="checkbox"] + label[disabled]:focus {
-          background-color: #008cba; }
-        .radio-inline input[type="radio"] + label.disabled.secondary, .radio-inline input[type="radio"] + label[disabled].secondary, .radio-inline input[type="checkbox"] + label.disabled.secondary, .radio-inline input[type="checkbox"] + label[disabled].secondary, .checkbox-inline input[type="radio"] + label.disabled.secondary, .checkbox-inline input[type="radio"] + label[disabled].secondary, .checkbox-inline input[type="checkbox"] + label.disabled.secondary, .checkbox-inline input[type="checkbox"] + label[disabled].secondary {
-          background-color: #e7e7e7;
-          border-color: #007095;
-          color: #333333;
-          cursor: default;
-          opacity: 0.7;
-          box-shadow: none; }
-          .radio-inline input[type="radio"] + label.disabled.secondary:hover, .radio-inline input[type="radio"] + label.disabled.secondary:focus, .radio-inline input[type="radio"] + label[disabled].secondary:hover, .radio-inline input[type="radio"] + label[disabled].secondary:focus, .radio-inline input[type="checkbox"] + label.disabled.secondary:hover, .radio-inline input[type="checkbox"] + label.disabled.secondary:focus, .radio-inline input[type="checkbox"] + label[disabled].secondary:hover, .radio-inline input[type="checkbox"] + label[disabled].secondary:focus, .checkbox-inline input[type="radio"] + label.disabled.secondary:hover, .checkbox-inline input[type="radio"] + label.disabled.secondary:focus, .checkbox-inline input[type="radio"] + label[disabled].secondary:hover, .checkbox-inline input[type="radio"] + label[disabled].secondary:focus, .checkbox-inline input[type="checkbox"] + label.disabled.secondary:hover, .checkbox-inline input[type="checkbox"] + label.disabled.secondary:focus, .checkbox-inline input[type="checkbox"] + label[disabled].secondary:hover, .checkbox-inline input[type="checkbox"] + label[disabled].secondary:focus {
-            background-color: #007095; }
-          .radio-inline input[type="radio"] + label.disabled.secondary:hover, .radio-inline input[type="radio"] + label.disabled.secondary:focus, .radio-inline input[type="radio"] + label[disabled].secondary:hover, .radio-inline input[type="radio"] + label[disabled].secondary:focus, .radio-inline input[type="checkbox"] + label.disabled.secondary:hover, .radio-inline input[type="checkbox"] + label.disabled.secondary:focus, .radio-inline input[type="checkbox"] + label[disabled].secondary:hover, .radio-inline input[type="checkbox"] + label[disabled].secondary:focus, .checkbox-inline input[type="radio"] + label.disabled.secondary:hover, .checkbox-inline input[type="radio"] + label.disabled.secondary:focus, .checkbox-inline input[type="radio"] + label[disabled].secondary:hover, .checkbox-inline input[type="radio"] + label[disabled].secondary:focus, .checkbox-inline input[type="checkbox"] + label.disabled.secondary:hover, .checkbox-inline input[type="checkbox"] + label.disabled.secondary:focus, .checkbox-inline input[type="checkbox"] + label[disabled].secondary:hover, .checkbox-inline input[type="checkbox"] + label[disabled].secondary:focus {
-            color: #333333; }
-          .radio-inline input[type="radio"] + label.disabled.secondary:hover, .radio-inline input[type="radio"] + label.disabled.secondary:focus, .radio-inline input[type="radio"] + label[disabled].secondary:hover, .radio-inline input[type="radio"] + label[disabled].secondary:focus, .radio-inline input[type="checkbox"] + label.disabled.secondary:hover, .radio-inline input[type="checkbox"] + label.disabled.secondary:focus, .radio-inline input[type="checkbox"] + label[disabled].secondary:hover, .radio-inline input[type="checkbox"] + label[disabled].secondary:focus, .checkbox-inline input[type="radio"] + label.disabled.secondary:hover, .checkbox-inline input[type="radio"] + label.disabled.secondary:focus, .checkbox-inline input[type="radio"] + label[disabled].secondary:hover, .checkbox-inline input[type="radio"] + label[disabled].secondary:focus, .checkbox-inline input[type="checkbox"] + label.disabled.secondary:hover, .checkbox-inline input[type="checkbox"] + label.disabled.secondary:focus, .checkbox-inline input[type="checkbox"] + label[disabled].secondary:hover, .checkbox-inline input[type="checkbox"] + label[disabled].secondary:focus {
-            background-color: #e7e7e7; }
-        .radio-inline input[type="radio"] + label.disabled.success, .radio-inline input[type="radio"] + label[disabled].success, .radio-inline input[type="checkbox"] + label.disabled.success, .radio-inline input[type="checkbox"] + label[disabled].success, .checkbox-inline input[type="radio"] + label.disabled.success, .checkbox-inline input[type="radio"] + label[disabled].success, .checkbox-inline input[type="checkbox"] + label.disabled.success, .checkbox-inline input[type="checkbox"] + label[disabled].success {
-          background-color: #43ac6a;
-          border-color: #007095;
-          color: white;
-          cursor: default;
-          opacity: 0.7;
-          box-shadow: none; }
-          .radio-inline input[type="radio"] + label.disabled.success:hover, .radio-inline input[type="radio"] + label.disabled.success:focus, .radio-inline input[type="radio"] + label[disabled].success:hover, .radio-inline input[type="radio"] + label[disabled].success:focus, .radio-inline input[type="checkbox"] + label.disabled.success:hover, .radio-inline input[type="checkbox"] + label.disabled.success:focus, .radio-inline input[type="checkbox"] + label[disabled].success:hover, .radio-inline input[type="checkbox"] + label[disabled].success:focus, .checkbox-inline input[type="radio"] + label.disabled.success:hover, .checkbox-inline input[type="radio"] + label.disabled.success:focus, .checkbox-inline input[type="radio"] + label[disabled].success:hover, .checkbox-inline input[type="radio"] + label[disabled].success:focus, .checkbox-inline input[type="checkbox"] + label.disabled.success:hover, .checkbox-inline input[type="checkbox"] + label.disabled.success:focus, .checkbox-inline input[type="checkbox"] + label[disabled].success:hover, .checkbox-inline input[type="checkbox"] + label[disabled].success:focus {
-            background-color: #007095; }
-          .radio-inline input[type="radio"] + label.disabled.success:hover, .radio-inline input[type="radio"] + label.disabled.success:focus, .radio-inline input[type="radio"] + label[disabled].success:hover, .radio-inline input[type="radio"] + label[disabled].success:focus, .radio-inline input[type="checkbox"] + label.disabled.success:hover, .radio-inline input[type="checkbox"] + label.disabled.success:focus, .radio-inline input[type="checkbox"] + label[disabled].success:hover, .radio-inline input[type="checkbox"] + label[disabled].success:focus, .checkbox-inline input[type="radio"] + label.disabled.success:hover, .checkbox-inline input[type="radio"] + label.disabled.success:focus, .checkbox-inline input[type="radio"] + label[disabled].success:hover, .checkbox-inline input[type="radio"] + label[disabled].success:focus, .checkbox-inline input[type="checkbox"] + label.disabled.success:hover, .checkbox-inline input[type="checkbox"] + label.disabled.success:focus, .checkbox-inline input[type="checkbox"] + label[disabled].success:hover, .checkbox-inline input[type="checkbox"] + label[disabled].success:focus {
-            color: white; }
-          .radio-inline input[type="radio"] + label.disabled.success:hover, .radio-inline input[type="radio"] + label.disabled.success:focus, .radio-inline input[type="radio"] + label[disabled].success:hover, .radio-inline input[type="radio"] + label[disabled].success:focus, .radio-inline input[type="checkbox"] + label.disabled.success:hover, .radio-inline input[type="checkbox"] + label.disabled.success:focus, .radio-inline input[type="checkbox"] + label[disabled].success:hover, .radio-inline input[type="checkbox"] + label[disabled].success:focus, .checkbox-inline input[type="radio"] + label.disabled.success:hover, .checkbox-inline input[type="radio"] + label.disabled.success:focus, .checkbox-inline input[type="radio"] + label[disabled].success:hover, .checkbox-inline input[type="radio"] + label[disabled].success:focus, .checkbox-inline input[type="checkbox"] + label.disabled.success:hover, .checkbox-inline input[type="checkbox"] + label.disabled.success:focus, .checkbox-inline input[type="checkbox"] + label[disabled].success:hover, .checkbox-inline input[type="checkbox"] + label[disabled].success:focus {
-            background-color: #43ac6a; }
-        .radio-inline input[type="radio"] + label.disabled.alert, .radio-inline input[type="radio"] + label[disabled].alert, .radio-inline input[type="checkbox"] + label.disabled.alert, .radio-inline input[type="checkbox"] + label[disabled].alert, .checkbox-inline input[type="radio"] + label.disabled.alert, .checkbox-inline input[type="radio"] + label[disabled].alert, .checkbox-inline input[type="checkbox"] + label.disabled.alert, .checkbox-inline input[type="checkbox"] + label[disabled].alert {
-          background-color: #f04124;
-          border-color: #007095;
-          color: white;
-          cursor: default;
-          opacity: 0.7;
-          box-shadow: none; }
-          .radio-inline input[type="radio"] + label.disabled.alert:hover, .radio-inline input[type="radio"] + label.disabled.alert:focus, .radio-inline input[type="radio"] + label[disabled].alert:hover, .radio-inline input[type="radio"] + label[disabled].alert:focus, .radio-inline input[type="checkbox"] + label.disabled.alert:hover, .radio-inline input[type="checkbox"] + label.disabled.alert:focus, .radio-inline input[type="checkbox"] + label[disabled].alert:hover, .radio-inline input[type="checkbox"] + label[disabled].alert:focus, .checkbox-inline input[type="radio"] + label.disabled.alert:hover, .checkbox-inline input[type="radio"] + label.disabled.alert:focus, .checkbox-inline input[type="radio"] + label[disabled].alert:hover, .checkbox-inline input[type="radio"] + label[disabled].alert:focus, .checkbox-inline input[type="checkbox"] + label.disabled.alert:hover, .checkbox-inline input[type="checkbox"] + label.disabled.alert:focus, .checkbox-inline input[type="checkbox"] + label[disabled].alert:hover, .checkbox-inline input[type="checkbox"] + label[disabled].alert:focus {
-            background-color: #007095; }
-          .radio-inline input[type="radio"] + label.disabled.alert:hover, .radio-inline input[type="radio"] + label.disabled.alert:focus, .radio-inline input[type="radio"] + label[disabled].alert:hover, .radio-inline input[type="radio"] + label[disabled].alert:focus, .radio-inline input[type="checkbox"] + label.disabled.alert:hover, .radio-inline input[type="checkbox"] + label.disabled.alert:focus, .radio-inline input[type="checkbox"] + label[disabled].alert:hover, .radio-inline input[type="checkbox"] + label[disabled].alert:focus, .checkbox-inline input[type="radio"] + label.disabled.alert:hover, .checkbox-inline input[type="radio"] + label.disabled.alert:focus, .checkbox-inline input[type="radio"] + label[disabled].alert:hover, .checkbox-inline input[type="radio"] + label[disabled].alert:focus, .checkbox-inline input[type="checkbox"] + label.disabled.alert:hover, .checkbox-inline input[type="checkbox"] + label.disabled.alert:focus, .checkbox-inline input[type="checkbox"] + label[disabled].alert:hover, .checkbox-inline input[type="checkbox"] + label[disabled].alert:focus {
-            color: white; }
-          .radio-inline input[type="radio"] + label.disabled.alert:hover, .radio-inline input[type="radio"] + label.disabled.alert:focus, .radio-inline input[type="radio"] + label[disabled].alert:hover, .radio-inline input[type="radio"] + label[disabled].alert:focus, .radio-inline input[type="checkbox"] + label.disabled.alert:hover, .radio-inline input[type="checkbox"] + label.disabled.alert:focus, .radio-inline input[type="checkbox"] + label[disabled].alert:hover, .radio-inline input[type="checkbox"] + label[disabled].alert:focus, .checkbox-inline input[type="radio"] + label.disabled.alert:hover, .checkbox-inline input[type="radio"] + label.disabled.alert:focus, .checkbox-inline input[type="radio"] + label[disabled].alert:hover, .checkbox-inline input[type="radio"] + label[disabled].alert:focus, .checkbox-inline input[type="checkbox"] + label.disabled.alert:hover, .checkbox-inline input[type="checkbox"] + label.disabled.alert:focus, .checkbox-inline input[type="checkbox"] + label[disabled].alert:hover, .checkbox-inline input[type="checkbox"] + label[disabled].alert:focus {
-            background-color: #f04124; }
-    .radio-inline input[type="radio"]:checked + label, .radio-inline input[type="checkbox"]:checked + label, .checkbox-inline input[type="radio"]:checked + label, .checkbox-inline input[type="checkbox"]:checked + label {
-      background-color: #e7e7e7; } }
-.sharetable {
-  min-height: 39px; }
-  .sharetable .facebook-cell,
-  .sharetable .twitter-cell,
-  .sharetable .gplus-cell {
-    float: left;
-    text-align: left;
-    vertical-align: top; }
-  .sharetable .facebook-cell {
-    padding: 0 20px 15px 0;
-    width: 200px; }
-  .sharetable .twitter-cell {
-    padding: 0 20px 0 0;
-    width: 150px; }
-    .sharetable .twitter-cell a {
-      text-indent: -999em;
-      display: inline-block; }
-  .sharetable .gplus-cell {
-    width: 52px; }
-
-.like-page {
-  margin-top: 15px; }
-
-#columns-1, #columns-2 {
-  padding-top: 1em; }
-
-.table {
-  display: table;
-  margin: 0 auto; }
-
-.big-section {
-  padding-top: 4rem;
-  padding-bottom: 4rem; }
-
-.section {
-  padding-top: 2rem;
-  padding-bottom: 2rem; }
-
-.padtopless {
-  padding-top: 5px; }
-
-.padtop {
-  padding-top: 10px; }
-
-.padtopmore {
-  padding-top: 15px; }
-
-.padbottomless {
-  padding-bottom: 5px; }
-
-.padbottom {
-  padding-bottom: 10px; }
-
-.padbottommore {
-  padding-bottom: 15px; }
-
-.fb_iframe_widget {
-  line-height: 11px; }
-
-div.pagination ul {
-  display: block;
-  min-height: 1.5rem;
-  margin-left: -0.3125rem; }
-  div.pagination ul li {
-    height: 1.5rem;
-    color: #222222;
-    font-size: 0.875rem;
-    margin-left: 0.3125rem; }
-    div.pagination ul li a, div.pagination ul li button {
-      display: block;
-      padding: 0.0625rem 0.625rem 0.0625rem;
-      color: #999999;
-      background: none;
-      border-radius: 3px;
-      font-weight: normal;
-      font-size: 1em;
-      line-height: inherit;
-      transition: background-color 300ms ease-out; }
-    div.pagination ul li:hover a,
-    div.pagination ul li a:focus, div.pagination ul li:hover button,
-    div.pagination ul li button:focus {
-      background: #e6e6e6; }
-    div.pagination ul li.unavailable a, div.pagination ul li.unavailable button {
-      cursor: default;
-      color: #999999; }
-    div.pagination ul li.unavailable:hover a, div.pagination ul li.unavailable a:focus, div.pagination ul li.unavailable:hover button, div.pagination ul li.unavailable button:focus {
-      background: transparent; }
-    div.pagination ul li.current a, div.pagination ul li.current button {
-      background: #008cba;
-      color: white;
-      font-weight: bold;
-      cursor: default; }
-      div.pagination ul li.current a:hover, div.pagination ul li.current a:focus, div.pagination ul li.current button:hover, div.pagination ul li.current button:focus {
-        background: #008cba; }
-  div.pagination ul li {
-    float: left;
-    display: block; }
-  div.pagination ul li.active a, div.pagination ul li.active button {
-    background: #008cba;
-    color: white;
-    font-weight: bold;
-    cursor: default; }
-    div.pagination ul li.active a:hover, div.pagination ul li.active a:focus, div.pagination ul li.active button:hover, div.pagination ul li.active button:focus {
-      background: #008cba; }
-  div.pagination ul li.disabled a, div.pagination ul li.disabled button {
-    cursor: default;
-    color: #999999; }
-  div.pagination ul li.disabled:hover a, div.pagination ul li.disabled a:focus, div.pagination ul li.disabled:hover button, div.pagination ul li.disabled button:focus {
-    background: transparent; }
-
-.pagination-centered {
-  text-align: center; }
-  .pagination-centered div.pagination ul li {
-    float: none;
-    display: inline-block; }
-
-.event-detail {
-  padding-bottom: 1rem; }
-  .event-detail .subhead {
-    font-weight: bold;
-    padding-bottom: 0.5rem; }
-  .event-detail .subtext {
-    line-height: 1.2em; }
-
-.label a, .page_tag_warning a, .page_tag_notice a {
-  color: inherit; }
-
-.byline {
-  font-size: 0.8em;
-  padding-bottom: 1rem; }
-
-.inline-labels input, .inline-labels label {
-  display: inline; }
-
-.within {
-  display: block;
-  padding-bottom: 1rem;
-  text-align: center; }
-  @media only screen and (min-width: 64.063em) {
-    .within {
-      display: inline;
-      padding-bottom: 0;
-      text-align: left; } }
