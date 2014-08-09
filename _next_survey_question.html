@@ -1,36 +1,35 @@
 {% if page.survey.is_next_question? %}
 
 {% form_for survey_question_response %}
-
 <div class="form-errors">{% error_messages_for survey_question_response %}</div>
-
 {% hidden_field_tag 'survey_question_response[survey_question_id]', page.survey.next_question.id %}
-
 <h3 class="headline">{{ page.survey.next_question.content }}</h3>
-
 {% if page.survey.next_question.intro.size > 0 %}
-
 <div class="row padtopmore">
-  <div class="columns">{{ page.survey.next_question.intro | new_line_to_br }}</div>
+  <div class="columns">
+    <p>
+      {{ page.survey.next_question.intro | new_line_to_br }}
+    </p>
+  </div>
 </div>
-
 {% endif %}
-
-<div class="row span12">
-
-  {% if page.survey.next_question.is_multiple_choice? %}
-
+<div class="row">
+  <div class="padtopmore columns">
+    {% if page.survey.next_question.is_multiple_choice? %}
   {% for possible_response in page.survey.next_question.possible_responses %}
-  <label for="survey-choice-{{possible_response.id}}" class="radio">{{ possible_response.radio_button }} {{ possible_response.name }}</label>
-  {% endfor %}
+    <label for="survey-choice-{{possible_response.id}}" class="radio">
+      {{ possible_response.radio_button }} {{ possible_response.name }}
+    </label>
+    {% endfor %}
 
   {% elsif page.survey.next_question.is_yes_no? %}
-  <label for="radio-button-yes" class="radio">{{ page.survey.next_question.yes_radio_button }} Yes</label>
-  <label for="radio-button-no" class="radio">{{ page.survey.next_question.no_radio_button }} No</label>
-  {% elsif page.survey.next_question.is_text? %}
+    <label for="radio-button-yes" class="radio">{{ page.survey.next_question.yes_radio_button }} Yes</label>
+    <label for="radio-button-no" class="radio">{{ page.survey.next_question.no_radio_button }} No</label>
+    {% elsif page.survey.next_question.is_text? %}
   {% text_area "content", class:"textarea" %}
 
   {% endif %}
+  </div>
 
 </div>
 
@@ -40,7 +39,6 @@
     <div class="form_submit"></div>
   </div>
 </div>
-
 {% endform_for %}
 
 {% else %}
