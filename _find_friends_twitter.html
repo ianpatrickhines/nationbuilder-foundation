@@ -1,70 +1,218 @@
 {% if request.current_signup.crawling_twitter? %}
-
-  <div class="row">
-    <div class="span12 twitter-followings" id="twitter_followings">
-      <img src="{{ "bert-loader-small.gif" | asset_path }}" border="0"> Checking Twitter for people who have joined...
+<div class="row">
+  <div class="columns twitter-followings" id="twitter_followings">
+    <img src="{{ "bert-loader-small.gif" | asset_path }}" border="0">
+    Checking Twitter for people who have joined...
       {{ request.current_signup.crawling_twitter_status_url | auto_refresh }}
-    </div>
   </div>
-
+</div>
 {% else %}
 
   {% if request.current_signup.followings_count_from_twitter == 0 %}
-
-    <div class="row">
-      <div class="columns">None of the people you follow on Twitter have joined.</div>
-    </div>
-
-  {% else %}
-    <div class="row padbottommore">
-      <div class="columns"><strong>{{ request.current_signup.followings_count_from_twitter }}</strong> people you follow on Twitter have joined.<br/>
-    You are automatically following them.</div>
-    </div>
-
-    {% if request.current_signup.followings_count_from_twitter > 6 %}
-    <div class="row">
-      <div class="columns"><div class="supporter-follow-details padbottom">Including...</div></div>
-    </div>
-    {% endif %}
-
-      {% for signup in request.current_signup.followings_from_twitter %}
-      <div class="people-list {% cycle 'odd', 'even' %}">
-        <div class="people-list-pic">{{ signup.bigger_profile_image }}</div>
-        <div class="people-name">{{ signup.published_name_linked }}</div>
-      </div>
-      {% endfor %}
-
-  {% endif %}
-
-<div class="padbottom padtopmore">
-
-  {% if request.current_signup.followers_count_from_twitter == 0 %}
-
-    <div class="row">
-      <div class="columns">None of your Twitter followers have joined.</div>
-    </div>
-
-  {% else %}
-    <div class="row padbottommore">
-      <div class="columns"><strong>{{ request.current_signup.followers_count_from_twitter }}</strong> of your Twitter followers have already joined.<br/>
-    They are automatically following <em>you</em>.</div>
-    </div>
-
-    {% if request.current_signup.followers_count_from_twitter > 6 %}
-    <div class="row">
-      <div class="columns"><div class="supporter-follow-details padbottom">Including...</div></div>
-    </div>
-    {% endif %}
-
-    {% for signup in request.current_signup.followers_from_twitter %}
-      <div class="people-list {% cycle 'odd', 'even' %}">
-        <div class="people-list-pic">{{ signup.bigger_profile_image }}</div>
-        <div class="people-name">{{ signup.published_name_linked }}</div>
-    </div>
+<div class="row">
+  <div class="columns">
+    <p>None of the people you follow on Twitter have joined.</p>
+  </div>
+</div>
+{% else %}
+<div class="row">
+  <div class="columns">
+    <p> <strong>{{ request.current_signup.followings_count_from_twitter }}</strong>
+      people you follow on Twitter have joined. You are automatically following them. {% if request.current_signup.followings_count_from_twitter > 6 %}Including…{% endif %}
+    </p>
+  </div>
+</div>
+<table>
+  {% comment %}
+  <thead>
+    <tr>
+      <th width="200">Table Header</th>
+      <th>Table Header</th>
+      <th width="150">Table Header</th>
+      <th width="150">Table Header</th>
+    </tr>
+  </thead>
+  {% endcomment %}
+  <tbody>
+    {% for signup in request.current_signup.followings_from_twitter %}
+    <tr>
+      <td class="text-center">
+        {% if signup.has_twitter_info? %}
+        <a href="{{ signup.twitter_profile_url }}">
+          {% elsif signup.has_facebook_info? %}
+          <a href="{{ signup.facebook_profile_url }}">
+            {% else %}{% endif %}
+        {% if site.show_public_profiles? == false %}
+        {% if signup.has_twitter_info? %}
+            <a href="{{ signup.twitter_profile_url }}">
+              {% elsif signup.has_facebook_info? %}
+              <a href="{{ signup.facebook_profile_url }}">
+                {% else %}{% endif %}
+        {% if signup.has_facebook_info? %}
+                <img src="http://graph.facebook.com/{{ signup.facebook_uid }}/picture?width=72&height=72" alt="Profile Photo" class="avatar">
+                {% else %}
+                <img src="{{ signup.profile_image_url }}" alt="Profile Photo" class="avatar">
+                {% endif %}
+        {% if signup.has_twitter_info? %}
+              </a>
+              {% elsif signup.has_facebook_info? %}
+            </a>
+            {% else %}{% endif %}
+        {% else %}
+        {{ signup.profile_image }}
+        {% endif %}
+        {% if signup.has_twitter_info? %}
+          </a>
+          {% elsif signup.has_facebook_info? %}
+        </a>
+        {% else %}{% endif %}
+      </td>
+      <td class="text-center">
+        <p> <strong>{{ signup.published_name_linked }}</strong>
+        </p>
+        <div class="table">
+          <ul class="inline-list">
+            {% comment %}{% if signup.has_email? %}
+            <li>
+              <a href="mailto:{{ signup.email }}" title="Email {{ request.current_signup.email }}" class="ss-icon ss-social-regular ss-mail"></a>
+            </li>
+            {% else %}
+            <li>
+              <span class="ss-icon ss-social-regular ss-mail silver"></span>
+            </li>
+            {% endif %}{% endcomment %}
+          {% if signup.has_facebook_info? %}
+            <li>
+              <a href="{{ signup.facebook_profile_url }}" title="{{ signup.full_name_or_friend}} on Facebook" class="ss-icon ss-social-regular ss-facebook facebook"></a>
+            </li>
+            {% else %}
+            <li>
+              <span class="ss-icon ss-social-regular ss-facebook silver"></span>
+            </li>
+            {% endif %}
+          {% if signup.has_twitter_info? %}
+            <li>
+              <a href="{{ signup.twitter_profile_url }}" title="@{{ signup.twitter_login }} on Twitter" class="ss-icon ss-social-regular ss-twitter twitter"></a>
+            </li>
+            {% else %}
+            <li>
+              <span class="ss-icon ss-social-regular ss-twitter silver"></span>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </td>
+    </tr>
     {% endfor %}
-
-  {% endif %}
-
+  </tbody>
+</table>
+{% endif %}
+<div class="padbottom padtopmore">
+  {% if request.current_signup.followers_count_from_twitter == 0 %}
+  <div class="row">
+    <div class="columns">
+      <p>None of your Twitter followers have joined.</p>
+    </div>
+  </div>
+  {% else %}
+  <div class="row">
+    <div class="columns">
+      <p>
+        <strong>{{ request.current_signup.followers_count_from_twitter }}</strong>
+        of your Twitter followers have already joined.
+      They are automatically following <em>you</em>
+        .{% if request.current_signup.followers_count_from_twitter > 6 %} Including…{% endif %}
+      </p>
+    </div>
   </div>
 
+  <div class="padbottommore">
+    <table>
+      {% comment %}
+      <thead>
+        <tr>
+          <th width="200">Table Header</th>
+          <th>Table Header</th>
+          <th width="150">Table Header</th>
+          <th width="150">Table Header</th>
+        </tr>
+      </thead>
+      {% endcomment %}
+      <tbody>
+        {% for signup in request.current_signup.followers_from_twitter %}
+        <tr>
+          <td class="text-center">
+            {% if signup.has_twitter_info? %}
+            <a href="{{ signup.twitter_profile_url }}">
+              {% elsif signup.has_facebook_info? %}
+              <a href="{{ signup.facebook_profile_url }}">
+                {% else %}{% endif %}
+        {% if site.show_public_profiles? == false %}
+        {% if signup.has_twitter_info? %}
+                <a href="{{ signup.twitter_profile_url }}">
+                  {% elsif signup.has_facebook_info? %}
+                  <a href="{{ signup.facebook_profile_url }}">
+                    {% else %}{% endif %}
+        {% if signup.has_facebook_info? %}
+                    <img src="http://graph.facebook.com/{{ signup.facebook_uid }}/picture?width=72&height=72" alt="Profile Photo" class="avatar">
+                    {% else %}
+                    <img src="{{ signup.profile_image_url }}" alt="Profile Photo" class="avatar">
+                    {% endif %}
+        {% if signup.has_twitter_info? %}
+                  </a>
+                  {% elsif signup.has_facebook_info? %}
+                </a>
+                {% else %}{% endif %}
+        {% else %}
+        {{ signup.profile_image }}
+        {% endif %}
+        {% if signup.has_twitter_info? %}
+              </a>
+              {% elsif signup.has_facebook_info? %}
+            </a>
+            {% else %}{% endif %}
+          </td>
+          <td class="text-center">
+            <p>
+              <strong>{{ signup.published_name_linked }}</strong>
+            </p>
+            <div class="table">
+              <ul class="inline-list">
+                {% comment %}{% if signup.has_email? %}
+                <li>
+                  <a href="mailto:{{ signup.email }}" title="Email {{ request.current_signup.email }}" class="ss-icon ss-social-regular ss-mail"></a>
+                </li>
+                {% else %}
+                <li>
+                  <span class="ss-icon ss-social-regular ss-mail silver"></span>
+                </li>
+                {% endif %}{% endcomment %}
+          {% if signup.has_facebook_info? %}
+                <li>
+                  <a href="{{ signup.facebook_profile_url }}" title="{{ signup.full_name_or_friend}} on Facebook" class="ss-icon ss-social-regular ss-facebook facebook"></a>
+                </li>
+                {% else %}
+                <li>
+                  <span class="ss-icon ss-social-regular ss-facebook silver"></span>
+                </li>
+                {% endif %}
+          {% if signup.has_twitter_info? %}
+                <li>
+                  <a href="{{ signup.twitter_profile_url }}" title="@{{ signup.twitter_login }} on Twitter" class="ss-icon ss-social-regular ss-twitter twitter"></a>
+                </li>
+                {% else %}
+                <li>
+                  <span class="ss-icon ss-social-regular ss-twitter silver"></span>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
 {% endif %}
