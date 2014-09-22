@@ -5,11 +5,13 @@
   "labels";
 
 .page_tag_warning, {
-  @extend .label;
-  @extend .label.secondary;
+  @include label-base;
+  @include label-size;
+  @include label-style($secondary-color);
 }
 
 .page_tag_notice {
-  @extend .label;
-  @extend .label.success;
+  @include label-base;
+  @include label-size;
+  @include label-style($success-color);
 }
