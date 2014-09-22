@@ -1,3 +1,47 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+// Make sure the charset is set appropriately
+@charset "UTF-8";
+
+// Behold, here are all the Foundation components.
 @import
   "settings",
-  "foundation";
+  "grid",
+  "accordion",
+  "alert-boxes",
+  "block-grid",
+  "breadcrumbs",
+  "button-groups",
+  "buttons",
+  "clearing",
+  "dropdown",
+  "dropdown-buttons",
+  "flex-video",
+  "forms",
+  "icon-bar",
+  "inline-lists",
+  "joyride",
+  "keystrokes",
+  "labels",
+  "magellan",
+  "orbit",
+  "pagination",
+  "panels",
+  "pricing-tables",
+  "progress-bars",
+  "range-slider",
+  "reveal",
+  "side-nav",
+  "split-buttons",
+  "sub-nav",
+  "switches",
+  "tables",
+  "tabs",
+  "thumbs",
+  "tooltips",
+  "top-bar",
+  "type",
+  "offcanvas",
+  "visibility";
