@@ -35,7 +35,7 @@
         <br/>
         {% endfor %}
         {% if page.event.has_venue_address? %}
-        <a href="{{ page.event.venue_address.google_map_link }}">Google map and directions</a>
+        <a href="{{ page.event.venue_address.google_map_link }}" target="_blank">Google map and directions</a>
         {% endif %}
       </div>
     </div>
