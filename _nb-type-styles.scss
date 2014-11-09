@@ -21,9 +21,9 @@
   display: block;
   padding-bottom: 1rem;
   text-align: center;
-  @media #{$large-up} {
-    display: inline;
-    padding-bottom: 0;
-    text-align: left;
-  }
+  // @media #{$large-up} {
+  //   display: inline;
+  //   padding-bottom: 0;
+  //   text-align: left;
+  // }
 }
