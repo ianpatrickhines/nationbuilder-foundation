@@ -237,6 +237,8 @@
               </div>
               {% endif %}
 
+              {% endif %}
+
               {% if page.donation.merchant_account.is_corporate_contribution_required? %}
               <div class="row">
 
@@ -248,7 +250,7 @@
 
               </div>
               {% endif %}
-              {% endif %}
+
               <div class="row">
                 {% if page.donation.merchant_account.is_taxable? %}
                 <div class="columns">
