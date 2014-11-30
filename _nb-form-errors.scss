@@ -1,6 +1,6 @@
 // NB Form Errors Styles
 
-@import "global";
+@import "global", "forms";
 
 .form-errors {
   background-color: $warning-color;
@@ -16,4 +16,21 @@
     list-style-type: disc;
     padding: 1rem;
   }
+}
+
+span.error-message, div.form-error {
+  background: $alert-color;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 0.25rem;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+input.error {
+  background: $input-bg-color !important;
+  color: $input-font-color !important;
+  border: 1px solid $alert-color !important;
+  margin-bottom: 1rem;
 }
