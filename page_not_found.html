@@ -1,3 +1,21 @@
 <div class="padcontainer">
-  The page you were looking for was not found.
+  <h2 class="headline">
+    404 Error.
+    <span class="primary-color">
+      <small>That page was not found.</small>
+    </span>
+  </h2>
+  <p>
+    The page you were looking for was not found. That’s all we know.
+  </p>
 </div>
+
+  <div class="site-search form padtop2">
+    <form method="get" class="search signup_form text-center" id="searchbox" action="http://www.google.com/search">
+      <input type="text" class="text" name="q" placeholder="What were you looking for?"/>
+      <input type="submit" class="expand button" value="Search"  />
+      <input type="hidden" name="site" value="{{ site.full_url }}" class="hidden"  />
+      <input type="hidden" name="domains" value="{{ site.full_url }}" class="hidden" />
+      <input type="hidden" class="hidden" name="sitesearch" value="{{ site.full_url }}" checked="checked" />
+    </form>
+  </div>
