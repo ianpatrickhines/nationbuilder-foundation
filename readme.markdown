@@ -1,5 +1,7 @@
 #NationBuilder Foundation Theme
 
+**NOTE: This theme is no longer being actively used or supported. I strongly recommend that you use NationBuilder’s [Bootstrap framework](http://nationbuilder.com/bootstrap_is_now_available_for_building_custom_themes), instead.**
+
 # [NationBuilder Foundation](http://foundation.ianpatrickhines.com)
 
 According to [Zurb](http://zurb.com), [Foundation](http://foundation.zurb.com) is “the most advanced responsive front-end framework in the world.” You can quickly prototype and build custom themes that work on any kind of device with Foundation, which includes layout constructs (like a fully responsive grid), elements and best practices.
